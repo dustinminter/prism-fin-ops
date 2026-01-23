@@ -3,13 +3,28 @@
     "id": "HHS",
     "name": "Exec Office of Health & Human Services",
     "cipPlanned": 251113521.0,
-    "consumed": 54117250.51,
-    "variance": 196996270.49,
-    "consumptionRate": 0.2155,
+    "consumed": 4897963.36,
+    "variance": 246215557.63,
+    "consumptionRate": 0.0195,
     "riskLevel": "Critical",
     "trend": "down",
     "topDrivers": [
       "Significant underspend vs plan",
+      "Low consumption rate",
+      "Declining spend rate"
+    ]
+  },
+  {
+    "id": "EOPSS",
+    "name": "EO Public Safety and Security",
+    "cipPlanned": 30544000.0,
+    "consumed": 5011813.28,
+    "variance": 25532186.72,
+    "consumptionRate": 0.1641,
+    "riskLevel": "Critical",
+    "trend": "down",
+    "topDrivers": [
+      "Moderate underspend",
       "Low consumption rate",
       "Declining spend rate"
     ]
@@ -74,22 +89,8 @@
     "id": "HOUSING",
     "name": "Housing and Livable Communities",
     "cipPlanned": 10000000.0,
-    "consumed": 67656.75,
-    "variance": 9932343.25,
-    "consumptionRate": 0.0068,
-    "riskLevel": "Critical",
-    "trend": "up",
-    "topDrivers": [
-      "Low consumption rate",
-      "Accelerating spend"
-    ]
-  },
-  {
-    "id": "EEA",
-    "name": "EO of Energy and Environmental Affairs",
-    "cipPlanned": 6350000.0,
     "consumed": 0,
-    "variance": 6350000.0,
+    "variance": 10000000.0,
     "consumptionRate": 0.0,
     "riskLevel": "Critical",
     "trend": "flat",
@@ -111,24 +112,25 @@
     ]
   },
   {
+    "id": "EEA",
+    "name": "EO of Energy and Environmental Affairs",
+    "cipPlanned": 6350000.0,
+    "consumed": 465861.73,
+    "variance": 5884138.27,
+    "consumptionRate": 0.0734,
+    "riskLevel": "Critical",
+    "trend": "down",
+    "topDrivers": [
+      "Low consumption rate",
+      "Declining spend rate"
+    ]
+  },
+  {
     "id": "TRIAL_COURT",
     "name": "Trial Court",
     "cipPlanned": 5000000.0,
     "consumed": 0,
     "variance": 5000000.0,
-    "consumptionRate": 0.0,
-    "riskLevel": "Critical",
-    "trend": "flat",
-    "topDrivers": [
-      "Low consumption rate"
-    ]
-  },
-  {
-    "id": "A_AND_F",
-    "name": "Exec Office for Administration & Finance",
-    "cipPlanned": 2719000.0,
-    "consumed": 0,
-    "variance": 2719000.0,
     "consumptionRate": 0.0,
     "riskLevel": "Critical",
     "trend": "flat",
@@ -176,6 +178,19 @@
     ]
   },
   {
+    "id": "A_AND_F",
+    "name": "Exec Office for Administration & Finance",
+    "cipPlanned": 500000.0,
+    "consumed": 0,
+    "variance": 500000.0,
+    "consumptionRate": 0.0,
+    "riskLevel": "Critical",
+    "trend": "flat",
+    "topDrivers": [
+      "Low consumption rate"
+    ]
+  },
+  {
     "id": "DLR",
     "name": "Department of Labor Relations",
     "cipPlanned": 150000.0,
@@ -189,32 +204,18 @@
     ]
   },
   {
-    "id": "EOPSS",
-    "name": "EO Public Safety and Security",
-    "cipPlanned": 30544000.0,
-    "consumed": 61836904.54,
-    "variance": -31292904.54,
-    "consumptionRate": 2.0245,
+    "id": "EOTSS",
+    "name": "Technology Services and Security",
+    "cipPlanned": 155116071.0,
+    "consumed": 179218197.2,
+    "variance": -24102126.2,
+    "consumptionRate": 1.1554,
     "riskLevel": "Low",
     "trend": "down",
     "topDrivers": [
       "Overspend vs plan",
       "Exceeded planned budget",
       "Declining spend rate"
-    ]
-  },
-  {
-    "id": "EOTSS",
-    "name": "Technology Services and Security",
-    "cipPlanned": 155116071.0,
-    "consumed": 302567100.93,
-    "variance": -147451029.93,
-    "consumptionRate": 1.9506,
-    "riskLevel": "Low",
-    "trend": "flat",
-    "topDrivers": [
-      "Overspend vs plan",
-      "Exceeded planned budget"
     ]
   }
 ]

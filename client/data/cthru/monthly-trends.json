@@ -1,74 +1,44 @@
 [
   {
     "month": "Jul",
-    "plannedBurn": 50301385.79,
-    "actualBurn": 72725166.59,
-    "variance": -22423780.8
+    "plannedBurn": 50091866.47,
+    "actualBurn": 75560505.67,
+    "variance": -25468639.2
   },
   {
     "month": "Aug",
-    "plannedBurn": 45728532.53,
-    "actualBurn": 18933375.76,
-    "variance": 4371375.97
+    "plannedBurn": 45538060.43,
+    "actualBurn": 19086297.2,
+    "variance": 983124.03
   },
   {
     "month": "Sep",
-    "plannedBurn": 43442105.91,
-    "actualBurn": 16995378.13,
-    "variance": 30818103.74
+    "plannedBurn": 43261157.41,
+    "actualBurn": 15455846.26,
+    "variance": 28788435.18
   },
   {
     "month": "Oct",
-    "plannedBurn": 41155679.28,
-    "actualBurn": 16590115.75,
-    "variance": 55383667.27
+    "plannedBurn": 40984254.39,
+    "actualBurn": 21747770.93,
+    "variance": 48024918.64
   },
   {
     "month": "Nov",
-    "plannedBurn": 38869252.65,
-    "actualBurn": 12458311.8,
-    "variance": 81794608.12
+    "plannedBurn": 38707351.36,
+    "actualBurn": 20996485.41,
+    "variance": 65735784.59
   },
   {
     "month": "Dec",
-    "plannedBurn": 38869252.65,
-    "actualBurn": 21362778.71,
-    "variance": 99301082.07
+    "plannedBurn": 38707351.36,
+    "actualBurn": 18105610.93,
+    "variance": 86337525.02
   },
   {
     "month": "Jan",
-    "plannedBurn": 38869252.65,
-    "actualBurn": 17096427.03,
-    "variance": 121073907.69
-  },
-  {
-    "month": "Feb",
-    "plannedBurn": 41155679.28,
-    "actualBurn": 14017694.0,
-    "variance": 148211892.97
-  },
-  {
-    "month": "Mar",
-    "plannedBurn": 43442105.91,
-    "actualBurn": 19413749.93,
-    "variance": 172240248.94
-  },
-  {
-    "month": "Apr",
-    "plannedBurn": 45728532.53,
-    "actualBurn": 16895650.35,
-    "variance": 201073131.13
-  },
-  {
-    "month": "May",
-    "plannedBurn": 50301385.79,
-    "actualBurn": 15288024.22,
-    "variance": 236086492.69
-  },
-  {
-    "month": "Jun",
-    "plannedBurn": 54874239.04,
-    "actualBurn": 35181580.41,
-    "variance": 255779151.32
+    "plannedBurn": 38707351.36,
+    "actualBurn": 8265680.8,
+    "variance": 116779195.59
   }
 ]

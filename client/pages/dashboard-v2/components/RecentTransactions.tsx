@@ -3,12 +3,14 @@ import { Card } from '../../../components/ui/Card';
 import { ALL_TRANSACTIONS } from '../../../data';
 import { formatCurrency, cn } from '../../../lib/utils';
 import { ArrowUpRight, ArrowDownRight, Clock, Building2, ExternalLink } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface RecentTransactionsProps {
     agencyId?: string;
 }
 
 export const RecentTransactions = ({ agencyId }: RecentTransactionsProps) => {
+    const navigate = useNavigate();
     // Filter by agency if selected
     // Note: department_id might not exist in the raw transactions, we might need to match on department name
     // But for now let's assume filtering works or just show all if 'ALL'
@@ -16,7 +18,14 @@ export const RecentTransactions = ({ agencyId }: RecentTransactionsProps) => {
         ? (ALL_TRANSACTIONS as any[]).filter((tx) => tx.department?.includes(agencyId))
         : (ALL_TRANSACTIONS as any[]);
 
-    const recentTx = filteredTx.slice(0, 8);
+    // Sort by date descending (newest first)
+    const sortedTx = [...filteredTx].sort((a, b) => {
+        const dateA = a.date || '';
+        const dateB = b.date || '';
+        return dateB.localeCompare(dateA);
+    });
+
+    const recentTx = sortedTx.slice(0, 8);
 
     return (
         <Card className="border-none shadow-sm" noPadding>
@@ -44,7 +53,11 @@ export const RecentTransactions = ({ agencyId }: RecentTransactionsProps) => {
                         </thead>
                         <tbody className="divide-y divide-slate-50">
                             {recentTx.map((tx: any, i) => (
-                                <tr key={i} className="group hover:bg-slate-50/80 transition-all">
+                                <tr 
+                                    key={i} 
+                                    className="group hover:bg-slate-50/80 transition-all cursor-pointer"
+                                    onClick={() => navigate(`/cip?transactionId=${tx.id}`)}
+                                >
                                     <td className="py-4 pl-2">
                                         <div className="flex items-center gap-4">
                                             <div className={cn(
@@ -72,7 +85,7 @@ export const RecentTransactions = ({ agencyId }: RecentTransactionsProps) => {
                                     <td className="py-4">
                                         <div className="flex items-center gap-2 text-xs text-slate-500">
                                             <Clock className="w-3.5 h-3.5 text-slate-300" />
-                                            {tx.date || 'Sept 24, 2025'}
+                                            {tx.date || 'Jan 22, 2026'}
                                         </div>
                                     </td>
                                     <td className="py-4 text-right">

@@ -14,7 +14,7 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [filters, setFilters] = useState<FilterState>({
-    fiscalYear: 'FY2024',
+    fiscalYear: 'FY2026',
     timeRange: 'FYTD',
     selectedAgencyId: 'ALL',
   });

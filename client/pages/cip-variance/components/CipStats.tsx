@@ -17,13 +17,13 @@ export const CipStats = ({ totalPlanned, totalConsumed, totalVariance }: CipStat
                 <div className="space-y-1">
                     <div className="flex items-center gap-2 text-slate-400">
                         <Activity className="w-4 h-4" />
-                        <span className="text-[10px] font-bold uppercase tracking-widest">Budget Utilization</span>
+                        <span className="text-[10px] font-bold uppercase tracking-widest">EOTSS Budget Utilization</span>
                     </div>
                     <div className="flex items-baseline gap-3">
                         <h2 className="text-4xl font-black text-slate-900 tracking-tight">
                             {Math.round(consumptionRate)}%
                         </h2>
-                        <span className="text-sm font-bold text-slate-400 uppercase tracking-wider">Consumed</span>
+                        <span className="text-sm font-bold text-slate-400 uppercase tracking-wider">Spent against budget</span>
                     </div>
                 </div>
 
@@ -31,7 +31,7 @@ export const CipStats = ({ totalPlanned, totalConsumed, totalVariance }: CipStat
                     <div className="text-right">
                         <div className="flex items-center justify-end gap-2 text-slate-400 mb-1">
                             <TrendingUp className="w-3.5 h-3.5 text-blue-500" />
-                            <span className="text-[10px] font-bold uppercase tracking-widest">Actual Spent</span>
+                            <span className="text-[10px] font-bold uppercase tracking-widest">EOTSS Actuals</span>
                         </div>
                         <div className="text-xl font-bold text-slate-900">{formatCurrency(totalConsumed)}</div>
                     </div>
@@ -39,7 +39,7 @@ export const CipStats = ({ totalPlanned, totalConsumed, totalVariance }: CipStat
                     <div className="text-right">
                         <div className="flex items-center justify-end gap-2 text-slate-400 mb-1">
                             <Target className="w-3.5 h-3.5 text-slate-400" />
-                            <span className="text-[10px] font-bold uppercase tracking-widest">Total Planned</span>
+                            <span className="text-[10px] font-bold uppercase tracking-widest">EOTSS Budget</span>
                         </div>
                         <div className="text-xl font-bold text-slate-900">{formatCurrency(totalPlanned)}</div>
                     </div>

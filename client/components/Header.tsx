@@ -22,8 +22,8 @@ export const Header: React.FC<HeaderProps> = ({ toggleChat, isChatOpen }) => {
             value={filters.fiscalYear}
             onChange={(e) => setFilters({ ...filters, fiscalYear: e.target.value })}
           >
-            <option value="FY2024">FY2024</option>
-            <option value="FY2023">FY2023</option>
+            <option value="FY2026">FY2026</option>
+            <option value="FY2025">FY2025</option>
           </select>
           <div className="w-px h-4 bg-slate-300 mx-1"></div>
           <select

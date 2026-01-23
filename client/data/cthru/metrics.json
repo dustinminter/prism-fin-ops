@@ -1,144 +1,144 @@
 {
   "summary": {
-    "total_spend": 302567100.9300002,
-    "total_transactions": 10569,
-    "unique_vendors": 201,
-    "unique_appropriations": 20
+    "total_spend": 179218197.20000005,
+    "total_transactions": 4401,
+    "unique_vendors": 147,
+    "unique_appropriations": 17
   },
   "by_vendor": [
     {
-      "vendor": "ITD - SUMMARY PAYROLL",
-      "amount": 57532620.28
-    },
-    {
       "vendor": "DELL MARKETING LP",
-      "amount": 38442922.15
+      "amount": 36344846.11
     },
     {
-      "vendor": "SMARTRONIX, LLC",
-      "amount": 26613241.91
-    },
-    {
-      "vendor": "HP INC",
-      "amount": 20935603.51
+      "vendor": "ITD - SUMMARY PAYROLL",
+      "amount": 33701720.49
     },
     {
       "vendor": "NUHARBOR SECURITY INC",
-      "amount": 15348605.07
+      "amount": 14841204.67
+    },
+    {
+      "vendor": "SMARTRONIX, LLC",
+      "amount": 12501701.94
     },
     {
       "vendor": "CONVERGEONE, INC",
-      "amount": 15238810.48
+      "amount": 8390228.82
     },
     {
       "vendor": "CARAHSOFT TECHNOLOGY CORPORATION",
-      "amount": 13276757.53
+      "amount": 6510178.43
     },
     {
       "vendor": "SHI INTERNATIONAL CORP",
-      "amount": 9819210.13
+      "amount": 5862014.32
     },
     {
       "vendor": "MOTOROLA SOLUTIONS, INC",
-      "amount": 8789539.39
+      "amount": 5831805.44
+    },
+    {
+      "vendor": "INTLX SOLUTIONS LLC",
+      "amount": 5818669.19
     },
     {
       "vendor": "MARKLEY BOSTON LLC",
-      "amount": 7523726.82
-    },
-    {
-      "vendor": "ACCENTURE LLP",
-      "amount": 7453393.68
+      "amount": 4045672.48
     },
     {
       "vendor": "LAST CALL MEDIA INC",
-      "amount": 6233911.29
+      "amount": 3364204.51
     },
     {
       "vendor": "MCINNIS CONSULTING SERVICES",
-      "amount": 5306118.14
+      "amount": 2610790.8
     },
     {
-      "vendor": "ORACLE AMERICA, INC",
-      "amount": 4489413.57
-    },
-    {
-      "vendor": "BLUE MANTIS INC",
-      "amount": 3705974.66
-    },
-    {
-      "vendor": "RAZAVI APPLICATION DEVELOPERS INC",
-      "amount": 3380743.12
-    },
-    {
-      "vendor": "FUTURE TECHNOLOGIES GROUP LLC",
-      "amount": 3270003.72
+      "vendor": "BULLETPROOF SOLUTIONS INC",
+      "amount": 2405902.73
     },
     {
       "vendor": "OVERTURE PARTNERS LLC",
-      "amount": 3269048.58
-    },
-    {
-      "vendor": "VERIZON BUSINESS NETWORK SERVICES LLC",
-      "amount": 2507440.92
+      "amount": 2253249.02
     },
     {
       "vendor": "SOFTWARE AG INC",
-      "amount": 2282715.0
+      "amount": 2052134.0
+    },
+    {
+      "vendor": "COUNTY OF NORFOLK",
+      "amount": 2000000.0
+    },
+    {
+      "vendor": "CGI TECHNOLOGIES & SOLUTIONS INC",
+      "amount": 1866102.69
+    },
+    {
+      "vendor": "INTRASYSTEMS INC",
+      "amount": 1659188.18
+    },
+    {
+      "vendor": "RAZAVI APPLICATION DEVELOPERS INC",
+      "amount": 1646355.9
+    },
+    {
+      "vendor": "INTERNATIONAL BUSINESS MACHINES CORP",
+      "amount": 1597980.28
     }
   ],
   "by_object_class": [
     {
       "objectClass": "IT NON-PAYROLL EXPENSES",
-      "amount": 241274660.18
+      "amount": 142004180.23
     },
     {
       "objectClass": "REGULAR EMPLOYEE COMPENSATION",
-      "amount": 56916499.86
+      "amount": 33360602.65
     },
     {
       "objectClass": "STATE AID/POL SUB",
-      "amount": 2217380.0
+      "amount": 2716110.0
     },
     {
       "objectClass": "ADMINISTRATIVE EXPENSES",
-      "amount": 760202.69
+      "amount": 402086.12
     },
     {
       "objectClass": "CONSULTANT SVCS (TO DEPTS)",
-      "amount": 558973.9
+      "amount": 359642.78
     },
     {
       "objectClass": "SPECIAL EMPLOYEES",
-      "amount": 475764.52
+      "amount": 266576.05
     },
     {
       "objectClass": "REGULAR EMPLOYEE RELATED EXPEN",
-      "amount": 140355.9
-    },
-    {
-      "objectClass": "INFRASTRUCTURE:",
-      "amount": 79525.45
-    },
-    {
-      "objectClass": "OPERATIONAL SERVICES",
-      "amount": 48410.35
-    },
-    {
-      "objectClass": "EQUIPMENT PURCHASE",
-      "amount": 46000.25
+      "amount": 74541.79
     },
     {
       "objectClass": "EQUIPMENT LEASE-MAINTAIN/REPAR",
-      "amount": 25347.67
+      "amount": 17907.03
     },
     {
-      "objectClass": "FACILITY OPERATIONAL EXPENSES",
-      "amount": 19420.47
+      "objectClass": "OPERATIONAL SERVICES",
+      "amount": 12899.69
     },
     {
       "objectClass": "ENERGY COSTS AND SPACE RENTAL",
-      "amount": 4559.69
+      "amount": 1459.07
+    },
+    {
+      "objectClass": "INFRASTRUCTURE:",
+      "amount": 1029.0
+    },
+    {
+      "objectClass": "FACILITY OPERATIONAL EXPENSES",
+      "amount": 912.79
+    },
+    {
+      "objectClass": "EQUIPMENT PURCHASE",
+      "amount": 250.0
     },
     {
       "objectClass": "PAYROLL REJECTS",
@@ -148,83 +148,71 @@
   "by_appropriation": [
     {
       "appropriation": "FOR THE COSTS OF COMPUTER RESOURCES",
-      "amount": 90098394.39
-    },
-    {
-      "appropriation": "CORE TECHNOLOGY SERVICES AND SECURITY",
-      "amount": 69565723.56
-    },
-    {
-      "appropriation": "CORE TECHNOLOGY SERVICES AND SECURITY CH",
-      "amount": 36607898.66
+      "amount": 128246521.48
     },
     {
       "appropriation": "GENERAL IT",
-      "amount": 29984745.04
+      "amount": 15988476.41
     },
     {
-      "appropriation": "IT CYBERSECURITY",
-      "amount": 16685074.27
-    },
-    {
-      "appropriation": "TECHNOLOGY PASS THROUGH CHARGEBACK",
-      "amount": 13481325.21
-    },
-    {
-      "appropriation": "GENERAL GOVT INFRASTRUCTURE",
-      "amount": 13081130.75
-    },
-    {
-      "appropriation": "ENHANCED 911 FUND",
-      "amount": 9751361.91
+      "appropriation": "CORE TECHNOLOGY SERVICES AND SECURITY",
+      "amount": 9689821.65
     },
     {
       "appropriation": "IT INFRA MOD",
-      "amount": 9202540.09
+      "amount": 6462694.49
     },
     {
-      "appropriation": "IT STRAT INIT",
-      "amount": 4602509.15
+      "appropriation": "ENHANCED 911 FUND",
+      "amount": 6347048.85
     },
     {
-      "appropriation": "DIVISION OF INFORMATION TECHNOLOGY",
-      "amount": 3448172.0
+      "appropriation": "TECHNOLOGY PASS THROUGH CHARGEBACK",
+      "amount": 5825210.62
     },
     {
       "appropriation": "COUNTY REGISTERS TECHNOLOGICAL FUND",
-      "amount": 2217380.0
+      "amount": 2716110.0
     },
     {
-      "appropriation": "IT STRATEGIC INITIATIVES",
-      "amount": 894171.09
+      "appropriation": "DIVISION OF INFORMATION TECHNOLOGY",
+      "amount": 1740942.15
+    },
+    {
+      "appropriation": "ENERGY AND ENVIRONMENT INFORMATION TECHNOLOGY COSTS",
+      "amount": 931723.47
+    },
+    {
+      "appropriation": "IT STRAT INIT",
+      "amount": 782062.93
+    },
+    {
+      "appropriation": "IT CONST SERV",
+      "amount": 229587.56
+    },
+    {
+      "appropriation": "IT CYBERSECURITY",
+      "amount": 227699.84
     },
     {
       "appropriation": "COMPUTER SERVICES TO GENERAL PUBLIC",
-      "amount": 815112.59
+      "amount": 106105.08
     },
     {
-      "appropriation": "IT INFRASTRUCTURE MODERNIZATION",
-      "amount": 718975.7
-    },
-    {
-      "appropriation": "IT CONSTITUENT SERVICES",
-      "amount": 688414.13
-    },
-    {
-      "appropriation": "FAMILY SHELTER AND SERVICES RESERVE",
-      "amount": 557352.07
-    },
-    {
-      "appropriation": "AFFORDABLE HOUSING TRUST",
-      "amount": 135313.5
-    },
-    {
-      "appropriation": "IT EQUIPMENT AND PROJECTS",
-      "amount": 31506.82
+      "appropriation": "CLIMATE ADAPTATION INFRASTRUCTURE",
+      "amount": 10292.67
     },
     {
       "appropriation": "PAYROLL HOLD ACCOUNT",
       "amount": 0.0
+    },
+    {
+      "appropriation": "CORE TECHNOLOGY SERVICES AND SECURITY CH",
+      "amount": -0.0
+    },
+    {
+      "appropriation": "EQUIPMENT FOR GENERAL GOVERNMENT OPERATIONS",
+      "amount": -86100.0
     }
   ]
 }
