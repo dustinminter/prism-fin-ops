@@ -1,0 +1,59 @@
+{
+  "bid_number": "S125606-vCurrent",
+  "scraped_at": "2026-01-22T20:38:54.026941",
+  "source_url": "https://www.commbuys.com/bso/external/bidDetail.sda?docId=S125606-vCurrent&external=true&parentUrl=close",
+  "header": {
+    "bid_number": "S125606-vCurrent",
+    "description": "Notice of Purchase Mass Technology Collaborative",
+    "opening_date": "06/30/2038 11:59:00 PM",
+    "purchaser": "Annemarie Kates",
+    "organization": "Executive Office of Technology Services and Security",
+    "department": "1060CONVD - ITD Default Data Conversion Department",
+    "location": "1060L - ITD Default Data Conversion Location",
+    "fiscal_year": "13",
+    "type_code": "NS - Non-Statewide Solicitation",
+    "allow_electronic_quote": "No",
+    "alternate_id": "ITP ITD 11-44",
+    "required_date": "",
+    "info_contact": "Linda Hamel, Address: One Ashburton Place Room 804 Boston, MA 02108, Phone: 617-626-4404, Email: Linda.Hamel@state.ma.us",
+    "bid_type": "OPEN",
+    "informal_bid_flag": "No",
+    "purchase_method": "Blanket",
+    "sbpp_eligible": ""
+  },
+  "items": [
+    {
+      "item_number": 1,
+      "description": "Converted bid item. See attachment section for complete bid information."
+    }
+  ],
+  "attachments": [
+    {
+      "filename": "Notice_of_Procurement_MTC",
+      "file_id": null,
+      "onclick": "",
+      "href": "javascript:downloadFile('328288');",
+      "local_path": "attachments/Notice_of_Procurement_MTC",
+      "downloaded_at": "2026-01-22T20:38:58.799016",
+      "download_status": "success"
+    },
+    {
+      "filename": "S125606-vCurrent_OD.xlsx",
+      "file_id": null,
+      "onclick": "",
+      "href": "javascript:downloadFile('570688');",
+      "local_path": "attachments/S125606-vCurrent_OD.xlsx",
+      "downloaded_at": "2026-01-22T20:38:59.345164",
+      "download_status": "success"
+    }
+  ],
+  "bulletin_description": "",
+  "pre_bid_conference": "",
+  "contact_info": {
+    "phone": "617-626-4404"
+  },
+  "addresses": {
+    "ship_to": "",
+    "bill_to": ""
+  }
+}

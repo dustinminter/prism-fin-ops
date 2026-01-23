@@ -1,0 +1,69 @@
+{
+  "bid_number": "BD-26-1060-ITD00-ITD00-124242",
+  "scraped_at": "2026-01-22T20:38:24.762186",
+  "source_url": "https://www.commbuys.com/bso/external/bidDetail.sda?docId=BD-26-1060-ITD00-ITD00-124242&external=true&parentUrl=close",
+  "header": {
+    "bid_number": "BD-26-1060-ITD00-ITD00-124242",
+    "description": "RFQ 26-04525 for Adobe Enterprise Agreement",
+    "opening_date": "02/11/2026 03:00:00 PM",
+    "purchaser": "Shawn Johnson",
+    "organization": "Executive Office of Technology Services and Security",
+    "department": "ITD0001 - Executive Office of Technology Services and Security",
+    "location": "ITD00 - TSS General",
+    "fiscal_year": "26",
+    "type_code": "",
+    "allow_electronic_quote": "Yes",
+    "alternate_id": "PCR-26-04525",
+    "required_date": "",
+    "info_contact": "Contact Shawn Johnson at (617) 626-4593",
+    "bid_type": "OPEN",
+    "informal_bid_flag": "No",
+    "purchase_method": "Open Market",
+    "sbpp_eligible": "NO"
+  },
+  "items": [
+    {
+      "item_number": 1,
+      "description": "The purpose of this RFQ is to solicit bids for Adobe Enterprise products.  See RFQ document for complete detail.  Bidders must be current ITS75 vendors authorized to resell Adobe products."
+    }
+  ],
+  "attachments": [
+    {
+      "filename": "RFQ 26-04525 Adobe Enterprise Agreement 01.12.26.docx",
+      "file_id": null,
+      "onclick": "",
+      "href": "javascript:downloadFile('2178563');",
+      "local_path": "attachments/RFQ 26-04525 Adobe Enterprise Agreement 01.12.26.docx",
+      "downloaded_at": "2026-01-22T20:38:29.308635",
+      "download_status": "success"
+    },
+    {
+      "filename": "Form 3 Template Statement of Work~5.docx",
+      "file_id": null,
+      "onclick": "",
+      "href": "javascript:downloadFile('2178564');",
+      "local_path": "attachments/Form 3 Template Statement of Work~5.docx",
+      "downloaded_at": "2026-01-22T20:38:29.629901",
+      "download_status": "success"
+    },
+    {
+      "filename": "Attachment B DMCA_091925~2.docx",
+      "file_id": null,
+      "onclick": "",
+      "href": "javascript:downloadFile('2178565');",
+      "local_path": "attachments/Attachment B DMCA_091925~2.docx",
+      "downloaded_at": "2026-01-22T20:38:29.902819",
+      "download_status": "success"
+    }
+  ],
+  "bulletin_description": "The purpose of this RFQ is to solicit bids for Adobe Enterprise products.  See RFQ document for complete detail.  Bidders must be current ITS75 vendors authorized to resell Adobe products.",
+  "pre_bid_conference": "",
+  "contact_info": {
+    "phone": "(617) 626-4593",
+    "name": "Shawn Johnson"
+  },
+  "addresses": {
+    "ship_to": "1 No Address See Item Section for specific information\nVendors need to check the Items section\nof the PO for ship to information\nBoston,  MA 02108\nUS\nEmail: seeitemsssection@xxx.com\nPhone: (617) 626-4400",
+    "bill_to": "Attention: EOTSS  Accounts Payable\nOne Ashburton Place Room 804\nBoston,  MA 02108\nUS\nEmail: itdinvoices@mass.gov\nPhone: (617) 626-5626\nAlt. Reference: Tiffany.Chen3@mass.gov"
+  }
+}

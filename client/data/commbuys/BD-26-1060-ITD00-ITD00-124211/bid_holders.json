@@ -1,0 +1,725 @@
+{
+  "bid_number": "BD-26-1060-ITD00-ITD00-124211",
+  "scraped_at": "2026-01-22T20:38:43.333684",
+  "source_url": "https://www.commbuys.com/bso/external/bidAckList.sda?bidId=BD-26-1060-ITD00-ITD00-124211",
+  "total_holders": 44,
+  "holders": [
+    {
+      "date_acknowledged": "2026-01-22 13:40:52.623",
+      "contact_person": "Rabinder Gabriel",
+      "company_name": "VLink, Inc",
+      "address": {
+        "lines": [
+          "701 John Fitch Blvd"
+        ],
+        "city": "South Windsor",
+        "state": "CT",
+        "zip": "06074"
+      },
+      "phone": "(860) 440-6494",
+      "fax": "(860) 256-8484",
+      "email": "rabinder.gabriel@vlinkinfo.com"
+    },
+    {
+      "date_acknowledged": "2026-01-22 16:44:52.55",
+      "contact_person": "Jennifer Golden",
+      "company_name": "NWN Corporation",
+      "address": {
+        "lines": [
+          "111 Huntington Ave, 7th Floor"
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02199"
+      },
+      "phone": "(860) 606-2865",
+      "fax": "(860) 606-2965",
+      "email": "jgolden@nwn.ai"
+    },
+    {
+      "date_acknowledged": "2026-01-09 13:29:02.257",
+      "contact_person": "Richard Romano",
+      "company_name": "Beacon Hill Staffing Group LLC",
+      "address": {
+        "lines": [
+          "152 Bowdoin Street"
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02108"
+      },
+      "phone": "(508) 243-2727",
+      "fax": "(617) 227-1220",
+      "email": "rromano@beaconhillstaffing.com"
+    },
+    {
+      "date_acknowledged": "2026-01-16 12:09:36.703",
+      "contact_person": "Greg Thorsell",
+      "company_name": "Windstream Communications Inc.",
+      "address": {
+        "lines": [
+          "4001 Rodney Parham Road"
+        ],
+        "city": "Little Rock",
+        "state": "AR",
+        "zip": "72212"
+      },
+      "phone": "(617) 475-0015",
+      "fax": "",
+      "email": "greg.thorsell@thor-tech.com"
+    },
+    {
+      "date_acknowledged": "2026-01-22 14:27:46.97",
+      "contact_person": "Erica Falchetti",
+      "company_name": "Insight Public Sector, Inc.",
+      "address": {
+        "lines": [
+          "6820 South Harl Avenue"
+        ],
+        "city": "Tempe",
+        "state": "AZ",
+        "zip": "85283"
+      },
+      "phone": "(480) 333-3071",
+      "fax": "(480) 760-9488",
+      "email": "erica.falchetti@insight.com"
+    },
+    {
+      "date_acknowledged": "2026-01-09 13:35:23.937",
+      "contact_person": "Rosemarie Pavlick",
+      "company_name": "Insight Public Sector, Inc.",
+      "address": {
+        "lines": [
+          "6820 South Harl Avenue"
+        ],
+        "city": "Tempe",
+        "state": "AZ",
+        "zip": "85283"
+      },
+      "phone": "(203) 659-2448",
+      "fax": "(480) 760-9488",
+      "email": "rosemarie.pavlick@insight.com"
+    },
+    {
+      "date_acknowledged": "2026-01-09 14:58:49.11",
+      "contact_person": "Cassandra Rheault",
+      "company_name": "RMON Networks Inc.",
+      "address": {
+        "lines": [
+          "2 Village Green Rd",
+          "Building B 1st Floor"
+        ],
+        "city": "Hampstead",
+        "state": "NH",
+        "zip": "03841"
+      },
+      "phone": "(603) 642-4010",
+      "fax": "(603) 642-4041",
+      "email": "crheault@rmonnetworks.com"
+    },
+    {
+      "date_acknowledged": "2026-01-14 04:59:59.697",
+      "contact_person": "Kathleen Hannon",
+      "company_name": "Nagarro, Inc.",
+      "address": {
+        "lines": [
+          "226 Airport Parkway",
+          "Suite 390"
+        ],
+        "city": "San Jose",
+        "state": "CA",
+        "zip": "95110"
+      },
+      "phone": "(617) 894-0578",
+      "fax": "",
+      "email": "team-newengland@nagarro.com"
+    },
+    {
+      "date_acknowledged": "2026-01-15 10:42:33.9",
+      "contact_person": "Amy Shaw",
+      "company_name": "Cloud Solved IT",
+      "address": {
+        "lines": [
+          "16 yale drive",
+          "16 yale drive"
+        ],
+        "city": "Milford",
+        "state": "MA",
+        "zip": "01757"
+      },
+      "phone": "(855) 529-8351",
+      "fax": "",
+      "email": "ashaw@cloudsolvedit.com"
+    },
+    {
+      "date_acknowledged": "2026-01-09 14:28:17.823",
+      "contact_person": "Tim Igo",
+      "company_name": "Arete Advisors LLC",
+      "address": {
+        "lines": [
+          "25 Wall Street"
+        ],
+        "city": "Burlington",
+        "state": "MA",
+        "zip": "01803"
+      },
+      "phone": "(617) 462-3785",
+      "fax": "",
+      "email": "tigo@areteadvisors.com"
+    },
+    {
+      "date_acknowledged": "2026-01-09 13:27:05.017",
+      "contact_person": "Triverus Commbuys",
+      "company_name": "Triverus Consulting, LLC",
+      "address": {
+        "lines": [
+          "300 Tradecenter",
+          "Suite 3490"
+        ],
+        "city": "Woburn",
+        "state": "MA",
+        "zip": "01801"
+      },
+      "phone": "(617) 336-3204",
+      "fax": "",
+      "email": "triveruscommbuys@triverusconsulting.com"
+    },
+    {
+      "date_acknowledged": "2026-01-09 14:31:28.107",
+      "contact_person": "Dana Procurement",
+      "company_name": "DK Consulting, LLC",
+      "address": {
+        "lines": [
+          "8955 Guilford Road",
+          "Suite 240"
+        ],
+        "city": "Columbia",
+        "state": "MD",
+        "zip": "21046"
+      },
+      "phone": "(301) 703-8302",
+      "fax": "(443) 283-4010",
+      "email": "procurement@dkconsult.net"
+    },
+    {
+      "date_acknowledged": "2026-01-12 14:19:36.193",
+      "contact_person": "Rob Rossi",
+      "company_name": "Eduloka, Ltd. (dba inLumon)",
+      "address": {
+        "lines": [
+          "5375 Kietzke Lane, SUite 150"
+        ],
+        "city": "Reno",
+        "state": "NV",
+        "zip": "89511"
+      },
+      "phone": "(800) 246-0541",
+      "fax": "",
+      "email": "info@inlumon.com"
+    },
+    {
+      "date_acknowledged": "2026-01-12 03:05:54.977",
+      "contact_person": "Thiru Ganesan",
+      "company_name": "Kyyba Tech Inc.",
+      "address": {
+        "lines": [
+          "28230 Orchard Lake Rd. Suite 130"
+        ],
+        "city": "Farmington Hills",
+        "state": "MI",
+        "zip": "48334"
+      },
+      "phone": "(248) 760-4708",
+      "fax": "(248) 813-9668",
+      "email": "Thiru@kyyba.com"
+    },
+    {
+      "date_acknowledged": "2026-01-09 13:50:37.943",
+      "contact_person": "David Knox",
+      "company_name": "Blue Mantis, Inc.",
+      "address": {
+        "lines": [
+          "Two International Drive, Suite 260"
+        ],
+        "city": "Portsmouth",
+        "state": "NH",
+        "zip": "03801"
+      },
+      "phone": "(781) 987-2013",
+      "fax": "",
+      "email": "david.knox@bluemantis.com"
+    },
+    {
+      "date_acknowledged": "2026-01-09 14:10:02.707",
+      "contact_person": "Christopher Querubin",
+      "company_name": "Windows Management Experts, Inc",
+      "address": {
+        "lines": [
+          "501 Cambria Ave STE 384"
+        ],
+        "city": "Bensalem",
+        "state": "PA",
+        "zip": "19020"
+      },
+      "phone": "(425) 502-0590",
+      "fax": "",
+      "email": "cquerubin@winmgmtexperts.com"
+    },
+    {
+      "date_acknowledged": "2026-01-13 09:06:14.877",
+      "contact_person": "Marilyn Koch",
+      "company_name": "CBTS LLC (formerly OnX)",
+      "address": {
+        "lines": [
+          "2 Lan Drive",
+          "Suite 203"
+        ],
+        "city": "Westford",
+        "state": "MA",
+        "zip": "01886"
+      },
+      "phone": "(781) 858-6246",
+      "fax": "(978) 692-2632",
+      "email": "marilyn.koch@cbts.com"
+    },
+    {
+      "date_acknowledged": "2026-01-11 23:56:09.907",
+      "contact_person": "Cathy Hsieh",
+      "company_name": "KAMBRIAN CORPORATION",
+      "address": {
+        "lines": [
+          "2707 east valley blvd",
+          "suite 312"
+        ],
+        "city": "WEST COVINA",
+        "state": "CA",
+        "zip": "91792"
+      },
+      "phone": "(626) 964-4445",
+      "fax": "(626) 964-4447",
+      "email": "team2@kambrian.com"
+    },
+    {
+      "date_acknowledged": "2026-01-09 13:55:53.993",
+      "contact_person": "Eric Ogden",
+      "company_name": "Trafera, LLC",
+      "address": {
+        "lines": [
+          "2550 University Ave W",
+          "Suite 315-S"
+        ],
+        "city": "St. Paul",
+        "state": "MN",
+        "zip": "55114"
+      },
+      "phone": "(651) 888-7922",
+      "fax": "(651) 888-7916",
+      "email": "contracts@trafera.com"
+    },
+    {
+      "date_acknowledged": "2026-01-12 06:17:39.197",
+      "contact_person": "Vikrant Shinde",
+      "company_name": "TrnDigital",
+      "address": {
+        "lines": [
+          "200 Portland Street",
+          "Floor 5"
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02114"
+      },
+      "phone": "(916) 822-1818",
+      "fax": "",
+      "email": "Vikrant.Shinde@trndigital.com"
+    },
+    {
+      "date_acknowledged": "2026-01-09 13:43:42.703",
+      "contact_person": "Greg Donovan",
+      "company_name": "TalentBurst, Inc",
+      "address": {
+        "lines": [
+          "679 Worcester"
+        ],
+        "city": "Natick",
+        "state": "MA",
+        "zip": "01760"
+      },
+      "phone": "(978) 821-3960",
+      "fax": "",
+      "email": "greg.donovan@talentburst.com"
+    },
+    {
+      "date_acknowledged": "2026-01-13 09:10:41.06",
+      "contact_person": "Joe Silva",
+      "company_name": "Spectra Networks LLC",
+      "address": {
+        "lines": [
+          "58 Pulaski St",
+          "Suite B4-7"
+        ],
+        "city": "Peabody",
+        "state": "MA",
+        "zip": "01960"
+      },
+      "phone": "(978) 219-9752",
+      "fax": "",
+      "email": "Joe@spectranets.com"
+    },
+    {
+      "date_acknowledged": "2026-01-09 13:46:41.223",
+      "contact_person": "Nitin Sharma",
+      "company_name": "American Business Solutions, Inc.",
+      "address": {
+        "lines": [
+          "8850 Whitney Drive",
+          "Lewis Center"
+        ],
+        "city": "Lewis Center",
+        "state": "OH",
+        "zip": "43035"
+      },
+      "phone": "(614) 888-2227",
+      "fax": "(888) 699-8866",
+      "email": "nitin@absi-usa.com"
+    },
+    {
+      "date_acknowledged": "2026-01-13 16:23:01.68",
+      "contact_person": "Clarence Barr",
+      "company_name": "Clever Management LLC",
+      "address": {
+        "lines": [
+          "307 Spruce St"
+        ],
+        "city": "Leominster",
+        "state": "MA",
+        "zip": "01453"
+      },
+      "phone": "(919) 525-9979",
+      "fax": "",
+      "email": "clevermanagement0217@gmail.com"
+    },
+    {
+      "date_acknowledged": "2026-01-12 06:49:27.59",
+      "contact_person": "Deviprasad Chabukswar",
+      "company_name": "Optima Business Solutions LLC",
+      "address": {
+        "lines": [
+          "809 Summer Breeze Drive"
+        ],
+        "city": "Baton Rouge",
+        "state": "LA",
+        "zip": "70810"
+      },
+      "phone": "(404) 444-0285",
+      "fax": "",
+      "email": "Hr@optimasolutions.us"
+    },
+    {
+      "date_acknowledged": "2026-01-09 13:37:10.407",
+      "contact_person": "Rocco Parisi",
+      "company_name": "ZenTek LLC",
+      "address": {
+        "lines": [
+          "9 Bobbink Terrace"
+        ],
+        "city": "East Rutherford",
+        "state": "NJ",
+        "zip": "07073"
+      },
+      "phone": "(866) 824-4459",
+      "fax": "",
+      "email": "government@zentekconsultants.net"
+    },
+    {
+      "date_acknowledged": "2026-01-09 16:42:50.573",
+      "contact_person": "Kendrick Tan",
+      "company_name": "Tech Advanced Computers",
+      "address": {
+        "lines": [
+          "1508 Creighton Road"
+        ],
+        "city": "Pensacola",
+        "state": "FL",
+        "zip": "32504"
+      },
+      "phone": "(850) 221-0382",
+      "fax": "",
+      "email": "ktan@techadvanced.com"
+    },
+    {
+      "date_acknowledged": "2026-01-13 17:39:59.89",
+      "contact_person": "Jonathan Rodgers",
+      "company_name": "Digital Ventures LLC",
+      "address": {
+        "lines": [
+          "PO Box 3131"
+        ],
+        "city": "Beverly",
+        "state": "MA",
+        "zip": "01915"
+      },
+      "phone": "(207) 240-5958",
+      "fax": "",
+      "email": "jrodgers04@gmail.com"
+    },
+    {
+      "date_acknowledged": "2026-01-20 10:16:55.36",
+      "contact_person": "Nithish Balasubramaniam",
+      "company_name": "Cloud Destinations Inc.",
+      "address": {
+        "lines": [
+          "2603 Camino Ramon, Suite 200, San Ramon, CA 94583"
+        ],
+        "city": "San Ramon",
+        "state": "CA",
+        "zip": "94583"
+      },
+      "phone": "(925) 391-8800",
+      "fax": "",
+      "email": "nithishb@clouddestinations.com"
+    },
+    {
+      "date_acknowledged": "2026-01-09 20:11:37.773",
+      "contact_person": "gregg Marschner",
+      "company_name": "Veteran Solutions Group LLC",
+      "address": {
+        "lines": [
+          "28114 Shadylane Dr"
+        ],
+        "city": "Farmington Hills, MI",
+        "state": "MI",
+        "zip": "48336"
+      },
+      "phone": "(910) 915-9060",
+      "fax": "(910) 915-9060",
+      "email": "gmarschner@veteran-solutions.com"
+    },
+    {
+      "date_acknowledged": "2026-01-16 10:09:26.98",
+      "contact_person": "Steve Foreman",
+      "company_name": "Technology Solutions Worldwide",
+      "address": {
+        "lines": [
+          "11340 Lakefield Drive",
+          "Suite 200"
+        ],
+        "city": "Johns Creek",
+        "state": "GA",
+        "zip": "30097"
+      },
+      "phone": "(800) 998-2792",
+      "fax": "",
+      "email": "governmentcontracting@techsolworld.com"
+    },
+    {
+      "date_acknowledged": "2026-01-09 14:03:34.507",
+      "contact_person": "Madison Lantz",
+      "company_name": "Dynamic Consultants Group",
+      "address": {
+        "lines": [
+          "5901 NW 63rd Terrace Suite #190"
+        ],
+        "city": "Kansas City",
+        "state": "MO",
+        "zip": "64151"
+      },
+      "phone": "(816) 558-5862",
+      "fax": "",
+      "email": "mlantz@dynamicconsultantsgroup.com"
+    },
+    {
+      "date_acknowledged": "2026-01-10 21:25:32.677",
+      "contact_person": "Frank Dasilva",
+      "company_name": "OBSENTRY LLC",
+      "address": {
+        "lines": [
+          "10 Elliot St"
+        ],
+        "city": "Malden",
+        "state": "MA",
+        "zip": "02148"
+      },
+      "phone": "(978) 914-5495",
+      "fax": "",
+      "email": "Vercosa@obsentry.com"
+    },
+    {
+      "date_acknowledged": "2026-01-09 21:53:16.667",
+      "contact_person": "Kenneth Okello",
+      "company_name": "VETERAN SUPPLY CHAIN & LOGISTICS CONSULTING LLC",
+      "address": {
+        "lines": [
+          "12 E SHEPPARD LN"
+        ],
+        "city": "CHELMSFORD",
+        "state": "MA",
+        "zip": "01824"
+      },
+      "phone": "(978) 876-2491",
+      "fax": "",
+      "email": "veteransupplychain@gmail.com"
+    },
+    {
+      "date_acknowledged": "2026-01-11 09:57:26.607",
+      "contact_person": "Damian Hartley",
+      "company_name": "MediSwift LLC",
+      "address": {
+        "lines": [
+          "PO Box383"
+        ],
+        "city": "East Otis",
+        "state": "MA",
+        "zip": "01029"
+      },
+      "phone": "(856) 375-4733",
+      "fax": "",
+      "email": "mediswiftdelivery@gmail.com"
+    },
+    {
+      "date_acknowledged": "2026-01-20 18:01:39.307",
+      "contact_person": "Ahad Mushtaq",
+      "company_name": "Meta IT Pro",
+      "address": {
+        "lines": [
+          "54 Bridge St"
+        ],
+        "city": "Raynham",
+        "state": "MA",
+        "zip": "02767"
+      },
+      "phone": "(774) 434-2346",
+      "fax": "",
+      "email": "ali@metaitpro.com"
+    },
+    {
+      "date_acknowledged": "2026-01-12 09:19:01.413",
+      "contact_person": "Amy O'Sullivan",
+      "company_name": "KPMG LLP",
+      "address": {
+        "lines": [
+          "Two Financial Center",
+          "60 South Street"
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02111"
+      },
+      "phone": "(617) 988-1000",
+      "fax": "(617) 988-1212",
+      "email": "amyosullivan@kpmg.com"
+    },
+    {
+      "date_acknowledged": "2026-01-21 12:13:46.947",
+      "contact_person": "Jessica Cammarano",
+      "company_name": "Rutter Networking Technologies, Inc.",
+      "address": {
+        "lines": [
+          "10 High St."
+        ],
+        "city": "Andover",
+        "state": "MA",
+        "zip": "01810"
+      },
+      "phone": "(978) 809-5069",
+      "fax": "",
+      "email": "jcammarano@rutter-net.com"
+    },
+    {
+      "date_acknowledged": "2026-01-22 15:46:56.723",
+      "contact_person": "Salvatore LoGiudice",
+      "company_name": "AT&T Corp",
+      "address": {
+        "lines": [
+          "550 Cochituate Rd"
+        ],
+        "city": "Framingham ",
+        "state": "MA",
+        "zip": "01701"
+      },
+      "phone": "(959) 282-6849",
+      "fax": "",
+      "email": "sl279h@att.com"
+    },
+    {
+      "date_acknowledged": "2026-01-16 15:32:44.0",
+      "contact_person": "Ryan Schumaker",
+      "company_name": "Dell Marketing L.P.",
+      "address": {
+        "lines": [
+          "176 South St"
+        ],
+        "city": "Hopkinton",
+        "state": "MA",
+        "zip": "01748"
+      },
+      "phone": "(512) 720-7215",
+      "fax": "",
+      "email": "Ryan_Schumaker@Dell.com"
+    },
+    {
+      "date_acknowledged": "2026-01-13 09:10:14.113",
+      "contact_person": "Susan McConathy",
+      "company_name": "Accenture",
+      "address": {
+        "lines": [
+          "888 Boylston Street"
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02199"
+      },
+      "phone": "(781) 956-4092",
+      "fax": "",
+      "email": "susan.mcconathy@accenture.com"
+    },
+    {
+      "date_acknowledged": "2026-01-09 14:08:06.34",
+      "contact_person": "Thomas Walsh",
+      "company_name": "SHI International Corp",
+      "address": {
+        "lines": [
+          "290 Davidson Ave."
+        ],
+        "city": "Somerset",
+        "state": "NJ",
+        "zip": "08873"
+      },
+      "phone": "(732) 652-6391",
+      "fax": "(732) 537-7163",
+      "email": "Thomas_Walsh@shi.com"
+    },
+    {
+      "date_acknowledged": "2026-01-22 14:02:04.103",
+      "contact_person": "Boronny Touch",
+      "company_name": "CDW Government LLC",
+      "address": {
+        "lines": [
+          "230 N. Milwaukee Ave."
+        ],
+        "city": "Vernon Hills",
+        "state": "IL",
+        "zip": "60061"
+      },
+      "phone": "(203) 851-7182",
+      "fax": "(847) 419-6200",
+      "email": "Boronny.Touch@cdwg.com"
+    },
+    {
+      "date_acknowledged": "2026-01-09 13:32:41.117",
+      "contact_person": "Craig Ventrice",
+      "company_name": "CDW Government LLC",
+      "address": {
+        "lines": [
+          "230 N. Milwaukee Ave."
+        ],
+        "city": "Vernon Hills",
+        "state": "IL",
+        "zip": "60061"
+      },
+      "phone": "(203) 851-7252",
+      "fax": "(847) 419-6200",
+      "email": "craig.ventrice@cdwg.com"
+    }
+  ]
+}

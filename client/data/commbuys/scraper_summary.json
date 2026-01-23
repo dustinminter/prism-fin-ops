@@ -1,0 +1,40 @@
+{
+  "generated_at": "2026-01-22T20:39:02.218453",
+  "total_bids_found": 5,
+  "successful_scrapes": 5,
+  "failed_scrapes": 0,
+  "total_attachments": 23,
+  "downloaded_attachments": 23,
+  "bids": [
+    {
+      "bid_number": "BD-26-1060-ITD00-ITD00-124337",
+      "status": "success",
+      "attachments_count": 1,
+      "holders_count": 28
+    },
+    {
+      "bid_number": "BD-26-1060-ITD00-ITD00-124242",
+      "status": "success",
+      "attachments_count": 3,
+      "holders_count": 11
+    },
+    {
+      "bid_number": "BD-26-1060-ITD00-ITD00-124211",
+      "status": "success",
+      "attachments_count": 15,
+      "holders_count": 44
+    },
+    {
+      "bid_number": "S124912-vCurrent",
+      "status": "success",
+      "attachments_count": 2,
+      "holders_count": 133
+    },
+    {
+      "bid_number": "S125606-vCurrent",
+      "status": "success",
+      "attachments_count": 2,
+      "holders_count": 160
+    }
+  ]
+}

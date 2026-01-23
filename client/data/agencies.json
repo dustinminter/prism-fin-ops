@@ -1,0 +1,220 @@
+[
+  {
+    "id": "HHS",
+    "name": "Exec Office of Health & Human Services",
+    "cipPlanned": 251113521.0,
+    "consumed": 54117250.51,
+    "variance": 196996270.49,
+    "consumptionRate": 0.2155,
+    "riskLevel": "Critical",
+    "trend": "down",
+    "topDrivers": [
+      "Significant underspend vs plan",
+      "Low consumption rate",
+      "Declining spend rate"
+    ]
+  },
+  {
+    "id": "LOTTERY",
+    "name": "State Lottery Commission",
+    "cipPlanned": 20100000.0,
+    "consumed": 0,
+    "variance": 20100000.0,
+    "consumptionRate": 0.0,
+    "riskLevel": "Critical",
+    "trend": "flat",
+    "topDrivers": [
+      "Moderate underspend",
+      "Low consumption rate"
+    ]
+  },
+  {
+    "id": "EOED",
+    "name": "EO of Economic Development",
+    "cipPlanned": 15200000.0,
+    "consumed": 0,
+    "variance": 15200000.0,
+    "consumptionRate": 0.0,
+    "riskLevel": "Critical",
+    "trend": "flat",
+    "topDrivers": [
+      "Moderate underspend",
+      "Low consumption rate"
+    ]
+  },
+  {
+    "id": "LABOR",
+    "name": "Executive Office of Labor and Workforce",
+    "cipPlanned": 15000000.0,
+    "consumed": 0,
+    "variance": 15000000.0,
+    "consumptionRate": 0.0,
+    "riskLevel": "Critical",
+    "trend": "flat",
+    "topDrivers": [
+      "Moderate underspend",
+      "Low consumption rate"
+    ]
+  },
+  {
+    "id": "EDU",
+    "name": "Executive Office of Education",
+    "cipPlanned": 12101462.0,
+    "consumed": 0,
+    "variance": 12101462.0,
+    "consumptionRate": 0.0,
+    "riskLevel": "Critical",
+    "trend": "flat",
+    "topDrivers": [
+      "Moderate underspend",
+      "Low consumption rate"
+    ]
+  },
+  {
+    "id": "HOUSING",
+    "name": "Housing and Livable Communities",
+    "cipPlanned": 10000000.0,
+    "consumed": 67656.75,
+    "variance": 9932343.25,
+    "consumptionRate": 0.0068,
+    "riskLevel": "Critical",
+    "trend": "up",
+    "topDrivers": [
+      "Low consumption rate",
+      "Accelerating spend"
+    ]
+  },
+  {
+    "id": "EEA",
+    "name": "EO of Energy and Environmental Affairs",
+    "cipPlanned": 6350000.0,
+    "consumed": 0,
+    "variance": 6350000.0,
+    "consumptionRate": 0.0,
+    "riskLevel": "Critical",
+    "trend": "flat",
+    "topDrivers": [
+      "Low consumption rate"
+    ]
+  },
+  {
+    "id": "EEC",
+    "name": "Early Ed and Care",
+    "cipPlanned": 6078850.0,
+    "consumed": 0,
+    "variance": 6078850.0,
+    "consumptionRate": 0.0,
+    "riskLevel": "Critical",
+    "trend": "flat",
+    "topDrivers": [
+      "Low consumption rate"
+    ]
+  },
+  {
+    "id": "TRIAL_COURT",
+    "name": "Trial Court",
+    "cipPlanned": 5000000.0,
+    "consumed": 0,
+    "variance": 5000000.0,
+    "consumptionRate": 0.0,
+    "riskLevel": "Critical",
+    "trend": "flat",
+    "topDrivers": [
+      "Low consumption rate"
+    ]
+  },
+  {
+    "id": "A_AND_F",
+    "name": "Exec Office for Administration & Finance",
+    "cipPlanned": 2719000.0,
+    "consumed": 0,
+    "variance": 2719000.0,
+    "consumptionRate": 0.0,
+    "riskLevel": "Critical",
+    "trend": "flat",
+    "topDrivers": [
+      "Low consumption rate"
+    ]
+  },
+  {
+    "id": "ORI",
+    "name": "Office for Refugees and Immigrants",
+    "cipPlanned": 1264500.0,
+    "consumed": 0,
+    "variance": 1264500.0,
+    "consumptionRate": 0.0,
+    "riskLevel": "Critical",
+    "trend": "flat",
+    "topDrivers": [
+      "Low consumption rate"
+    ]
+  },
+  {
+    "id": "AUDITOR",
+    "name": "Office of the State Auditor",
+    "cipPlanned": 1000000.0,
+    "consumed": 0,
+    "variance": 1000000.0,
+    "consumptionRate": 0.0,
+    "riskLevel": "Critical",
+    "trend": "flat",
+    "topDrivers": [
+      "Low consumption rate"
+    ]
+  },
+  {
+    "id": "ETHICS",
+    "name": "State Ethics Commission",
+    "cipPlanned": 1000000.0,
+    "consumed": 0,
+    "variance": 1000000.0,
+    "consumptionRate": 0.0,
+    "riskLevel": "Critical",
+    "trend": "flat",
+    "topDrivers": [
+      "Low consumption rate"
+    ]
+  },
+  {
+    "id": "DLR",
+    "name": "Department of Labor Relations",
+    "cipPlanned": 150000.0,
+    "consumed": 0,
+    "variance": 150000.0,
+    "consumptionRate": 0.0,
+    "riskLevel": "Critical",
+    "trend": "flat",
+    "topDrivers": [
+      "Low consumption rate"
+    ]
+  },
+  {
+    "id": "EOPSS",
+    "name": "EO Public Safety and Security",
+    "cipPlanned": 30544000.0,
+    "consumed": 61836904.54,
+    "variance": -31292904.54,
+    "consumptionRate": 2.0245,
+    "riskLevel": "Low",
+    "trend": "down",
+    "topDrivers": [
+      "Overspend vs plan",
+      "Exceeded planned budget",
+      "Declining spend rate"
+    ]
+  },
+  {
+    "id": "EOTSS",
+    "name": "Technology Services and Security",
+    "cipPlanned": 155116071.0,
+    "consumed": 302567100.93,
+    "variance": -147451029.93,
+    "consumptionRate": 1.9506,
+    "riskLevel": "Low",
+    "trend": "flat",
+    "topDrivers": [
+      "Overspend vs plan",
+      "Exceeded planned budget"
+    ]
+  }
+]

@@ -1,0 +1,188 @@
+{
+  "bid_number": "BD-26-1060-ITD00-ITD00-124242",
+  "scraped_at": "2026-01-22T20:38:29.903137",
+  "source_url": "https://www.commbuys.com/bso/external/bidAckList.sda?bidId=BD-26-1060-ITD00-ITD00-124242",
+  "total_holders": 11,
+  "holders": [
+    {
+      "date_acknowledged": "2026-01-13 01:32:37.257",
+      "contact_person": "Amanda Brown",
+      "company_name": "Ardent Technologies, Inc.",
+      "address": {
+        "lines": [
+          "6234 Far Hills Ave"
+        ],
+        "city": "Dayton",
+        "state": "OH",
+        "zip": "45459"
+      },
+      "phone": "(937) 312-1345",
+      "fax": "(937) 312-1346",
+      "email": "mabids@ardentinc.com"
+    },
+    {
+      "date_acknowledged": "2026-01-15 11:06:12.337",
+      "contact_person": "Rosemarie Pavlick",
+      "company_name": "Insight Public Sector, Inc.",
+      "address": {
+        "lines": [
+          "6820 South Harl Avenue"
+        ],
+        "city": "Tempe",
+        "state": "AZ",
+        "zip": "85283"
+      },
+      "phone": "(203) 659-2448",
+      "fax": "(480) 760-9488",
+      "email": "rosemarie.pavlick@insight.com"
+    },
+    {
+      "date_acknowledged": "2026-01-12 11:50:23.653",
+      "contact_person": "Gregory Yanchenko",
+      "company_name": "BidDocs ONLINE Inc.",
+      "address": {
+        "lines": [
+          "P.O. Box 51",
+          "61 Skyfields Drive"
+        ],
+        "city": "Groton",
+        "state": "MA",
+        "zip": "01450"
+      },
+      "phone": "(978) 888-3350",
+      "fax": "(978) 449-0469",
+      "email": "gky@biddocsonline.com"
+    },
+    {
+      "date_acknowledged": "2026-01-14 10:15:34.173",
+      "contact_person": "Kathleen Hannon",
+      "company_name": "Nagarro, Inc.",
+      "address": {
+        "lines": [
+          "226 Airport Parkway",
+          "Suite 390"
+        ],
+        "city": "San Jose",
+        "state": "CA",
+        "zip": "95110"
+      },
+      "phone": "(617) 894-0578",
+      "fax": "",
+      "email": "team-newengland@nagarro.com"
+    },
+    {
+      "date_acknowledged": "2026-01-12 11:45:11.293",
+      "contact_person": "Bryant McGhee",
+      "company_name": "Advantage Technical Resourcing, Inc.",
+      "address": {
+        "lines": [
+          "220 Noorwood Park S."
+        ],
+        "city": "Norwood",
+        "state": "MA",
+        "zip": "02062"
+      },
+      "phone": "(860) 402-9661",
+      "fax": "(781) 466-8102",
+      "email": "Bryant.McGhee@advantagetechnical.com"
+    },
+    {
+      "date_acknowledged": "2026-01-15 02:21:54.37",
+      "contact_person": "Cathy Hsieh",
+      "company_name": "KAMBRIAN CORPORATION",
+      "address": {
+        "lines": [
+          "2707 east valley blvd",
+          "suite 312"
+        ],
+        "city": "WEST COVINA",
+        "state": "CA",
+        "zip": "91792"
+      },
+      "phone": "(626) 964-4445",
+      "fax": "(626) 964-4447",
+      "email": "team2@kambrian.com"
+    },
+    {
+      "date_acknowledged": "2026-01-12 12:13:13.803",
+      "contact_person": "Nitin Sharma",
+      "company_name": "American Business Solutions, Inc.",
+      "address": {
+        "lines": [
+          "8850 Whitney Drive",
+          "Lewis Center"
+        ],
+        "city": "Lewis Center",
+        "state": "OH",
+        "zip": "43035"
+      },
+      "phone": "(614) 888-2227",
+      "fax": "(888) 699-8866",
+      "email": "nitin@absi-usa.com"
+    },
+    {
+      "date_acknowledged": "2026-01-22 16:44:25.957",
+      "contact_person": "Thomas Smyth",
+      "company_name": "Concourse",
+      "address": {
+        "lines": [
+          "147 West 22nd St"
+        ],
+        "city": "New. York",
+        "state": "NY",
+        "zip": "10011"
+      },
+      "phone": "(706) 418-5816",
+      "fax": "",
+      "email": "sales@concoursetech.com"
+    },
+    {
+      "date_acknowledged": "2026-01-13 17:36:06.67",
+      "contact_person": "Jonathan Rodgers",
+      "company_name": "Digital Ventures LLC",
+      "address": {
+        "lines": [
+          "PO Box 3131"
+        ],
+        "city": "Beverly",
+        "state": "MA",
+        "zip": "01915"
+      },
+      "phone": "(207) 240-5958",
+      "fax": "",
+      "email": "jrodgers04@gmail.com"
+    },
+    {
+      "date_acknowledged": "2026-01-13 11:46:21.16",
+      "contact_person": "Thomas Walsh",
+      "company_name": "SHI International Corp",
+      "address": {
+        "lines": [
+          "290 Davidson Ave."
+        ],
+        "city": "Somerset",
+        "state": "NJ",
+        "zip": "08873"
+      },
+      "phone": "(732) 652-6391",
+      "fax": "(732) 537-7163",
+      "email": "Thomas_Walsh@shi.com"
+    },
+    {
+      "date_acknowledged": "2026-01-12 11:33:50.12",
+      "contact_person": "Craig Ventrice",
+      "company_name": "CDW Government LLC",
+      "address": {
+        "lines": [
+          "230 N. Milwaukee Ave."
+        ],
+        "city": "Vernon Hills",
+        "state": "IL",
+        "zip": "60061"
+      },
+      "phone": "(203) 851-7252",
+      "fax": "(847) 419-6200",
+      "email": "craig.ventrice@cdwg.com"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+[
+  {
+    "month": "Jul",
+    "plannedBurn": 50301385.79,
+    "actualBurn": 72725166.59,
+    "variance": -22423780.8
+  },
+  {
+    "month": "Aug",
+    "plannedBurn": 45728532.53,
+    "actualBurn": 18933375.76,
+    "variance": 4371375.97
+  },
+  {
+    "month": "Sep",
+    "plannedBurn": 43442105.91,
+    "actualBurn": 16995378.13,
+    "variance": 30818103.74
+  },
+  {
+    "month": "Oct",
+    "plannedBurn": 41155679.28,
+    "actualBurn": 16590115.75,
+    "variance": 55383667.27
+  },
+  {
+    "month": "Nov",
+    "plannedBurn": 38869252.65,
+    "actualBurn": 12458311.8,
+    "variance": 81794608.12
+  },
+  {
+    "month": "Dec",
+    "plannedBurn": 38869252.65,
+    "actualBurn": 21362778.71,
+    "variance": 99301082.07
+  },
+  {
+    "month": "Jan",
+    "plannedBurn": 38869252.65,
+    "actualBurn": 17096427.03,
+    "variance": 121073907.69
+  },
+  {
+    "month": "Feb",
+    "plannedBurn": 41155679.28,
+    "actualBurn": 14017694.0,
+    "variance": 148211892.97
+  },
+  {
+    "month": "Mar",
+    "plannedBurn": 43442105.91,
+    "actualBurn": 19413749.93,
+    "variance": 172240248.94
+  },
+  {
+    "month": "Apr",
+    "plannedBurn": 45728532.53,
+    "actualBurn": 16895650.35,
+    "variance": 201073131.13
+  },
+  {
+    "month": "May",
+    "plannedBurn": 50301385.79,
+    "actualBurn": 15288024.22,
+    "variance": 236086492.69
+  },
+  {
+    "month": "Jun",
+    "plannedBurn": 54874239.04,
+    "actualBurn": 35181580.41,
+    "variance": 255779151.32
+  }
+]

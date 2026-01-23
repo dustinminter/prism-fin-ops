@@ -1,0 +1,274 @@
+[
+  {
+    "id": "RISK-1001",
+    "title": "Exec Office of Health & Human Servi - Significant underspend vs plan",
+    "agencyId": "HHS",
+    "severity": "Critical",
+    "varianceDelta": 196996270.49,
+    "driver": "Significant underspend vs plan",
+    "createdDate": "2026-01-22",
+    "status": "New",
+    "owner": "Unassigned",
+    "description": "Program has $196,996,270 variance from plan. Planned: $251,113,521, Consumed: $54,117,251. Consumption rate: 21.6%.",
+    "recommendedSteps": [
+      "Review project execution timeline",
+      "Assess procurement pipeline status",
+      "Evaluate capacity to accelerate spending"
+    ]
+  },
+  {
+    "id": "RISK-1002",
+    "title": "State Lottery Commission - Moderate underspend",
+    "agencyId": "LOTTERY",
+    "severity": "Critical",
+    "varianceDelta": 20100000.0,
+    "driver": "Moderate underspend",
+    "createdDate": "2026-01-22",
+    "status": "Reviewing",
+    "owner": "J. Martinez",
+    "description": "Program has $20,100,000 variance from plan. Planned: $20,100,000, Consumed: $0. Consumption rate: 0.0%.",
+    "recommendedSteps": [
+      "Review project execution timeline",
+      "Assess procurement pipeline status",
+      "Evaluate capacity to accelerate spending"
+    ]
+  },
+  {
+    "id": "RISK-1003",
+    "title": "EO of Economic Development - Moderate underspend",
+    "agencyId": "EOED",
+    "severity": "Critical",
+    "varianceDelta": 15200000.0,
+    "driver": "Moderate underspend",
+    "createdDate": "2026-01-22",
+    "status": "New",
+    "owner": "S. Johnson",
+    "description": "Program has $15,200,000 variance from plan. Planned: $15,200,000, Consumed: $0. Consumption rate: 0.0%.",
+    "recommendedSteps": [
+      "Review project execution timeline",
+      "Assess procurement pipeline status",
+      "Evaluate capacity to accelerate spending"
+    ]
+  },
+  {
+    "id": "RISK-1004",
+    "title": "Executive Office of Labor and Workf - Moderate underspend",
+    "agencyId": "LABOR",
+    "severity": "Critical",
+    "varianceDelta": 15000000.0,
+    "driver": "Moderate underspend",
+    "createdDate": "2026-01-22",
+    "status": "Mitigated",
+    "owner": "Unassigned",
+    "description": "Program has $15,000,000 variance from plan. Planned: $15,000,000, Consumed: $0. Consumption rate: 0.0%.",
+    "recommendedSteps": [
+      "Review project execution timeline",
+      "Assess procurement pipeline status",
+      "Evaluate capacity to accelerate spending"
+    ]
+  },
+  {
+    "id": "RISK-1005",
+    "title": "Executive Office of Education - Moderate underspend",
+    "agencyId": "EDU",
+    "severity": "Critical",
+    "varianceDelta": 12101462.0,
+    "driver": "Moderate underspend",
+    "createdDate": "2026-01-22",
+    "status": "New",
+    "owner": "M. Chen",
+    "description": "Program has $12,101,462 variance from plan. Planned: $12,101,462, Consumed: $0. Consumption rate: 0.0%.",
+    "recommendedSteps": [
+      "Review project execution timeline",
+      "Assess procurement pipeline status",
+      "Evaluate capacity to accelerate spending"
+    ]
+  },
+  {
+    "id": "RISK-1006",
+    "title": "Housing and Livable Communities - Low consumption rate",
+    "agencyId": "HOUSING",
+    "severity": "Critical",
+    "varianceDelta": 9932343.25,
+    "driver": "Low consumption rate",
+    "createdDate": "2026-01-22",
+    "status": "New",
+    "owner": "Unassigned",
+    "description": "Program has $9,932,343 variance from plan. Planned: $10,000,000, Consumed: $67,657. Consumption rate: 0.7%.",
+    "recommendedSteps": [
+      "Review project execution timeline",
+      "Assess procurement pipeline status",
+      "Evaluate capacity to accelerate spending"
+    ]
+  },
+  {
+    "id": "RISK-1007",
+    "title": "EO of Energy and Environmental Affa - Low consumption rate",
+    "agencyId": "EEA",
+    "severity": "Critical",
+    "varianceDelta": 6350000.0,
+    "driver": "Low consumption rate",
+    "createdDate": "2026-01-22",
+    "status": "Reviewing",
+    "owner": "J. Martinez",
+    "description": "Program has $6,350,000 variance from plan. Planned: $6,350,000, Consumed: $0. Consumption rate: 0.0%.",
+    "recommendedSteps": [
+      "Review project execution timeline",
+      "Assess procurement pipeline status",
+      "Evaluate capacity to accelerate spending"
+    ]
+  },
+  {
+    "id": "RISK-1008",
+    "title": "Early Ed and Care - Low consumption rate",
+    "agencyId": "EEC",
+    "severity": "Critical",
+    "varianceDelta": 6078850.0,
+    "driver": "Low consumption rate",
+    "createdDate": "2026-01-22",
+    "status": "New",
+    "owner": "S. Johnson",
+    "description": "Program has $6,078,850 variance from plan. Planned: $6,078,850, Consumed: $0. Consumption rate: 0.0%.",
+    "recommendedSteps": [
+      "Review project execution timeline",
+      "Assess procurement pipeline status",
+      "Evaluate capacity to accelerate spending"
+    ]
+  },
+  {
+    "id": "RISK-1009",
+    "title": "Trial Court - Low consumption rate",
+    "agencyId": "TRIAL_COURT",
+    "severity": "Critical",
+    "varianceDelta": 5000000.0,
+    "driver": "Low consumption rate",
+    "createdDate": "2026-01-22",
+    "status": "Mitigated",
+    "owner": "Unassigned",
+    "description": "Program has $5,000,000 variance from plan. Planned: $5,000,000, Consumed: $0. Consumption rate: 0.0%.",
+    "recommendedSteps": [
+      "Review project execution timeline",
+      "Assess procurement pipeline status",
+      "Evaluate capacity to accelerate spending"
+    ]
+  },
+  {
+    "id": "RISK-1010",
+    "title": "Exec Office for Administration & Fi - Low consumption rate",
+    "agencyId": "A_AND_F",
+    "severity": "Critical",
+    "varianceDelta": 2719000.0,
+    "driver": "Low consumption rate",
+    "createdDate": "2026-01-22",
+    "status": "New",
+    "owner": "M. Chen",
+    "description": "Program has $2,719,000 variance from plan. Planned: $2,719,000, Consumed: $0. Consumption rate: 0.0%.",
+    "recommendedSteps": [
+      "Review project execution timeline",
+      "Assess procurement pipeline status",
+      "Evaluate capacity to accelerate spending"
+    ]
+  },
+  {
+    "id": "RISK-1011",
+    "title": "Office for Refugees and Immigrants - Low consumption rate",
+    "agencyId": "ORI",
+    "severity": "Critical",
+    "varianceDelta": 1264500.0,
+    "driver": "Low consumption rate",
+    "createdDate": "2026-01-22",
+    "status": "New",
+    "owner": "Unassigned",
+    "description": "Program has $1,264,500 variance from plan. Planned: $1,264,500, Consumed: $0. Consumption rate: 0.0%.",
+    "recommendedSteps": [
+      "Review project execution timeline",
+      "Assess procurement pipeline status",
+      "Evaluate capacity to accelerate spending"
+    ]
+  },
+  {
+    "id": "RISK-1012",
+    "title": "Office of the State Auditor - Low consumption rate",
+    "agencyId": "AUDITOR",
+    "severity": "Critical",
+    "varianceDelta": 1000000.0,
+    "driver": "Low consumption rate",
+    "createdDate": "2026-01-22",
+    "status": "Reviewing",
+    "owner": "J. Martinez",
+    "description": "Program has $1,000,000 variance from plan. Planned: $1,000,000, Consumed: $0. Consumption rate: 0.0%.",
+    "recommendedSteps": [
+      "Review project execution timeline",
+      "Assess procurement pipeline status",
+      "Evaluate capacity to accelerate spending"
+    ]
+  },
+  {
+    "id": "RISK-1013",
+    "title": "State Ethics Commission - Low consumption rate",
+    "agencyId": "ETHICS",
+    "severity": "Critical",
+    "varianceDelta": 1000000.0,
+    "driver": "Low consumption rate",
+    "createdDate": "2026-01-22",
+    "status": "New",
+    "owner": "S. Johnson",
+    "description": "Program has $1,000,000 variance from plan. Planned: $1,000,000, Consumed: $0. Consumption rate: 0.0%.",
+    "recommendedSteps": [
+      "Review project execution timeline",
+      "Assess procurement pipeline status",
+      "Evaluate capacity to accelerate spending"
+    ]
+  },
+  {
+    "id": "RISK-1014",
+    "title": "Department of Labor Relations - Low consumption rate",
+    "agencyId": "DLR",
+    "severity": "Critical",
+    "varianceDelta": 150000.0,
+    "driver": "Low consumption rate",
+    "createdDate": "2026-01-22",
+    "status": "Mitigated",
+    "owner": "Unassigned",
+    "description": "Program has $150,000 variance from plan. Planned: $150,000, Consumed: $0. Consumption rate: 0.0%.",
+    "recommendedSteps": [
+      "Review project execution timeline",
+      "Assess procurement pipeline status",
+      "Evaluate capacity to accelerate spending"
+    ]
+  },
+  {
+    "id": "RISK-1016",
+    "title": "Technology Services and Security - Overspend vs plan",
+    "agencyId": "EOTSS",
+    "severity": "Watch",
+    "varianceDelta": 147451029.93,
+    "driver": "Overspend vs plan",
+    "createdDate": "2026-01-22",
+    "status": "New",
+    "owner": "Unassigned",
+    "description": "Program has $147,451,030 variance from plan. Planned: $155,116,071, Consumed: $302,567,101. Consumption rate: 195.1%.",
+    "recommendedSteps": [
+      "Review cost overrun root cause",
+      "Assess budget reallocation options",
+      "Update fiscal year projections"
+    ]
+  },
+  {
+    "id": "RISK-1015",
+    "title": "EO Public Safety and Security - Overspend vs plan",
+    "agencyId": "EOPSS",
+    "severity": "Watch",
+    "varianceDelta": 31292904.54,
+    "driver": "Overspend vs plan",
+    "createdDate": "2026-01-22",
+    "status": "New",
+    "owner": "M. Chen",
+    "description": "Program has $31,292,905 variance from plan. Planned: $30,544,000, Consumed: $61,836,905. Consumption rate: 202.5%.",
+    "recommendedSteps": [
+      "Review cost overrun root cause",
+      "Assess budget reallocation options",
+      "Update fiscal year projections"
+    ]
+  }
+]

@@ -1,0 +1,51 @@
+{
+  "bid_number": "BD-26-1060-ITD00-ITD00-124337",
+  "scraped_at": "2026-01-22T20:38:17.384123",
+  "source_url": "https://www.commbuys.com/bso/external/bidDetail.sda?docId=BD-26-1060-ITD00-ITD00-124337&external=true&parentUrl=close",
+  "header": {
+    "bid_number": "BD-26-1060-ITD00-ITD00-124337",
+    "description": "PCR-26-04547 Tyler Technologies Pilot",
+    "opening_date": "01/28/2026 05:00:00 PM",
+    "purchaser": "Shawn Johnson",
+    "organization": "Executive Office of Technology Services and Security",
+    "department": "ITD0001 - Executive Office of Technology Services and Security",
+    "location": "ITD00 - TSS General",
+    "fiscal_year": "26",
+    "type_code": "NS - Non-Statewide Solicitation",
+    "allow_electronic_quote": "Yes",
+    "alternate_id": "PCR-26-04547",
+    "required_date": "",
+    "info_contact": "Contact Shawn Johnson at (617) 626-4593",
+    "bid_type": "OPEN",
+    "informal_bid_flag": "Yes",
+    "purchase_method": "Open Market",
+    "sbpp_eligible": "NO"
+  },
+  "items": [
+    {
+      "item_number": 1,
+      "description": "Due Diligence Notice of Intent to accept best value offer of Tyler Technologies' Continuous Vulnerability Scanning, Endpoint Detection & Response, and Managed Detection & Response products.  See attached notice for complete detail."
+    }
+  ],
+  "attachments": [
+    {
+      "filename": "Tyler Technologies Due Diligence Notice of Intent 01.14.26.docx",
+      "file_id": null,
+      "onclick": "",
+      "href": "javascript:downloadFile('2179523');",
+      "local_path": "attachments/Tyler Technologies Due Diligence Notice of Intent 01.14.26.docx",
+      "downloaded_at": "2026-01-22T20:38:21.995592",
+      "download_status": "success"
+    }
+  ],
+  "bulletin_description": "Due Diligence Notice of Intent to accept best value offer of Tyler Technologies' Continuous Vulnerability Scanning, Endpoint Detection & Response, and Managed Detection & Response products. See attached notice for complete detail.",
+  "pre_bid_conference": "",
+  "contact_info": {
+    "phone": "(617) 626-4593",
+    "name": "Shawn Johnson"
+  },
+  "addresses": {
+    "ship_to": "1 No Address See Item Section for specific information\nVendors need to check the Items section\nof the PO for ship to information\nBoston,  MA 02108\nUS\nEmail: seeitemsssection@xxx.com\nPhone: (617) 626-4400",
+    "bill_to": "Attention: EOTSS  Accounts Payable\nOne Ashburton Place Room 804\nBoston,  MA 02108\nUS\nEmail: itdinvoices@mass.gov\nPhone: (617) 626-5626\nAlt. Reference: Tiffany.Chen3@mass.gov"
+  }
+}

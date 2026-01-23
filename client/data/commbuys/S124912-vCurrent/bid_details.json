@@ -1,0 +1,59 @@
+{
+  "bid_number": "S124912-vCurrent",
+  "scraped_at": "2026-01-22T20:38:46.106341",
+  "source_url": "https://www.commbuys.com/bso/external/bidDetail.sda?docId=S124912-vCurrent&external=true&parentUrl=close",
+  "header": {
+    "bid_number": "S124912-vCurrent",
+    "description": "Notice of Agreement Between the Commonwealth of Massachusetts and OpenCape",
+    "opening_date": "01/31/2038 11:59:00 PM",
+    "purchaser": "Annemarie Kates",
+    "organization": "Executive Office of Technology Services and Security",
+    "department": "1060CONVD - ITD Default Data Conversion Department",
+    "location": "1060L - ITD Default Data Conversion Location",
+    "fiscal_year": "13",
+    "type_code": "NS - Non-Statewide Solicitation",
+    "allow_electronic_quote": "No",
+    "alternate_id": "ITD ITP 11-43",
+    "required_date": "",
+    "info_contact": "Linda  Hamel, Address: One Ashburton Place Room 804 Boston, MA 02108, Phone: 617-626-4404, Email: Linda.Hamel@state.ma.us",
+    "bid_type": "OPEN",
+    "informal_bid_flag": "No",
+    "purchase_method": "Blanket",
+    "sbpp_eligible": ""
+  },
+  "items": [
+    {
+      "item_number": 1,
+      "description": "Converted bid item. See attachment section for complete bid information."
+    }
+  ],
+  "attachments": [
+    {
+      "filename": "Notice_of_Agreement_with_Open_Capefinal",
+      "file_id": null,
+      "onclick": "",
+      "href": "javascript:downloadFile('321147');",
+      "local_path": "attachments/Notice_of_Agreement_with_Open_Capefinal",
+      "downloaded_at": "2026-01-22T20:38:50.657460",
+      "download_status": "success"
+    },
+    {
+      "filename": "S124912-vCurrent_OD.xlsx",
+      "file_id": null,
+      "onclick": "",
+      "href": "javascript:downloadFile('571473');",
+      "local_path": "attachments/S124912-vCurrent_OD.xlsx",
+      "downloaded_at": "2026-01-22T20:38:51.108132",
+      "download_status": "success"
+    }
+  ],
+  "bulletin_description": "",
+  "pre_bid_conference": "",
+  "contact_info": {
+    "phone": "617-626-4404"
+  },
+  "addresses": {
+    "ship_to": "",
+    "bill_to": ""
+  }
+}

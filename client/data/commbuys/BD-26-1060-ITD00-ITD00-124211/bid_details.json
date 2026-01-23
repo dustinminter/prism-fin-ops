@@ -1,0 +1,177 @@
+{
+  "bid_number": "BD-26-1060-ITD00-ITD00-124211",
+  "scraped_at": "2026-01-22T20:38:32.648170",
+  "source_url": "https://www.commbuys.com/bso/external/bidDetail.sda?docId=BD-26-1060-ITD00-ITD00-124211&external=true&parentUrl=close",
+  "header": {
+    "bid_number": "BD-26-1060-ITD00-ITD00-124211",
+    "description": "RFR-27-04282 Microsoft Products",
+    "opening_date": "02/18/2026 03:00:00 PM",
+    "purchaser": "Nelson Wong",
+    "organization": "Executive Office of Technology Services and Security",
+    "department": "ITD0001 - Executive Office of Technology Services and Security",
+    "location": "ITD00 - TSS General",
+    "fiscal_year": "26",
+    "type_code": "",
+    "allow_electronic_quote": "Yes",
+    "alternate_id": "PCR-27-04282",
+    "required_date": "",
+    "info_contact": "Contact Nelson Wong at (617) 626-4553",
+    "bid_type": "OPEN",
+    "informal_bid_flag": "Yes",
+    "purchase_method": "Open Market",
+    "sbpp_eligible": "NO"
+  },
+  "items": [
+    {
+      "item_number": 1,
+      "description": "The purpose of this RFR is to solicit bids for Microsoft Products. See RFR document for complete detail."
+    }
+  ],
+  "attachments": [
+    {
+      "filename": "RFR-27-04282 Microsoft Products.docx",
+      "file_id": null,
+      "onclick": "",
+      "href": "javascript:downloadFile('2178244');",
+      "local_path": "attachments/RFR-27-04282 Microsoft Products.docx",
+      "downloaded_at": "2026-01-22T20:38:37.917192",
+      "download_status": "success"
+    },
+    {
+      "filename": "Attachment A - RFR Microsoft Products - Bidder Response Questionnaire.docx",
+      "file_id": null,
+      "onclick": "",
+      "href": "javascript:downloadFile('2178245');",
+      "local_path": "attachments/Attachment A - RFR Microsoft Products - Bidder Response Questionnaire.docx",
+      "downloaded_at": "2026-01-22T20:38:38.187305",
+      "download_status": "success"
+    },
+    {
+      "filename": "Attachment B CEP Form.xlsx",
+      "file_id": null,
+      "onclick": "",
+      "href": "javascript:downloadFile('2178246');",
+      "local_path": "attachments/Attachment B CEP Form.xlsx",
+      "downloaded_at": "2026-01-22T20:38:38.489258",
+      "download_status": "success"
+    },
+    {
+      "filename": "Attachment C PPD Form.pdf",
+      "file_id": null,
+      "onclick": "",
+      "href": "javascript:downloadFile('2178248');",
+      "local_path": "attachments/Attachment C PPD Form.pdf",
+      "downloaded_at": "2026-01-22T20:38:38.943308",
+      "download_status": "success"
+    },
+    {
+      "filename": "Attachment D SDP Form.xlsx",
+      "file_id": null,
+      "onclick": "",
+      "href": "javascript:downloadFile('2178250');",
+      "local_path": "attachments/Attachment D SDP Form.xlsx",
+      "downloaded_at": "2026-01-22T20:38:39.240986",
+      "download_status": "success"
+    },
+    {
+      "filename": "Attachment E DEP Form.docx",
+      "file_id": null,
+      "onclick": "",
+      "href": "javascript:downloadFile('2178251');",
+      "local_path": "attachments/Attachment E DEP Form.docx",
+      "downloaded_at": "2026-01-22T20:38:40.224739",
+      "download_status": "success"
+    },
+    {
+      "filename": "Commonwealth Terms and Conditions for Information Technology Contracts.pdf",
+      "file_id": null,
+      "onclick": "",
+      "href": "javascript:downloadFile('2178252');",
+      "local_path": "attachments/Commonwealth Terms and Conditions for Information Technology Contracts.pdf",
+      "downloaded_at": "2026-01-22T20:38:40.570822",
+      "download_status": "success"
+    },
+    {
+      "filename": "Contractor Authorized Signatory Listing.pdf",
+      "file_id": null,
+      "onclick": "",
+      "href": "javascript:downloadFile('2178253');",
+      "local_path": "attachments/Contractor Authorized Signatory Listing.pdf",
+      "downloaded_at": "2026-01-22T20:38:40.970396",
+      "download_status": "success"
+    },
+    {
+      "filename": "EFT Form~1.pdf",
+      "file_id": null,
+      "onclick": "",
+      "href": "javascript:downloadFile('2178255');",
+      "local_path": "attachments/EFT Form~1.pdf",
+      "downloaded_at": "2026-01-22T20:38:41.434747",
+      "download_status": "success"
+    },
+    {
+      "filename": "Exhibit 1 Additional Terms and Conditions.docx",
+      "file_id": null,
+      "onclick": "",
+      "href": "javascript:downloadFile('2178256');",
+      "local_path": "attachments/Exhibit 1 Additional Terms and Conditions.docx",
+      "downloaded_at": "2026-01-22T20:38:41.709612",
+      "download_status": "success"
+    },
+    {
+      "filename": "Exhibit 2 Acceptance of Terms.docx",
+      "file_id": null,
+      "onclick": "",
+      "href": "javascript:downloadFile('2178258');",
+      "local_path": "attachments/Exhibit 2 Acceptance of Terms.docx",
+      "downloaded_at": "2026-01-22T20:38:42.085178",
+      "download_status": "success"
+    },
+    {
+      "filename": "Exhibit 3 DMCA.docx",
+      "file_id": null,
+      "onclick": "",
+      "href": "javascript:downloadFile('2178259');",
+      "local_path": "attachments/Exhibit 3 DMCA.docx",
+      "downloaded_at": "2026-01-22T20:38:42.450136",
+      "download_status": "success"
+    },
+    {
+      "filename": "Standard Contract Form~3.pdf",
+      "file_id": null,
+      "onclick": "",
+      "href": "javascript:downloadFile('2178260');",
+      "local_path": "attachments/Standard Contract Form~3.pdf",
+      "downloaded_at": "2026-01-22T20:38:42.768486",
+      "download_status": "success"
+    },
+    {
+      "filename": "W9 Form.pdf",
+      "file_id": null,
+      "onclick": "",
+      "href": "javascript:downloadFile('2178261');",
+      "local_path": "attachments/W9 Form.pdf",
+      "downloaded_at": "2026-01-22T20:38:43.080776",
+      "download_status": "success"
+    },
+    {
+      "filename": "RFR-27-04282 Microsoft Products Questions and Answers.xlsx",
+      "file_id": null,
+      "onclick": "",
+      "href": "javascript:downloadFile('2181762');",
+      "local_path": "attachments/RFR-27-04282 Microsoft Products Questions and Answers.xlsx",
+      "downloaded_at": "2026-01-22T20:38:43.333133",
+      "download_status": "success"
+    }
+  ],
+  "bulletin_description": "",
+  "pre_bid_conference": "",
+  "contact_info": {
+    "phone": "(617) 626-4553",
+    "name": "Nelson Wong"
+  },
+  "addresses": {
+    "ship_to": "1 No Address See Item Section for specific information\nVendors need to check the Items section\nof the PO for ship to information\nBoston,  MA 02108\nUS\nEmail: seeitemsssection@xxx.com\nPhone: (617) 626-4400",
+    "bill_to": "Attention: EOTSS  Accounts Payable\nOne Ashburton Place Room 804\nBoston,  MA 02108\nUS\nEmail: itdinvoices@mass.gov\nPhone: (617) 626-5626\nAlt. Reference: Tiffany.Chen3@mass.gov"
+  }
+}

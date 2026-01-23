@@ -1,0 +1,2177 @@
+{
+  "bid_number": "S124912-vCurrent",
+  "scraped_at": "2026-01-22T20:38:51.108512",
+  "source_url": "https://www.commbuys.com/bso/external/bidAckList.sda?bidId=S124912-vCurrent",
+  "total_holders": 133,
+  "holders": [
+    {
+      "date_acknowledged": "2024-01-12 12:21:31.99",
+      "contact_person": "MIchael McNally",
+      "company_name": "Maverick Construction Corporation",
+      "address": {
+        "lines": [
+          "One Westinghouse Plaza, Building D"
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02136"
+      },
+      "phone": "(617) 799-3277",
+      "fax": "(617) 833-9629",
+      "email": "mmcnally@maverickcorporation.com"
+    },
+    {
+      "date_acknowledged": "2018-09-18 13:56:50.947",
+      "contact_person": "Kulpreet Singh",
+      "company_name": "22nd Century Technologies, Inc.",
+      "address": {
+        "lines": [
+          "1 Executive Drive",
+          "Suite 285"
+        ],
+        "city": "Somerset",
+        "state": "NJ",
+        "zip": "08873"
+      },
+      "phone": "(888) 998-7284",
+      "fax": "(501) 421-3750",
+      "email": "sledbids@tscti.com"
+    },
+    {
+      "date_acknowledged": "2014-04-29 20:23:41.88",
+      "contact_person": "Joseph Amaral",
+      "company_name": "Amaral Group",
+      "address": {
+        "lines": [
+          "1500 District Avenue"
+        ],
+        "city": "Burlington",
+        "state": "MA",
+        "zip": "01803"
+      },
+      "phone": "(617) 440-7900",
+      "fax": "(617) 812-5885",
+      "email": "joseph.amaral@amaral.com"
+    },
+    {
+      "date_acknowledged": "2014-03-25 07:52:17.267",
+      "contact_person": "Eric Sholl",
+      "company_name": "Apex Systems",
+      "address": {
+        "lines": [
+          "4400 Cox Rd",
+          "suite 200"
+        ],
+        "city": "glen allen",
+        "state": "VA",
+        "zip": "23060"
+      },
+      "phone": "(303) 328-2599",
+      "fax": "",
+      "email": "esholl@apexsystems.com"
+    },
+    {
+      "date_acknowledged": "2023-03-08 13:53:20.277",
+      "contact_person": "Steve Riggs",
+      "company_name": "Isotrope; LLC",
+      "address": {
+        "lines": [
+          "503 Main Street",
+          "2nd Floor"
+        ],
+        "city": "Medfield",
+        "state": "MA",
+        "zip": "02052"
+      },
+      "phone": "(508) 359-8833",
+      "fax": "",
+      "email": "riggs@isotrope.im"
+    },
+    {
+      "date_acknowledged": "2019-10-01 14:42:19.277",
+      "contact_person": "Diane Broderick",
+      "company_name": "HDR Engineering, Inc.",
+      "address": {
+        "lines": [
+          "HDR Engineering, Inc."
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02111"
+      },
+      "phone": "(617) 230-4705",
+      "fax": "(617) 357-7759",
+      "email": "diane.broderick@hdrinc.com"
+    },
+    {
+      "date_acknowledged": "2016-09-09 11:51:32.537",
+      "contact_person": "Donna Fitzgerald",
+      "company_name": "Contemporaries, Inc.",
+      "address": {
+        "lines": [
+          "10 Post Office Square",
+          "Suite 800 South"
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02109"
+      },
+      "phone": "(617) 973-5151",
+      "fax": "",
+      "email": "donna@bostoncontemporaries.com"
+    },
+    {
+      "date_acknowledged": "2015-01-08 12:45:24.823",
+      "contact_person": "Chris Wetmore",
+      "company_name": "RSM US LLP",
+      "address": {
+        "lines": [
+          "80 City Square"
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02129"
+      },
+      "phone": "(617) 241-4656",
+      "fax": "(617) 912-9001",
+      "email": "chris.wetmore@mcgladrey.com"
+    },
+    {
+      "date_acknowledged": "2014-04-06 19:14:36.133",
+      "contact_person": "DEVAN RAMANUJAM",
+      "company_name": "Yorbologic",
+      "address": {
+        "lines": [
+          "255 HAY MEADOW RD"
+        ],
+        "city": "NORTH ANDOVER",
+        "state": "MA",
+        "zip": "01845"
+      },
+      "phone": "(617) 682-7097",
+      "fax": "(617) 682-7097",
+      "email": "services@yorbologic.com"
+    },
+    {
+      "date_acknowledged": "2020-02-05 10:02:59.28",
+      "contact_person": "Maria Shabanova",
+      "company_name": "IBM",
+      "address": {
+        "lines": [
+          "75 Binney St"
+        ],
+        "city": "Cambridge",
+        "state": "MA",
+        "zip": "02142"
+      },
+      "phone": "(617) 435-1256",
+      "fax": "(610) 613-5954",
+      "email": "maria.shabanova@ibm.com"
+    },
+    {
+      "date_acknowledged": "2014-04-21 10:30:59.057",
+      "contact_person": "Gary Sussman",
+      "company_name": "DGI Technologies",
+      "address": {
+        "lines": [
+          "101 Billerica Ave",
+          "Bldg 6"
+        ],
+        "city": "Billerica",
+        "state": "MA",
+        "zip": "01862"
+      },
+      "phone": "(978) 495-3822",
+      "fax": "(978) 495-3758",
+      "email": "gsussman@dgitech.com"
+    },
+    {
+      "date_acknowledged": "2014-03-27 11:47:25.943",
+      "contact_person": "Frank Sisto",
+      "company_name": "TKT Software Services, Inc.",
+      "address": {
+        "lines": [
+          "284 Main Street"
+        ],
+        "city": "West Newbury",
+        "state": "MA",
+        "zip": "01985"
+      },
+      "phone": "(781) 507-5675",
+      "fax": "",
+      "email": "fsisto@tktss.com"
+    },
+    {
+      "date_acknowledged": "2016-09-06 15:10:15.093",
+      "contact_person": "Justin Dyer",
+      "company_name": "Akkodis, Inc.",
+      "address": {
+        "lines": [
+          "20 Mall Road",
+          "Suite 410"
+        ],
+        "city": "Burlington",
+        "state": "MA",
+        "zip": "01803"
+      },
+      "phone": "(781) 262-5007",
+      "fax": "",
+      "email": "justin.dyer@modis.com"
+    },
+    {
+      "date_acknowledged": "2014-03-27 10:03:28.033",
+      "contact_person": "Anthony Fuller Jr",
+      "company_name": "Fulltec Consultants",
+      "address": {
+        "lines": [
+          "1399 Commonwealth Ave",
+          "Suite#28"
+        ],
+        "city": "Allston",
+        "state": "MA",
+        "zip": "02134"
+      },
+      "phone": "(857) 991-3970",
+      "fax": "",
+      "email": "tony@fulltecsystems.com"
+    },
+    {
+      "date_acknowledged": "2015-01-12 14:03:48.713",
+      "contact_person": "Roger Michelson",
+      "company_name": "BNMC (Bredy Network Management Corporation & CPU Sales and Service)",
+      "address": {
+        "lines": [
+          "50 Union Street"
+        ],
+        "city": "Andover",
+        "state": "MA",
+        "zip": "01810"
+      },
+      "phone": "(978) 482-2020",
+      "fax": "(781) 721-9739",
+      "email": "Roger@bnmc.net"
+    },
+    {
+      "date_acknowledged": "2017-04-13 12:59:22.947",
+      "contact_person": "Heather Ivester",
+      "company_name": "Michael Baker International, Inc.",
+      "address": {
+        "lines": [
+          "890 Winter Street",
+          "Suite 208"
+        ],
+        "city": "Waltham",
+        "state": "MA",
+        "zip": "02451"
+      },
+      "phone": "(781) 255-8802",
+      "fax": "",
+      "email": "Heather.Ivester@mbakerintl.com"
+    },
+    {
+      "date_acknowledged": "2020-09-01 09:30:13.883",
+      "contact_person": "Jennifer Golden",
+      "company_name": "NWN Corporation",
+      "address": {
+        "lines": [
+          "111 Huntington Ave, 7th Floor"
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02199"
+      },
+      "phone": "(860) 606-2865",
+      "fax": "(860) 606-2965",
+      "email": "jgolden@nwn.ai"
+    },
+    {
+      "date_acknowledged": "2014-03-31 21:10:01.297",
+      "contact_person": "Reinier Moquete",
+      "company_name": "Advoqt Technology Group",
+      "address": {
+        "lines": [
+          "245 1st Street, Suite 1800"
+        ],
+        "city": "Cambridge",
+        "state": "MA",
+        "zip": "02142"
+      },
+      "phone": "(617) 835-4525",
+      "fax": "",
+      "email": "RM@Advoqt.com"
+    },
+    {
+      "date_acknowledged": "2015-12-28 13:29:27.207",
+      "contact_person": "Brenna Gerwitz",
+      "company_name": "TEKsystems",
+      "address": {
+        "lines": [
+          "1 Federal Street",
+          "Suite 2104"
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02110"
+      },
+      "phone": "(716) 353-1161",
+      "fax": "(617) 449-3546",
+      "email": "bgerwitz@teksystems.com"
+    },
+    {
+      "date_acknowledged": "2014-05-13 13:12:31.54",
+      "contact_person": "Stephen Burns",
+      "company_name": "The Skyline Group",
+      "address": {
+        "lines": [
+          "10 River Road",
+          "Suite 103"
+        ],
+        "city": "Uxbridge",
+        "state": "MA",
+        "zip": "01569"
+      },
+      "phone": "(508) 278-5500",
+      "fax": "(508) 302-5500",
+      "email": "sburns@tsgma.com"
+    },
+    {
+      "date_acknowledged": "2014-05-08 14:46:07.967",
+      "contact_person": "Mary Bruno",
+      "company_name": "Apex",
+      "address": {
+        "lines": [
+          "125 Broad St"
+        ],
+        "city": "Lynn",
+        "state": "MA",
+        "zip": "02110"
+      },
+      "phone": "(617) 728-0070",
+      "fax": "",
+      "email": "mbruno@apexcos.com"
+    },
+    {
+      "date_acknowledged": "2019-01-16 14:53:00.713",
+      "contact_person": "Donna Fager",
+      "company_name": "WSP USA INC.",
+      "address": {
+        "lines": [
+          "100 Summer St., 13th Fl"
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02110"
+      },
+      "phone": "(617) 960-4957",
+      "fax": "",
+      "email": "Donna.Fager@wsp.com"
+    },
+    {
+      "date_acknowledged": "2018-12-17 10:21:07.72",
+      "contact_person": "Michael O'Brien",
+      "company_name": "Logicworks Systems Corporation",
+      "address": {
+        "lines": [
+          "155 Avenue of the Americas, 5th Floor"
+        ],
+        "city": "New York",
+        "state": "NY",
+        "zip": "10013"
+      },
+      "phone": "(212) 625-5343",
+      "fax": "(212) 625-5400",
+      "email": "mobrien@logicworks.net"
+    },
+    {
+      "date_acknowledged": "2016-12-29 09:51:46.863",
+      "contact_person": "Paul Torchia",
+      "company_name": "ProsumerCorp Inc",
+      "address": {
+        "lines": [
+          "154 Angellbrook Dr"
+        ],
+        "city": "West Boylston ",
+        "state": "MA",
+        "zip": "01583"
+      },
+      "phone": "(508) 450-2503",
+      "fax": "",
+      "email": "prosumercorp@outlook.com"
+    },
+    {
+      "date_acknowledged": "2022-07-28 13:13:47.387",
+      "contact_person": "Lea Irzyk",
+      "company_name": "Allen & Major Associates, Inc.",
+      "address": {
+        "lines": [
+          "100 Commerce Way, Suite 5",
+          "Suite 5"
+        ],
+        "city": "Woburn",
+        "state": "MA",
+        "zip": "01801"
+      },
+      "phone": "(781) 935-6889",
+      "fax": "(781) 935-2896",
+      "email": "lirzyk@allenmajor.com"
+    },
+    {
+      "date_acknowledged": "2014-05-14 09:53:48.637",
+      "contact_person": "Tom Brefeld",
+      "company_name": "Winbourne Consulting, LLC",
+      "address": {
+        "lines": [
+          "1611 North Kent Street",
+          "Suite 802"
+        ],
+        "city": "Arlington",
+        "state": "VA",
+        "zip": "22209"
+      },
+      "phone": "(804) 715-9459",
+      "fax": "(703) 935-1147",
+      "email": "tbrefeld@w-llc.com"
+    },
+    {
+      "date_acknowledged": "2018-08-31 16:05:35.303",
+      "contact_person": "David A Kinsella",
+      "company_name": "d. a. kinsella company",
+      "address": {
+        "lines": [
+          "7 Bridge Street, Suite 9"
+        ],
+        "city": "Billerica",
+        "state": "MA",
+        "zip": "01821"
+      },
+      "phone": "(978) 667-7971",
+      "fax": "(978) 670-8138",
+      "email": "dakinsellacompany@gmail.com"
+    },
+    {
+      "date_acknowledged": "2014-08-27 16:49:26.77",
+      "contact_person": "Roger Feng",
+      "company_name": "Onewit Inc",
+      "address": {
+        "lines": [
+          "21 Bridge Street"
+        ],
+        "city": "Needham",
+        "state": "MA",
+        "zip": "02494"
+      },
+      "phone": "(617) 285-3172",
+      "fax": "",
+      "email": "roger.feng@onewit.com"
+    },
+    {
+      "date_acknowledged": "2015-07-28 10:06:29.737",
+      "contact_person": "Suman Akula",
+      "company_name": "Lead IT Corporation",
+      "address": {
+        "lines": [
+          "1999 Wabash Ave Ste 210"
+        ],
+        "city": "Springfield",
+        "state": "IL",
+        "zip": "62704"
+      },
+      "phone": "(217) 726-7250",
+      "fax": "(801) 705-2524",
+      "email": "Suman.akula@leaditgroup.com"
+    },
+    {
+      "date_acknowledged": "2016-05-16 12:49:27.897",
+      "contact_person": "STEVEN JOHNSTON",
+      "company_name": "OpenCape Corporation",
+      "address": {
+        "lines": [
+          "P.O. Box 1148",
+          "3195 Main Street"
+        ],
+        "city": "Barnstable",
+        "state": "MA",
+        "zip": "02630"
+      },
+      "phone": "(508) 524-5905",
+      "fax": "(508) 362-0454",
+      "email": "sjohnston@opencape.org"
+    },
+    {
+      "date_acknowledged": "2014-06-20 09:02:28.917",
+      "contact_person": "Jackie Caouette",
+      "company_name": "Finer Associates, Inc.",
+      "address": {
+        "lines": [
+          "55 Chapel Street"
+        ],
+        "city": "Newton",
+        "state": "MA",
+        "zip": "02458"
+      },
+      "phone": "(617) 244-1190",
+      "fax": "",
+      "email": "jackie@finerassociates.tv"
+    },
+    {
+      "date_acknowledged": "2015-06-18 11:19:42.867",
+      "contact_person": "Matt Marquis",
+      "company_name": "Prolifics Inc",
+      "address": {
+        "lines": [
+          "114 West 47th St, 20th Floor"
+        ],
+        "city": "New York",
+        "state": "NY",
+        "zip": "10036"
+      },
+      "phone": "(603) 496-7095",
+      "fax": "(603) 384-1280",
+      "email": "matt.marquis@prolifics.com"
+    },
+    {
+      "date_acknowledged": "2014-06-16 13:47:34.073",
+      "contact_person": "Gregory Titus",
+      "company_name": "Cego Solutions Inc",
+      "address": {
+        "lines": [
+          "PO BOX 52"
+        ],
+        "city": "Cumberland",
+        "state": "RI",
+        "zip": "02864"
+      },
+      "phone": "(401) 749-2087",
+      "fax": "",
+      "email": "gregt@cegosolutions.net"
+    },
+    {
+      "date_acknowledged": "2018-06-13 12:17:03.3",
+      "contact_person": "Ronelle Erickson",
+      "company_name": "CDR Maguire Inc.",
+      "address": {
+        "lines": [
+          "P.O. Box 771750"
+        ],
+        "city": "Miami",
+        "state": "FL",
+        "zip": "33177"
+      },
+      "phone": "(617) 778-1467",
+      "fax": "(617) 778-1467",
+      "email": "ronelle.erickson@cdrmaguire.com"
+    },
+    {
+      "date_acknowledged": "2014-11-13 12:44:57.433",
+      "contact_person": "Michael Welsh",
+      "company_name": "Daktronics Inc.",
+      "address": {
+        "lines": [
+          "201 Daktronics Drive"
+        ],
+        "city": "Brookings",
+        "state": "SD",
+        "zip": "57006"
+      },
+      "phone": "(516) 909-6692",
+      "fax": "(605) 697-4700",
+      "email": "Michael.welsh@daktronics.com"
+    },
+    {
+      "date_acknowledged": "2014-07-18 11:24:18.607",
+      "contact_person": "Whitney Tuthill",
+      "company_name": "PRIME3SG",
+      "address": {
+        "lines": [
+          "55 Capital Boulevard"
+        ],
+        "city": "Rocky HIll",
+        "state": "CT",
+        "zip": "06067"
+      },
+      "phone": "(860) 436-5600",
+      "fax": "(860) 436-5601",
+      "email": "wtuthill@primeeng.com"
+    },
+    {
+      "date_acknowledged": "2015-02-24 10:00:07.45",
+      "contact_person": "Thomas Biolsi",
+      "company_name": "Roux Associates, Inc.",
+      "address": {
+        "lines": [
+          "200 Summit Avenue",
+          "Suite 500"
+        ],
+        "city": "Burlington",
+        "state": "MA",
+        "zip": "01803"
+      },
+      "phone": "(781) 569-4000",
+      "fax": "(781) 569-4001",
+      "email": "tbiolsi@rouxinc.com"
+    },
+    {
+      "date_acknowledged": "2015-04-28 09:13:07.717",
+      "contact_person": "Doug Mackey",
+      "company_name": "NPCR",
+      "address": {
+        "lines": [
+          "14 Beach St"
+        ],
+        "city": "Beverly",
+        "state": "MA",
+        "zip": "01915"
+      },
+      "phone": "(609) 439-3899",
+      "fax": "",
+      "email": "doug.mackey@npatria.com"
+    },
+    {
+      "date_acknowledged": "2014-09-22 14:52:11.62",
+      "contact_person": "James Marzilli",
+      "company_name": "Marzilli Machine Co.,Inc.",
+      "address": {
+        "lines": [
+          "621 S. Almond St."
+        ],
+        "city": "Fall River",
+        "state": "MA",
+        "zip": "02724"
+      },
+      "phone": "(508) 567-4145",
+      "fax": "(508) 567-4851",
+      "email": "james@marzmachine.com"
+    },
+    {
+      "date_acknowledged": "2014-09-29 12:55:17.267",
+      "contact_person": "Gregory Rosa",
+      "company_name": "Aquila Technology Corp.",
+      "address": {
+        "lines": [
+          "10 Mall Road",
+          "Suite 200"
+        ],
+        "city": "Burlington",
+        "state": "MA",
+        "zip": "01803"
+      },
+      "phone": "(781) 993-9004",
+      "fax": "",
+      "email": "grosa@aquilatc.com"
+    },
+    {
+      "date_acknowledged": "2014-10-17 11:19:34.19",
+      "contact_person": "Sharon Mowry",
+      "company_name": "Timberline Construction Corporation",
+      "address": {
+        "lines": [
+          "300 Pine Street"
+        ],
+        "city": "Canton",
+        "state": "MA",
+        "zip": "02021"
+      },
+      "phone": "(339) 502-5000",
+      "fax": "(339) 502-5022",
+      "email": "smowry@timberlineconstruction.com"
+    },
+    {
+      "date_acknowledged": "2017-02-21 11:27:07.807",
+      "contact_person": "Stephen Cummings",
+      "company_name": "Fingent, Corp.",
+      "address": {
+        "lines": [
+          "235 Mamaroneck Ave, Ste 301"
+        ],
+        "city": "White Plains",
+        "state": "NY",
+        "zip": "10605"
+      },
+      "phone": "(914) 615-9160",
+      "fax": "(914) 615-9170",
+      "email": "stephen.cummings@fingent.com"
+    },
+    {
+      "date_acknowledged": "2016-05-12 13:01:38.347",
+      "contact_person": "Jennifer Hamaker",
+      "company_name": "hCentive, Inc.",
+      "address": {
+        "lines": [
+          "12355 Sunrise Valley Drive",
+          "Suite 400"
+        ],
+        "city": "Reston",
+        "state": "VA",
+        "zip": "20191"
+      },
+      "phone": "(615) 624-1864",
+      "fax": "",
+      "email": "jennifer.hamaker@hcentive.com"
+    },
+    {
+      "date_acknowledged": "2017-02-02 03:20:16.82",
+      "contact_person": "Patrick Bench",
+      "company_name": "Benchmark Strategies",
+      "address": {
+        "lines": [
+          "one boston place",
+          "26th floor"
+        ],
+        "city": "boston",
+        "state": "MA",
+        "zip": "02108"
+      },
+      "phone": "(617) 733-1290",
+      "fax": "",
+      "email": "pbench@benchmark-strategies.com"
+    },
+    {
+      "date_acknowledged": "2019-01-04 14:32:33.727",
+      "contact_person": "Tom Tavares",
+      "company_name": "Micro Technology Solutions, Inc",
+      "address": {
+        "lines": [
+          "132 Alden Road"
+        ],
+        "city": "Fairhaven",
+        "state": "MA",
+        "zip": "02719"
+      },
+      "phone": "(508) 324-9475",
+      "fax": "(508) 324-4477",
+      "email": "ttavares@mtsolutions.net"
+    },
+    {
+      "date_acknowledged": "2015-01-19 16:23:22.047",
+      "contact_person": "John Barker",
+      "company_name": "Technology Leadership Group LLC",
+      "address": {
+        "lines": [
+          "663 Central Street"
+        ],
+        "city": "Manchester",
+        "state": "NH",
+        "zip": "03103"
+      },
+      "phone": "(603) 765-0696",
+      "fax": "",
+      "email": "jbarkercio@gmail.com"
+    },
+    {
+      "date_acknowledged": "2015-03-06 15:45:05.917",
+      "contact_person": "Tim Walters",
+      "company_name": "Wireless Consulting Group",
+      "address": {
+        "lines": [
+          "11 Kenwood Avenue"
+        ],
+        "city": "Newton",
+        "state": "MA",
+        "zip": "02459"
+      },
+      "phone": "(617) 594-5812",
+      "fax": "",
+      "email": "timw@wirelesscg.com"
+    },
+    {
+      "date_acknowledged": "2015-03-13 23:27:29.88",
+      "contact_person": "Sarah Dakubu",
+      "company_name": "Seaglass Technology Partners",
+      "address": {
+        "lines": [
+          "650 Islington St, Fl 2"
+        ],
+        "city": "Portsmouth",
+        "state": "NH",
+        "zip": "03801"
+      },
+      "phone": "(617) 634-9167",
+      "fax": "",
+      "email": "dsimpson@seaglassit.com"
+    },
+    {
+      "date_acknowledged": "2020-01-21 15:13:10.463",
+      "contact_person": "Axell Emmanuel",
+      "company_name": "Network Technology Academy",
+      "address": {
+        "lines": [
+          "20-40 Holland Street",
+          "Suite 402"
+        ],
+        "city": "Somerville",
+        "state": "MA",
+        "zip": "02144"
+      },
+      "phone": "(857) 241-0702",
+      "fax": "(617) 628-0598",
+      "email": "axell@ntai.net"
+    },
+    {
+      "date_acknowledged": "2016-06-12 12:05:03.773",
+      "contact_person": "John Wilson",
+      "company_name": "Network Technology Academy",
+      "address": {
+        "lines": [
+          "20-40 Holland Street",
+          "Suite 402"
+        ],
+        "city": "Somerville",
+        "state": "MA",
+        "zip": "02144"
+      },
+      "phone": "(617) 869-1850",
+      "fax": "(617) 628-0598",
+      "email": "macommbuys@ntai.net"
+    },
+    {
+      "date_acknowledged": "2022-12-05 10:58:36.197",
+      "contact_person": "Jen Conn",
+      "company_name": "Blue Spruce Technologies, Inc.",
+      "address": {
+        "lines": [
+          "50 Pointe Place",
+          "Suite 9"
+        ],
+        "city": "Dover",
+        "state": "NH",
+        "zip": "03820"
+      },
+      "phone": "(603) 241-2486",
+      "fax": "",
+      "email": "jconn@bluesprucetechnologies.com"
+    },
+    {
+      "date_acknowledged": "2023-08-30 10:13:46.433",
+      "contact_person": "Ken Boyle",
+      "company_name": "Tech Networks of Boston",
+      "address": {
+        "lines": [
+          "1 Wadleigh Place"
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02127"
+      },
+      "phone": "(617) 269-0299",
+      "fax": "(888) 527-9333",
+      "email": "ken.boyle@techboston.com"
+    },
+    {
+      "date_acknowledged": "2015-08-05 12:38:25.587",
+      "contact_person": "Ian Kemper",
+      "company_name": "Ernst & Young U.S. LLP",
+      "address": {
+        "lines": [
+          "200 Clarendon St."
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02116"
+      },
+      "phone": "(212) 773-0369",
+      "fax": "",
+      "email": "ian.kemper@ey.com"
+    },
+    {
+      "date_acknowledged": "2024-06-17 10:23:10.377",
+      "contact_person": "Stephen Silveira",
+      "company_name": "Mintz, Levin, Cohn, Ferris, Glovsky and Popeo, P.C.",
+      "address": {
+        "lines": [
+          "1 Financial Center",
+          "40th Floor"
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02111"
+      },
+      "phone": "(617) 348-3095",
+      "fax": "",
+      "email": "SSilveira@mlstrategies.com"
+    },
+    {
+      "date_acknowledged": "2020-07-31 12:00:31.127",
+      "contact_person": "Audrey Baker",
+      "company_name": "Bryley Systems Inc",
+      "address": {
+        "lines": [
+          "12 Main St"
+        ],
+        "city": "Hudson",
+        "state": "MA",
+        "zip": "01749"
+      },
+      "phone": "(978) 562-6077",
+      "fax": "(978) 562-5680",
+      "email": "abaker@bryley.com"
+    },
+    {
+      "date_acknowledged": "2016-04-11 13:03:10.24",
+      "contact_person": "Jeff Johnson",
+      "company_name": "Timlin Enterprises",
+      "address": {
+        "lines": [
+          "225 Cedar Hill Street"
+        ],
+        "city": "Marlborough",
+        "state": "MA",
+        "zip": "01752"
+      },
+      "phone": "(508) 263-0694",
+      "fax": "",
+      "email": "jjohnson@timlinenterprises.com"
+    },
+    {
+      "date_acknowledged": "2016-09-28 15:07:38.073",
+      "contact_person": "Matt Pierce",
+      "company_name": "Nagarro, Inc.",
+      "address": {
+        "lines": [
+          "226 Airport Parkway",
+          "Suite 390"
+        ],
+        "city": "San Jose",
+        "state": "CA",
+        "zip": "95110"
+      },
+      "phone": "(203) 832-6136",
+      "fax": "",
+      "email": "matt.pierce@nagarro.com"
+    },
+    {
+      "date_acknowledged": "2021-02-02 13:40:56.54",
+      "contact_person": "Caleb Morgan",
+      "company_name": "EchoStor Technologies",
+      "address": {
+        "lines": [
+          "45 South St"
+        ],
+        "city": "Hopkinton",
+        "state": "MA",
+        "zip": "01748"
+      },
+      "phone": "(866) 818-1313",
+      "fax": "",
+      "email": "caleb.morgan@echostor.com"
+    },
+    {
+      "date_acknowledged": "2016-05-31 14:08:34.083",
+      "contact_person": "Jill Blagsvedt",
+      "company_name": "Solidus Technical Solutions, LLC",
+      "address": {
+        "lines": [
+          "PO Box 255"
+        ],
+        "city": "Lunenburg",
+        "state": "MA",
+        "zip": "01462"
+      },
+      "phone": "(781) 538-0607",
+      "fax": "",
+      "email": "solidussmallbd@solidus-ts.com"
+    },
+    {
+      "date_acknowledged": "2016-06-08 11:56:03.457",
+      "contact_person": "Rajesh Jaiswal",
+      "company_name": "The Computer Exchange",
+      "address": {
+        "lines": [
+          "261 Main Street"
+        ],
+        "city": "Northborough",
+        "state": "MA",
+        "zip": "01453"
+      },
+      "phone": "(508) 393-3848",
+      "fax": "",
+      "email": "thecomputerexchange@gmail.com"
+    },
+    {
+      "date_acknowledged": "2017-06-07 09:02:48.527",
+      "contact_person": "Ellen White",
+      "company_name": "Patrick Engineering Inc.",
+      "address": {
+        "lines": [
+          "11 Beacon Street, Suite 735"
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02108"
+      },
+      "phone": "(617) 939-8838",
+      "fax": "",
+      "email": "ewhite@hntb.com"
+    },
+    {
+      "date_acknowledged": "2016-10-14 13:59:09.9",
+      "contact_person": "Miles Robinson",
+      "company_name": "Cosenta LLC",
+      "address": {
+        "lines": [
+          "101 Great Road #166"
+        ],
+        "city": "Bedford",
+        "state": "MA",
+        "zip": "01730"
+      },
+      "phone": "(855) 246-3980",
+      "fax": "",
+      "email": "miles@cosenta.com"
+    },
+    {
+      "date_acknowledged": "2018-08-23 21:34:58.633",
+      "contact_person": "Barbara Hough",
+      "company_name": "One Source Consulting, LLC",
+      "address": {
+        "lines": [
+          "6900 Virginia Manor Road",
+          "Ste. 111"
+        ],
+        "city": "Beltsville",
+        "state": "MD",
+        "zip": "20705"
+      },
+      "phone": "(800) 974-3158",
+      "fax": "(202) 318-6272",
+      "email": "bhough@onesourcesbc.com"
+    },
+    {
+      "date_acknowledged": "2017-05-23 19:01:20.49",
+      "contact_person": "Bid Desk",
+      "company_name": "RFx Analyst, Inc.",
+      "address": {
+        "lines": [
+          "34231 Camino Capistrano",
+          "Suite 207"
+        ],
+        "city": "Dana Point",
+        "state": "CA",
+        "zip": "92624"
+      },
+      "phone": "(302) 244-5650",
+      "fax": "(302) 244-5653",
+      "email": "rfp@rfxanalyst.com"
+    },
+    {
+      "date_acknowledged": "2018-02-21 14:36:25.877",
+      "contact_person": "David Knox",
+      "company_name": "Norwell Technology Group, LLC",
+      "address": {
+        "lines": [
+          "167 Washington Street"
+        ],
+        "city": "Norwell",
+        "state": "MA",
+        "zip": "02061"
+      },
+      "phone": "(781) 987-3977",
+      "fax": "(781) 987-7408",
+      "email": "dknox@norwelltechnologygroup.com"
+    },
+    {
+      "date_acknowledged": "2017-01-03 21:50:44.163",
+      "contact_person": "Claudette Marshall",
+      "company_name": "Marshall Consulting",
+      "address": {
+        "lines": [
+          "39 Gilbert St."
+        ],
+        "city": "North Brookfield",
+        "state": "MA",
+        "zip": "01535"
+      },
+      "phone": "(508) 867-7080",
+      "fax": "",
+      "email": "claude@marshallcomputing.com"
+    },
+    {
+      "date_acknowledged": "2019-01-28 16:51:42.717",
+      "contact_person": "Kathy Stivaletta",
+      "company_name": "CTS Services Inc.",
+      "address": {
+        "lines": [
+          "260 Maple Street"
+        ],
+        "city": "Bellingham",
+        "state": "MA",
+        "zip": "02019"
+      },
+      "phone": "(508) 528-7720",
+      "fax": "(508) 966-9734",
+      "email": "kstivaletta@ctsservices.com"
+    },
+    {
+      "date_acknowledged": "2020-03-26 19:12:05.143",
+      "contact_person": "Kelly Mittal",
+      "company_name": "myKidzday, LLC",
+      "address": {
+        "lines": [
+          "20 audubon way"
+        ],
+        "city": "Sturbridge",
+        "state": "MA",
+        "zip": "01566"
+      },
+      "phone": "(860) 593-2955",
+      "fax": "",
+      "email": "info@mykidzday.com"
+    },
+    {
+      "date_acknowledged": "2017-02-21 10:23:32.53",
+      "contact_person": "Chris Lynch",
+      "company_name": "Matrix Design Group",
+      "address": {
+        "lines": [
+          "926 Southbridge St",
+          "Unit 10"
+        ],
+        "city": "Worcester",
+        "state": "MA",
+        "zip": "01610"
+      },
+      "phone": "(774) 262-0914",
+      "fax": "",
+      "email": "clynch@matrixdg.com"
+    },
+    {
+      "date_acknowledged": "2018-04-25 11:51:15.987",
+      "contact_person": "Tim Igo",
+      "company_name": "Arete Advisors LLC",
+      "address": {
+        "lines": [
+          "25 Wall Street"
+        ],
+        "city": "Burlington",
+        "state": "MA",
+        "zip": "01803"
+      },
+      "phone": "(617) 462-3785",
+      "fax": "",
+      "email": "tigo@areteadvisors.com"
+    },
+    {
+      "date_acknowledged": "2025-02-17 15:49:35.333",
+      "contact_person": "Andrea Marsters",
+      "company_name": "Timmons Group",
+      "address": {
+        "lines": [
+          "1001 Boulders Parkway",
+          "Suite 300"
+        ],
+        "city": "Richmond",
+        "state": "VA",
+        "zip": "23225"
+      },
+      "phone": "(804) 200-6368",
+      "fax": "(804) 804-5601",
+      "email": "mktgbid@timmons.com"
+    },
+    {
+      "date_acknowledged": "2017-09-04 20:16:13.577",
+      "contact_person": "Bruce Harrington",
+      "company_name": "Executive IT Strategies, Inc.",
+      "address": {
+        "lines": [
+          "2193 Commonwealth Ave. / Suite 382"
+        ],
+        "city": "Brighton",
+        "state": "MA",
+        "zip": "02135"
+      },
+      "phone": "(617) 527-0908",
+      "fax": "",
+      "email": "bruce@harrington-consulting.com"
+    },
+    {
+      "date_acknowledged": "2017-08-23 15:02:50.873",
+      "contact_person": "Derek Chemers",
+      "company_name": "Tyson Clark Inc",
+      "address": {
+        "lines": [
+          "550 north ave"
+        ],
+        "city": "glendale heights",
+        "state": "IL",
+        "zip": "60139"
+      },
+      "phone": "(630) 790-0780",
+      "fax": "",
+      "email": "dchemers@compsych.com"
+    },
+    {
+      "date_acknowledged": "2017-12-19 15:07:11.26",
+      "contact_person": "Jesse Ferraro",
+      "company_name": "Congruity360, LLC",
+      "address": {
+        "lines": [
+          "56 Pembroke Woods Drive"
+        ],
+        "city": "Pembroke",
+        "state": "MA",
+        "zip": "02359"
+      },
+      "phone": "(781) 264-7198",
+      "fax": "",
+      "email": "jferraro@congruity360.com"
+    },
+    {
+      "date_acknowledged": "2017-12-28 17:51:46.397",
+      "contact_person": "Scott Rousseau",
+      "company_name": "Rubin Anders Scientific Inc.",
+      "address": {
+        "lines": [
+          "1309 Beacon Street",
+          "Suite 300"
+        ],
+        "city": "Brookline",
+        "state": "MA",
+        "zip": "02446"
+      },
+      "phone": "(617) 547-7214",
+      "fax": "",
+      "email": "scottboston2@gmail.com"
+    },
+    {
+      "date_acknowledged": "2019-06-10 13:14:43.483",
+      "contact_person": "Ariel Martinez",
+      "company_name": "Martinez Couch And Associates LLC",
+      "address": {
+        "lines": [
+          "1084 Cromwell Avenue"
+        ],
+        "city": "Rocky Hill",
+        "state": "CT",
+        "zip": "06067"
+      },
+      "phone": "(860) 436-4364",
+      "fax": "",
+      "email": "ariel.martinez@martinezcouch.com"
+    },
+    {
+      "date_acknowledged": "2018-03-07 21:27:52.633",
+      "contact_person": "Stefano Jean Joseph",
+      "company_name": "JeanComputech Corporation",
+      "address": {
+        "lines": [
+          "One International Place Suite 1400"
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02110"
+      },
+      "phone": "(857) 869-2283",
+      "fax": "",
+      "email": "stefanojj@jeancomputech.com"
+    },
+    {
+      "date_acknowledged": "2018-04-03 12:23:05.543",
+      "contact_person": "Robert Cleary",
+      "company_name": "ClearCom IT Solutions, Inc.",
+      "address": {
+        "lines": [
+          "49 MAIN ST"
+        ],
+        "city": "Sturbridge",
+        "state": "MA",
+        "zip": "01566"
+      },
+      "phone": "(508) 892-5555",
+      "fax": "",
+      "email": "rob@clearcomit.com"
+    },
+    {
+      "date_acknowledged": "2021-11-20 17:24:55.0",
+      "contact_person": "Gary Evee",
+      "company_name": "Evee Security Consulting Group, LLC",
+      "address": {
+        "lines": [
+          "90 Canal Street"
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02114"
+      },
+      "phone": "(781) 964-3633",
+      "fax": "",
+      "email": "gevee@eveesecurity.com"
+    },
+    {
+      "date_acknowledged": "2021-05-04 00:15:48.797",
+      "contact_person": "Mark Robinson",
+      "company_name": "ARVARDEN",
+      "address": {
+        "lines": [
+          "61 Linwood Street"
+        ],
+        "city": "Medford",
+        "state": "MA",
+        "zip": "02155"
+      },
+      "phone": "(949) 690-4003",
+      "fax": "",
+      "email": "mark.robinson@arvarden.com"
+    },
+    {
+      "date_acknowledged": "2018-08-20 22:18:37.23",
+      "contact_person": "Samuel Bozkurtian",
+      "company_name": "Structure Consulting Group, Inc",
+      "address": {
+        "lines": [
+          "905 Turnpike Street",
+          "Suite A-2"
+        ],
+        "city": "Canton",
+        "state": "MA",
+        "zip": "02021"
+      },
+      "phone": "(781) 645-8812",
+      "fax": "(781) 791-7704",
+      "email": "sambozkurtian@structureconsulting.net"
+    },
+    {
+      "date_acknowledged": "2020-10-16 14:01:00.79",
+      "contact_person": "Gergana Boneva",
+      "company_name": "Mindboard Inc.",
+      "address": {
+        "lines": [
+          "43676 Trade Center Place, Suite #235"
+        ],
+        "city": "Sterling",
+        "state": "VA",
+        "zip": "20166"
+      },
+      "phone": "(703) 574-3210",
+      "fax": "",
+      "email": "ITS74@mindboard.com"
+    },
+    {
+      "date_acknowledged": "2020-02-27 11:44:36.93",
+      "contact_person": "Lori McCormick",
+      "company_name": "Infrasense, Inc.",
+      "address": {
+        "lines": [
+          "21-G Olympia Ave., STE. 45"
+        ],
+        "city": "Woburn",
+        "state": "MA",
+        "zip": "01801"
+      },
+      "phone": "(781) 281-1686",
+      "fax": "",
+      "email": "asmith@infrasense.com"
+    },
+    {
+      "date_acknowledged": "2019-07-16 16:32:55.593",
+      "contact_person": "Aurelie Steere",
+      "company_name": "JAWSBURY",
+      "address": {
+        "lines": [
+          "75 Arlington street",
+          "Suite 500"
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02116"
+      },
+      "phone": "(617) 230-6660",
+      "fax": "",
+      "email": "aurelie.steere@jawsbury.com"
+    },
+    {
+      "date_acknowledged": "2021-03-24 15:47:12.52",
+      "contact_person": "Ralph Burkey",
+      "company_name": "Eight Eleven Group",
+      "address": {
+        "lines": [
+          "5 Marine View Plaza, Suite 212"
+        ],
+        "city": "Hoboken",
+        "state": "NJ",
+        "zip": "46240"
+      },
+      "phone": "(502) 276-0409",
+      "fax": "",
+      "email": "rburkey@brooksource.com"
+    },
+    {
+      "date_acknowledged": "2020-05-20 13:09:34.373",
+      "contact_person": "Cindy Mallory",
+      "company_name": "Worldwide TechServices",
+      "address": {
+        "lines": [
+          "836 North Street",
+          "Tewksbury MA 01876"
+        ],
+        "city": "MA",
+        "state": "MA",
+        "zip": "01876"
+      },
+      "phone": "(908) 894-8972",
+      "fax": "",
+      "email": "cindy.mallory@wwts.com"
+    },
+    {
+      "date_acknowledged": "2021-03-31 18:57:52.893",
+      "contact_person": "Madhi Raju",
+      "company_name": "iCollaboration, Inc.",
+      "address": {
+        "lines": [
+          "13536 Hunting Hill Way"
+        ],
+        "city": "North Potomac",
+        "state": "MD",
+        "zip": "20878"
+      },
+      "phone": "(202) 756-1111",
+      "fax": "",
+      "email": "madhi.r@icollabinc.com"
+    },
+    {
+      "date_acknowledged": "2023-05-30 11:35:32.237",
+      "contact_person": "Jadine Yarde",
+      "company_name": "Uncut Lab, LLC",
+      "address": {
+        "lines": [
+          "867 Boylston Street",
+          "Floor 5",
+          "Boston,\n                                           MA,\n                                           021116"
+        ]
+      },
+      "phone": "(617) 437-8854",
+      "fax": "(617) 655-9478",
+      "email": "JVenturesIntl@gmail.com"
+    },
+    {
+      "date_acknowledged": "2020-10-31 13:51:52.077",
+      "contact_person": "Jon Wallace",
+      "company_name": "Viage LLC",
+      "address": {
+        "lines": [
+          "75 Arlington Street",
+          "Suite 500"
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02116"
+      },
+      "phone": "(857) 702-9963",
+      "fax": "",
+      "email": "jonwgt@viagellc.com"
+    },
+    {
+      "date_acknowledged": "2021-02-15 17:09:26.327",
+      "contact_person": "CHRISTINA S",
+      "company_name": "The Turnout, LLC",
+      "address": {
+        "lines": [
+          "2106 Clark Place"
+        ],
+        "city": "Silver Spring",
+        "state": "MD",
+        "zip": "20910"
+      },
+      "phone": "(949) 416-1065",
+      "fax": "",
+      "email": "christina@turnout.rocks"
+    },
+    {
+      "date_acknowledged": "2021-09-02 16:12:13.22",
+      "contact_person": "Tiffany Martin",
+      "company_name": "TKMartin Consulting",
+      "address": {
+        "lines": [
+          "1258 Massachusetts Avenue",
+          "Unit #303"
+        ],
+        "city": "Dorchester",
+        "state": "MA",
+        "zip": "02125"
+      },
+      "phone": "(646) 575-8200",
+      "fax": "",
+      "email": "tiffany@tkmartinconsulting.com"
+    },
+    {
+      "date_acknowledged": "2022-12-29 10:19:22.177",
+      "contact_person": "Patrick Hosty",
+      "company_name": "Dynamhex",
+      "address": {
+        "lines": [
+          "901 S Bond St, 203"
+        ],
+        "city": "Baltimore",
+        "state": "MD",
+        "zip": "21231"
+      },
+      "phone": "(816) 214-8306",
+      "fax": "",
+      "email": "patrick@dynmhx.io"
+    },
+    {
+      "date_acknowledged": "2023-09-04 23:04:40.21",
+      "contact_person": "Bernard O'Donnell",
+      "company_name": "Hot Dragonfly LLC",
+      "address": {
+        "lines": [
+          "40 Post Office Park, #435"
+        ],
+        "city": "Wilbraham",
+        "state": "MA",
+        "zip": "01095"
+      },
+      "phone": "(413) 351-3400",
+      "fax": "",
+      "email": "Bernie@HotDragonfly.com"
+    },
+    {
+      "date_acknowledged": "2021-08-17 01:22:00.61",
+      "contact_person": "Nicholas Trapasso",
+      "company_name": "A2E Advisors, LLC.",
+      "address": {
+        "lines": [
+          "515 Madison Avenue",
+          "9th Floor"
+        ],
+        "city": "New York",
+        "state": "NY",
+        "zip": "10022"
+      },
+      "phone": "(315) 561-9369",
+      "fax": "",
+      "email": "Nicholas.trapasso@a2e-advisors.com"
+    },
+    {
+      "date_acknowledged": "2022-03-09 15:28:01.517",
+      "contact_person": "Vijay Sinha",
+      "company_name": "Varsnet Inc",
+      "address": {
+        "lines": [
+          "22 Aspen Ave"
+        ],
+        "city": "South Grafton",
+        "state": "MA",
+        "zip": "01560"
+      },
+      "phone": "(774) 279-7830",
+      "fax": "",
+      "email": "vijay.sinha@varstech.com"
+    },
+    {
+      "date_acknowledged": "2022-09-10 20:40:50.903",
+      "contact_person": "Young Jae Koh",
+      "company_name": "Union Blue Automatics",
+      "address": {
+        "lines": [
+          "57 7th Street, Unit 2",
+          "Cambridge MA, 02141"
+        ],
+        "city": "Cambridge",
+        "state": "MA",
+        "zip": "02141"
+      },
+      "phone": "(484) 998-8587",
+      "fax": "",
+      "email": "unionblueautomatics@gmail.com"
+    },
+    {
+      "date_acknowledged": "2024-09-17 09:54:36.13",
+      "contact_person": "Lynchie Bowlay",
+      "company_name": "Cntxt.agency",
+      "address": {
+        "lines": [
+          "11 Fairmount Ave, Suite 108"
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02136"
+      },
+      "phone": "(347) 821-2803",
+      "fax": "",
+      "email": "lynchie@cntxt.agency"
+    },
+    {
+      "date_acknowledged": "2023-03-13 11:06:21.313",
+      "contact_person": "Joseph Longo",
+      "company_name": "Bracken Engineering, Inc.",
+      "address": {
+        "lines": [
+          "49 Herring Pond Road"
+        ],
+        "city": "Bourne",
+        "state": "MA",
+        "zip": "02532"
+      },
+      "phone": "(508) 833-0070",
+      "fax": "",
+      "email": "joe@brackeneng.com"
+    },
+    {
+      "date_acknowledged": "2023-06-29 15:03:21.063",
+      "contact_person": "Michelle Harlap",
+      "company_name": "EPAM Systems",
+      "address": {
+        "lines": [
+          "41 University Dr #202"
+        ],
+        "city": "Newtown",
+        "state": "PA",
+        "zip": "18940"
+      },
+      "phone": "(267) 759-9000",
+      "fax": "(267) 759-8989",
+      "email": "publicsector@epam.com"
+    },
+    {
+      "date_acknowledged": "2024-08-07 10:50:02.267",
+      "contact_person": "Sachin Shah",
+      "company_name": "Syndicate-Services LLC",
+      "address": {
+        "lines": [
+          "6 Richard K Stevens Dr"
+        ],
+        "city": "North Attleboro",
+        "state": "MA",
+        "zip": "02760"
+      },
+      "phone": "(215) 703-7550",
+      "fax": "",
+      "email": "sshah@syndicateitservices.com"
+    },
+    {
+      "date_acknowledged": "2023-10-02 16:16:20.99",
+      "contact_person": "Ann Tirrell-Burton",
+      "company_name": "Briggs Burton Consulting",
+      "address": {
+        "lines": [
+          "28 Donna Road"
+        ],
+        "city": "North Billerica",
+        "state": "MA",
+        "zip": "01862"
+      },
+      "phone": "(617) 352-8312",
+      "fax": "",
+      "email": "aburton@briggsburtonconsulting.com"
+    },
+    {
+      "date_acknowledged": "2023-11-05 19:14:45.893",
+      "contact_person": "Dawit Demoz",
+      "company_name": "MSH International LLC",
+      "address": {
+        "lines": [
+          "1E, Broward Blvd Suite 1501"
+        ],
+        "city": "Fort Lauderdale",
+        "state": "FL",
+        "zip": "33301"
+      },
+      "phone": "(407) 883-6086",
+      "fax": "",
+      "email": "dawit.demoz@talentmsh.com"
+    },
+    {
+      "date_acknowledged": "2024-02-20 18:28:05.94",
+      "contact_person": "Omotayo Sorinmade",
+      "company_name": "CtrlBridge",
+      "address": {
+        "lines": [
+          "75 Foundry Street",
+          "Unit 29"
+        ],
+        "city": "South Easton",
+        "state": "MA",
+        "zip": "02375"
+      },
+      "phone": "(617) 515-3763",
+      "fax": "",
+      "email": "contact@ctrlbridge.com"
+    },
+    {
+      "date_acknowledged": "2024-03-24 01:13:42.097",
+      "contact_person": "Joshua Kuhn",
+      "company_name": "Sidestreet Operations Corp",
+      "address": {
+        "lines": [
+          "187 North Church Street",
+          "Suite A"
+        ],
+        "city": "Spartanburg",
+        "state": "SC",
+        "zip": "29306"
+      },
+      "phone": "(864) 256-1925",
+      "fax": "",
+      "email": "jkuhn@sidestreet.cc"
+    },
+    {
+      "date_acknowledged": "2024-05-21 15:15:35.067",
+      "contact_person": "Cameron French",
+      "company_name": "Komodo Technologies",
+      "address": {
+        "lines": [
+          "PO Box 255278"
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02125"
+      },
+      "phone": "(518) 231-9087",
+      "fax": "",
+      "email": "cameron@ktechboston.com"
+    },
+    {
+      "date_acknowledged": "2024-12-09 10:47:35.187",
+      "contact_person": "mario moussa",
+      "company_name": "underdogtalent llc",
+      "address": {
+        "lines": [
+          "100 Shawmut Rd",
+          "suite 100"
+        ],
+        "city": "Canton",
+        "state": "MA",
+        "zip": "02021"
+      },
+      "phone": "(617) 784-8465",
+      "fax": "",
+      "email": "Mario@underdogtalent.com"
+    },
+    {
+      "date_acknowledged": "2025-11-13 00:06:24.327",
+      "contact_person": "Lisette Joseph",
+      "company_name": "NP-Transportation, LLC",
+      "address": {
+        "lines": [
+          "5 Vining St"
+        ],
+        "city": "Malden",
+        "state": "MA",
+        "zip": "02148"
+      },
+      "phone": "(617) 312-3771",
+      "fax": "",
+      "email": "nplisette@gmail.com"
+    },
+    {
+      "date_acknowledged": "2025-01-06 10:15:08.107",
+      "contact_person": "Stephen Derby",
+      "company_name": "PurpleSec, LLC",
+      "address": {
+        "lines": [
+          "105 Elm Street"
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02129"
+      },
+      "phone": "(617) 320-9851",
+      "fax": "",
+      "email": "stephen@purplesec.boston"
+    },
+    {
+      "date_acknowledged": "2024-11-04 05:56:37.783",
+      "contact_person": "Chaitanya Krishna Dubey",
+      "company_name": "Cardinal Integrated Technologies",
+      "address": {
+        "lines": [
+          "707 Alexander Rd, Ste 202 Princeton NJ 08540 USA"
+        ],
+        "city": "New Jersey",
+        "state": "NY",
+        "zip": "08540"
+      },
+      "phone": "(732) 821-7400",
+      "fax": "",
+      "email": "chaitanya.dubey@cardinaltsinc.net"
+    },
+    {
+      "date_acknowledged": "2024-11-11 07:20:33.37",
+      "contact_person": "Javier Castillo",
+      "company_name": "Castillo Holliday Films LLC",
+      "address": {
+        "lines": [
+          "88 Franklin St"
+        ],
+        "city": "Watertown",
+        "state": "MA",
+        "zip": "02472"
+      },
+      "phone": "(857) 409-9592",
+      "fax": "",
+      "email": "javier@castillohollidayfilms.com"
+    },
+    {
+      "date_acknowledged": "2025-05-26 11:58:27.44",
+      "contact_person": "Shannelle Chisholm",
+      "company_name": "Coastal paving llc",
+      "address": {
+        "lines": [
+          "1070 iyannough road unit 166"
+        ],
+        "city": "Hyannis",
+        "state": "MA",
+        "zip": "02601"
+      },
+      "phone": "(508) 974-2989",
+      "fax": "",
+      "email": "Contact@coastalpavingco.com"
+    },
+    {
+      "date_acknowledged": "2025-06-19 08:14:35.357",
+      "contact_person": "John Osorio",
+      "company_name": "McClure Engineering Co.",
+      "address": {
+        "lines": [
+          "225 Friend Street",
+          "Suite 805"
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02108"
+      },
+      "phone": "(617) 466-6785",
+      "fax": "(515) 964-2370",
+      "email": "josorio@mcclurevision.com"
+    },
+    {
+      "date_acknowledged": "2025-05-07 09:31:02.87",
+      "contact_person": "Stan Bernard",
+      "company_name": "Tremont & Grand, LLC",
+      "address": {
+        "lines": [
+          "285 Bulkley Drive"
+        ],
+        "city": "Fairfield",
+        "state": "CT",
+        "zip": "06825"
+      },
+      "phone": "(203) 448-8202",
+      "fax": "",
+      "email": "stan@tremontgrand.com"
+    },
+    {
+      "date_acknowledged": "2025-11-16 00:52:23.443",
+      "contact_person": "Dawei Dai",
+      "company_name": "One Astronomical Unit Software LLC",
+      "address": {
+        "lines": [
+          "101 Middlesex Tpke, Suite 6, pmb 269"
+        ],
+        "city": "Burlington",
+        "state": "MA",
+        "zip": "01803"
+      },
+      "phone": "(781) 392-7856",
+      "fax": "",
+      "email": "daviddai@askabroad.com"
+    },
+    {
+      "date_acknowledged": "2026-01-13 23:06:37.49",
+      "contact_person": "David Ibrahimi",
+      "company_name": "David Ibrahimi",
+      "address": {
+        "lines": [
+          "872 Massachusetts Ave Apt 803"
+        ],
+        "city": "Cambridge",
+        "state": "MA",
+        "zip": "02139"
+      },
+      "phone": "(508) 615-9582",
+      "fax": "(508) 615-9582",
+      "email": "dibrahimi.009@gmail.com"
+    },
+    {
+      "date_acknowledged": "2019-01-25 11:04:25.437",
+      "contact_person": "Melissa DEMREST",
+      "company_name": "Custom Computer Specialists, Inc.",
+      "address": {
+        "lines": [
+          "6 Blackstone Valley Place",
+          "Suite 402"
+        ],
+        "city": "Lincoln",
+        "state": "RI",
+        "zip": "02865"
+      },
+      "phone": "(401) 775-1163",
+      "fax": "",
+      "email": "MDEMREST@CUSTOMONLINE.COM"
+    },
+    {
+      "date_acknowledged": "2025-02-26 12:50:01.103",
+      "contact_person": "Jessica Cammarano",
+      "company_name": "Rutter Networking Technologies, Inc.",
+      "address": {
+        "lines": [
+          "10 High St."
+        ],
+        "city": "Andover",
+        "state": "MA",
+        "zip": "01810"
+      },
+      "phone": "(978) 809-5069",
+      "fax": "",
+      "email": "jcammarano@rutter-net.com"
+    },
+    {
+      "date_acknowledged": "2014-08-27 08:50:00.663",
+      "contact_person": "John Prestidge",
+      "company_name": "Enterprise Services LLC",
+      "address": {
+        "lines": [
+          "100 Hancock Street"
+        ],
+        "city": "Quincy",
+        "state": "MA",
+        "zip": "02171"
+      },
+      "phone": "(603) 745-7685",
+      "fax": "",
+      "email": "john.prestidge@perspecta.com"
+    },
+    {
+      "date_acknowledged": "2017-08-23 15:09:36.883",
+      "contact_person": "Sam Spencer",
+      "company_name": "EOS Approach LLC (SOMWBA) dba Proshred Security",
+      "address": {
+        "lines": [
+          "75 Post Office Park"
+        ],
+        "city": "Wilbraham",
+        "state": "MA",
+        "zip": "01095"
+      },
+      "phone": "(413) 596-5479",
+      "fax": "(413) 596-5401",
+      "email": "sam.spencer@proscansolutions.com"
+    },
+    {
+      "date_acknowledged": "2014-04-07 10:22:32.03",
+      "contact_person": "John Prestidge",
+      "company_name": "HP Inc.",
+      "address": {
+        "lines": [
+          "1501 Page Mill Road"
+        ],
+        "city": "Palo Alto",
+        "state": "CA",
+        "zip": "94304"
+      },
+      "phone": "(603) 759-7996",
+      "fax": "(800) 825-2329",
+      "email": "john.prestidge@hp.com"
+    },
+    {
+      "date_acknowledged": "2014-04-08 16:37:58.91",
+      "contact_person": "Susan Gleason",
+      "company_name": "Boston Data Group, Inc.",
+      "address": {
+        "lines": [
+          "PO Box 162"
+        ],
+        "city": "Norwood",
+        "state": "MA",
+        "zip": "02062"
+      },
+      "phone": "(617) 771-3547",
+      "fax": "(508) 668-5050",
+      "email": "susanegleason@comcast.net"
+    },
+    {
+      "date_acknowledged": "2014-11-11 11:49:55.163",
+      "contact_person": "Rachel Harpootlian",
+      "company_name": "Currier, McCabe & Associates",
+      "address": {
+        "lines": [
+          "700 Troy Schenectady Road"
+        ],
+        "city": "Latham",
+        "state": "NY",
+        "zip": "12110"
+      },
+      "phone": "(518) 783-9003",
+      "fax": "(518) 783-5093",
+      "email": "proposals@cma.com"
+    },
+    {
+      "date_acknowledged": "2019-02-26 14:18:24.893",
+      "contact_person": "Charlie Desourdy",
+      "company_name": "New Era Technology NE",
+      "address": {
+        "lines": [
+          "New Era Technology NE"
+        ],
+        "city": "Quincy",
+        "state": "MA",
+        "zip": "02169"
+      },
+      "phone": "(617) 367-7474",
+      "fax": "(617) 367-3331",
+      "email": "Charlie.Desourdy@NewEraTech.com"
+    },
+    {
+      "date_acknowledged": "2014-04-17 09:17:20.74",
+      "contact_person": "Greg Hussey",
+      "company_name": "SIGNET Electronic Systems, LLC",
+      "address": {
+        "lines": [
+          "90 Longwater Drive"
+        ],
+        "city": "Norwell",
+        "state": "MA",
+        "zip": "02061"
+      },
+      "phone": "(781) 871-5888",
+      "fax": "(781) 871-4757",
+      "email": "greg.hussey@SIGNETGROUP.NET"
+    },
+    {
+      "date_acknowledged": "2015-11-16 12:44:32.937",
+      "contact_person": "Brian Lippold",
+      "company_name": "James W. Sewall Company",
+      "address": {
+        "lines": [
+          "136 Center Street",
+          "PO Box 433"
+        ],
+        "city": "Old Town",
+        "state": "ME",
+        "zip": "04468"
+      },
+      "phone": "(207) 817-5517",
+      "fax": "(207) 827-3641",
+      "email": "noemail@sewall.com"
+    },
+    {
+      "date_acknowledged": "2015-03-10 13:59:02.157",
+      "contact_person": "Jennifer McGarry",
+      "company_name": "PeopleGIS, LLC",
+      "address": {
+        "lines": [
+          "500 West Cummings Park",
+          "Suite 5950"
+        ],
+        "city": "Woburn",
+        "state": "MA",
+        "zip": "01801"
+      },
+      "phone": "(617) 625-3608",
+      "fax": "",
+      "email": "Jennifer@peoplegis.com"
+    },
+    {
+      "date_acknowledged": "2016-08-10 12:07:56.347",
+      "contact_person": "Rich Pomper",
+      "company_name": "Terminal Exchange Systems",
+      "address": {
+        "lines": [
+          "163 Amory St"
+        ],
+        "city": "Brookline",
+        "state": "MA",
+        "zip": "02446"
+      },
+      "phone": "(617) 731-6319",
+      "fax": "(617) 277-1984",
+      "email": "rich.pomper@bulletproofsi.com"
+    },
+    {
+      "date_acknowledged": "2016-06-15 16:49:02.86",
+      "contact_person": "Jacqueline Sullivan",
+      "company_name": "PeopleSERVE, Inc.",
+      "address": {
+        "lines": [
+          "643 VFW Parkway, Suite 201"
+        ],
+        "city": "Chestnut Hill",
+        "state": "MA",
+        "zip": "02467"
+      },
+      "phone": "(617) 553-5203",
+      "fax": "(617) 363-0091",
+      "email": "jsullivan@peopleserveinc.com"
+    },
+    {
+      "date_acknowledged": "2014-09-25 20:23:30.643",
+      "contact_person": "Evren Sen",
+      "company_name": "Cisco Systems, Inc",
+      "address": {
+        "lines": [
+          "125 High Street"
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02110"
+      },
+      "phone": "(919) 862-4396",
+      "fax": "",
+      "email": "esen@cisco.com"
+    },
+    {
+      "date_acknowledged": "2014-07-08 16:13:04.57",
+      "contact_person": "Matthew Burnham",
+      "company_name": "Accenture",
+      "address": {
+        "lines": [
+          "888 Boylston Street"
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02199"
+      },
+      "phone": "(315) 398-3451",
+      "fax": "",
+      "email": "matthew.g.burnham@accenture.com"
+    },
+    {
+      "date_acknowledged": "2014-09-05 16:44:26.1",
+      "contact_person": "Antonio Pagan",
+      "company_name": "Center for Educational Leadership and Technology",
+      "address": {
+        "lines": [
+          "Center for Educational Leadership and Technology",
+          "65 West Boston Post Rd., West"
+        ],
+        "city": "Marlborough",
+        "state": "MA",
+        "zip": "01752"
+      },
+      "phone": "(508) 624-4474",
+      "fax": "(508) 624-6565",
+      "email": "apagan@celtcorp.com"
+    },
+    {
+      "date_acknowledged": "2014-10-29 11:47:02.747",
+      "contact_person": "Nancy Whitehead",
+      "company_name": "Kyran Research Associates, Inc.",
+      "address": {
+        "lines": [
+          "18 Sheffield Avenue"
+        ],
+        "city": "Newport",
+        "state": "RI",
+        "zip": "02840"
+      },
+      "phone": "(401) 849-7734",
+      "fax": "(401) 846-3832",
+      "email": "nancyw@kyran.com"
+    },
+    {
+      "date_acknowledged": "2016-04-07 11:30:20.453",
+      "contact_person": "John Schaeffer",
+      "company_name": "Strategic Solutions Group, LLC",
+      "address": {
+        "lines": [
+          "300 First Ave. Suite 103"
+        ],
+        "city": "Needham",
+        "state": "MA",
+        "zip": "02494"
+      },
+      "phone": "(617) 721-8845",
+      "fax": "(781) 850-4495",
+      "email": "jschaeffer@ssg-llc.com"
+    }
+  ]
+}

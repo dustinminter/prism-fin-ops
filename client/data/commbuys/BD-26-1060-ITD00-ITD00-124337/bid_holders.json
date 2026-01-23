@@ -1,0 +1,465 @@
+{
+  "bid_number": "BD-26-1060-ITD00-ITD00-124337",
+  "scraped_at": "2026-01-22T20:38:21.995963",
+  "source_url": "https://www.commbuys.com/bso/external/bidAckList.sda?bidId=BD-26-1060-ITD00-ITD00-124337",
+  "total_holders": 28,
+  "holders": [
+    {
+      "date_acknowledged": "2026-01-19 11:57:58.88",
+      "contact_person": "Jennifer Golden",
+      "company_name": "NWN Corporation",
+      "address": {
+        "lines": [
+          "111 Huntington Ave, 7th Floor"
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02199"
+      },
+      "phone": "(860) 606-2865",
+      "fax": "(860) 606-2965",
+      "email": "jgolden@nwn.ai"
+    },
+    {
+      "date_acknowledged": "2026-01-14 11:49:51.077",
+      "contact_person": "Sandra Maloney",
+      "company_name": "CGI Technologies and Solutions Inc",
+      "address": {
+        "lines": [
+          "78 Blanchard Rd, Suite 300"
+        ],
+        "city": "Burlington",
+        "state": "MA",
+        "zip": "01803"
+      },
+      "phone": "(978) 314-2640",
+      "fax": "",
+      "email": "sandy.maloney@cgi.com"
+    },
+    {
+      "date_acknowledged": "2026-01-14 11:44:09.187",
+      "contact_person": "Sarah Pilon",
+      "company_name": "GL Solutions",
+      "address": {
+        "lines": [
+          "555 Corporate Drive",
+          "Suite 301"
+        ],
+        "city": "Kalispell",
+        "state": "MT",
+        "zip": "59901"
+      },
+      "phone": "(541) 312-3662",
+      "fax": "(541) 312-3662",
+      "email": "pilon@glsolutions.com"
+    },
+    {
+      "date_acknowledged": "2026-01-15 16:58:49.863",
+      "contact_person": "Robert Gorman",
+      "company_name": "Relational Semantics, Inc.",
+      "address": {
+        "lines": [
+          "Relational Semantics, Inc.",
+          "464 Common Street, #303"
+        ],
+        "city": "Belmont",
+        "state": "MA",
+        "zip": "02478"
+      },
+      "phone": "(617) 965-1700",
+      "fax": "",
+      "email": "bob@rsi.com"
+    },
+    {
+      "date_acknowledged": "2026-01-14 13:40:13.903",
+      "contact_person": "Marian Mulholland",
+      "company_name": "Grant Street Group",
+      "address": {
+        "lines": [
+          "339 Sixth Avenue",
+          "Suite 1400"
+        ],
+        "city": "Pittsburgh",
+        "state": "PA",
+        "zip": "15222"
+      },
+      "phone": "(412) 391-5555",
+      "fax": "",
+      "email": "rfps@grantstreet.com"
+    },
+    {
+      "date_acknowledged": "2026-01-14 16:32:41.82",
+      "contact_person": "Philip Betz",
+      "company_name": "Journal Technologies, Inc.",
+      "address": {
+        "lines": [
+          "843 South 100 West"
+        ],
+        "city": "Logan",
+        "state": "UT",
+        "zip": "84321"
+      },
+      "phone": "(877) 587-8927",
+      "fax": "(435) 774-1605",
+      "email": "pbetz@journaltech.com"
+    },
+    {
+      "date_acknowledged": "2026-01-14 12:18:30.96",
+      "contact_person": "Acro Recruiting",
+      "company_name": "Acro Service Corporation",
+      "address": {
+        "lines": [
+          "39209 Six Mile Road, Suite #250"
+        ],
+        "city": "Livonia",
+        "state": "MI",
+        "zip": "48152"
+      },
+      "phone": "(877) 227-0930",
+      "fax": "(734) 591-1217",
+      "email": "acrosoma@acrocorp.com"
+    },
+    {
+      "date_acknowledged": "2026-01-16 14:40:02.45",
+      "contact_person": "Dennis Rizzi",
+      "company_name": "Slalom Consulting",
+      "address": {
+        "lines": [
+          "399 Boylston St , Suite 1000"
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02116"
+      },
+      "phone": "(703) 424-6674",
+      "fax": "",
+      "email": "dennis.rizzi@slalom.com"
+    },
+    {
+      "date_acknowledged": "2026-01-14 12:50:52.933",
+      "contact_person": "Rob Rossi",
+      "company_name": "Eduloka, Ltd. (dba inLumon)",
+      "address": {
+        "lines": [
+          "5375 Kietzke Lane, SUite 150"
+        ],
+        "city": "Reno",
+        "state": "NV",
+        "zip": "89511"
+      },
+      "phone": "(800) 246-0541",
+      "fax": "",
+      "email": "info@inlumon.com"
+    },
+    {
+      "date_acknowledged": "2026-01-14 13:51:34.273",
+      "contact_person": "Kaitlyn Sullivan",
+      "company_name": "ConvergeOne",
+      "address": {
+        "lines": [
+          "3344 Highway 149"
+        ],
+        "city": "Eagan",
+        "state": "MN",
+        "zip": "55121"
+      },
+      "phone": "(781) 357-8179",
+      "fax": "(651) 994-6801",
+      "email": "ksullivan@convergeone.com"
+    },
+    {
+      "date_acknowledged": "2026-01-14 19:15:03.403",
+      "contact_person": "Marilyn Koch",
+      "company_name": "CBTS LLC (formerly OnX)",
+      "address": {
+        "lines": [
+          "2 Lan Drive",
+          "Suite 203"
+        ],
+        "city": "Westford",
+        "state": "MA",
+        "zip": "01886"
+      },
+      "phone": "(781) 858-6246",
+      "fax": "(978) 692-2632",
+      "email": "marilyn.koch@cbts.com"
+    },
+    {
+      "date_acknowledged": "2026-01-17 14:49:59.92",
+      "contact_person": "John Hawes",
+      "company_name": "Zscaler",
+      "address": {
+        "lines": [
+          "110 Rose Orchard Way"
+        ],
+        "city": "San Jose",
+        "state": "CA",
+        "zip": "95134"
+      },
+      "phone": "(617) 828-1674",
+      "fax": "(408) 868-4089",
+      "email": "jhawes@zscaler.com"
+    },
+    {
+      "date_acknowledged": "2026-01-14 15:03:52.88",
+      "contact_person": "Sean Hosman",
+      "company_name": "Allvest Information Services",
+      "address": {
+        "lines": [
+          "PO Box 1802"
+        ],
+        "city": "Salt Lake City",
+        "state": "UT",
+        "zip": "84110"
+      },
+      "phone": "(877) 277-3778",
+      "fax": "",
+      "email": "procurementalerts@vant4ge.com"
+    },
+    {
+      "date_acknowledged": "2026-01-21 13:58:02.57",
+      "contact_person": "Marc Damboorajian",
+      "company_name": "EdgeTech Consulting LLC",
+      "address": {
+        "lines": [
+          "44 Merrimack Street",
+          "Suite 310"
+        ],
+        "city": "Newburyport",
+        "state": "MA",
+        "zip": "01950"
+      },
+      "phone": "(781) 760-3096",
+      "fax": "",
+      "email": "mdamboorajian@edgetech-consulting.com"
+    },
+    {
+      "date_acknowledged": "2026-01-21 01:14:36.447",
+      "contact_person": "Srinivas Kumar",
+      "company_name": "Comtech LLC",
+      "address": {
+        "lines": [
+          "1801 Robert Fulton Drive, Suite 410"
+        ],
+        "city": "Reston",
+        "state": "VA",
+        "zip": "20191"
+      },
+      "phone": "(561) 931-6186",
+      "fax": "",
+      "email": "bd@comtechllc.com"
+    },
+    {
+      "date_acknowledged": "2026-01-16 09:57:35.117",
+      "contact_person": "Tory Colvin",
+      "company_name": "Authorium Inc.",
+      "address": {
+        "lines": [
+          "425 California St.",
+          "Suite 1350"
+        ],
+        "city": "San Francisco",
+        "state": "CA",
+        "zip": "94104"
+      },
+      "phone": "(415) 849-8810",
+      "fax": "",
+      "email": "tory.colvin@authorium.com"
+    },
+    {
+      "date_acknowledged": "2026-01-14 11:48:15.637",
+      "contact_person": "Colin Guan",
+      "company_name": "GiveCard",
+      "address": {
+        "lines": [
+          "611 S DuPont Hwy",
+          "Ste 102"
+        ],
+        "city": "Dover",
+        "state": "DE",
+        "zip": "19901"
+      },
+      "phone": "(626) 244-1465",
+      "fax": "",
+      "email": "colin@givecard.io"
+    },
+    {
+      "date_acknowledged": "2026-01-14 12:05:04.92",
+      "contact_person": "Derek Vanderby",
+      "company_name": "Soliant Consulting, Inc.",
+      "address": {
+        "lines": [
+          "14 N. Peoria St #2H"
+        ],
+        "city": "Chicago",
+        "state": "IL",
+        "zip": "60607"
+      },
+      "phone": "(650) 696-9314",
+      "fax": "",
+      "email": "dvanderby@soliantconsulting.com"
+    },
+    {
+      "date_acknowledged": "2026-01-14 12:23:00.617",
+      "contact_person": "Neetu Singh",
+      "company_name": "NorthStar Group Inc",
+      "address": {
+        "lines": [
+          "7520 Standish Place,St 260"
+        ],
+        "city": "Rockville",
+        "state": "MD",
+        "zip": "20855"
+      },
+      "phone": "(408) 809-0828",
+      "fax": "",
+      "email": "neetu@nstargroupinc.com"
+    },
+    {
+      "date_acknowledged": "2026-01-16 05:46:51.76",
+      "contact_person": "Peter Orondo",
+      "company_name": "Acclaim Consulting Group, Inc",
+      "address": {
+        "lines": [
+          "18 Oak St"
+        ],
+        "city": "Hopkinton",
+        "state": "MA",
+        "zip": "01748"
+      },
+      "phone": "(617) 871-9250",
+      "fax": "",
+      "email": "corp@acclaimconsulting.com"
+    },
+    {
+      "date_acknowledged": "2026-01-15 14:11:56.863",
+      "contact_person": "Chris White",
+      "company_name": "Gov Source LLC",
+      "address": {
+        "lines": [
+          "1441 Woodmont Ln NW #1999"
+        ],
+        "city": "Atlanta",
+        "state": "GA",
+        "zip": "30318"
+      },
+      "phone": "(943) 473-3280",
+      "fax": "",
+      "email": "bids@govsource.us"
+    },
+    {
+      "date_acknowledged": "2026-01-14 11:47:44.77",
+      "contact_person": "Lee Cocis",
+      "company_name": "IT Vizion Inc",
+      "address": {
+        "lines": [
+          "423 Jenks Cir, 205"
+        ],
+        "city": "Corona",
+        "state": "CA",
+        "zip": "92880"
+      },
+      "phone": "(562) 556-8207",
+      "fax": "(562) 556-8207",
+      "email": "lee.cocis@itvizion.com"
+    },
+    {
+      "date_acknowledged": "2026-01-15 10:10:39.903",
+      "contact_person": "Frank Dasilva",
+      "company_name": "OBSENTRY LLC",
+      "address": {
+        "lines": [
+          "10 Elliot St"
+        ],
+        "city": "Malden",
+        "state": "MA",
+        "zip": "02148"
+      },
+      "phone": "(978) 914-5495",
+      "fax": "",
+      "email": "Vercosa@obsentry.com"
+    },
+    {
+      "date_acknowledged": "2026-01-14 11:31:28.823",
+      "contact_person": "Kenneth Okello",
+      "company_name": "VETERAN SUPPLY CHAIN & LOGISTICS CONSULTING LLC",
+      "address": {
+        "lines": [
+          "12 E SHEPPARD LN"
+        ],
+        "city": "CHELMSFORD",
+        "state": "MA",
+        "zip": "01824"
+      },
+      "phone": "(978) 876-2491",
+      "fax": "",
+      "email": "veteransupplychain@gmail.com"
+    },
+    {
+      "date_acknowledged": "2026-01-22 10:28:17.057",
+      "contact_person": "Madeline Doherty",
+      "company_name": "IntraSystems, Inc.",
+      "address": {
+        "lines": [
+          "35 Braintree Hill Office Park",
+          "Suite 302"
+        ],
+        "city": "Braintree",
+        "state": "MA",
+        "zip": "02184"
+      },
+      "phone": "(781) 986-1700",
+      "fax": "(781) 986-1001",
+      "email": "mdoherty@intrasystems.com"
+    },
+    {
+      "date_acknowledged": "2026-01-15 10:40:47.867",
+      "contact_person": "Jessica Bianca",
+      "company_name": "Deloitte Consulting",
+      "address": {
+        "lines": [
+          "115 Federal Street",
+          "Winthrop Center; Floors 12-15"
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02110"
+      },
+      "phone": "(717) 303-6858",
+      "fax": "",
+      "email": "jbianca@deloitte.com"
+    },
+    {
+      "date_acknowledged": "2026-01-14 12:54:07.91",
+      "contact_person": "Susan McConathy",
+      "company_name": "Accenture",
+      "address": {
+        "lines": [
+          "888 Boylston Street"
+        ],
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02199"
+      },
+      "phone": "(781) 956-4092",
+      "fax": "",
+      "email": "susan.mcconathy@accenture.com"
+    },
+    {
+      "date_acknowledged": "2026-01-14 14:39:14.827",
+      "contact_person": "Rick Fritz",
+      "company_name": "HUB Technical Services",
+      "address": {
+        "lines": [
+          "44 Norfolk Avenue"
+        ],
+        "city": "South Easton",
+        "state": "MA",
+        "zip": "02375"
+      },
+      "phone": "(508) 238-9887",
+      "fax": "(508) 238-1146",
+      "email": "rfritz@hubtechnical.com"
+    }
+  ]
+}
