@@ -1,0 +1,138 @@
+{
+  "collection_date": "2026-01-19T04:13:01.482674",
+  "evidence_id": "A6",
+  "enforcement_log": {
+    "total_entries": 4,
+    "by_decision": {
+      "APPROVED": 1,
+      "GATED": 1,
+      "DENIED": 1,
+      "ALLOWED": 1
+    },
+    "sample_entries": [
+      {
+        "LOG_ID": "f38458ff-5382-4ade-be64-9ea94765fb49",
+        "REQUEST_ID": "14b2cae4",
+        "USER_ID": "TEST_EOTSS_EXEC",
+        "AGENCY_ID": "EOTSS",
+        "SECRETARIAT_ID": "EOTSS",
+        "SNOWFLAKE_ROLE": "EOTSS_EXECUTIVE",
+        "REQUEST_TYPE": "TRUST_STATE_PROMOTION",
+        "AGREEMENT_ID": "DULA-EOTSS-2024-001",
+        "POLICY_VERSION": "1.0.0",
+        "DECISION": "APPROVED",
+        "VIOLATED_CLAUSE": null,
+        "DENIAL_REASON": null,
+        "GATE_TYPE": null,
+        "REQUIRED_APPROVER_ROLE": null,
+        "APPROVER_ID": "TEST_EOTSS_EXEC",
+        "ENFORCED_AT": "2026-01-19T02:12:06.198000"
+      },
+      {
+        "LOG_ID": "10f031f2-5389-4829-b5fa-a31905cd1fdd",
+        "REQUEST_ID": "40e86d75",
+        "USER_ID": "TEST_EOTSS_ANALYST",
+        "AGENCY_ID": "EOTSS",
+        "SECRETARIAT_ID": "EOTSS",
+        "SNOWFLAKE_ROLE": "EOTSS_FINOPS_ANALYST",
+        "REQUEST_TYPE": "TRUST_STATE_PROMOTION",
+        "AGREEMENT_ID": "DULA-EOTSS-2024-001",
+        "POLICY_VERSION": "1.0.0",
+        "DECISION": "GATED",
+        "VIOLATED_CLAUSE": null,
+        "DENIAL_REASON": null,
+        "GATE_TYPE": "HUMAN_REVIEW",
+        "REQUIRED_APPROVER_ROLE": "EOTSS_EXECUTIVE",
+        "APPROVER_ID": null,
+        "ENFORCED_AT": "2026-01-19T02:12:05.484000"
+      },
+      {
+        "LOG_ID": "c028ee73-9e3a-4a76-934c-bdf15fc2c7f5",
+        "REQUEST_ID": "c00b6555",
+        "USER_ID": "TEST_ITD_ANALYST",
+        "AGENCY_ID": "ITD",
+        "SECRETARIAT_ID": "EOTSS",
+        "SNOWFLAKE_ROLE": "AGENCY_ITD_ANALYST",
+        "REQUEST_TYPE": "DATA_QUERY",
+        "AGREEMENT_ID": "DULA-EOTSS-2024-001",
+        "POLICY_VERSION": "1.0.0",
+        "DECISION": "DENIED",
+        "VIOLATED_CLAUSE": "DULA-EOTSS-2024-001-C03",
+        "DENIAL_REASON": "Cross-agency line-item data sharing requires DSA per Clause 5.1",
+        "GATE_TYPE": null,
+        "REQUIRED_APPROVER_ROLE": null,
+        "APPROVER_ID": null,
+        "ENFORCED_AT": "2026-01-19T02:12:04.807000"
+      },
+      {
+        "LOG_ID": "3a488dc0-25d0-48cf-ba15-c8ecae084004",
+        "REQUEST_ID": "2c02c3c0",
+        "USER_ID": "TEST_ITD_ANALYST",
+        "AGENCY_ID": "ITD",
+        "SECRETARIAT_ID": "EOTSS",
+        "SNOWFLAKE_ROLE": "AGENCY_ITD_ANALYST",
+        "REQUEST_TYPE": "DATA_QUERY",
+        "AGREEMENT_ID": "DULA-EOTSS-2024-001",
+        "POLICY_VERSION": "1.0.0",
+        "DECISION": "ALLOWED",
+        "VIOLATED_CLAUSE": null,
+        "DENIAL_REASON": null,
+        "GATE_TYPE": null,
+        "REQUIRED_APPROVER_ROLE": null,
+        "APPROVER_ID": null,
+        "ENFORCED_AT": "2026-01-19T02:12:01.849000"
+      }
+    ]
+  },
+  "session_log": {
+    "total_entries": 5,
+    "sample_entries": [
+      {
+        "user_id": "TEST_DPH_ANALYST",
+        "agency_id": "DPH",
+        "secretariat_id": "HHS",
+        "snowflake_role": "AGENCY_DPH_ANALYST",
+        "established_at": "2026-01-19T02:02:55.381000"
+      },
+      {
+        "user_id": "TEST_MASSIT_ANALYST",
+        "agency_id": "MASSIT",
+        "secretariat_id": "EOTSS",
+        "snowflake_role": "AGENCY_MASSIT_ANALYST",
+        "established_at": "2026-01-19T02:02:54.740000"
+      },
+      {
+        "user_id": "TEST_ITD_ANALYST",
+        "agency_id": "ITD",
+        "secretariat_id": "EOTSS",
+        "snowflake_role": "AGENCY_ITD_ANALYST",
+        "established_at": "2026-01-19T02:02:53.934000"
+      },
+      {
+        "user_id": "TEST_EOTSS_ANALYST",
+        "agency_id": "EOTSS",
+        "secretariat_id": "EOTSS",
+        "snowflake_role": "EOTSS_FINOPS_ANALYST",
+        "established_at": "2026-01-19T02:02:53.352000"
+      },
+      {
+        "user_id": "TEST_EOTSS_EXEC",
+        "agency_id": "EOTSS",
+        "secretariat_id": "EOTSS",
+        "snowflake_role": "EOTSS_EXECUTIVE",
+        "established_at": "2026-01-19T02:02:52.373000"
+      }
+    ]
+  },
+  "verification_checks": {
+    "enforcement_logs_exist": true,
+    "session_logs_exist": true,
+    "all_logs_have_user_id": true,
+    "all_logs_have_agreement_id": true,
+    "all_logs_have_decision": true,
+    "denied_logs_have_clause": true,
+    "gated_logs_have_approver_role": true,
+    "approved_logs_have_approver": true
+  },
+  "all_checks_pass": true
+}

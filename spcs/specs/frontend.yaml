@@ -1,0 +1,28 @@
+# ============================================================================
+# PRISM FinOps - Frontend Service Specification
+# ============================================================================
+
+spec:
+  containers:
+    - name: frontend
+      image: /prism_spcs/app/images/frontend:latest
+      resources:
+        requests:
+          cpu: 0.25
+          memory: 128Mi
+        limits:
+          cpu: 1
+          memory: 512Mi
+      readinessProbe:
+        port: 80
+        path: /health
+
+  endpoints:
+    - name: web
+      port: 80
+      protocol: HTTP
+
+  serviceRoles:
+    - name: frontend_access
+      endpoints:
+        - web

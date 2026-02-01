@@ -1,0 +1,16 @@
+# =============================================================================
+# PRISM FinOps — Terraform Variables
+# =============================================================================
+# Copy this file to terraform.tfvars and fill in your values.
+# DO NOT commit terraform.tfvars to version control.
+# =============================================================================
+
+snowflake_organization = "<org-name>"
+snowflake_account      = "<account-name>"
+snowflake_user         = "<service_user>"
+snowflake_password     = "<password>"
+
+# Optional overrides (defaults shown):
+# snowflake_role   = "ACCOUNTADMIN"
+# warehouse_size   = "X-SMALL"
+# environment      = "prod"

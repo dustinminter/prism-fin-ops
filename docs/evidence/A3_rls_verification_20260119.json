@@ -1,0 +1,135 @@
+{
+  "collection_date": "2026-01-19T04:07:00.541820",
+  "evidence_id": "A3",
+  "rls_tests": [
+    {
+      "username": "TEST_ITD_ANALYST",
+      "description": "Agency user sees only own agency",
+      "expected_agencies": [
+        "ITD"
+      ],
+      "test_time": "2026-01-19T04:06:39.682446",
+      "visible_agencies": [
+        "ITD"
+      ],
+      "agency_counts": {
+        "ITD": 3
+      },
+      "pass": true,
+      "extra_agencies": [],
+      "missing_agencies": []
+    },
+    {
+      "username": "TEST_MASSIT_ANALYST",
+      "description": "Agency user sees only own agency",
+      "expected_agencies": [
+        "MASSIT"
+      ],
+      "test_time": "2026-01-19T04:06:42.486511",
+      "visible_agencies": [
+        "MASSIT"
+      ],
+      "agency_counts": {
+        "MASSIT": 3
+      },
+      "pass": true,
+      "extra_agencies": [],
+      "missing_agencies": []
+    },
+    {
+      "username": "TEST_DPH_ANALYST",
+      "description": "Agency user (different secretariat) sees only own agency",
+      "expected_agencies": [
+        "DPH"
+      ],
+      "test_time": "2026-01-19T04:06:46.551766",
+      "visible_agencies": [
+        "DPH"
+      ],
+      "agency_counts": {
+        "DPH": 3
+      },
+      "pass": true,
+      "extra_agencies": [],
+      "missing_agencies": []
+    },
+    {
+      "username": "TEST_EOTSS_ANALYST",
+      "description": "Secretariat analyst sees all EOTSS agencies",
+      "expected_agencies": [
+        "ITD",
+        "MASSIT",
+        "CYBER",
+        "CIO"
+      ],
+      "test_time": "2026-01-19T04:06:49.858820",
+      "visible_agencies": [
+        "CIO",
+        "CYBER",
+        "ITD",
+        "MASSIT"
+      ],
+      "agency_counts": {
+        "CIO": 1,
+        "CYBER": 2,
+        "ITD": 3,
+        "MASSIT": 3
+      },
+      "pass": true,
+      "extra_agencies": [],
+      "missing_agencies": []
+    },
+    {
+      "username": "TEST_EOTSS_EXEC",
+      "description": "Secretariat executive sees all EOTSS agencies",
+      "expected_agencies": [
+        "ITD",
+        "MASSIT",
+        "CYBER",
+        "CIO"
+      ],
+      "test_time": "2026-01-19T04:06:53.649276",
+      "visible_agencies": [
+        "CIO",
+        "CYBER",
+        "ITD",
+        "MASSIT"
+      ],
+      "agency_counts": {
+        "CIO": 1,
+        "CYBER": 2,
+        "ITD": 3,
+        "MASSIT": 3
+      },
+      "pass": true,
+      "extra_agencies": [],
+      "missing_agencies": []
+    },
+    {
+      "username": "TEST_EOTSS_ANALYST",
+      "description": "EOTSS user cannot see HHS data",
+      "test_time": "2026-01-19T04:06:56.261263",
+      "hhs_visible_count": 0,
+      "pass": true
+    },
+    {
+      "description": "PRISM_GOVERNANCE_ADMIN sees all data",
+      "test_time": "2026-01-19T04:06:58.990918",
+      "visible_secretariats": [
+        "EOTSS",
+        "HHS"
+      ],
+      "pass": true
+    }
+  ],
+  "summary": {
+    "total_tests": 7,
+    "passed": 7,
+    "failed": 0,
+    "pass_rate": "100.0%"
+  },
+  "policy_definition": {
+    "name": "GOVERNANCE.AGENCY_ISOLATION_POLICY",
+    "logic": "Role-based: AGENCY scope sees own agency, SECRETARIAT scope sees secretariat, ALL scope sees everything"
+  }
+}

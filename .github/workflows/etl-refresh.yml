@@ -1,0 +1,127 @@
+# =============================================================================
+# PRISM FinOps — Monthly ETL Data Refresh
+# =============================================================================
+# Runs on the 1st of each month at 06:00 UTC (01:00 AM ET) to fetch fresh
+# data from Massachusetts open data sources and load into Snowflake.
+#
+# Can also be triggered manually via workflow_dispatch with optional
+# fiscal year and limit overrides.
+#
+# Data sources:
+#   - CTHRU Expenditures (data.mass.gov / Socrata API)
+#   - USASpending.gov IT awards for Massachusetts
+#   - COMMBUYS bid data (load-only; manual scrape required)
+# =============================================================================
+
+name: ETL Refresh
+
+on:
+  schedule:
+    # 1st of every month at 06:00 UTC
+    - cron: "0 6 1 * *"
+  workflow_dispatch:
+    inputs:
+      fiscal_year:
+        description: "Fiscal year to fetch (default: current)"
+        required: false
+        default: "2026"
+      limit:
+        description: "Max records per source (0 = all)"
+        required: false
+        default: "0"
+      sources:
+        description: "Sources to run (all, cthru, usaspending, commbuys)"
+        required: false
+        default: "all"
+
+env:
+  SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+  SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+  SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+  SNOWFLAKE_WAREHOUSE: "PRISM_APP_WH"
+  SNOWFLAKE_DATABASE: "FEDERAL_FINANCIAL_DATA"
+  SNOWFLAKE_ROLE: "PRISM_APP_ROLE"
+  SNOWFLAKE_SCHEMA: "EOTSS_STAGING"
+  SOCRATA_APP_TOKEN: ${{ secrets.SOCRATA_APP_TOKEN }}
+
+jobs:
+  etl-refresh:
+    name: Data Acquisition & Load
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-etl-${{ hashFiles('etl/requirements.txt') }}
+          restore-keys: |
+            pip-etl-
+
+      - name: Install ETL dependencies
+        run: pip install -r etl/requirements.txt
+
+      - name: Determine fiscal year
+        id: fy
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "fiscal_year=${{ github.event.inputs.fiscal_year }}" >> $GITHUB_OUTPUT
+            echo "limit=${{ github.event.inputs.limit }}" >> $GITHUB_OUTPUT
+            echo "sources=${{ github.event.inputs.sources }}" >> $GITHUB_OUTPUT
+          else
+            # Scheduled run: use current FY based on month
+            # MA FY starts July; Federal FY starts October
+            MONTH=$(date +%m)
+            YEAR=$(date +%Y)
+            if [ "$MONTH" -ge 7 ]; then
+              FY=$((YEAR + 1))
+            else
+              FY=$YEAR
+            fi
+            echo "fiscal_year=${FY}" >> $GITHUB_OUTPUT
+            echo "limit=0" >> $GITHUB_OUTPUT
+            echo "sources=all" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Fetch CTHRU expenditures
+        if: contains(fromJSON('["all", "cthru"]'), steps.fy.outputs.sources)
+        run: |
+          python -m etl.cthru_acquisition \
+            --fiscal-year ${{ steps.fy.outputs.fiscal_year }} \
+            --limit ${{ steps.fy.outputs.limit }}
+
+      - name: Fetch USASpending awards
+        if: contains(fromJSON('["all", "usaspending"]'), steps.fy.outputs.sources)
+        run: |
+          python -m etl.usaspending_loader \
+            --fiscal-year ${{ steps.fy.outputs.fiscal_year }} \
+            --limit ${{ steps.fy.outputs.limit }}
+
+      - name: Load COMMBUYS bid data
+        if: contains(fromJSON('["all", "commbuys"]'), steps.fy.outputs.sources)
+        run: |
+          python -m etl.commbuys_scraper --load-only
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## ETL Refresh Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Parameter | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Fiscal Year | ${{ steps.fy.outputs.fiscal_year }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Record Limit | ${{ steps.fy.outputs.limit }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Sources | ${{ steps.fy.outputs.sources }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Trigger | ${{ github.event_name }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Snowflake Account | ${{ secrets.SNOWFLAKE_ACCOUNT }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "> Loaded to \`FEDERAL_FINANCIAL_DATA.EOTSS_STAGING\`" >> $GITHUB_STEP_SUMMARY

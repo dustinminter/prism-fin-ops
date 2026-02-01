@@ -1,0 +1,901 @@
+# =============================================================================
+# PRISM EOTSS FinOps - Cortex Analyst Semantic Model
+# =============================================================================
+# This YAML defines the semantic model for Snowflake Intelligence UI.
+# It teaches Cortex Analyst about Commonwealth financial data so budget
+# directors can ask questions in plain English.
+#
+# Database: FEDERAL_FINANCIAL_DATA
+# Staging schema: EOTSS_STAGING (swap layer — views point to sample data now,
+#   real CIW/CIP/Commbuys/CTHR data later)
+#
+# Deployment:
+#   Option A: Upload to stage for Cortex Analyst REST API
+#   Option B: SYSTEM$CREATE_SEMANTIC_VIEW_FROM_YAML (see 05-deploy-semantic-model.sql)
+# =============================================================================
+
+name: PRISM_EOTSS_FinOps
+description: >
+  Commonwealth of Massachusetts financial operations intelligence model for EOTSS.
+  Covers agency spending (CIW), capital IT investments (CIP), procurement awards
+  (Commbuys), and workforce costs (CTHR). Designed for budget directors and
+  secretariat leadership to query spending, detect anomalies, and forecast trends
+  using natural language.
+
+tables:
+  # =========================================================================
+  # TABLE 1: Agency Spending (CIW)
+  # =========================================================================
+  - name: SPENDING_BY_AGENCY
+    description: >
+      Monthly spending data by Commonwealth agency, fund code, and fiscal period.
+      Sourced from the Comptroller Information Warehouse (CIW). Includes obligations,
+      expenditures, budget authority, unliquidated obligations, and burn rate.
+    synonyms:
+      - agency spending
+      - CIW data
+      - spending data
+      - appropriations
+      - encumbrances
+      - expenditure data
+    base_table:
+      database: FEDERAL_FINANCIAL_DATA
+      schema: EOTSS_STAGING
+      table: V_CIW_SPENDING
+
+    dimensions:
+      - name: AGENCY_CODE
+        description: Unique code identifying the Commonwealth agency (e.g., ITD, MASSIT, DPH)
+        synonyms:
+          - agency
+          - department code
+          - org code
+        expr: AGENCY_CODE
+        data_type: VARCHAR
+        unique: false
+        sample_values:
+          - "ITD"
+          - "MASSIT"
+          - "DPH"
+          - "MASSDOT"
+          - "CYBER"
+
+      - name: AGENCY_NAME
+        description: Full name of the Commonwealth agency
+        synonyms:
+          - agency name
+          - department name
+          - department
+        expr: AGENCY_NAME
+        data_type: VARCHAR
+        unique: false
+        sample_values:
+          - "Information Technology Division"
+          - "MassIT"
+          - "Department of Public Health"
+
+      - name: SECRETARIAT_ID
+        description: >
+          The executive office (secretariat) that oversees the agency.
+          Massachusetts state government is organized under secretariats
+          (e.g., EOTSS, HHS, ANF, DOT).
+        synonyms:
+          - secretariat
+          - executive office
+          - cabinet
+        expr: SECRETARIAT_ID
+        data_type: VARCHAR
+        unique: false
+        sample_values:
+          - "EOTSS"
+          - "HHS"
+          - "ANF"
+          - "DOT"
+          - "EOPSS"
+          - "EOE"
+          - "EEA"
+          - "DHCD"
+          - "EED"
+
+      - name: FUND_CODE
+        description: >
+          State fund code identifying the funding source.
+          0100 = General Fund, 0200 = Federal Funds, 0300 = Capital Fund, 0400 = Trust Funds.
+        synonyms:
+          - fund
+          - funding source
+          - appropriation fund
+        expr: FUND_CODE
+        data_type: VARCHAR
+        unique: false
+        sample_values:
+          - "0100"
+          - "0200"
+          - "0300"
+          - "0400"
+
+      - name: FUND_NAME
+        description: Descriptive name of the fund code
+        expr: FUND_NAME
+        data_type: VARCHAR
+        unique: false
+        sample_values:
+          - "General Fund"
+          - "Federal Funds"
+          - "Capital Fund"
+          - "Trust Funds"
+
+      - name: FISCAL_YEAR_LABEL
+        description: Massachusetts state fiscal year label (e.g., FY2025, FY2026). Fiscal year runs July 1 through June 30.
+        synonyms:
+          - fiscal year
+          - FY
+          - budget year
+        expr: FISCAL_YEAR_LABEL
+        data_type: VARCHAR
+        unique: false
+        sample_values:
+          - "FY2025"
+          - "FY2026"
+
+    time_dimensions:
+      - name: FISCAL_PERIOD_DATE
+        description: >
+          First day of the fiscal month for this spending record.
+          Massachusetts fiscal year runs July 1 through June 30.
+        synonyms:
+          - month
+          - fiscal period
+          - spending month
+          - period
+          - date
+        expr: FISCAL_PERIOD_DATE
+        data_type: DATE
+        unique: false
+
+    measures:
+      - name: TOTAL_OBLIGATIONS
+        description: >
+          Total amount obligated (committed) for the period. Obligations represent
+          legally binding commitments to pay. In Commonwealth terminology, this
+          includes encumbrances and allotments.
+        synonyms:
+          - obligations
+          - committed spending
+          - encumbrances
+          - allotments
+        expr: TOTAL_OBLIGATIONS
+        data_type: NUMBER
+        default_aggregation: sum
+
+      - name: TOTAL_EXPENDITURES
+        description: >
+          Total amount actually spent (disbursed) for the period. Expenditures
+          represent cash outlays against obligations.
+        synonyms:
+          - expenditures
+          - spending
+          - outlays
+          - disbursements
+          - actual spend
+        expr: TOTAL_EXPENDITURES
+        data_type: NUMBER
+        default_aggregation: sum
+
+      - name: BUDGET_AUTHORITY
+        description: >
+          Authorized budget for the period. Represents the maximum amount an
+          agency is authorized to obligate or spend.
+        synonyms:
+          - budget
+          - appropriation
+          - authorized amount
+          - budget limit
+        expr: BUDGET_AUTHORITY
+        data_type: NUMBER
+        default_aggregation: sum
+
+      - name: UNLIQUIDATED_OBLIGATIONS
+        description: >
+          Obligations that have not yet been paid (obligations minus expenditures).
+          High ULO at fiscal year-end is a risk indicator — funds may expire
+          if not disbursed.
+        synonyms:
+          - ULO
+          - unliquidated
+          - unpaid obligations
+          - outstanding commitments
+        expr: UNLIQUIDATED_OBLIGATIONS
+        data_type: NUMBER
+        default_aggregation: sum
+
+      - name: BURN_RATE_PCT
+        description: >
+          Percentage of budget authority that has been spent (expenditures / budget
+          authority * 100). Above 100% means over budget. Above 90% is a warning.
+        synonyms:
+          - burn rate
+          - spend rate
+          - utilization rate
+          - budget utilization
+        expr: BURN_RATE_PCT
+        data_type: NUMBER
+        default_aggregation: avg
+
+  # =========================================================================
+  # TABLE 2: Capital IT Investments (CIP)
+  # =========================================================================
+  - name: CIP_INVESTMENTS
+    description: >
+      Commonwealth Capital Investment Program (CIP) projects tracking IT
+      investments across state agencies. Includes planned budget, actual spend,
+      variance, and project status.
+    synonyms:
+      - capital investments
+      - CIP projects
+      - IT investments
+      - IT projects
+      - capital programs
+    base_table:
+      database: FEDERAL_FINANCIAL_DATA
+      schema: EOTSS_STAGING
+      table: V_CIP_INVESTMENTS
+
+    dimensions:
+      - name: PROJECT_ID
+        description: Unique identifier for the CIP project
+        expr: PROJECT_ID
+        data_type: VARCHAR
+        unique: true
+
+      - name: PROJECT_NAME
+        description: Name of the capital investment project
+        synonyms:
+          - project
+          - program name
+          - initiative
+        expr: PROJECT_NAME
+        data_type: VARCHAR
+        unique: true
+        sample_values:
+          - "MassIT Cloud Migration Phase 2"
+          - "EOTSS Cybersecurity Modernization"
+          - "1MAGIC ERP Upgrade"
+          - "MBTA Fare System Modernization"
+
+      - name: AGENCY_CODE
+        description: Agency responsible for the project
+        synonyms:
+          - agency
+          - owning agency
+        expr: AGENCY_CODE
+        data_type: VARCHAR
+        unique: false
+
+      - name: SECRETARIAT
+        description: Executive office overseeing the project
+        synonyms:
+          - secretariat
+          - executive office
+        expr: SECRETARIAT
+        data_type: VARCHAR
+        unique: false
+
+      - name: POLICY_AREA
+        description: Technology domain or policy area of the project
+        synonyms:
+          - category
+          - domain
+          - technology area
+        expr: POLICY_AREA
+        data_type: VARCHAR
+        unique: false
+        sample_values:
+          - "Cloud Infrastructure"
+          - "Cybersecurity"
+          - "Enterprise Systems"
+          - "Digital Services"
+          - "Health IT"
+
+      - name: PROJECT_STATUS
+        description: Current status of the project
+        synonyms:
+          - status
+          - phase
+        expr: PROJECT_STATUS
+        data_type: VARCHAR
+        unique: false
+        sample_values:
+          - "In Progress"
+          - "Planning"
+          - "Complete"
+
+      - name: FISCAL_YEAR_START
+        description: Fiscal year when the project started
+        expr: FISCAL_YEAR_START
+        data_type: VARCHAR
+        unique: false
+
+      - name: FISCAL_YEAR_END
+        description: Fiscal year when the project is expected to complete
+        expr: FISCAL_YEAR_END
+        data_type: VARCHAR
+        unique: false
+
+      - name: PROJECT_MANAGER
+        description: Name of the project manager
+        expr: PROJECT_MANAGER
+        data_type: VARCHAR
+        unique: false
+
+    time_dimensions:
+      - name: FISCAL_YEAR_START_DATE
+        description: Start date of the project's initial fiscal year
+        synonyms:
+          - start date
+          - project start
+        expr: FISCAL_YEAR_START_DATE
+        data_type: DATE
+        unique: false
+
+    measures:
+      - name: PLANNED_BUDGET
+        description: Total planned budget for the project across all fiscal years
+        synonyms:
+          - planned cost
+          - estimated budget
+          - project budget
+        expr: PLANNED_BUDGET
+        data_type: NUMBER
+        default_aggregation: sum
+
+      - name: ACTUAL_SPEND
+        description: Total actual spending to date on the project
+        synonyms:
+          - actual cost
+          - spent to date
+          - actual spending
+        expr: ACTUAL_SPEND
+        data_type: NUMBER
+        default_aggregation: sum
+
+      - name: VARIANCE_AMOUNT
+        description: >
+          Budget variance in dollars (actual - planned). Positive means over budget,
+          negative means under budget.
+        synonyms:
+          - variance
+          - budget variance
+          - over/under
+        expr: VARIANCE_AMOUNT
+        data_type: NUMBER
+        default_aggregation: sum
+
+      - name: VARIANCE_PCT
+        description: >
+          Budget variance as a percentage ((actual - planned) / planned * 100).
+          Positive means over budget.
+        synonyms:
+          - variance percent
+          - percent over budget
+        expr: VARIANCE_PCT
+        data_type: NUMBER
+        default_aggregation: avg
+
+      - name: PERCENT_COMPLETE
+        description: Estimated project completion percentage (0-100)
+        synonyms:
+          - completion
+          - progress
+          - percent done
+        expr: PERCENT_COMPLETE
+        data_type: NUMBER
+        default_aggregation: avg
+
+  # =========================================================================
+  # TABLE 3: Procurement Awards (Commbuys)
+  # =========================================================================
+  - name: PROCUREMENT_AWARDS
+    description: >
+      State procurement contracts and vendor awards from the Commbuys system.
+      Includes vendor name, award amount, category, and diversity set-aside
+      designations (MBE, WBE, Small Business).
+    synonyms:
+      - procurement
+      - contracts
+      - Commbuys
+      - vendor awards
+      - purchase orders
+      - RFPs
+    base_table:
+      database: FEDERAL_FINANCIAL_DATA
+      schema: EOTSS_STAGING
+      table: V_COMMBUYS_AWARDS
+
+    dimensions:
+      - name: AWARD_ID
+        description: Unique award identifier
+        expr: AWARD_ID
+        data_type: VARCHAR
+        unique: true
+
+      - name: CONTRACT_NUMBER
+        description: State contract or ITS number
+        synonyms:
+          - contract
+          - contract ID
+        expr: CONTRACT_NUMBER
+        data_type: VARCHAR
+        unique: false
+
+      - name: VENDOR_NAME
+        description: Name of the awarded vendor or contractor
+        synonyms:
+          - vendor
+          - contractor
+          - supplier
+          - company
+        expr: VENDOR_NAME
+        data_type: VARCHAR
+        unique: false
+        sample_values:
+          - "Deloitte Consulting LLP"
+          - "Accenture Federal Services"
+          - "Amazon Web Services Inc."
+          - "Microsoft Corporation"
+          - "CrowdStrike Inc."
+
+      - name: AGENCY_CODE
+        description: Agency that issued the procurement
+        synonyms:
+          - agency
+          - buying agency
+          - issuing agency
+        expr: AGENCY_CODE
+        data_type: VARCHAR
+        unique: false
+
+      - name: CATEGORY
+        description: Procurement category or commodity type
+        synonyms:
+          - type
+          - commodity
+          - service category
+          - procurement type
+        expr: CATEGORY
+        data_type: VARCHAR
+        unique: false
+        sample_values:
+          - "IT Services"
+          - "Cloud Infrastructure"
+          - "Cybersecurity"
+          - "Consulting"
+          - "Digital Services"
+          - "Health IT"
+          - "Enterprise Systems"
+
+      - name: SET_ASIDE
+        description: >
+          Diversity or small business set-aside designation.
+          MBE = Minority Business Enterprise, WBE = Women Business Enterprise.
+        synonyms:
+          - diversity designation
+          - small business
+          - MBE
+          - WBE
+          - set aside
+          - minority business
+          - women-owned
+        expr: SET_ASIDE
+        data_type: VARCHAR
+        unique: false
+        sample_values:
+          - "MBE"
+          - "WBE"
+          - "Small Business"
+
+      - name: DESCRIPTION
+        description: Brief description of the procurement scope
+        expr: DESCRIPTION
+        data_type: VARCHAR
+        unique: false
+
+    time_dimensions:
+      - name: AWARD_DATE
+        description: Date the award was made
+        synonyms:
+          - date awarded
+          - procurement date
+        expr: AWARD_DATE
+        data_type: DATE
+        unique: false
+
+    measures:
+      - name: AWARD_AMOUNT
+        description: Total dollar value of the procurement award
+        synonyms:
+          - contract value
+          - award value
+          - contract amount
+          - total contract
+        expr: AWARD_AMOUNT
+        data_type: NUMBER
+        default_aggregation: sum
+
+  # =========================================================================
+  # TABLE 4: Workforce Costs (CTHR)
+  # =========================================================================
+  - name: WORKFORCE_COSTS
+    description: >
+      Workforce data by agency from the Commonwealth's CTHR (human resources)
+      system. Includes position counts, salary obligations, filled positions,
+      and vacancy rates by job classification.
+    synonyms:
+      - workforce
+      - CTHR
+      - HR data
+      - personnel
+      - staffing
+      - headcount
+      - employees
+    base_table:
+      database: FEDERAL_FINANCIAL_DATA
+      schema: EOTSS_STAGING
+      table: V_CTHR_WORKFORCE
+
+    dimensions:
+      - name: AGENCY_CODE
+        description: Agency code for the workforce record
+        synonyms:
+          - agency
+          - department
+        expr: AGENCY_CODE
+        data_type: VARCHAR
+        unique: false
+
+      - name: AGENCY_NAME
+        description: Full name of the agency
+        synonyms:
+          - agency name
+          - department name
+        expr: AGENCY_NAME
+        data_type: VARCHAR
+        unique: false
+
+      - name: SECRETARIAT_ID
+        description: Executive office overseeing the agency
+        synonyms:
+          - secretariat
+          - executive office
+        expr: SECRETARIAT_ID
+        data_type: VARCHAR
+        unique: false
+
+      - name: JOB_CLASSIFICATION
+        description: Job classification or title category
+        synonyms:
+          - job title
+          - position type
+          - classification
+          - role
+        expr: JOB_CLASSIFICATION
+        data_type: VARCHAR
+        unique: false
+        sample_values:
+          - "IT Specialist"
+          - "Project Manager"
+          - "Health Professional"
+          - "Social Worker"
+          - "Sworn Officer"
+
+    time_dimensions:
+      - name: REPORTING_PERIOD_DATE
+        description: First day of the reporting period for this workforce snapshot
+        synonyms:
+          - reporting date
+          - period
+          - as of date
+        expr: REPORTING_PERIOD_DATE
+        data_type: DATE
+        unique: false
+
+    measures:
+      - name: POSITION_COUNT
+        description: Total authorized positions (funded headcount)
+        synonyms:
+          - positions
+          - authorized headcount
+          - FTE count
+          - total positions
+        expr: POSITION_COUNT
+        data_type: NUMBER
+        default_aggregation: sum
+
+      - name: FILLED_POSITIONS
+        description: Number of positions currently filled
+        synonyms:
+          - filled
+          - current headcount
+          - active employees
+        expr: FILLED_POSITIONS
+        data_type: NUMBER
+        default_aggregation: sum
+
+      - name: SALARY_OBLIGATIONS
+        description: Total salary obligations (payroll budget) for the period
+        synonyms:
+          - salaries
+          - payroll
+          - salary budget
+          - compensation
+          - personnel costs
+        expr: SALARY_OBLIGATIONS
+        data_type: NUMBER
+        default_aggregation: sum
+
+      - name: VACANCY_RATE
+        description: >
+          Percentage of authorized positions that are vacant
+          ((positions - filled) / positions * 100). High vacancy rates
+          may indicate hiring challenges or budget constraints.
+        synonyms:
+          - vacancies
+          - vacancy percentage
+          - unfilled rate
+          - hiring gap
+        expr: VACANCY_RATE
+        data_type: NUMBER
+        default_aggregation: avg
+
+# =============================================================================
+# RELATIONSHIPS
+# Cross-source joins via AGENCY_CODE
+# =============================================================================
+relationships:
+  - name: SPENDING_TO_CIP
+    left_table: SPENDING_BY_AGENCY
+    right_table: CIP_INVESTMENTS
+    relationship_columns:
+      - left_column: AGENCY_CODE
+        right_column: AGENCY_CODE
+    relationship_type: many_to_one
+    description: Links agency spending to capital investment projects for the same agency
+
+  - name: SPENDING_TO_WORKFORCE
+    left_table: SPENDING_BY_AGENCY
+    right_table: WORKFORCE_COSTS
+    relationship_columns:
+      - left_column: AGENCY_CODE
+        right_column: AGENCY_CODE
+    relationship_type: many_to_one
+    description: Links agency spending to workforce data for total cost analysis
+
+  - name: CIP_TO_PROCUREMENT
+    left_table: CIP_INVESTMENTS
+    right_table: PROCUREMENT_AWARDS
+    relationship_columns:
+      - left_column: AGENCY_CODE
+        right_column: AGENCY_CODE
+    relationship_type: one_to_many
+    description: Links capital projects to procurement awards for the same agency
+
+  - name: SPENDING_TO_PROCUREMENT
+    left_table: SPENDING_BY_AGENCY
+    right_table: PROCUREMENT_AWARDS
+    relationship_columns:
+      - left_column: AGENCY_CODE
+        right_column: AGENCY_CODE
+    relationship_type: many_to_many
+    description: Links agency spending to procurement awards for vendor analysis
+
+# =============================================================================
+# VERIFIED QUERIES
+# Known-answer pairs for the 5 demo scenarios
+# =============================================================================
+verified_queries:
+  # Scenario 1: Agency Spending Q&A
+  - name: "Total spending by secretariat FY2026"
+    question: "What is total spending by secretariat for FY2026?"
+    use_as_onboarding_question: true
+    sql: |
+      SELECT
+        s.SECRETARIAT_ID,
+        SUM(s.TOTAL_EXPENDITURES) AS total_spending,
+        SUM(s.TOTAL_OBLIGATIONS) AS total_obligations,
+        SUM(s.BUDGET_AUTHORITY) AS total_budget
+      FROM __SPENDING_BY_AGENCY s
+      WHERE s.FISCAL_YEAR_LABEL = 'FY2026'
+      GROUP BY s.SECRETARIAT_ID
+      ORDER BY total_spending DESC
+
+  - name: "EOTSS agency spending breakdown"
+    question: "Show me spending by agency within EOTSS"
+    use_as_onboarding_question: true
+    sql: |
+      SELECT
+        s.AGENCY_CODE,
+        s.AGENCY_NAME,
+        SUM(s.TOTAL_EXPENDITURES) AS total_spending,
+        SUM(s.BUDGET_AUTHORITY) AS total_budget,
+        AVG(s.BURN_RATE_PCT) AS avg_burn_rate
+      FROM __SPENDING_BY_AGENCY s
+      WHERE s.SECRETARIAT_ID = 'EOTSS'
+        AND s.FISCAL_YEAR_LABEL = 'FY2026'
+      GROUP BY s.AGENCY_CODE, s.AGENCY_NAME
+      ORDER BY total_spending DESC
+
+  - name: "General Fund vs Federal spending"
+    question: "Compare General Fund and Federal Fund spending across all agencies"
+    sql: |
+      SELECT
+        s.FUND_NAME,
+        SUM(s.TOTAL_EXPENDITURES) AS total_spending,
+        SUM(s.TOTAL_OBLIGATIONS) AS total_obligations
+      FROM __SPENDING_BY_AGENCY s
+      WHERE s.FISCAL_YEAR_LABEL = 'FY2026'
+      GROUP BY s.FUND_NAME
+      ORDER BY total_spending DESC
+
+  # Scenario 2: Anomaly Investigation
+  - name: "Agencies over budget"
+    question: "Which agencies are over budget?"
+    use_as_onboarding_question: true
+    sql: |
+      SELECT
+        s.AGENCY_CODE,
+        s.AGENCY_NAME,
+        s.FISCAL_PERIOD_DATE,
+        s.TOTAL_EXPENDITURES,
+        s.BUDGET_AUTHORITY,
+        s.BURN_RATE_PCT
+      FROM __SPENDING_BY_AGENCY s
+      WHERE s.BURN_RATE_PCT > 100
+      ORDER BY s.BURN_RATE_PCT DESC
+
+  - name: "High burn rate agencies"
+    question: "Show me agencies with burn rate above 90%"
+    use_as_onboarding_question: true
+    sql: |
+      SELECT
+        s.AGENCY_CODE,
+        s.AGENCY_NAME,
+        s.FISCAL_PERIOD_DATE,
+        s.FUND_NAME,
+        s.BURN_RATE_PCT,
+        s.TOTAL_EXPENDITURES,
+        s.BUDGET_AUTHORITY,
+        s.UNLIQUIDATED_OBLIGATIONS
+      FROM __SPENDING_BY_AGENCY s
+      WHERE s.BURN_RATE_PCT > 90
+      ORDER BY s.BURN_RATE_PCT DESC
+
+  - name: "ULO risk agencies"
+    question: "Which agencies have the highest unliquidated obligations?"
+    sql: |
+      SELECT
+        s.AGENCY_CODE,
+        s.AGENCY_NAME,
+        s.FISCAL_PERIOD_DATE,
+        SUM(s.UNLIQUIDATED_OBLIGATIONS) AS total_ulo,
+        SUM(s.TOTAL_OBLIGATIONS) AS total_obligations,
+        ROUND(SUM(s.UNLIQUIDATED_OBLIGATIONS) / NULLIF(SUM(s.TOTAL_OBLIGATIONS), 0) * 100, 2) AS ulo_pct
+      FROM __SPENDING_BY_AGENCY s
+      WHERE s.FISCAL_YEAR_LABEL = 'FY2026'
+      GROUP BY s.AGENCY_CODE, s.AGENCY_NAME, s.FISCAL_PERIOD_DATE
+      ORDER BY total_ulo DESC
+      LIMIT 10
+
+  # Scenario 3: CIP Project Analysis
+  - name: "Over-budget CIP projects"
+    question: "Which CIP projects are over budget?"
+    use_as_onboarding_question: true
+    sql: |
+      SELECT
+        c.PROJECT_NAME,
+        c.AGENCY_CODE,
+        c.SECRETARIAT,
+        c.PLANNED_BUDGET,
+        c.ACTUAL_SPEND,
+        c.VARIANCE_AMOUNT,
+        c.VARIANCE_PCT,
+        c.PERCENT_COMPLETE,
+        c.PROJECT_STATUS
+      FROM __CIP_INVESTMENTS c
+      WHERE c.VARIANCE_AMOUNT > 0
+      ORDER BY c.VARIANCE_AMOUNT DESC
+
+  - name: "CIP projects by policy area"
+    question: "What is the total investment by technology policy area?"
+    sql: |
+      SELECT
+        c.POLICY_AREA,
+        COUNT(*) AS project_count,
+        SUM(c.PLANNED_BUDGET) AS total_planned,
+        SUM(c.ACTUAL_SPEND) AS total_spent,
+        AVG(c.PERCENT_COMPLETE) AS avg_completion
+      FROM __CIP_INVESTMENTS c
+      GROUP BY c.POLICY_AREA
+      ORDER BY total_planned DESC
+
+  # Scenario 4: Procurement
+  - name: "Top vendors by award amount"
+    question: "Who are the top vendors by total contract value?"
+    sql: |
+      SELECT
+        p.VENDOR_NAME,
+        COUNT(*) AS award_count,
+        SUM(p.AWARD_AMOUNT) AS total_awarded
+      FROM __PROCUREMENT_AWARDS p
+      GROUP BY p.VENDOR_NAME
+      ORDER BY total_awarded DESC
+      LIMIT 10
+
+  - name: "Diversity procurement"
+    question: "How much has been awarded to MBE, WBE, and small businesses?"
+    sql: |
+      SELECT
+        p.SET_ASIDE,
+        COUNT(*) AS award_count,
+        SUM(p.AWARD_AMOUNT) AS total_awarded
+      FROM __PROCUREMENT_AWARDS p
+      WHERE p.SET_ASIDE IS NOT NULL
+      GROUP BY p.SET_ASIDE
+      ORDER BY total_awarded DESC
+
+  # Scenario 5: Cross-Source (Spending + Workforce)
+  - name: "Total cost per agency with salaries"
+    question: "What is the total cost per agency including salaries?"
+    use_as_onboarding_question: true
+    sql: |
+      SELECT
+        s.AGENCY_CODE,
+        s.AGENCY_NAME,
+        SUM(s.TOTAL_EXPENDITURES) AS operational_spending,
+        w.total_salary,
+        SUM(s.TOTAL_EXPENDITURES) + w.total_salary AS total_cost
+      FROM __SPENDING_BY_AGENCY s
+      JOIN (
+        SELECT AGENCY_CODE, SUM(SALARY_OBLIGATIONS) AS total_salary
+        FROM __WORKFORCE_COSTS
+        GROUP BY AGENCY_CODE
+      ) w ON s.AGENCY_CODE = w.AGENCY_CODE
+      WHERE s.FISCAL_YEAR_LABEL = 'FY2026'
+      GROUP BY s.AGENCY_CODE, s.AGENCY_NAME, w.total_salary
+      ORDER BY total_cost DESC
+
+  - name: "High vacancy agencies"
+    question: "Which agencies have the highest vacancy rates?"
+    sql: |
+      SELECT
+        w.AGENCY_CODE,
+        w.AGENCY_NAME,
+        w.JOB_CLASSIFICATION,
+        w.POSITION_COUNT,
+        w.FILLED_POSITIONS,
+        w.VACANCY_RATE,
+        w.SALARY_OBLIGATIONS
+      FROM __WORKFORCE_COSTS w
+      WHERE w.VACANCY_RATE > 15
+      ORDER BY w.VACANCY_RATE DESC
+
+  - name: "Cybersecurity workforce and spending"
+    question: "What is the cybersecurity workforce situation and spending?"
+    sql: |
+      SELECT
+        w.AGENCY_CODE,
+        w.AGENCY_NAME,
+        w.JOB_CLASSIFICATION,
+        w.POSITION_COUNT,
+        w.FILLED_POSITIONS,
+        w.VACANCY_RATE,
+        w.SALARY_OBLIGATIONS,
+        s.total_operational_spending
+      FROM __WORKFORCE_COSTS w
+      LEFT JOIN (
+        SELECT AGENCY_CODE, SUM(TOTAL_EXPENDITURES) AS total_operational_spending
+        FROM __SPENDING_BY_AGENCY
+        WHERE SECRETARIAT_ID = 'EOTSS' AND FISCAL_YEAR_LABEL = 'FY2026'
+        GROUP BY AGENCY_CODE
+      ) s ON w.AGENCY_CODE = s.AGENCY_CODE
+      WHERE w.SECRETARIAT_ID = 'EOTSS'
+      ORDER BY w.VACANCY_RATE DESC

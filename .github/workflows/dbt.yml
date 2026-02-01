@@ -1,0 +1,139 @@
+# =============================================================================
+# PRISM FinOps — dbt Build & Test
+# =============================================================================
+# Runs dbt seed, run, and test whenever dbt project files change.
+# Triggered on push to main when dbt_project/ files are modified.
+#
+# Target: FEDERAL_FINANCIAL_DATA.EOTSS_STAGING (Snowflake)
+# Profile: prism_finops (see dbt_project/profiles.yml)
+# =============================================================================
+
+name: dbt
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "dbt_project/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "dbt_project/**"
+  workflow_dispatch:
+    inputs:
+      dbt_command:
+        description: "dbt command to run (default: seed + run + test)"
+        required: false
+        default: "full"
+      target:
+        description: "dbt target profile (dev or prod)"
+        required: false
+        default: "dev"
+
+env:
+  SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+  SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+  SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+  SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE || 'PRISM_ADMIN_ROLE' }}
+  SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE || 'PRISM_APP_WH' }}
+  DBT_PROFILES_DIR: ./dbt_project
+
+jobs:
+  dbt:
+    name: dbt Seed / Run / Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    defaults:
+      run:
+        working-directory: dbt_project
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-dbt-${{ hashFiles('dbt_project/dbt_project.yml') }}
+          restore-keys: |
+            pip-dbt-
+
+      - name: Install dbt-snowflake
+        run: pip install dbt-snowflake~=1.8
+
+      - name: Verify dbt connection
+        run: dbt debug --target ${{ github.event.inputs.target || 'dev' }}
+
+      - name: Determine dbt target
+        id: target
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "target=${{ github.event.inputs.target }}" >> $GITHUB_OUTPUT
+            echo "command=${{ github.event.inputs.dbt_command }}" >> $GITHUB_OUTPUT
+          else
+            echo "target=dev" >> $GITHUB_OUTPUT
+            echo "command=full" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Install dbt packages
+        run: dbt deps --target ${{ steps.target.outputs.target }}
+        continue-on-error: true
+
+      - name: dbt seed
+        if: contains(fromJSON('["full", "seed"]'), steps.target.outputs.command)
+        run: dbt seed --target ${{ steps.target.outputs.target }}
+
+      - name: dbt run
+        if: contains(fromJSON('["full", "run"]'), steps.target.outputs.command)
+        run: dbt run --target ${{ steps.target.outputs.target }}
+
+      - name: dbt test
+        if: contains(fromJSON('["full", "test"]'), steps.target.outputs.command)
+        run: dbt test --target ${{ steps.target.outputs.target }}
+
+      - name: Upload dbt artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dbt-artifacts-${{ github.sha }}
+          path: |
+            dbt_project/target/manifest.json
+            dbt_project/target/run_results.json
+            dbt_project/target/catalog.json
+          retention-days: 30
+          if-no-files-found: ignore
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## dbt Run Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Parameter | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Target | ${{ steps.target.outputs.target }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Command | ${{ steps.target.outputs.command }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Database | FEDERAL_FINANCIAL_DATA |" >> $GITHUB_STEP_SUMMARY
+          echo "| Schema | EOTSS_STAGING |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -f target/run_results.json ]; then
+            echo "### Model Results" >> $GITHUB_STEP_SUMMARY
+            python3 -c "
+          import json
+          with open('target/run_results.json') as f:
+              data = json.load(f)
+          results = data.get('results', [])
+          counts = {}
+          for r in results:
+              s = r.get('status', 'unknown')
+              counts[s] = counts.get(s, 0) + 1
+          for status, count in sorted(counts.items()):
+              print(f'- **{status}**: {count}')
+          " >> $GITHUB_STEP_SUMMARY
+          fi

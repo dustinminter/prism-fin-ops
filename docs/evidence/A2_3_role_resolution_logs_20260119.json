@@ -1,0 +1,62 @@
+{
+  "collection_date": "2026-01-19T04:04:05.622068",
+  "evidence_id": "A2_3",
+  "session_log": [
+    {
+      "log_id": "69492692-9760-4ece-9d40-663b81643cbc",
+      "session_id": "5615528005926922",
+      "user_id": "TEST_DPH_ANALYST",
+      "email": "test_dph_analyst@mass.gov",
+      "agency_id": "DPH",
+      "secretariat_id": "HHS",
+      "snowflake_role": "AGENCY_DPH_ANALYST",
+      "established_at": "2026-01-19T02:02:55.381000"
+    },
+    {
+      "log_id": "5c1c6f86-a120-4995-bfa1-45f02310764d",
+      "session_id": "5615528005795890",
+      "user_id": "TEST_MASSIT_ANALYST",
+      "email": "test_massit_analyst@mass.gov",
+      "agency_id": "MASSIT",
+      "secretariat_id": "EOTSS",
+      "snowflake_role": "AGENCY_MASSIT_ANALYST",
+      "established_at": "2026-01-19T02:02:54.740000"
+    },
+    {
+      "log_id": "4e14eefe-5cf4-48d8-bfb5-a0ac15fdbf5b",
+      "session_id": "5615528005898254",
+      "user_id": "TEST_ITD_ANALYST",
+      "email": "test_itd_analyst@mass.gov",
+      "agency_id": "ITD",
+      "secretariat_id": "EOTSS",
+      "snowflake_role": "AGENCY_ITD_ANALYST",
+      "established_at": "2026-01-19T02:02:53.934000"
+    },
+    {
+      "log_id": "1192402d-cf20-4814-89e3-22520313fae1",
+      "session_id": "5615528005922830",
+      "user_id": "TEST_EOTSS_ANALYST",
+      "email": "test_eotss_analyst@mass.gov",
+      "agency_id": "EOTSS",
+      "secretariat_id": "EOTSS",
+      "snowflake_role": "EOTSS_FINOPS_ANALYST",
+      "established_at": "2026-01-19T02:02:53.352000"
+    },
+    {
+      "log_id": "2bf9993b-910f-4b79-b037-048e5e9c898b",
+      "session_id": "5615528005865490",
+      "user_id": "TEST_EOTSS_EXEC",
+      "email": "test_eotss_exec@mass.gov",
+      "agency_id": "EOTSS",
+      "secretariat_id": "EOTSS",
+      "snowflake_role": "EOTSS_EXECUTIVE",
+      "established_at": "2026-01-19T02:02:52.373000"
+    }
+  ],
+  "verification": {
+    "total_sessions": 5,
+    "unique_users": 5,
+    "role_attribution_complete": true,
+    "agency_attribution_complete": true
+  }
+}

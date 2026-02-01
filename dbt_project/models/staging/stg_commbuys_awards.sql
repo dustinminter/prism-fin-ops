@@ -1,0 +1,16 @@
+-- Staging view for Commbuys procurement awards
+-- Replaces EOTSS_STAGING.V_COMMBUYS_AWARDS
+SELECT
+    AWARD_ID,
+    CONTRACT_NUMBER,
+    VENDOR_NAME,
+    AGENCY_CODE,
+    AGENCY_NAME,
+    CATEGORY,
+    SET_ASIDE,
+    AWARD_DATE,
+    AWARD_AMOUNT,
+    CONTRACT_START_DATE,
+    CONTRACT_END_DATE,
+    DESCRIPTION
+FROM {{ source('eotss_poc', 'COMMBUYS_AWARDS') }}

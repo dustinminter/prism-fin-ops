@@ -1,0 +1,58 @@
+{
+  "collection_date": "2026-01-19T04:12:06.867317",
+  "evidence_id": "A5",
+  "scenarios": {
+    "A": {
+      "scenario_id": "TRIANGLE-A-001",
+      "description": "ITD Analyst queries ITD spending - should be allowed with isolation",
+      "user": "TEST_ITD_ANALYST",
+      "expected_decision": "ALLOWED",
+      "test_time": "2026-01-19T04:11:59.859594",
+      "pre_query_decision": "ALLOWED",
+      "policy_version": "1.0.0",
+      "agencies_in_results": [
+        "ITD"
+      ],
+      "isolation_verified": true,
+      "enforcement_logged": true,
+      "pass": true
+    },
+    "B": {
+      "scenario_id": "TRIANGLE-B-001",
+      "description": "ITD Analyst attempts cross-agency comparison - should be blocked",
+      "user": "TEST_ITD_ANALYST",
+      "expected_decision": "DENIED",
+      "test_time": "2026-01-19T04:12:03.906734",
+      "pre_query_decision": "DENIED",
+      "violated_clause": "5.1",
+      "denial_reason": "Cross-agency line-item data requires DSA",
+      "agencies_returned": [
+        "ITD"
+      ],
+      "massit_blocked": true,
+      "enforcement_logged": true,
+      "pass": true
+    },
+    "C": {
+      "scenario_id": "TRIANGLE-C-001",
+      "description": "Analyst attempts EXECUTIVE promotion - requires human review",
+      "user": "TEST_EOTSS_ANALYST",
+      "expected_decision": "GATED",
+      "test_time": "2026-01-19T04:12:05.424480",
+      "trust_ceiling": "CLIENT",
+      "hitl_required": true,
+      "promotion_decision": "GATED",
+      "required_approver": "EOTSS_EXECUTIVE",
+      "approval_logged": true,
+      "approver_id": "TEST_EOTSS_EXEC",
+      "pass": true
+    }
+  },
+  "summary": {
+    "scenario_a_pass": true,
+    "scenario_b_pass": true,
+    "scenario_c_pass": true,
+    "all_pass": true,
+    "triangle_closed": true
+  }
+}

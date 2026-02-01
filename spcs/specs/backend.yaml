@@ -1,0 +1,42 @@
+# ============================================================================
+# PRISM FinOps - Backend Service Specification
+# ============================================================================
+
+spec:
+  containers:
+    - name: backend
+      image: /prism_spcs/app/images/backend:latest
+      env:
+        NODE_ENV: production
+        PORT: "3000"
+        # Snowflake connection (uses auto-provisioned token)
+        # These are auto-injected by SPCS at runtime
+        # SNOWFLAKE_ACCOUNT: <auto-injected>
+        # SNOWFLAKE_HOST: <auto-injected>
+        SNOWFLAKE_DATABASE: FEDERAL_FINANCIAL_DATA
+        SNOWFLAKE_SCHEMA: USASPENDING
+        SNOWFLAKE_WAREHOUSE: PRISM_APP_WH
+        # Governance database
+        SNOWFLAKE_GOVERNANCE_SCHEMA: GOVERNANCE
+        # Analytics database
+        SNOWFLAKE_ANALYTICS_SCHEMA: ANALYTICS
+      resources:
+        requests:
+          cpu: 0.5
+          memory: 512Mi
+        limits:
+          cpu: 2
+          memory: 2Gi
+      readinessProbe:
+        port: 3000
+        path: /api/health
+
+  endpoints:
+    - name: api
+      port: 3000
+      protocol: HTTP
+
+  serviceRoles:
+    - name: backend_access
+      endpoints:
+        - api

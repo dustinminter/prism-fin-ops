@@ -1,0 +1,124 @@
+# =============================================================================
+# PRISM FinOps — Deploy to Snowpark Container Services (SPCS)
+# =============================================================================
+# Manual workflow to build Docker images (backend, frontend, router) and push
+# them to the Snowflake image registry for SPCS deployment.
+#
+# After images are pushed, the SPCS service specs must be applied in Snowsight
+# or via the Snowflake CLI — CREATE SERVICE / ALTER SERVICE statements cannot
+# run from GitHub Actions.
+#
+# Prerequisites:
+#   - Snowflake CLI (snow) installed on the runner
+#   - Repository secrets configured (see below)
+#   - SPCS infrastructure already provisioned (see spcs/sql/01-infrastructure.sql)
+# =============================================================================
+
+name: Deploy SPCS
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Image tag (e.g. latest, v1.2.0)"
+        required: false
+        default: "latest"
+      components:
+        description: "Components to build (all, backend, frontend, router)"
+        required: false
+        default: "all"
+
+env:
+  SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+  SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+  SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+  IMAGE_REGISTRY: "${{ secrets.SNOWFLAKE_ACCOUNT }}.registry.snowflakecomputing.com"
+  IMAGE_REPO: "prism_spcs/app/images"
+  TAG: ${{ github.event.inputs.tag }}
+
+jobs:
+  build-and-push:
+    name: Build & Push Docker Images
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Snowflake CLI
+        uses: Snowflake-Labs/snowflake-cli-action@v1
+        with:
+          default-config-file-path: ""
+
+      - name: Configure Snowflake CLI connection
+        run: |
+          mkdir -p ~/.snowflake
+          cat > ~/.snowflake/connections.toml << 'TOML'
+          [prism]
+          account = "${{ secrets.SNOWFLAKE_ACCOUNT }}"
+          user = "${{ secrets.SNOWFLAKE_USER }}"
+          password = "${{ secrets.SNOWFLAKE_PASSWORD }}"
+          warehouse = "PRISM_APP_WH"
+          database = "PRISM_SPCS"
+          role = "PRISM_ADMIN_ROLE"
+          TOML
+
+      - name: Login to Snowflake image registry
+        run: |
+          snow spcs image-registry login -c prism
+
+      - name: Build backend image
+        if: contains(fromJSON('["all", "backend"]'), github.event.inputs.components)
+        run: |
+          docker build \
+            -t "${IMAGE_REGISTRY}/${IMAGE_REPO}/backend:${TAG}" \
+            -f spcs/docker/backend.Dockerfile \
+            --platform linux/amd64 \
+            .
+
+      - name: Build frontend image
+        if: contains(fromJSON('["all", "frontend"]'), github.event.inputs.components)
+        run: |
+          docker build \
+            -t "${IMAGE_REGISTRY}/${IMAGE_REPO}/frontend:${TAG}" \
+            -f spcs/docker/frontend.Dockerfile \
+            --platform linux/amd64 \
+            .
+
+      - name: Build router image
+        if: contains(fromJSON('["all", "router"]'), github.event.inputs.components)
+        run: |
+          docker build \
+            -t "${IMAGE_REGISTRY}/${IMAGE_REPO}/router:${TAG}" \
+            -f spcs/docker/router.Dockerfile \
+            --platform linux/amd64 \
+            .
+
+      - name: Push backend image
+        if: contains(fromJSON('["all", "backend"]'), github.event.inputs.components)
+        run: |
+          docker push "${IMAGE_REGISTRY}/${IMAGE_REPO}/backend:${TAG}"
+
+      - name: Push frontend image
+        if: contains(fromJSON('["all", "frontend"]'), github.event.inputs.components)
+        run: |
+          docker push "${IMAGE_REGISTRY}/${IMAGE_REPO}/frontend:${TAG}"
+
+      - name: Push router image
+        if: contains(fromJSON('["all", "router"]'), github.event.inputs.components)
+        run: |
+          docker push "${IMAGE_REGISTRY}/${IMAGE_REPO}/router:${TAG}"
+
+      - name: Summary
+        run: |
+          echo "## SPCS Image Push Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Component | Image | Tag |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----------|-------|-----|" >> $GITHUB_STEP_SUMMARY
+          echo "| Backend  | \`${IMAGE_REGISTRY}/${IMAGE_REPO}/backend\`  | \`${TAG}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| Frontend | \`${IMAGE_REGISTRY}/${IMAGE_REPO}/frontend\` | \`${TAG}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| Router   | \`${IMAGE_REGISTRY}/${IMAGE_REPO}/router\`   | \`${TAG}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "> **Next step:** Apply service specs in Snowsight or via \`snow spcs service create\`." >> $GITHUB_STEP_SUMMARY
+          echo "> See \`spcs/sql/02-deploy-services.sql\` for the service definitions." >> $GITHUB_STEP_SUMMARY

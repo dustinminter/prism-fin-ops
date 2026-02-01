@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GitHub Theme Color Palettes</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 40px; background: #e5e5e5; margin: 0; }
+    h1 { color: #1f2328; margin-bottom: 8px; text-align: center; }
+    .subtitle { color: #656d76; text-align: center; margin-bottom: 40px; }
+    .container { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 1200px; margin: 0 auto; }
+    .theme { padding: 32px; border-radius: 16px; }
+    .theme.light { background: #ffffff; border: 1px solid #d0d7de; }
+    .theme.dark { background: #0d1117; border: 1px solid #30363d; }
+    .theme-title { font-size: 20px; font-weight: 600; margin-bottom: 24px; }
+    .theme.light .theme-title { color: #1f2328; }
+    .theme.dark .theme-title { color: #e6edf3; }
+    h2 { font-size: 11px; font-weight: 600; margin-top: 24px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .theme.light h2 { color: #656d76; }
+    .theme.dark h2 { color: #8b949e; }
+    .color-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .swatch { width: 48px; height: 48px; border-radius: 8px; flex-shrink: 0; }
+    .theme.light .swatch { border: 1px solid #d0d7de; }
+    .theme.dark .swatch { border: 1px solid #30363d; }
+    .info { display: flex; flex-direction: column; min-width: 0; }
+    .hex { font-family: ui-monospace, SFMono-Regular, monospace; font-size: 13px; font-weight: 500; }
+    .theme.light .hex { color: #1f2328; }
+    .theme.dark .hex { color: #e6edf3; }
+    .label { font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .theme.light .label { color: #656d76; }
+    .theme.dark .label { color: #8b949e; }
+    .section { margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+  <h1>GitHub Theme Color Palettes</h1>
+  <p class="subtitle">Light Theme vs Dark Theme - Side by Side Comparison</p>
+
+  <div class="container">
+    <!-- Light Theme -->
+    <div class="theme light">
+      <div class="theme-title">Light Theme</div>
+
+      <div class="section">
+        <h2>Backgrounds</h2>
+        <div class="color-row">
+          <div class="swatch" style="background: #ffffff;"></div>
+          <div class="info"><span class="hex">#ffffff</span><span class="label">Canvas default</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #f6f8fa;"></div>
+          <div class="info"><span class="hex">#f6f8fa</span><span class="label">Canvas subtle</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #f3f4f6;"></div>
+          <div class="info"><span class="hex">#f3f4f6</span><span class="label">Canvas inset</span></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Borders</h2>
+        <div class="color-row">
+          <div class="swatch" style="background: #d0d7de;"></div>
+          <div class="info"><span class="hex">#d0d7de</span><span class="label">Border default</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #afb8c1;"></div>
+          <div class="info"><span class="hex">#afb8c1</span><span class="label">Border muted</span></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Text</h2>
+        <div class="color-row">
+          <div class="swatch" style="background: #1f2328;"></div>
+          <div class="info"><span class="hex">#1f2328</span><span class="label">Foreground default</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #656d76;"></div>
+          <div class="info"><span class="hex">#656d76</span><span class="label">Foreground muted</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #8b949e;"></div>
+          <div class="info"><span class="hex">#8b949e</span><span class="label">Foreground subtle</span></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Accent</h2>
+        <div class="color-row">
+          <div class="swatch" style="background: #0969da;"></div>
+          <div class="info"><span class="hex">#0969da</span><span class="label">Accent emphasis</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #54aeff;"></div>
+          <div class="info"><span class="hex">#54aeff</span><span class="label">Accent fg</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #ddf4ff;"></div>
+          <div class="info"><span class="hex">#ddf4ff</span><span class="label">Accent subtle</span></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Success</h2>
+        <div class="color-row">
+          <div class="swatch" style="background: #1a7f37;"></div>
+          <div class="info"><span class="hex">#1a7f37</span><span class="label">Success emphasis</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #1f883d;"></div>
+          <div class="info"><span class="hex">#1f883d</span><span class="label">Success fg</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #dafbe1;"></div>
+          <div class="info"><span class="hex">#dafbe1</span><span class="label">Success subtle</span></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Warning</h2>
+        <div class="color-row">
+          <div class="swatch" style="background: #bf8700;"></div>
+          <div class="info"><span class="hex">#bf8700</span><span class="label">Attention emphasis</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #9a6700;"></div>
+          <div class="info"><span class="hex">#9a6700</span><span class="label">Attention fg</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #fff8c5;"></div>
+          <div class="info"><span class="hex">#fff8c5</span><span class="label">Attention subtle</span></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Danger</h2>
+        <div class="color-row">
+          <div class="swatch" style="background: #cf222e;"></div>
+          <div class="info"><span class="hex">#cf222e</span><span class="label">Danger emphasis</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #d1242f;"></div>
+          <div class="info"><span class="hex">#d1242f</span><span class="label">Danger fg</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #ffebe9;"></div>
+          <div class="info"><span class="hex">#ffebe9</span><span class="label">Danger subtle</span></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Done / Purple</h2>
+        <div class="color-row">
+          <div class="swatch" style="background: #8250df;"></div>
+          <div class="info"><span class="hex">#8250df</span><span class="label">Done emphasis</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #8250df;"></div>
+          <div class="info"><span class="hex">#8250df</span><span class="label">Done fg</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #fbefff;"></div>
+          <div class="info"><span class="hex">#fbefff</span><span class="label">Done subtle</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dark Theme -->
+    <div class="theme dark">
+      <div class="theme-title">Dark Theme</div>
+
+      <div class="section">
+        <h2>Backgrounds</h2>
+        <div class="color-row">
+          <div class="swatch" style="background: #0d1117;"></div>
+          <div class="info"><span class="hex">#0d1117</span><span class="label">Canvas default</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #161b22;"></div>
+          <div class="info"><span class="hex">#161b22</span><span class="label">Canvas subtle</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #010409;"></div>
+          <div class="info"><span class="hex">#010409</span><span class="label">Canvas inset</span></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Borders</h2>
+        <div class="color-row">
+          <div class="swatch" style="background: #30363d;"></div>
+          <div class="info"><span class="hex">#30363d</span><span class="label">Border default</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #21262d;"></div>
+          <div class="info"><span class="hex">#21262d</span><span class="label">Border muted</span></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Text</h2>
+        <div class="color-row">
+          <div class="swatch" style="background: #e6edf3;"></div>
+          <div class="info"><span class="hex">#e6edf3</span><span class="label">Foreground default</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #8b949e;"></div>
+          <div class="info"><span class="hex">#8b949e</span><span class="label">Foreground muted</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #6e7681;"></div>
+          <div class="info"><span class="hex">#6e7681</span><span class="label">Foreground subtle</span></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Accent</h2>
+        <div class="color-row">
+          <div class="swatch" style="background: #1f6feb;"></div>
+          <div class="info"><span class="hex">#1f6feb</span><span class="label">Accent emphasis</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #58a6ff;"></div>
+          <div class="info"><span class="hex">#58a6ff</span><span class="label">Accent fg</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #388bfd26;"></div>
+          <div class="info"><span class="hex">#388bfd26</span><span class="label">Accent subtle</span></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Success</h2>
+        <div class="color-row">
+          <div class="swatch" style="background: #238636;"></div>
+          <div class="info"><span class="hex">#238636</span><span class="label">Success emphasis</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #3fb950;"></div>
+          <div class="info"><span class="hex">#3fb950</span><span class="label">Success fg</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #2ea04326;"></div>
+          <div class="info"><span class="hex">#2ea04326</span><span class="label">Success subtle</span></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Warning</h2>
+        <div class="color-row">
+          <div class="swatch" style="background: #9e6a03;"></div>
+          <div class="info"><span class="hex">#9e6a03</span><span class="label">Attention emphasis</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #d29922;"></div>
+          <div class="info"><span class="hex">#d29922</span><span class="label">Attention fg</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #bb800926;"></div>
+          <div class="info"><span class="hex">#bb800926</span><span class="label">Attention subtle</span></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Danger</h2>
+        <div class="color-row">
+          <div class="swatch" style="background: #da3633;"></div>
+          <div class="info"><span class="hex">#da3633</span><span class="label">Danger emphasis</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #f85149;"></div>
+          <div class="info"><span class="hex">#f85149</span><span class="label">Danger fg</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #f8514926;"></div>
+          <div class="info"><span class="hex">#f8514926</span><span class="label">Danger subtle</span></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Done / Purple</h2>
+        <div class="color-row">
+          <div class="swatch" style="background: #8957e5;"></div>
+          <div class="info"><span class="hex">#8957e5</span><span class="label">Done emphasis</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #a371f7;"></div>
+          <div class="info"><span class="hex">#a371f7</span><span class="label">Done fg</span></div>
+        </div>
+        <div class="color-row">
+          <div class="swatch" style="background: #8957e526;"></div>
+          <div class="info"><span class="hex">#8957e526</span><span class="label">Done subtle</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UI Components Section -->
+  <h1 style="margin-top: 60px;">UI Components</h1>
+  <p class="subtitle">Common components styled with each theme</p>
+
+  <div class="container">
+    <!-- Light Theme Components -->
+    <div class="theme light">
+      <div class="theme-title">Light Theme Components</div>
+
+      <div class="section">
+        <h2>Buttons</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
+          <button style="background: #0969da; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; cursor: pointer;">Primary</button>
+          <button style="background: #f6f8fa; color: #1f2328; border: 1px solid #d0d7de; padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; cursor: pointer;">Secondary</button>
+          <button style="background: #1a7f37; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; cursor: pointer;">Success</button>
+          <button style="background: #cf222e; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; cursor: pointer;">Danger</button>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <button style="background: transparent; color: #0969da; border: 1px solid #0969da; padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; cursor: pointer;">Outline</button>
+          <button style="background: transparent; color: #656d76; border: none; padding: 8px 16px; border-radius: 6px; font-size: 14px; cursor: pointer;">Ghost</button>
+          <button style="background: #d0d7de; color: #656d76; border: none; padding: 8px 16px; border-radius: 6px; font-size: 14px; cursor: not-allowed; opacity: 0.6;">Disabled</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Inputs</h2>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <input type="text" placeholder="Default input" style="background: #f6f8fa; border: 1px solid #d0d7de; padding: 8px 12px; border-radius: 6px; font-size: 14px; color: #1f2328; outline: none;">
+          <input type="text" placeholder="Focused input" style="background: #ffffff; border: 1px solid #0969da; padding: 8px 12px; border-radius: 6px; font-size: 14px; color: #1f2328; outline: none; box-shadow: 0 0 0 3px rgba(9,105,218,0.15);">
+          <input type="text" placeholder="Error input" style="background: #ffffff; border: 1px solid #cf222e; padding: 8px 12px; border-radius: 6px; font-size: 14px; color: #1f2328; outline: none;">
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Badges</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <span style="background: #ddf4ff; color: #0969da; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">Default</span>
+          <span style="background: #dafbe1; color: #1a7f37; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">Success</span>
+          <span style="background: #fff8c5; color: #9a6700; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">Warning</span>
+          <span style="background: #ffebe9; color: #cf222e; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">Danger</span>
+          <span style="background: #fbefff; color: #8250df; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">Purple</span>
+          <span style="background: #f6f8fa; color: #656d76; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; border: 1px solid #d0d7de;">Outline</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Alerts</h2>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="background: #ddf4ff; border: 1px solid #54aeff; border-radius: 6px; padding: 12px 16px;">
+            <div style="font-weight: 600; color: #0969da; font-size: 14px; margin-bottom: 4px;">Info</div>
+            <div style="color: #0969da; font-size: 13px;">This is an informational message.</div>
+          </div>
+          <div style="background: #dafbe1; border: 1px solid #1f883d; border-radius: 6px; padding: 12px 16px;">
+            <div style="font-weight: 600; color: #1a7f37; font-size: 14px; margin-bottom: 4px;">Success</div>
+            <div style="color: #1a7f37; font-size: 13px;">Operation completed successfully.</div>
+          </div>
+          <div style="background: #fff8c5; border: 1px solid #bf8700; border-radius: 6px; padding: 12px 16px;">
+            <div style="font-weight: 600; color: #9a6700; font-size: 14px; margin-bottom: 4px;">Warning</div>
+            <div style="color: #9a6700; font-size: 13px;">Please review before proceeding.</div>
+          </div>
+          <div style="background: #ffebe9; border: 1px solid #cf222e; border-radius: 6px; padding: 12px 16px;">
+            <div style="font-weight: 600; color: #cf222e; font-size: 14px; margin-bottom: 4px;">Error</div>
+            <div style="color: #cf222e; font-size: 13px;">Something went wrong.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Card</h2>
+        <div style="background: #ffffff; border: 1px solid #d0d7de; border-radius: 8px; padding: 16px; box-shadow: 0 1px 3px rgba(31,35,40,0.04);">
+          <div style="font-weight: 600; color: #1f2328; font-size: 16px; margin-bottom: 8px;">Card Title</div>
+          <div style="color: #656d76; font-size: 14px; margin-bottom: 12px;">This is a card component with some descriptive text content.</div>
+          <div style="display: flex; gap: 8px;">
+            <button style="background: #0969da; color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 13px; cursor: pointer;">Action</button>
+            <button style="background: transparent; color: #656d76; border: none; padding: 6px 12px; border-radius: 6px; font-size: 13px; cursor: pointer;">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Tabs</h2>
+        <div style="display: flex; background: #d0d7de; border-radius: 6px; padding: 4px;">
+          <button style="background: #0969da; color: white; border: none; padding: 6px 16px; border-radius: 4px; font-size: 13px; cursor: pointer;">Active</button>
+          <button style="background: transparent; color: #656d76; border: none; padding: 6px 16px; border-radius: 4px; font-size: 13px; cursor: pointer;">Inactive</button>
+          <button style="background: transparent; color: #656d76; border: none; padding: 6px 16px; border-radius: 4px; font-size: 13px; cursor: pointer;">Inactive</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Table</h2>
+        <div style="border: 1px solid #d0d7de; border-radius: 8px; overflow: hidden;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+            <thead>
+              <tr style="background: #f6f8fa;">
+                <th style="text-align: left; padding: 10px 12px; color: #656d76; font-weight: 600; border-bottom: 1px solid #d0d7de;">Name</th>
+                <th style="text-align: left; padding: 10px 12px; color: #656d76; font-weight: 600; border-bottom: 1px solid #d0d7de;">Status</th>
+                <th style="text-align: right; padding: 10px 12px; color: #656d76; font-weight: 600; border-bottom: 1px solid #d0d7de;">Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding: 10px 12px; color: #1f2328; border-bottom: 1px solid #d0d7de;">Item One</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid #d0d7de;"><span style="background: #dafbe1; color: #1a7f37; padding: 2px 8px; border-radius: 10px; font-size: 11px;">Active</span></td>
+                <td style="padding: 10px 12px; color: #1f2328; text-align: right; border-bottom: 1px solid #d0d7de;">$1,234</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px; color: #1f2328; border-bottom: 1px solid #d0d7de;">Item Two</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid #d0d7de;"><span style="background: #fff8c5; color: #9a6700; padding: 2px 8px; border-radius: 10px; font-size: 11px;">Pending</span></td>
+                <td style="padding: 10px 12px; color: #1f2328; text-align: right; border-bottom: 1px solid #d0d7de;">$5,678</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px; color: #1f2328;">Item Three</td>
+                <td style="padding: 10px 12px;"><span style="background: #ffebe9; color: #cf222e; padding: 2px 8px; border-radius: 10px; font-size: 11px;">Error</span></td>
+                <td style="padding: 10px 12px; color: #1f2328; text-align: right;">$910</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dark Theme Components -->
+    <div class="theme dark">
+      <div class="theme-title">Dark Theme Components</div>
+
+      <div class="section">
+        <h2>Buttons</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
+          <button style="background: #1f6feb; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; cursor: pointer;">Primary</button>
+          <button style="background: #21262d; color: #e6edf3; border: 1px solid #30363d; padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; cursor: pointer;">Secondary</button>
+          <button style="background: #238636; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; cursor: pointer;">Success</button>
+          <button style="background: #da3633; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; cursor: pointer;">Danger</button>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <button style="background: transparent; color: #58a6ff; border: 1px solid #58a6ff; padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; cursor: pointer;">Outline</button>
+          <button style="background: transparent; color: #8b949e; border: none; padding: 8px 16px; border-radius: 6px; font-size: 14px; cursor: pointer;">Ghost</button>
+          <button style="background: #30363d; color: #8b949e; border: none; padding: 8px 16px; border-radius: 6px; font-size: 14px; cursor: not-allowed; opacity: 0.6;">Disabled</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Inputs</h2>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <input type="text" placeholder="Default input" style="background: #0d1117; border: 1px solid #30363d; padding: 8px 12px; border-radius: 6px; font-size: 14px; color: #e6edf3; outline: none;">
+          <input type="text" placeholder="Focused input" style="background: #0d1117; border: 1px solid #58a6ff; padding: 8px 12px; border-radius: 6px; font-size: 14px; color: #e6edf3; outline: none; box-shadow: 0 0 0 3px rgba(56,139,253,0.15);">
+          <input type="text" placeholder="Error input" style="background: #0d1117; border: 1px solid #f85149; padding: 8px 12px; border-radius: 6px; font-size: 14px; color: #e6edf3; outline: none;">
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Badges</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <span style="background: rgba(56,139,253,0.15); color: #58a6ff; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">Default</span>
+          <span style="background: rgba(46,160,67,0.15); color: #3fb950; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">Success</span>
+          <span style="background: rgba(187,128,9,0.15); color: #d29922; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">Warning</span>
+          <span style="background: rgba(248,81,73,0.15); color: #f85149; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">Danger</span>
+          <span style="background: rgba(137,87,229,0.15); color: #a371f7; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">Purple</span>
+          <span style="background: transparent; color: #8b949e; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; border: 1px solid #30363d;">Outline</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Alerts</h2>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="background: rgba(56,139,253,0.15); border: 1px solid rgba(56,139,253,0.4); border-radius: 6px; padding: 12px 16px;">
+            <div style="font-weight: 600; color: #58a6ff; font-size: 14px; margin-bottom: 4px;">Info</div>
+            <div style="color: #58a6ff; font-size: 13px;">This is an informational message.</div>
+          </div>
+          <div style="background: rgba(46,160,67,0.15); border: 1px solid rgba(46,160,67,0.4); border-radius: 6px; padding: 12px 16px;">
+            <div style="font-weight: 600; color: #3fb950; font-size: 14px; margin-bottom: 4px;">Success</div>
+            <div style="color: #3fb950; font-size: 13px;">Operation completed successfully.</div>
+          </div>
+          <div style="background: rgba(187,128,9,0.15); border: 1px solid rgba(187,128,9,0.4); border-radius: 6px; padding: 12px 16px;">
+            <div style="font-weight: 600; color: #d29922; font-size: 14px; margin-bottom: 4px;">Warning</div>
+            <div style="color: #d29922; font-size: 13px;">Please review before proceeding.</div>
+          </div>
+          <div style="background: rgba(248,81,73,0.15); border: 1px solid rgba(248,81,73,0.4); border-radius: 6px; padding: 12px 16px;">
+            <div style="font-weight: 600; color: #f85149; font-size: 14px; margin-bottom: 4px;">Error</div>
+            <div style="color: #f85149; font-size: 13px;">Something went wrong.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Card</h2>
+        <div style="background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 16px;">
+          <div style="font-weight: 600; color: #e6edf3; font-size: 16px; margin-bottom: 8px;">Card Title</div>
+          <div style="color: #8b949e; font-size: 14px; margin-bottom: 12px;">This is a card component with some descriptive text content.</div>
+          <div style="display: flex; gap: 8px;">
+            <button style="background: #1f6feb; color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 13px; cursor: pointer;">Action</button>
+            <button style="background: transparent; color: #8b949e; border: none; padding: 6px 12px; border-radius: 6px; font-size: 13px; cursor: pointer;">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Tabs</h2>
+        <div style="display: flex; background: #21262d; border-radius: 6px; padding: 4px;">
+          <button style="background: #1f6feb; color: white; border: none; padding: 6px 16px; border-radius: 4px; font-size: 13px; cursor: pointer;">Active</button>
+          <button style="background: transparent; color: #8b949e; border: none; padding: 6px 16px; border-radius: 4px; font-size: 13px; cursor: pointer;">Inactive</button>
+          <button style="background: transparent; color: #8b949e; border: none; padding: 6px 16px; border-radius: 4px; font-size: 13px; cursor: pointer;">Inactive</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Table</h2>
+        <div style="border: 1px solid #30363d; border-radius: 8px; overflow: hidden;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+            <thead>
+              <tr style="background: #161b22;">
+                <th style="text-align: left; padding: 10px 12px; color: #8b949e; font-weight: 600; border-bottom: 1px solid #30363d;">Name</th>
+                <th style="text-align: left; padding: 10px 12px; color: #8b949e; font-weight: 600; border-bottom: 1px solid #30363d;">Status</th>
+                <th style="text-align: right; padding: 10px 12px; color: #8b949e; font-weight: 600; border-bottom: 1px solid #30363d;">Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding: 10px 12px; color: #e6edf3; border-bottom: 1px solid #21262d;">Item One</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid #21262d;"><span style="background: rgba(46,160,67,0.15); color: #3fb950; padding: 2px 8px; border-radius: 10px; font-size: 11px;">Active</span></td>
+                <td style="padding: 10px 12px; color: #e6edf3; text-align: right; border-bottom: 1px solid #21262d;">$1,234</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px; color: #e6edf3; border-bottom: 1px solid #21262d;">Item Two</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid #21262d;"><span style="background: rgba(187,128,9,0.15); color: #d29922; padding: 2px 8px; border-radius: 10px; font-size: 11px;">Pending</span></td>
+                <td style="padding: 10px 12px; color: #e6edf3; text-align: right; border-bottom: 1px solid #21262d;">$5,678</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px; color: #e6edf3;">Item Three</td>
+                <td style="padding: 10px 12px;"><span style="background: rgba(248,81,73,0.15); color: #f85149; padding: 2px 8px; border-radius: 10px; font-size: 11px;">Error</span></td>
+                <td style="padding: 10px 12px; color: #e6edf3; text-align: right;">$910</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

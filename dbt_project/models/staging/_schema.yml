@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: stg_ciw_spending
+    description: CIW spending data with computed ULO and burn rate
+    columns:
+      - name: RECORD_ID
+        tests:
+          - not_null
+      - name: BURN_RATE_PCT
+        description: Expenditures / Budget Authority * 100 (capped at 999.99%)
+
+  - name: stg_cip_investments
+    description: CIP investment data with computed variance
+    columns:
+      - name: PROJECT_ID
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_commbuys_awards
+    description: Commbuys procurement awards
+    columns:
+      - name: AWARD_ID
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_cthr_workforce
+    description: CTHR workforce data
+    columns:
+      - name: RECORD_ID
+        tests:
+          - not_null

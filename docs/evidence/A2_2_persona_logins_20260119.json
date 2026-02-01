@@ -1,0 +1,82 @@
+{
+  "collection_date": "2026-01-19T04:02:56.040823",
+  "evidence_id": "A2_2",
+  "persona_logins": [
+    {
+      "username": "TEST_EOTSS_EXEC",
+      "expected_role": "EOTSS_EXECUTIVE",
+      "agency_id": "EOTSS",
+      "secretariat_id": "EOTSS",
+      "test_time": "2026-01-19T04:02:25.947186",
+      "actual_role": "EOTSS_EXECUTIVE",
+      "role_match": true,
+      "current_user": "TEST_EOTSS_EXEC",
+      "session_id": "5615528005865490",
+      "database_access": false,
+      "access_error": "002003 (42S02): SQL compilation error:\nObject 'SECRETARIAT_AGENCIES' does not exist or not authorize",
+      "login_success": true
+    },
+    {
+      "username": "TEST_EOTSS_ANALYST",
+      "expected_role": "EOTSS_FINOPS_ANALYST",
+      "agency_id": "EOTSS",
+      "secretariat_id": "EOTSS",
+      "test_time": "2026-01-19T04:02:30.496497",
+      "actual_role": "EOTSS_FINOPS_ANALYST",
+      "role_match": true,
+      "current_user": "TEST_EOTSS_ANALYST",
+      "session_id": "5615528005922830",
+      "database_access": false,
+      "access_error": "002003 (42S02): SQL compilation error:\nObject 'SECRETARIAT_AGENCIES' does not exist or not authorize",
+      "login_success": true
+    },
+    {
+      "username": "TEST_ITD_ANALYST",
+      "expected_role": "AGENCY_ITD_ANALYST",
+      "agency_id": "ITD",
+      "secretariat_id": "EOTSS",
+      "test_time": "2026-01-19T04:02:35.825875",
+      "actual_role": "AGENCY_ITD_ANALYST",
+      "role_match": true,
+      "current_user": "TEST_ITD_ANALYST",
+      "session_id": "5615528005898254",
+      "database_access": false,
+      "access_error": "002003 (42S02): SQL compilation error:\nObject 'SECRETARIAT_AGENCIES' does not exist or not authorize",
+      "login_success": true
+    },
+    {
+      "username": "TEST_MASSIT_ANALYST",
+      "expected_role": "AGENCY_MASSIT_ANALYST",
+      "agency_id": "MASSIT",
+      "secretariat_id": "EOTSS",
+      "test_time": "2026-01-19T04:02:40.868529",
+      "actual_role": "AGENCY_MASSIT_ANALYST",
+      "role_match": true,
+      "current_user": "TEST_MASSIT_ANALYST",
+      "session_id": "5615528005795890",
+      "database_access": false,
+      "access_error": "002003 (42S02): SQL compilation error:\nObject 'SECRETARIAT_AGENCIES' does not exist or not authorize",
+      "login_success": true
+    },
+    {
+      "username": "TEST_DPH_ANALYST",
+      "expected_role": "AGENCY_DPH_ANALYST",
+      "agency_id": "DPH",
+      "secretariat_id": "HHS",
+      "test_time": "2026-01-19T04:02:46.050646",
+      "actual_role": "AGENCY_DPH_ANALYST",
+      "role_match": true,
+      "current_user": "TEST_DPH_ANALYST",
+      "session_id": "5615528005926922",
+      "database_access": false,
+      "access_error": "002003 (42S02): SQL compilation error:\nObject 'SECRETARIAT_AGENCIES' does not exist or not authorize",
+      "login_success": true
+    }
+  ],
+  "summary": {
+    "total_personas": 5,
+    "successful_logins": 5,
+    "role_matches": 5,
+    "database_access": 0
+  }
+}

@@ -1,0 +1,33 @@
+version: 2
+
+sources:
+  - name: eotss_poc
+    database: FEDERAL_FINANCIAL_DATA
+    schema: EOTSS_POC
+    tables:
+      - name: CIW_SPENDING
+        description: Commonwealth Information Warehouse spending data (sample)
+      - name: CIP_INVESTMENTS
+        description: Capital Investment Plan project data (sample)
+      - name: COMMBUYS_AWARDS
+        description: Commbuys procurement award data (sample)
+      - name: CTHR_WORKFORCE
+        description: Commonwealth Human Resources workforce data (sample)
+
+  - name: eotss_staging
+    database: FEDERAL_FINANCIAL_DATA
+    schema: EOTSS_STAGING
+    tables:
+      - name: SPEND_ANOMALY_RESULTS
+        description: Cortex ML anomaly detection output
+      - name: BUDGET_FORECAST_RESULTS
+        description: Cortex ML forecast output
+      - name: V_FORECAST_TRAINING
+        description: Monthly aggregated training data for ML models
+
+  - name: governance
+    database: FEDERAL_FINANCIAL_DATA
+    schema: GOVERNANCE
+    tables:
+      - name: SECRETARIAT_AGENCIES
+        description: Agency-to-secretariat mapping

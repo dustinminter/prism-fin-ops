@@ -1,0 +1,289 @@
+{
+  "collection_date": "2026-01-19T04:08:39.728931",
+  "evidence_id": "A4",
+  "agreement": {
+    "agreement_id": "DULA-EOTSS-2024-001",
+    "title": "EOTSS Enterprise Data Use and License Agreement",
+    "agreement_type": "DULA",
+    "status": "EXECUTED",
+    "effective_date": "2024-01-01",
+    "expiration_date": "2027-01-01",
+    "version": "1.0",
+    "executed_by": "CIO_OFFICE"
+  },
+  "clauses": [
+    {
+      "clause_id": "DULA-EOTSS-2024-001-C01",
+      "clause_number": "3.1",
+      "clause_type": "PURPOSE_RESTRICTION",
+      "title": "Permitted Purposes",
+      "policy_json": {
+        "allowed_purposes": [
+          "OPERATIONAL_ANALYSIS",
+          "BUDGET_PLANNING",
+          "VENDOR_EVALUATION",
+          "EXECUTIVE_REPORTING"
+        ],
+        "prohibited_purposes": [
+          "COMMERCIAL_RESALE",
+          "INDIVIDUAL_PROFILING",
+          "LAW_ENFORCEMENT"
+        ],
+        "requires_amendment_for": [
+          "RESEARCH",
+          "THIRD_PARTY_SHARING"
+        ]
+      }
+    },
+    {
+      "clause_id": "DULA-EOTSS-2024-001-C02",
+      "clause_number": "4.1",
+      "clause_type": "DATA_DOMAIN",
+      "title": "Authorized Data Domains",
+      "policy_json": {
+        "allowed_domains": [
+          "IT_SPENDING",
+          "CLOUD_COSTS",
+          "VENDOR_CONTRACTS",
+          "BUDGET_ALLOCATIONS"
+        ],
+        "prohibited_domains": [
+          "PERSONNEL",
+          "PROCUREMENT_SENSITIVE",
+          "SECURITY_INCIDENTS"
+        ],
+        "supplemental_required": [
+          "HR_ANALYTICS",
+          "SECURITY_POSTURE"
+        ]
+      }
+    },
+    {
+      "clause_id": "DULA-EOTSS-2024-001-C03",
+      "clause_number": "5.1",
+      "clause_type": "CROSS_AGENCY",
+      "title": "Cross-Agency Data Sharing",
+      "policy_json": {
+        "cross_secretariat": {
+          "allowed": false,
+          "requires": "COMMONWEALTH_APPROVAL"
+        },
+        "intra_secretariat": {
+          "aggregation_required": true,
+          "allowed": true,
+          "line_item_requires_dsa": true
+        }
+      }
+    },
+    {
+      "clause_id": "DULA-EOTSS-2024-001-C04",
+      "clause_number": "6.1",
+      "clause_type": "AI_PROCESSING",
+      "title": "AI and Machine Learning Processing",
+      "policy_json": {
+        "ai_allowed": true,
+        "allowed_ai_uses": [
+          "TREND_ANALYSIS",
+          "ANOMALY_DETECTION",
+          "NARRATIVE_GENERATION",
+          "FORECASTING"
+        ],
+        "executive_requires_human_review": true,
+        "labeling_required": true,
+        "prohibited_ai_uses": [
+          "MODEL_TRAINING",
+          "AUTOMATED_DECISIONS"
+        ],
+        "trust_state_ceiling": "CLIENT"
+      }
+    },
+    {
+      "clause_id": "DULA-EOTSS-2024-001-C05",
+      "clause_number": "7.1",
+      "clause_type": "DATA_PROTECTION",
+      "title": "Personally Identifiable Information",
+      "policy_json": {
+        "detection_required": true,
+        "phi_allowed": false,
+        "pii_allowed": false,
+        "redaction_required": true,
+        "supplemental_for_pii": "PRIVACY_AGREEMENT"
+      }
+    },
+    {
+      "clause_id": "DULA-EOTSS-2024-001-C06",
+      "clause_number": "8.1",
+      "clause_type": "AUDIT",
+      "title": "Audit and Logging Requirements",
+      "policy_json": {
+        "audit_access": "PROVIDER",
+        "audit_frequency": "QUARTERLY",
+        "log_fields": [
+          "user_id",
+          "timestamp",
+          "query_hash",
+          "purpose",
+          "agency_id",
+          "data_domains_accessed"
+        ],
+        "logging_required": true,
+        "retention_years": 7
+      }
+    }
+  ],
+  "compiled_policy": {
+    "policy_id": "POL-EOTSS-2024-001-v1",
+    "policy_version": "1.0.0",
+    "compiled_by": "PRISM_SYSTEM",
+    "validated_by": "PRISM_POLICY_VALIDATOR",
+    "status": "ACTIVE"
+  },
+  "verification": {
+    "agreement_exists": true,
+    "clause_count": 6,
+    "policy_compiled": true,
+    "policy_validated": true
+  },
+  "search_citations": {
+    "collection_date": "2026-01-19T04:09:22.725594",
+    "evidence_id": "A4_4",
+    "search_tests": [
+      {
+        "query": "What does the agreement say about AI processing?",
+        "expected_clause": "6.1",
+        "search_terms": [
+          "AI",
+          "machine learning",
+          "processing"
+        ],
+        "test_time": "2026-01-19T04:09:20.408522",
+        "matches": [
+          {
+            "clause_id": "DULA-EOTSS-2024-001-C02",
+            "clause_number": "4.1",
+            "title": "Authorized Data Domains",
+            "excerpt": "Consumer is authorized to access the following data domains: (a) IT Spending, (b) Cloud Costs, (c) Vendor Contracts, (d) Budget Allocations. Access to..."
+          },
+          {
+            "clause_id": "DULA-EOTSS-2024-001-C04",
+            "clause_number": "6.1",
+            "title": "AI and Machine Learning Processing",
+            "excerpt": "AI-assisted analysis is permitted for trend identification, anomaly detection, and narrative generation. All AI-generated content must be clearly labe..."
+          },
+          {
+            "clause_id": "DULA-EOTSS-2024-001-C05",
+            "clause_number": "7.1",
+            "title": "Personally Identifiable Information",
+            "excerpt": "No PII shall be processed through PRISM without explicit consent and supplemental privacy agreement. System must detect and redact potential PII befor..."
+          },
+          {
+            "clause_id": "DULA-EOTSS-2024-001-C06",
+            "clause_number": "8.1",
+            "title": "Audit and Logging Requirements",
+            "excerpt": "All data access must be logged with user identity, timestamp, query context, and purpose declaration. Logs must be retained for 7 years minimum. Provi..."
+          }
+        ],
+        "found_expected": true,
+        "pass": true
+      },
+      {
+        "query": "Can I share data with another agency?",
+        "expected_clause": "5.1",
+        "search_terms": [
+          "cross-agency",
+          "sharing",
+          "data sharing"
+        ],
+        "test_time": "2026-01-19T04:09:20.824037",
+        "matches": [
+          {
+            "clause_id": "DULA-EOTSS-2024-001-C03",
+            "clause_number": "5.1",
+            "title": "Cross-Agency Data Sharing",
+            "excerpt": "Agencies within EOTSS secretariat may share aggregated, non-identifying spending data for benchmarking purposes. Line-item or vendor-specific data sha..."
+          }
+        ],
+        "found_expected": true,
+        "pass": true
+      },
+      {
+        "query": "What data domains can I access?",
+        "expected_clause": "4.1",
+        "search_terms": [
+          "data domain",
+          "authorized",
+          "access"
+        ],
+        "test_time": "2026-01-19T04:09:21.150132",
+        "matches": [
+          {
+            "clause_id": "DULA-EOTSS-2024-001-C02",
+            "clause_number": "4.1",
+            "title": "Authorized Data Domains",
+            "excerpt": "Consumer is authorized to access the following data domains: (a) IT Spending, (b) Cloud Costs, (c) Vendor Contracts, (d) Budget Allocations. Access to..."
+          },
+          {
+            "clause_id": "DULA-EOTSS-2024-001-C06",
+            "clause_number": "8.1",
+            "title": "Audit and Logging Requirements",
+            "excerpt": "All data access must be logged with user identity, timestamp, query context, and purpose declaration. Logs must be retained for 7 years minimum. Provi..."
+          }
+        ],
+        "found_expected": true,
+        "pass": true
+      },
+      {
+        "query": "Is PII allowed?",
+        "expected_clause": "7.1",
+        "search_terms": [
+          "PII",
+          "personally identifiable",
+          "PHI"
+        ],
+        "test_time": "2026-01-19T04:09:21.686790",
+        "matches": [
+          {
+            "clause_id": "DULA-EOTSS-2024-001-C05",
+            "clause_number": "7.1",
+            "title": "Personally Identifiable Information",
+            "excerpt": "No PII shall be processed through PRISM without explicit consent and supplemental privacy agreement. System must detect and redact potential PII befor..."
+          }
+        ],
+        "found_expected": true,
+        "pass": true
+      },
+      {
+        "query": "What are the audit requirements?",
+        "expected_clause": "8.1",
+        "search_terms": [
+          "audit",
+          "logging",
+          "retention"
+        ],
+        "test_time": "2026-01-19T04:09:21.951450",
+        "matches": [
+          {
+            "clause_id": "DULA-EOTSS-2024-001-C06",
+            "clause_number": "8.1",
+            "title": "Audit and Logging Requirements",
+            "excerpt": "All data access must be logged with user identity, timestamp, query context, and purpose declaration. Logs must be retained for 7 years minimum. Provi..."
+          }
+        ],
+        "found_expected": true,
+        "pass": true
+      }
+    ],
+    "policy_resolution": {
+      "agreement_id": "DULA-EOTSS-2024-001",
+      "title": "EOTSS Enterprise Data Use and License Agreement",
+      "policy_version": "1.0.0",
+      "status": "ACTIVE",
+      "resolved": true
+    },
+    "summary": {
+      "total_searches": 5,
+      "passed": 5,
+      "pass_rate": "100.0%"
+    }
+  }
+}

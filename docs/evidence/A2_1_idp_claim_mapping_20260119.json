@@ -1,0 +1,101 @@
+{
+  "collection_date": "2026-01-19T04:01:42.835105",
+  "test_users": [
+    {
+      "username": "TEST_EOTSS_EXEC",
+      "display_name": "Alex Director",
+      "email": "alex.director@mass.gov",
+      "agency_id": "EOTSS",
+      "secretariat_id": "EOTSS",
+      "role": "EXECUTIVE",
+      "snowflake_role": "EOTSS_EXECUTIVE"
+    },
+    {
+      "username": "TEST_EOTSS_ANALYST",
+      "display_name": "Jordan Analyst",
+      "email": "jordan.analyst@mass.gov",
+      "agency_id": "EOTSS",
+      "secretariat_id": "EOTSS",
+      "role": "ANALYST",
+      "snowflake_role": "EOTSS_FINOPS_ANALYST"
+    },
+    {
+      "username": "TEST_ITD_ANALYST",
+      "display_name": "Morgan Analyst",
+      "email": "morgan.analyst@mass.gov",
+      "agency_id": "ITD",
+      "secretariat_id": "EOTSS",
+      "role": "ANALYST",
+      "snowflake_role": "AGENCY_ITD_ANALYST"
+    },
+    {
+      "username": "TEST_MASSIT_ANALYST",
+      "display_name": "Casey Analyst",
+      "email": "casey.analyst@mass.gov",
+      "agency_id": "MASSIT",
+      "secretariat_id": "EOTSS",
+      "role": "ANALYST",
+      "snowflake_role": "AGENCY_MASSIT_ANALYST"
+    },
+    {
+      "username": "TEST_DPH_ANALYST",
+      "display_name": "Riley Analyst",
+      "email": "riley.analyst@mass.gov",
+      "agency_id": "DPH",
+      "secretariat_id": "HHS",
+      "role": "ANALYST",
+      "snowflake_role": "AGENCY_DPH_ANALYST"
+    }
+  ],
+  "idp_claim_mapping": {
+    "description": "Required IdP claims for PRISM SSO integration",
+    "required_claims": [
+      {
+        "claim": "sub",
+        "description": "Unique user identifier from IdP"
+      },
+      {
+        "claim": "email",
+        "description": "User email address"
+      },
+      {
+        "claim": "name",
+        "description": "Display name"
+      },
+      {
+        "claim": "prism_agency_id",
+        "description": "User's primary agency code"
+      },
+      {
+        "claim": "prism_secretariat_id",
+        "description": "User's secretariat code"
+      },
+      {
+        "claim": "prism_role",
+        "description": "PRISM role level (VIEWER|ANALYST|ADMIN|EXECUTIVE)"
+      },
+      {
+        "claim": "prism_groups",
+        "description": "Array of group memberships"
+      }
+    ],
+    "role_mapping_rules": [
+      {
+        "condition": "prism_groups contains '{secretariat}_EXEC' AND prism_role == 'EXECUTIVE'",
+        "snowflake_role": "{secretariat}_EXECUTIVE"
+      },
+      {
+        "condition": "prism_groups contains '{secretariat}_FINOPS' AND prism_role == 'ANALYST'",
+        "snowflake_role": "{secretariat}_FINOPS_ANALYST"
+      },
+      {
+        "condition": "prism_role == 'ANALYST'",
+        "snowflake_role": "AGENCY_{agency_id}_ANALYST"
+      },
+      {
+        "condition": "prism_role == 'VIEWER'",
+        "snowflake_role": "AGENCY_{agency_id}_VIEWER"
+      }
+    ]
+  }
+}

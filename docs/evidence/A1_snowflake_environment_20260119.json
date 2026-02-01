@@ -1,0 +1,125 @@
+{
+  "collection_date": "2026-01-19T03:58:32.072396",
+  "evidence_id": "A1",
+  "A1_1_schemas": [
+    {
+      "name": "ANALYTICS",
+      "owner": "ACCOUNTADMIN"
+    },
+    {
+      "name": "GOVERNANCE",
+      "owner": "ACCOUNTADMIN"
+    },
+    {
+      "name": "PUBLIC",
+      "owner": "ACCOUNTADMIN"
+    },
+    {
+      "name": "SEMANTIC",
+      "owner": "ACCOUNTADMIN"
+    }
+  ],
+  "A1_1_governance_tables": [
+    {
+      "name": "AGREEMENTS",
+      "rows": "Agreement registry for DULAs, MOUs, DSAs"
+    },
+    {
+      "name": "AGREEMENT_CLAUSES",
+      "rows": "Agreement clauses with executable policy_json"
+    },
+    {
+      "name": "AMENDMENT_REQUESTS",
+      "rows": "Amendment request workflow"
+    },
+    {
+      "name": "COMPILED_POLICIES",
+      "rows": "Compiled agreement policies for runtime enforcement"
+    },
+    {
+      "name": "POLICY_ENFORCEMENT_LOG",
+      "rows": "Immutable log of all policy enforcement decisions"
+    },
+    {
+      "name": "SECRETARIAT_AGENCIES",
+      "rows": "Mapping of agencies to secretariats for RLS"
+    },
+    {
+      "name": "SESSION_LOG",
+      "rows": "Session establishment log for identity attribution"
+    }
+  ],
+  "A1_2_prism_roles": [
+    {
+      "name": "AGENCY_DPH_ADMIN",
+      "owner": "ACCOUNTADMIN"
+    },
+    {
+      "name": "AGENCY_DPH_ANALYST",
+      "owner": "ACCOUNTADMIN"
+    },
+    {
+      "name": "AGENCY_DPH_VIEWER",
+      "owner": "ACCOUNTADMIN"
+    },
+    {
+      "name": "AGENCY_ITD_ADMIN",
+      "owner": "ACCOUNTADMIN"
+    },
+    {
+      "name": "AGENCY_ITD_ANALYST",
+      "owner": "ACCOUNTADMIN"
+    },
+    {
+      "name": "AGENCY_ITD_VIEWER",
+      "owner": "ACCOUNTADMIN"
+    },
+    {
+      "name": "AGENCY_MASSIT_ADMIN",
+      "owner": "ACCOUNTADMIN"
+    },
+    {
+      "name": "AGENCY_MASSIT_ANALYST",
+      "owner": "ACCOUNTADMIN"
+    },
+    {
+      "name": "AGENCY_MASSIT_VIEWER",
+      "owner": "ACCOUNTADMIN"
+    },
+    {
+      "name": "EOTSS_EXECUTIVE",
+      "owner": "ACCOUNTADMIN"
+    },
+    {
+      "name": "EOTSS_FINOPS_ANALYST",
+      "owner": "ACCOUNTADMIN"
+    },
+    {
+      "name": "EOTSS_VIEWER",
+      "owner": "ACCOUNTADMIN"
+    },
+    {
+      "name": "PRISM_AUDIT_READER",
+      "owner": "ACCOUNTADMIN"
+    },
+    {
+      "name": "PRISM_ENFORCER",
+      "owner": "ACCOUNTADMIN"
+    },
+    {
+      "name": "PRISM_GOVERNANCE_ADMIN",
+      "owner": "ACCOUNTADMIN"
+    },
+    {
+      "name": "PRISM_POLICY_VALIDATOR",
+      "owner": "ACCOUNTADMIN"
+    }
+  ],
+  "A1_2_role_hierarchy": [],
+  "A1_3_query_history_available": true,
+  "A1_3_queries_last_24h": 1756,
+  "A1_3_login_history_available": true,
+  "A1_3_logins_last_7d": 254,
+  "A1_4_cortex_enabled": true,
+  "A1_4_cortex_test": " to confirm that you understand the instructions and are ready to proceed.\n\nOK, I understand the ins"
+}

@@ -1,0 +1,86 @@
+{
+  "roles": [],
+  "hierarchy": [
+    {
+      "role": "PRISM_GOVERNANCE_ADMIN",
+      "granted_to_type": "PRISM_GOVERNANCE_ADMIN",
+      "granted_to_name": "ACCOUNTADMIN"
+    },
+    {
+      "role": "PRISM_POLICY_VALIDATOR",
+      "granted_to_type": "PRISM_POLICY_VALIDATOR",
+      "granted_to_name": "PRISM_GOVERNANCE_ADMIN"
+    },
+    {
+      "role": "PRISM_AUDIT_READER",
+      "granted_to_type": "PRISM_AUDIT_READER",
+      "granted_to_name": "PRISM_GOVERNANCE_ADMIN"
+    },
+    {
+      "role": "PRISM_AUDIT_READER",
+      "granted_to_type": "PRISM_AUDIT_READER",
+      "granted_to_name": "PRISM_POLICY_VALIDATOR"
+    },
+    {
+      "role": "EOTSS_EXECUTIVE",
+      "granted_to_type": "EOTSS_EXECUTIVE",
+      "granted_to_name": "ACCOUNTADMIN"
+    },
+    {
+      "role": "EOTSS_FINOPS_ANALYST",
+      "granted_to_type": "EOTSS_FINOPS_ANALYST",
+      "granted_to_name": "EOTSS_EXECUTIVE"
+    },
+    {
+      "role": "EOTSS_VIEWER",
+      "granted_to_type": "EOTSS_VIEWER",
+      "granted_to_name": "EOTSS_FINOPS_ANALYST"
+    },
+    {
+      "role": "AGENCY_ITD_ADMIN",
+      "granted_to_type": "AGENCY_ITD_ADMIN",
+      "granted_to_name": "ACCOUNTADMIN"
+    },
+    {
+      "role": "AGENCY_ITD_ANALYST",
+      "granted_to_type": "AGENCY_ITD_ANALYST",
+      "granted_to_name": "AGENCY_ITD_ADMIN"
+    },
+    {
+      "role": "AGENCY_ITD_VIEWER",
+      "granted_to_type": "AGENCY_ITD_VIEWER",
+      "granted_to_name": "AGENCY_ITD_ANALYST"
+    },
+    {
+      "role": "AGENCY_MASSIT_ADMIN",
+      "granted_to_type": "AGENCY_MASSIT_ADMIN",
+      "granted_to_name": "ACCOUNTADMIN"
+    },
+    {
+      "role": "AGENCY_MASSIT_ANALYST",
+      "granted_to_type": "AGENCY_MASSIT_ANALYST",
+      "granted_to_name": "AGENCY_MASSIT_ADMIN"
+    },
+    {
+      "role": "AGENCY_MASSIT_VIEWER",
+      "granted_to_type": "AGENCY_MASSIT_VIEWER",
+      "granted_to_name": "AGENCY_MASSIT_ANALYST"
+    },
+    {
+      "role": "AGENCY_DPH_ADMIN",
+      "granted_to_type": "AGENCY_DPH_ADMIN",
+      "granted_to_name": "ACCOUNTADMIN"
+    },
+    {
+      "role": "AGENCY_DPH_ANALYST",
+      "granted_to_type": "AGENCY_DPH_ANALYST",
+      "granted_to_name": "AGENCY_DPH_ADMIN"
+    },
+    {
+      "role": "AGENCY_DPH_VIEWER",
+      "granted_to_type": "AGENCY_DPH_VIEWER",
+      "granted_to_name": "AGENCY_DPH_ANALYST"
+    }
+  ],
+  "database_grants": []
+}
