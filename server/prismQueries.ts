@@ -1,4 +1,5 @@
-import { executeQuery, executeGovernedQuery, GovernanceContext, GovernanceMetadata } from "./snowflake";
+import { executeQuery, executeGovernedQuery, executeTenantQuery, GovernanceContext, GovernanceMetadata } from "./snowflake";
+import type { TenantConfig } from "../shared/types/tenant";
 
 /**
  * Helper function to extract text from various Cortex response formats
@@ -1084,6 +1085,65 @@ export async function searchAgreements(
     console.warn("[Cortex] SEARCH not available:", (error as Error).message);
     return { results: [] };
   }
+}
+
+// ============================================================================
+// CTHRU SPENDING QUERIES (real Commonwealth data)
+// ============================================================================
+
+export interface CTHRUSpendingSummary {
+  agencyCode: string;
+  agencyName: string;
+  secretariatId: string;
+  fiscalYearLabel: string;
+  totalExpenditures: number;
+  totalObligations: number;
+  budgetAuthority: number | null;
+  burnRatePct: number;
+  periodCount: number;
+}
+
+/**
+ * Get CTHRU spending summary by agency for a given fiscal year.
+ * Uses schema token {{DATA_SCHEMA}} resolved via executeTenantQuery for tenant isolation.
+ */
+export async function getCTHRUSpending(
+  tenant: TenantConfig,
+  fiscalYear?: string,
+  limit: number = 25,
+  context: GovernanceContext = {}
+): Promise<CTHRUSpendingSummary[]> {
+  const govContext = {
+    ...context,
+    requestSource: "getCTHRUSpending",
+  };
+
+  const fyFilter = fiscalYear ? "WHERE FISCAL_YEAR_LABEL = ?" : "";
+  const params: (string | number)[] = fiscalYear ? [fiscalYear, limit] : [limit];
+
+  const sql = `
+    SELECT
+      AGENCY_CODE            AS "agencyCode",
+      AGENCY_NAME            AS "agencyName",
+      SECRETARIAT_ID         AS "secretariatId",
+      FISCAL_YEAR_LABEL      AS "fiscalYearLabel",
+      SUM(TOTAL_EXPENDITURES)AS "totalExpenditures",
+      SUM(TOTAL_OBLIGATIONS) AS "totalObligations",
+      MAX(BUDGET_AUTHORITY)  AS "budgetAuthority",
+      CASE
+        WHEN MAX(BUDGET_AUTHORITY) > 0
+        THEN ROUND(SUM(TOTAL_EXPENDITURES) / MAX(BUDGET_AUTHORITY) * 100, 2)
+        ELSE 0
+      END                    AS "burnRatePct",
+      COUNT(*)               AS "periodCount"
+    FROM FEDERAL_FINANCIAL_DATA.{{DATA_SCHEMA}}.V_CTHRU_SPENDING
+    ${fyFilter}
+    GROUP BY AGENCY_CODE, AGENCY_NAME, SECRETARIAT_ID, FISCAL_YEAR_LABEL
+    ORDER BY "totalExpenditures" DESC
+    LIMIT ?
+  `;
+
+  return executeTenantQuery<CTHRUSpendingSummary>(sql, params, tenant, govContext);
 }
 
 // Helper function to format currency

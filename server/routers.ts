@@ -205,6 +205,23 @@ export const appRouter = router({
       return prismQueries.getAllDataLineage(buildGovernanceContext(ctx));
     }),
 
+    // CTHRU real spending data (tenant-scoped, schema-token-resolved)
+    getCTHRUSpending: tenantProcedure
+      .input(
+        z.object({
+          fiscalYear: z.string().optional(),
+          limit: z.number().optional().default(25),
+        })
+      )
+      .query(async ({ input, ctx }) => {
+        return prismQueries.getCTHRUSpending(
+          ctx.tenant!,
+          input.fiscalYear,
+          input.limit,
+          buildGovernanceContext(ctx)
+        );
+      }),
+
     // Natural Language Query endpoint
     executeNaturalLanguageQuery: protectedProcedure
       .input(

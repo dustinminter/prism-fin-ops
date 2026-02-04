@@ -130,6 +130,30 @@ vi.mock("./prismQueries", () => ({
       { metric: "Spending Volatility", status: "normal", value: 1.2 },
     ],
   }),
+  getCTHRUSpending: vi.fn().mockResolvedValue([
+    {
+      agencyCode: "ITD",
+      agencyName: "Information Technology Division",
+      secretariatId: "EOTSS",
+      fiscalYearLabel: "FY2026",
+      totalExpenditures: 45000000,
+      totalObligations: 48600000,
+      budgetAuthority: 52000000,
+      burnRatePct: 86.54,
+      periodCount: 7,
+    },
+    {
+      agencyCode: "MRC",
+      agencyName: "Massachusetts Rehabilitation Commission",
+      secretariatId: "HHS",
+      fiscalYearLabel: "FY2026",
+      totalExpenditures: 120000000,
+      totalObligations: 129600000,
+      budgetAuthority: 150000000,
+      burnRatePct: 80.0,
+      periodCount: 7,
+    },
+  ]),
   acknowledgeAnomaly: vi.fn().mockResolvedValue(true),
   updateNarrativeTrustState: vi.fn().mockResolvedValue(true),
   getAgencies: vi.fn().mockResolvedValue([
@@ -314,6 +338,38 @@ describe("PRISM tRPC Endpoints", () => {
       expect(result).toHaveLength(3);
       expect(result[0]).toHaveProperty("code", "DOD");
       expect(result[0]).toHaveProperty("name", "Department of Defense");
+    });
+
+    it("getCTHRUSpending rejects unauthenticated requests", async () => {
+      const ctx = createPublicContext();
+      const caller = appRouter.createCaller(ctx);
+
+      await expect(
+        caller.prism.getCTHRUSpending({ limit: 10 })
+      ).rejects.toThrow();
+    });
+
+    it("getCTHRUSpending returns CTHRU spending data for authenticated user", async () => {
+      const ctx = createAuthContext();
+      const caller = appRouter.createCaller(ctx);
+
+      const result = await caller.prism.getCTHRUSpending({ limit: 25 });
+
+      expect(result).toHaveLength(2);
+      expect(result[0]).toHaveProperty("agencyCode", "ITD");
+      expect(result[0]).toHaveProperty("secretariatId", "EOTSS");
+      expect(result[0]).toHaveProperty("totalExpenditures", 45000000);
+      expect(result[0]).toHaveProperty("burnRatePct", 86.54);
+    });
+
+    it("getCTHRUSpending accepts optional fiscalYear filter", async () => {
+      const ctx = createAuthContext();
+      const caller = appRouter.createCaller(ctx);
+
+      const result = await caller.prism.getCTHRUSpending({ fiscalYear: "FY2026" });
+
+      expect(result).toBeDefined();
+      expect(Array.isArray(result)).toBe(true);
     });
   });
 
