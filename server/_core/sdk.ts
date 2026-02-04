@@ -1,6 +1,6 @@
 import type { User } from "../../shared/types/user";
 
-const DEV_USER: User = {
+const DEV_USER: Omit<User, "tenantId"> = {
   id: 1,
   openId: "dev-user-001",
   name: "Dev User",
@@ -9,7 +9,7 @@ const DEV_USER: User = {
 };
 
 export const sdk = {
-  authenticateRequest(_req: unknown): User {
+  authenticateRequest(_req: unknown): Omit<User, "tenantId"> {
     return DEV_USER;
   },
 };

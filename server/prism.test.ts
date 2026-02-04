@@ -1,6 +1,16 @@
 import { describe, expect, it, vi, beforeEach } from "vitest";
 import { appRouter } from "./routers";
 import type { TrpcContext } from "./_core/context";
+import type { TenantConfig } from "../shared/types/tenant";
+
+const TEST_TENANT: TenantConfig = {
+  tenantId: "eotss",
+  displayName: "EOTSS",
+  dataSchema: "EOTSS_STAGING",
+  govSchema: "GOVERNANCE",
+  semSchema: "SEMANTIC",
+  snowflakeRole: "PRISM_TENANT_EOTSS_ROLE",
+};
 
 // Mock the Snowflake queries module
 vi.mock("./prismQueries", () => ({
@@ -134,6 +144,7 @@ type AuthenticatedUser = NonNullable<TrpcContext["user"]>;
 function createPublicContext(): TrpcContext {
   return {
     user: null,
+    tenant: null,
     req: {
       protocol: "https",
       headers: {},
@@ -151,10 +162,12 @@ function createAuthContext(): TrpcContext {
     email: "test@example.com",
     name: "Test User",
     role: "user",
+    tenantId: "eotss",
   };
 
   return {
     user,
+    tenant: TEST_TENANT,
     req: {
       protocol: "https",
       headers: {},
@@ -166,9 +179,16 @@ function createAuthContext(): TrpcContext {
 }
 
 describe("PRISM tRPC Endpoints", () => {
-  describe("Public Endpoints", () => {
-    it("getAgencySpending returns top agencies by spending", async () => {
+  describe("Tenant-Scoped Endpoints", () => {
+    it("getAgencySpending rejects unauthenticated requests", async () => {
       const ctx = createPublicContext();
+      const caller = appRouter.createCaller(ctx);
+
+      await expect(caller.prism.getAgencySpending({ limit: 10 })).rejects.toThrow();
+    });
+
+    it("getAgencySpending returns top agencies by spending", async () => {
+      const ctx = createAuthContext();
       const caller = appRouter.createCaller(ctx);
 
       const result = await caller.prism.getAgencySpending({ limit: 10 });
@@ -179,7 +199,7 @@ describe("PRISM tRPC Endpoints", () => {
     });
 
     it("getAwardSummary returns aggregate statistics", async () => {
-      const ctx = createPublicContext();
+      const ctx = createAuthContext();
       const caller = appRouter.createCaller(ctx);
 
       const result = await caller.prism.getAwardSummary();
@@ -190,7 +210,7 @@ describe("PRISM tRPC Endpoints", () => {
     });
 
     it("getAwardsByType returns breakdown by award type", async () => {
-      const ctx = createPublicContext();
+      const ctx = createAuthContext();
       const caller = appRouter.createCaller(ctx);
 
       const result = await caller.prism.getAwardsByType();
@@ -201,7 +221,7 @@ describe("PRISM tRPC Endpoints", () => {
     });
 
     it("getTopAwards returns highest value awards", async () => {
-      const ctx = createPublicContext();
+      const ctx = createAuthContext();
       const caller = appRouter.createCaller(ctx);
 
       const result = await caller.prism.getTopAwards({ limit: 5 });
@@ -212,7 +232,7 @@ describe("PRISM tRPC Endpoints", () => {
     });
 
     it("getAgencyRiskMetrics returns risk scores", async () => {
-      const ctx = createPublicContext();
+      const ctx = createAuthContext();
       const caller = appRouter.createCaller(ctx);
 
       const result = await caller.prism.getAgencyRiskMetrics();
@@ -223,7 +243,7 @@ describe("PRISM tRPC Endpoints", () => {
     });
 
     it("getConsumptionMetrics returns spending trend data", async () => {
-      const ctx = createPublicContext();
+      const ctx = createAuthContext();
       const caller = appRouter.createCaller(ctx);
 
       const result = await caller.prism.getConsumptionMetrics();
@@ -234,7 +254,7 @@ describe("PRISM tRPC Endpoints", () => {
     });
 
     it("getDriftAlerts returns variance-based alerts", async () => {
-      const ctx = createPublicContext();
+      const ctx = createAuthContext();
       const caller = appRouter.createCaller(ctx);
 
       const result = await caller.prism.getDriftAlerts();
@@ -245,7 +265,7 @@ describe("PRISM tRPC Endpoints", () => {
     });
 
     it("getConsumptionForecast returns historical and forecast data", async () => {
-      const ctx = createPublicContext();
+      const ctx = createAuthContext();
       const caller = appRouter.createCaller(ctx);
 
       const result = await caller.prism.getConsumptionForecast({});
@@ -260,7 +280,7 @@ describe("PRISM tRPC Endpoints", () => {
     });
 
     it("getSpendingAnomalies returns detected anomalies", async () => {
-      const ctx = createPublicContext();
+      const ctx = createAuthContext();
       const caller = appRouter.createCaller(ctx);
 
       const result = await caller.prism.getSpendingAnomalies({});
@@ -272,7 +292,7 @@ describe("PRISM tRPC Endpoints", () => {
     });
 
     it("getAgencyDeepDive returns detailed agency data", async () => {
-      const ctx = createPublicContext();
+      const ctx = createAuthContext();
       const caller = appRouter.createCaller(ctx);
 
       const result = await caller.prism.getAgencyDeepDive({ agencyCode: "DOD" });
@@ -286,7 +306,7 @@ describe("PRISM tRPC Endpoints", () => {
     });
 
     it("getAgencies returns list of agencies", async () => {
-      const ctx = createPublicContext();
+      const ctx = createAuthContext();
       const caller = appRouter.createCaller(ctx);
 
       const result = await caller.prism.getAgencies();
@@ -361,7 +381,7 @@ describe("PRISM tRPC Endpoints", () => {
 
   describe("Input Validation", () => {
     it("getAgencySpending accepts limit parameter", async () => {
-      const ctx = createPublicContext();
+      const ctx = createAuthContext();
       const caller = appRouter.createCaller(ctx);
 
       const result = await caller.prism.getAgencySpending({ limit: 5 });
@@ -370,7 +390,7 @@ describe("PRISM tRPC Endpoints", () => {
     });
 
     it("getConsumptionForecast accepts optional agencyCode", async () => {
-      const ctx = createPublicContext();
+      const ctx = createAuthContext();
       const caller = appRouter.createCaller(ctx);
 
       const result = await caller.prism.getConsumptionForecast({ agencyCode: "DOD" });
@@ -379,7 +399,7 @@ describe("PRISM tRPC Endpoints", () => {
     });
 
     it("getSpendingAnomalies accepts optional severityFilter", async () => {
-      const ctx = createPublicContext();
+      const ctx = createAuthContext();
       const caller = appRouter.createCaller(ctx);
 
       const result = await caller.prism.getSpendingAnomalies({ severityFilter: "critical" });

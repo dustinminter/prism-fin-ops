@@ -4,4 +4,5 @@ export interface User {
   name: string | null;
   email: string | null;
   role: "user" | "admin";
+  tenantId: string;
 }

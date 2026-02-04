@@ -2,7 +2,7 @@ import { COOKIE_NAME } from "@shared/const";
 import { z } from "zod";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
-import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
+import { publicProcedure, protectedProcedure, tenantProcedure, router } from "./_core/trpc";
 import * as prismQueries from "./prismQueries";
 import * as governanceQueries from "./governanceQueries";
 import { GovernanceContext } from "./snowflake";
@@ -30,49 +30,49 @@ export const appRouter = router({
     }),
   }),
 
-  // PRISM FinOps Endpoints
+  // PRISM FinOps Endpoints (tenant-scoped: require authenticated user with tenant)
   prism: router({
     // Dashboard endpoints
-    getAgencySpending: publicProcedure
+    getAgencySpending: tenantProcedure
       .input(z.object({ limit: z.number().optional().default(10) }))
       .query(async ({ input, ctx }) => {
         return prismQueries.getAgencySpending(input.limit, buildGovernanceContext(ctx));
       }),
 
-    getAwardSummary: publicProcedure.query(async ({ ctx }) => {
+    getAwardSummary: tenantProcedure.query(async ({ ctx }) => {
       return prismQueries.getAwardSummary(buildGovernanceContext(ctx));
     }),
 
-    getAwardsByType: publicProcedure.query(async ({ ctx }) => {
+    getAwardsByType: tenantProcedure.query(async ({ ctx }) => {
       return prismQueries.getAwardsByType(buildGovernanceContext(ctx));
     }),
 
-    getTopAwards: publicProcedure
+    getTopAwards: tenantProcedure
       .input(z.object({ limit: z.number().optional().default(10) }))
       .query(async ({ input, ctx }) => {
         return prismQueries.getTopAwards(input.limit, buildGovernanceContext(ctx));
       }),
 
-    getAgencyRiskMetrics: publicProcedure.query(async ({ ctx }) => {
+    getAgencyRiskMetrics: tenantProcedure.query(async ({ ctx }) => {
       return prismQueries.getAgencyRiskMetrics(buildGovernanceContext(ctx));
     }),
 
-    getConsumptionMetrics: publicProcedure.query(async ({ ctx }) => {
+    getConsumptionMetrics: tenantProcedure.query(async ({ ctx }) => {
       return prismQueries.getConsumptionMetrics(buildGovernanceContext(ctx));
     }),
 
-    getDriftAlerts: publicProcedure.query(async ({ ctx }) => {
+    getDriftAlerts: tenantProcedure.query(async ({ ctx }) => {
       return prismQueries.getDriftAlerts(buildGovernanceContext(ctx));
     }),
 
     // Cortex AI endpoints
-    getConsumptionForecast: publicProcedure
+    getConsumptionForecast: tenantProcedure
       .input(z.object({ agencyCode: z.string().optional() }))
       .query(async ({ input, ctx }) => {
         return prismQueries.getConsumptionForecast(input.agencyCode, buildGovernanceContext(ctx));
       }),
 
-    getSpendingAnomalies: publicProcedure
+    getSpendingAnomalies: tenantProcedure
       .input(z.object({ severityFilter: z.string().optional() }))
       .query(async ({ input, ctx }) => {
         return prismQueries.getSpendingAnomalies(input.severityFilter, buildGovernanceContext(ctx));
@@ -94,7 +94,7 @@ export const appRouter = router({
       }),
 
     // AI Chat with Cortex Intelligence
-    chatWithIntelligence: publicProcedure
+    chatWithIntelligence: tenantProcedure
       .input(
         z.object({
           message: z.string(),
@@ -120,7 +120,7 @@ export const appRouter = router({
         return prismQueries.chatWithIntelligence(input.message, input.chatContext, govContext);
       }),
 
-    getAgencyDeepDive: publicProcedure
+    getAgencyDeepDive: tenantProcedure
       .input(z.object({ agencyCode: z.string() }))
       .query(async ({ input, ctx }) => {
         return prismQueries.getAgencyDeepDive(input.agencyCode, buildGovernanceContext(ctx));
@@ -155,7 +155,7 @@ export const appRouter = router({
       }),
 
     // Agency list
-    getAgencies: publicProcedure.query(async ({ ctx }) => {
+    getAgencies: tenantProcedure.query(async ({ ctx }) => {
       return prismQueries.getAgencies(buildGovernanceContext(ctx));
     }),
 
@@ -167,11 +167,11 @@ export const appRouter = router({
       }),
 
     // CIP (Capital Investment Plan) endpoints
-    getCIPPrograms: publicProcedure.query(async ({ ctx }) => {
+    getCIPPrograms: tenantProcedure.query(async ({ ctx }) => {
       return prismQueries.getCIPPrograms(buildGovernanceContext(ctx));
     }),
 
-    getCIPLineItems: publicProcedure
+    getCIPLineItems: tenantProcedure
       .input(
         z.object({
           programId: z.string().optional(),
@@ -184,7 +184,7 @@ export const appRouter = router({
         return prismQueries.getCIPLineItems(input, buildGovernanceContext(ctx));
       }),
 
-    getCIPSummary: publicProcedure.query(async ({ ctx }) => {
+    getCIPSummary: tenantProcedure.query(async ({ ctx }) => {
       return prismQueries.getCIPSummary(buildGovernanceContext(ctx));
     }),
 
@@ -195,13 +195,13 @@ export const appRouter = router({
       }),
 
     // Data Lineage endpoints
-    getDataLineage: publicProcedure
+    getDataLineage: tenantProcedure
       .input(z.object({ targetObject: z.string() }))
       .query(async ({ input, ctx }) => {
         return prismQueries.getDataLineage(input.targetObject, buildGovernanceContext(ctx));
       }),
 
-    getAllDataLineage: publicProcedure.query(async ({ ctx }) => {
+    getAllDataLineage: tenantProcedure.query(async ({ ctx }) => {
       return prismQueries.getAllDataLineage(buildGovernanceContext(ctx));
     }),
 
@@ -221,9 +221,9 @@ export const appRouter = router({
 
   }),
 
-  // Governance & Agreements Router
+  // Governance & Agreements Router (tenant-scoped)
   governance: router({
-    getAgreements: publicProcedure
+    getAgreements: tenantProcedure
       .input(
         z.object({
           status: z.string().optional(),
@@ -235,35 +235,35 @@ export const appRouter = router({
         return governanceQueries.getAgreements(input);
       }),
 
-    getAgreementById: publicProcedure
+    getAgreementById: tenantProcedure
       .input(z.object({ agreementId: z.string() }))
       .query(async ({ input }) => {
         return governanceQueries.getAgreementById(input.agreementId);
       }),
 
-    getAgreementClauses: publicProcedure
+    getAgreementClauses: tenantProcedure
       .input(z.object({ agreementId: z.string() }))
       .query(async ({ input }) => {
         return governanceQueries.getAgreementClauses(input.agreementId);
       }),
 
-    getPermissionsMatrix: publicProcedure
+    getPermissionsMatrix: tenantProcedure
       .input(z.object({ agreementId: z.string() }))
       .query(async ({ input }) => {
         return governanceQueries.getPermissionsMatrix(input.agreementId);
       }),
 
-    getAgreementEvents: publicProcedure
+    getAgreementEvents: tenantProcedure
       .input(z.object({ agreementId: z.string() }))
       .query(async ({ input }) => {
         return governanceQueries.getAgreementEvents(input.agreementId);
       }),
 
-    getAgreementStats: publicProcedure.query(async () => {
+    getAgreementStats: tenantProcedure.query(async () => {
       return governanceQueries.getAgreementStats();
     }),
 
-    getEnforcementLog: publicProcedure
+    getEnforcementLog: tenantProcedure
       .input(
         z.object({
           agreementId: z.string().optional(),

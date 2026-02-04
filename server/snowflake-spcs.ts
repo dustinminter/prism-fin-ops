@@ -52,9 +52,10 @@ function readSpcsToken(): string {
 }
 
 /**
- * Create connection options based on environment
+ * Create connection options based on environment.
+ * Exported for use by tenant-connection.ts to build per-tenant connections.
  */
-function getConnectionOptions(): snowflake.ConnectionOptions {
+export function getConnectionOptions(): snowflake.ConnectionOptions {
   const baseOptions = {
     account: SNOWFLAKE_CONFIG.account,
     warehouse: SNOWFLAKE_CONFIG.warehouse,
@@ -221,13 +222,17 @@ export function getConnectionInfo(): {
   };
 }
 
-// Graceful shutdown
+// Graceful shutdown (includes tenant connections)
 process.on("SIGINT", async () => {
+  const { closeAllTenantConnections } = await import("./_core/tenant-connection");
+  await closeAllTenantConnections();
   await closeConnection();
   process.exit(0);
 });
 
 process.on("SIGTERM", async () => {
+  const { closeAllTenantConnections } = await import("./_core/tenant-connection");
+  await closeAllTenantConnections();
   await closeConnection();
   process.exit(0);
 });

@@ -5,11 +5,14 @@ import {
   isSpcsEnvironment,
   getConnectionInfo,
 } from "./snowflake-spcs";
+import type { TenantConfig } from "../shared/types/tenant";
+import { getTenantConnection } from "./_core/tenant-connection";
+import { replaceSchemaTokens } from "./_core/schema-tokens";
 
 // Re-export SPCS utilities
 export { isSpcsEnvironment, getConnectionInfo };
 
-// Use SPCS-aware connection
+// Use SPCS-aware connection (for non-tenant queries like tenant resolution itself)
 export const getSnowflakeConnection = getSpcsConnection;
 
 /**
@@ -298,6 +301,60 @@ export class GovernanceError extends Error {
     this.name = "GovernanceError";
     this.code = code;
   }
+}
+
+/**
+ * Execute a query scoped to a tenant's connection and schema tokens.
+ * SQL tokens ({{DATA_SCHEMA}}, {{GOV_SCHEMA}}, {{SEM_SCHEMA}}) are replaced
+ * with the tenant's configured schema names before execution.
+ */
+export async function executeTenantQuery<T>(
+  sql: string,
+  binds: (string | number | boolean | null)[] = [],
+  tenant: TenantConfig,
+  context: GovernanceContext = {}
+): Promise<T[]> {
+  const connection = await getTenantConnection(tenant);
+  const resolvedSql = replaceSchemaTokens(sql, tenant);
+  const queryId = generateQueryId();
+  const startTime = Date.now();
+
+  // Set query tags for governance tracking
+  await setQueryTags(connection, { ...context, userId: context.userId || "tenant:" + tenant.tenantId });
+
+  return new Promise((resolve, reject) => {
+    connection.execute({
+      sqlText: resolvedSql,
+      binds: binds,
+      complete: (err, stmt, rows) => {
+        const executionTime = Date.now() - startTime;
+        const result = (rows || []) as T[];
+
+        logQueryAudit({
+          queryId,
+          userId: context.userId || "tenant:" + tenant.tenantId,
+          userRole: context.userRole || "tenant",
+          agreementId: context.agreementId || null,
+          trustState: context.trustState || null,
+          queryText: resolvedSql.substring(0, 4000),
+          queryHash: hashQuery(resolvedSql),
+          executionTimeMs: executionTime,
+          rowCount: result.length,
+          status: err ? "error" : "success",
+          errorMessage: err?.message || null,
+          governanceContext: JSON.stringify({ ...context, tenantId: tenant.tenantId }),
+          timestamp: new Date(),
+        });
+
+        if (err) {
+          console.error(`[Snowflake] Tenant query failed (${tenant.tenantId}):`, err.message);
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      },
+    });
+  });
 }
 
 /**
