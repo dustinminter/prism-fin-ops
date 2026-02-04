@@ -6,7 +6,7 @@ import IntelligenceChat from "@/components/intelligence/IntelligenceChat";
 
 function IntelligenceLayout() {
   return (
-    <div className="flex flex-col h-screen bg-white text-[#1e293b] overflow-hidden">
+    <div className="flex flex-col h-screen bg-[#0d1117] overflow-hidden">
       <TopBar />
       <div className="flex flex-1 overflow-hidden">
         <Sidebar />

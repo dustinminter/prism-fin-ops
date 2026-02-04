@@ -9,7 +9,7 @@ function renderMarkdown(text: string) {
   const parts = text.split(/(\*\*[^*]+\*\*)/g);
   return parts.map((part, i) => {
     if (part.startsWith("**") && part.endsWith("**")) {
-      return <strong key={i} className="text-[#0f172a]">{part.slice(2, -2)}</strong>;
+      return <strong key={i} className="text-[#e6edf3]">{part.slice(2, -2)}</strong>;
     }
     const lines = part.split("\n");
     return lines.map((line, j) => (
@@ -28,15 +28,15 @@ function DetailsToggle({ sql }: { sql: string }) {
     <div className="my-2">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-1 text-[11px] font-medium text-[#475569] hover:text-[#29B5E8] transition-colors"
+        className="flex items-center gap-1 text-[11px] font-medium text-[#8b949e] hover:text-[#29B5E8] transition-colors"
       >
         {open ? <ChevronDown className="w-3 h-3" /> : <ChevronRight className="w-3 h-3" />}
         Show Details
       </button>
       {open && (
         <div className="mt-2 space-y-2">
-          <div className="text-[10px] font-semibold uppercase tracking-wider text-[#94a3b8] mb-1">Generated SQL</div>
-          <div className="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg px-3 py-2 font-mono text-[11px] text-[#475569] overflow-x-auto whitespace-pre leading-[1.4]">
+          <div className="text-[10px] font-semibold uppercase tracking-wider text-[#484f58] mb-1">Generated SQL</div>
+          <div className="bg-[#0d1117] border border-[#21262d] rounded-lg px-3 py-2 font-mono text-[11px] text-[#8b949e] overflow-x-auto whitespace-pre leading-[1.4]">
             {sql}
           </div>
         </div>
@@ -58,7 +58,7 @@ export default function IntelMessages({ messages, onSuggestionClick }: IntelMess
           return (
             <div
               key={i}
-              className="self-end max-w-[80%] bg-[#1e293b] text-white rounded-2xl rounded-br-sm px-4 py-2.5 text-[13px] leading-[1.45]"
+              className="self-end max-w-[80%] bg-[#1f6feb] text-white rounded-2xl rounded-br-sm px-4 py-2.5 text-[13px] leading-[1.45]"
             >
               {msg.content}
             </div>
@@ -70,7 +70,7 @@ export default function IntelMessages({ messages, onSuggestionClick }: IntelMess
 
         return (
           <div key={i} className="self-start max-w-[94%]">
-            <div className="bg-white border border-[#e2e8f0] rounded-2xl rounded-bl-sm px-4 py-3 text-[13px] text-[#1e293b] leading-[1.5] shadow-sm">
+            <div className="bg-[#161b22] border border-[#21262d] rounded-2xl rounded-bl-sm px-4 py-3 text-[13px] text-[#c9d1d9] leading-[1.5]">
               {/* Text content */}
               <div>{renderMarkdown(msg.content)}</div>
 
@@ -98,7 +98,7 @@ export default function IntelMessages({ messages, onSuggestionClick }: IntelMess
                         {msg.table.headers.map((h, hi) => (
                           <th
                             key={hi}
-                            className="text-left px-2 py-1.5 bg-[#f8fafc] text-[#94a3b8] font-semibold text-[10px] uppercase tracking-wider border-b border-[#e2e8f0]"
+                            className="text-left px-2 py-1.5 bg-[#0d1117] text-[#484f58] font-semibold text-[10px] uppercase tracking-wider border-b border-[#21262d]"
                             style={hi > 0 ? { textAlign: "right" } : {}}
                           >
                             {h}
@@ -110,14 +110,14 @@ export default function IntelMessages({ messages, onSuggestionClick }: IntelMess
                       {msg.table.rows.map((row, ri) => (
                         <tr key={ri}>
                           {row.cells.map((cell, ci) => {
-                            let color = "#475569";
-                            if (cell.className?.includes("danger")) color = "#dc2626";
-                            else if (cell.className?.includes("warn")) color = "#b45309";
+                            let color = "#c9d1d9";
+                            if (cell.className?.includes("danger")) color = "#f85149";
+                            else if (cell.className?.includes("warn")) color = "#d29922";
                             const isNum = cell.className?.includes("num");
                             return (
                               <td
                                 key={ci}
-                                className="px-2 py-1.5 border-b border-[#f1f5f9]"
+                                className="px-2 py-1.5 border-b border-[#21262d]"
                                 style={{
                                   color,
                                   fontWeight: isNum ? 600 : 400,
@@ -139,7 +139,7 @@ export default function IntelMessages({ messages, onSuggestionClick }: IntelMess
 
               {/* Insight callout */}
               {msg.insight && (
-                <div className="bg-[#f0fdf4] border-l-2 border-l-[#22c55e] px-3 py-2 my-2 text-[12px] text-[#374151] rounded-r-lg leading-[1.4]">
+                <div className="bg-[#0d1117] border-l-2 border-l-[#3fb950] px-3 py-2 my-2 text-[12px] text-[#8b949e] rounded-r-lg leading-[1.4]">
                   {msg.insight}
                 </div>
               )}
@@ -147,13 +147,13 @@ export default function IntelMessages({ messages, onSuggestionClick }: IntelMess
               {/* Source & verification badges */}
               <div className="flex items-center gap-2 mt-2">
                 {msg.verified && (
-                  <span className="inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-[#f0fdf4] text-[#059669] border border-[#bbf7d0]">
+                  <span className="inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-[#3fb950]/10 text-[#3fb950] border border-[#3fb950]/20">
                     <ShieldCheck className="w-3 h-3" />
                     Verified Query
                   </span>
                 )}
                 {msg.source && (
-                  <span className="inline-block text-[10px] px-2 py-0.5 rounded-full bg-[#f1f5f9] text-[#64748b]">
+                  <span className="inline-block text-[10px] px-2 py-0.5 rounded-full bg-[#21262d] text-[#8b949e]">
                     Source: {msg.source}
                   </span>
                 )}
@@ -167,7 +167,7 @@ export default function IntelMessages({ messages, onSuggestionClick }: IntelMess
                   <button
                     key={si}
                     onClick={() => onSuggestionClick(s)}
-                    className="text-[12px] text-[#29B5E8] bg-[#f0f9ff] border border-[#bae6fd] rounded-full px-3 py-1 hover:bg-[#e0f2fe] hover:border-[#29B5E8] transition-all cursor-pointer"
+                    className="text-[12px] text-[#29B5E8] bg-[#29B5E8]/10 border border-[#29B5E8]/20 rounded-full px-3 py-1 hover:bg-[#29B5E8]/20 hover:border-[#29B5E8]/40 transition-all cursor-pointer"
                   >
                     {s}
                   </button>
