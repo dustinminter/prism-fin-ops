@@ -14,6 +14,53 @@ export type ScenarioId =
   | "forecast"
   | "cross";
 
+export type ChartType = "bar" | "line" | "area" | "pie" | "composed" | "heatmap";
+
+export type ValueFormat = "currency" | "percent" | "compact" | "number";
+
+export interface ChartSeries {
+  dataKey: string;
+  label: string;
+  color: string;
+  type?: "bar" | "line" | "area";
+  formatter?: ValueFormat;
+  stackId?: string;
+}
+
+export interface ChartAxisConfig {
+  dataKey: string;
+  label?: string;
+  formatter?: ValueFormat;
+}
+
+export interface HeatMapConfig {
+  rowKey: string;
+  colKey: string;
+  valueKey: string;
+  colorScale: "diverging" | "sequential" | "severity";
+}
+
+export interface KPICard {
+  label: string;
+  value: string;
+  change?: string;
+  changeDirection?: "up" | "down" | "neutral";
+  sparklineData?: number[];
+  color?: string;
+  formatter?: ValueFormat;
+}
+
+export interface ChartData {
+  type: ChartType;
+  title?: string;
+  data: Record<string, unknown>[];
+  series: ChartSeries[];
+  xAxis?: ChartAxisConfig;
+  yAxis?: ChartAxisConfig;
+  heatmap?: HeatMapConfig;
+  availableTypes?: ChartType[];
+}
+
 export interface KPI {
   label: string;
   value: string;
@@ -21,12 +68,15 @@ export interface KPI {
   valueFontSize?: string;
   change?: string;
   changeDirection?: "up" | "down" | "neutral";
+  sparklineData?: number[];
 }
 
 export interface ChatMessage {
   role: "user" | "assistant";
   content: string;
   table?: { headers: string[]; rows: ChatTableRow[] };
+  chart?: ChartData;
+  kpis?: KPICard[];
   sql?: string;
   insight?: string;
   source?: string;
@@ -55,10 +105,10 @@ const spendingScenario: ScenarioData = {
   label: "Agency Spending Q&A",
   icon: Target,
   kpis: [
-    { label: "Total Spending (YTD)", value: "$1.28B", color: "blue", change: "FY2026 • All agencies", changeDirection: "neutral" },
+    { label: "Total Spending (YTD)", value: "$1.28B", color: "blue", change: "FY2026 • All agencies", changeDirection: "neutral", sparklineData: [145, 162, 178, 190, 205, 198, 210] },
     { label: "Agencies Tracked", value: "10", change: "7 secretariats", changeDirection: "neutral" },
-    { label: "Unliquidated (ULO)", value: "$18.4M", color: "gold", change: "+6.2% exposure", changeDirection: "down" },
-    { label: "Avg Burn Rate", value: "56.8%", color: "green", change: "On target at mid-year", changeDirection: "up" },
+    { label: "Unliquidated (ULO)", value: "$18.4M", color: "gold", change: "+6.2% exposure", changeDirection: "down", sparklineData: [12, 14, 15, 16, 17, 18, 18.4] },
+    { label: "Avg Burn Rate", value: "56.8%", color: "green", change: "On target at mid-year", changeDirection: "up", sparklineData: [42, 48, 50, 52, 54, 55, 56.8] },
   ],
   suggestions: [
     "What is total spending by secretariat for FY2026?",
@@ -70,6 +120,26 @@ const spendingScenario: ScenarioData = {
     {
       role: "assistant",
       content: "Here's total spending by secretariat for FY2026 (July 2025 – January 2026):",
+      chart: {
+        type: "bar",
+        title: "Total Expenditures by Secretariat (FY2026)",
+        data: [
+          { secretariat: "HHS", obligations: 525.2, expenditures: 468.4 },
+          { secretariat: "DOT", obligations: 252.8, expenditures: 225.1 },
+          { secretariat: "EOTSS", obligations: 180.6, expenditures: 159.3 },
+          { secretariat: "EOE", obligations: 158.4, expenditures: 141.2 },
+          { secretariat: "EOPSS", obligations: 130.1, expenditures: 115.9 },
+          { secretariat: "EEA", obligations: 49.1, expenditures: 43.7 },
+          { secretariat: "ANF", obligations: 23.1, expenditures: 20.6 },
+        ],
+        series: [
+          { dataKey: "obligations", label: "Obligations ($M)", color: "#29B5E8", formatter: "currency" },
+          { dataKey: "expenditures", label: "Expenditures ($M)", color: "#22c55e", formatter: "currency" },
+        ],
+        xAxis: { dataKey: "secretariat", label: "Secretariat" },
+        yAxis: { dataKey: "obligations", formatter: "currency" },
+        availableTypes: ["bar", "pie", "line"],
+      },
       table: {
         headers: ["SECRETARIAT_ID", "AGENCY_COUNT", "TOTAL_OBLIGATIONS", "TOTAL_EXPENDITURES", "BURN_RATE"],
         rows: [
@@ -98,6 +168,26 @@ ORDER BY total_expenditures DESC`,
     {
       role: "assistant",
       content: "**MASSIT** monthly spending trend (last 6 months, base budget $12M/mo):",
+      chart: {
+        type: "line",
+        title: "MASSIT Monthly Spending Trend",
+        data: [
+          { month: "Aug '25", obligations: 11.6, expenditures: 10.4, budget: 12.0 },
+          { month: "Sep '25", obligations: 12.1, expenditures: 10.8, budget: 12.0 },
+          { month: "Oct '25", obligations: 12.4, expenditures: 11.1, budget: 12.1 },
+          { month: "Nov '25", obligations: 11.8, expenditures: 10.6, budget: 11.9 },
+          { month: "Dec '25", obligations: 12.7, expenditures: 11.4, budget: 12.1 },
+          { month: "Jan '26", obligations: 11.9, expenditures: 10.7, budget: 12.0 },
+        ],
+        series: [
+          { dataKey: "obligations", label: "Obligations ($M)", color: "#29B5E8", formatter: "currency" },
+          { dataKey: "expenditures", label: "Expenditures ($M)", color: "#22c55e", formatter: "currency" },
+          { dataKey: "budget", label: "Budget Authority ($M)", color: "#94a3b8", type: "line", formatter: "currency" },
+        ],
+        xAxis: { dataKey: "month" },
+        yAxis: { dataKey: "obligations", formatter: "currency" },
+        availableTypes: ["line", "area", "bar", "composed"],
+      },
       table: {
         headers: ["FISCAL_PERIOD_DATE", "TOTAL_OBLIGATIONS", "TOTAL_EXPENDITURES", "BUDGET_AUTHORITY", "BURN_RATE_PCT"],
         rows: [
@@ -123,10 +213,10 @@ const anomaliesScenario: ScenarioData = {
   icon: AlertTriangle,
   badgeCount: 2,
   kpis: [
-    { label: "Active Anomalies", value: "2", color: "red", change: "1 critical, 1 warning", changeDirection: "down" },
+    { label: "Active Anomalies", value: "2", color: "red", change: "1 critical, 1 warning", changeDirection: "down", sparklineData: [5, 4, 3, 4, 3, 2, 2] },
     { label: "Largest Deviation", value: "+3.4σ", color: "red", change: "ITD — Dec 2025", changeDirection: "neutral" },
     { label: "Detection Model", value: "Cortex ML", color: "sfBlue", valueFontSize: "12px", change: "ANOMALY_DETECTION", changeDirection: "neutral" },
-    { label: "Budget Risk Agencies", value: "3", color: "gold", change: "At Risk or Over Budget", changeDirection: "neutral" },
+    { label: "Budget Risk Agencies", value: "3", color: "gold", change: "At Risk or Over Budget", changeDirection: "neutral", sparklineData: [1, 2, 2, 3, 2, 3, 3] },
   ],
   suggestions: [
     "Which agencies have spending anomalies?",
@@ -138,6 +228,21 @@ const anomaliesScenario: ScenarioData = {
     {
       role: "assistant",
       content: "Cortex ML flagged **2 anomalies** in the detection window (Jul 2025 – Jan 2026):",
+      chart: {
+        type: "bar",
+        title: "Anomaly: Actual vs Expected Spend",
+        data: [
+          { agency: "ITD (Dec '25)", actual: 6.31, expected: 4.68 },
+          { agency: "CYBER (Jan '26)", actual: 2.89, expected: 2.31 },
+        ],
+        series: [
+          { dataKey: "actual", label: "Actual Spend ($M)", color: "#dc2626", formatter: "currency" },
+          { dataKey: "expected", label: "Expected Spend ($M)", color: "#94a3b8", formatter: "currency" },
+        ],
+        xAxis: { dataKey: "agency" },
+        yAxis: { dataKey: "actual", formatter: "currency" },
+        availableTypes: ["bar"],
+      },
       table: {
         headers: ["AGENCY_CODE", "AGENCY_NAME", "FISCAL_PERIOD_DATE", "ACTUAL_SPEND", "EXPECTED_SPEND", "ANOMALY_SEVERITY", "SPEND_DEVIATION_PCT"],
         rows: [
@@ -159,6 +264,22 @@ ORDER BY DISTANCE DESC`,
     {
       role: "assistant",
       content: "Budget risk analysis from Cortex FORECAST model — **3 agencies** flagged:",
+      chart: {
+        type: "composed",
+        title: "Projected Year-End vs Budget Authority",
+        data: [
+          { agency: "ITD", projected: 104.5, budget: 102.0 },
+          { agency: "CYBER", projected: 49.2, budget: 50.4 },
+          { agency: "DESE", projected: 258.0, budget: 264.0 },
+        ],
+        series: [
+          { dataKey: "projected", label: "Projected Year-End ($M)", color: "#dc2626", type: "bar", formatter: "currency" },
+          { dataKey: "budget", label: "Budget Authority ($M)", color: "#29B5E8", type: "line", formatter: "currency" },
+        ],
+        xAxis: { dataKey: "agency" },
+        yAxis: { dataKey: "projected", formatter: "currency" },
+        availableTypes: ["composed", "bar"],
+      },
       table: {
         headers: ["AGENCY_CODE", "AGENCY_NAME", "BUDGET_RISK_LEVEL", "YTD_SPEND", "FORECASTED_REMAINING", "PROJECTED_YEAR_END", "BUDGET_AUTHORITY", "PROJECTED_BURN_RATE_PCT"],
         rows: [
@@ -181,8 +302,8 @@ const forecastScenario: ScenarioData = {
   icon: Activity,
   kpis: [
     { label: "Forecast Horizon", value: "6 mo", color: "blue", change: "Jan–Jun 2026", changeDirection: "neutral" },
-    { label: "Avg Monthly Forecast", value: "$182.7M", color: "green", change: "All agencies", changeDirection: "up" },
-    { label: "Agencies At Risk", value: "3", color: "gold", change: "Burn rate > 90%", changeDirection: "neutral" },
+    { label: "Avg Monthly Forecast", value: "$182.7M", color: "green", change: "All agencies", changeDirection: "up", sparklineData: [168, 172, 175, 178, 180, 182, 182.7] },
+    { label: "Agencies At Risk", value: "3", color: "gold", change: "Burn rate > 90%", changeDirection: "neutral", sparklineData: [1, 2, 2, 3, 2, 3, 3] },
     { label: "Model Confidence", value: "95%", color: "sfBlue", change: "Cortex FORECAST", changeDirection: "neutral" },
   ],
   suggestions: [
@@ -195,6 +316,30 @@ const forecastScenario: ScenarioData = {
     {
       role: "assistant",
       content: "Cortex FORECAST 6-month projections (Jan–Jun 2026) combined with YTD actuals for all 10 agencies:",
+      chart: {
+        type: "composed",
+        title: "Year-End Projection: YTD + Forecast vs Budget",
+        data: [
+          { agency: "DPH", ytd: 290.4, forecast: 242.8, budget: 540.0 },
+          { agency: "MASSDOT", ytd: 225.1, forecast: 188.4, budget: 420.0 },
+          { agency: "DCFS", ytd: 178.2, forecast: 153.6, budget: 336.0 },
+          { agency: "DESE", ytd: 100.8, forecast: 157.2, budget: 264.0 },
+          { agency: "MSP", ytd: 115.9, forecast: 96.8, budget: 216.0 },
+          { agency: "ITD", ytd: 62.4, forecast: 42.1, budget: 102.0 },
+          { agency: "MASSIT", ytd: 75.2, forecast: 66.4, budget: 144.0 },
+          { agency: "DEP", ytd: 43.7, forecast: 36.8, budget: 81.6 },
+          { agency: "CYBER", ytd: 21.8, forecast: 27.4, budget: 50.4 },
+          { agency: "OSD", ytd: 20.6, forecast: 17.3, budget: 38.4 },
+        ],
+        series: [
+          { dataKey: "ytd", label: "YTD Spend ($M)", color: "#29B5E8", type: "bar", formatter: "currency", stackId: "spend" },
+          { dataKey: "forecast", label: "Forecasted Remaining ($M)", color: "#22c55e", type: "bar", formatter: "currency", stackId: "spend" },
+          { dataKey: "budget", label: "Budget Authority ($M)", color: "#dc2626", type: "line", formatter: "currency" },
+        ],
+        xAxis: { dataKey: "agency" },
+        yAxis: { dataKey: "budget", formatter: "currency" },
+        availableTypes: ["composed", "bar"],
+      },
       table: {
         headers: ["AGENCY_CODE", "AGENCY_NAME", "BUDGET_RISK_LEVEL", "YTD_SPEND", "FORECASTED_REMAINING", "PROJECTED_YEAR_END", "BUDGET_AUTHORITY", "PROJECTED_BURN_RATE_PCT"],
         rows: [
@@ -268,6 +413,29 @@ const crossScenario: ScenarioData = {
     {
       role: "assistant",
       content: "Cross-source analysis joining **CIW spending** + **CTHR workforce** data for all 10 agencies:",
+      chart: {
+        type: "bar",
+        title: "Total Cost: Operations + Salaries by Agency",
+        data: [
+          { agency: "MSP", operations: 115.9, salaries: 258.6 },
+          { agency: "DPH", operations: 290.4, salaries: 62.4 },
+          { agency: "MASSDOT", operations: 225.1, salaries: 58.5 },
+          { agency: "DCFS", operations: 178.2, salaries: 73.2 },
+          { agency: "DESE", operations: 100.8, salaries: 40.1 },
+          { agency: "MASSIT", operations: 75.2, salaries: 32.6 },
+          { agency: "ITD", operations: 62.4, salaries: 25.9 },
+          { agency: "DEP", operations: 43.7, salaries: 32.0 },
+          { agency: "CYBER", operations: 21.8, salaries: 16.2 },
+          { agency: "OSD", operations: 20.6, salaries: 11.3 },
+        ],
+        series: [
+          { dataKey: "operations", label: "Operational ($M)", color: "#29B5E8", formatter: "currency", stackId: "cost" },
+          { dataKey: "salaries", label: "Salaries ($M)", color: "#22c55e", formatter: "currency", stackId: "cost" },
+        ],
+        xAxis: { dataKey: "agency" },
+        yAxis: { dataKey: "operations", formatter: "currency" },
+        availableTypes: ["bar", "pie", "composed"],
+      },
       table: {
         headers: ["AGENCY_CODE", "AGENCY_NAME", "OPERATIONAL_SPENDING", "SALARY_OBLIGATIONS", "TOTAL_COST", "TOTAL_POSITIONS", "FILLED_POSITIONS", "AVG_VACANCY_RATE"],
         rows: [
@@ -310,6 +478,21 @@ ORDER BY total_cost DESC`,
     {
       role: "assistant",
       content: "**CYBER (Office of Cybersecurity)** — cross-source intelligence from all 4 PRISM data sources:",
+      chart: {
+        type: "pie",
+        title: "CYBER Spending by Source",
+        data: [
+          { source: "CIW (Operations)", amount: 21.8 },
+          { source: "CTHR (Salaries)", amount: 16.2 },
+          { source: "Commbuys (Procurement)", amount: 24.5 },
+          { source: "CIP (Capital)", amount: 30.2 },
+        ],
+        series: [
+          { dataKey: "amount", label: "Amount ($M)", color: "#29B5E8", formatter: "currency" },
+        ],
+        xAxis: { dataKey: "source" },
+        availableTypes: ["pie", "bar"],
+      },
       table: {
         headers: ["Source", "Metric", "Value"],
         rows: [
