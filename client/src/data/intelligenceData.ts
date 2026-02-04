@@ -81,6 +81,7 @@ export interface ChatMessage {
   insight?: string;
   source?: string;
   verified?: boolean;
+  suggestions?: string[];
 }
 
 export interface ChatTableRow {
