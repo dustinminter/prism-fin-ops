@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, Settings, Clock, Circle, Loader2, Database, TrendingUp, TrendingDown, Minus } from "lucide-react";
-import { usePOCScenario } from "@/contexts/POCScenarioContext";
-import { scenarioMap, type ChatMessage, type KPI } from "@/data/pocDemoData";
+import { useIntelligence } from "@/contexts/IntelligenceContext";
+import { scenarioMap, type ChatMessage, type KPI } from "@/data/intelligenceData";
 import { trpc } from "@/lib/trpc";
 import IntelMessages from "./IntelMessages";
 import { SnowflakeLogo } from "./SnowflakeIcon";
@@ -27,8 +27,8 @@ function getGreeting(): string {
   return "Good evening";
 }
 
-export default function SnowflakeIntelligencePanel() {
-  const { activeScenario } = usePOCScenario();
+export default function IntelligenceChat() {
+  const { activeScenario } = useIntelligence();
   const data = scenarioMap[activeScenario];
   const [query, setQuery] = useState("");
   const [liveMessages, setLiveMessages] = useState<ChatMessage[]>([]);
@@ -63,7 +63,7 @@ export default function SnowflakeIntelligencePanel() {
       const result = await chatMutation.mutateAsync({
         message,
         chatContext: {
-          page: `poc-${activeScenario}`,
+          page: `intelligence-${activeScenario}`,
           conversationHistory: [
             ...data.conversations.slice(-4).map((m) => ({
               role: m.role,

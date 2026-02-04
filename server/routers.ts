@@ -93,7 +93,7 @@ export const appRouter = router({
         return prismQueries.generateExecutiveNarrative(input.scope, input.scopeId, govContext);
       }),
 
-    // AI Chat with Cortex (publicProcedure for POC demo access)
+    // AI Chat with Cortex Intelligence
     chatWithIntelligence: publicProcedure
       .input(
         z.object({

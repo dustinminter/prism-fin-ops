@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ChevronDown, ChevronRight, ShieldCheck } from "lucide-react";
-import type { ChatMessage } from "@/data/pocDemoData";
+import type { ChatMessage } from "@/data/intelligenceData";
 
 function renderMarkdown(text: string) {
   const parts = text.split(/(\*\*[^*]+\*\*)/g);

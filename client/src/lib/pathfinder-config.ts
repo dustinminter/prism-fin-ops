@@ -1,7 +1,7 @@
 import type { DriveStep } from "driver.js";
 
 /**
- * Spotlight tour steps for the PRISM FinOps Intelligence POC.
+ * Spotlight tour steps for the PRISM FinOps Intelligence interface.
  * Each step highlights a key UI element using driver.js.
  */
 export const spotlightTourSteps: DriveStep[] = [
@@ -18,7 +18,7 @@ export const spotlightTourSteps: DriveStep[] = [
   {
     element: "#si-sidebar",
     popover: {
-      title: "Demo Scenarios",
+      title: "Topics",
       description:
         "Walk through 4 data stories: spending analysis, anomaly investigation, budget forecasting, and cross-source intelligence.",
       side: "right",
@@ -81,14 +81,14 @@ export const spotlightTourSteps: DriveStep[] = [
  * Pathfinder contextual page guides.
  */
 export const pageGuides: Record<string, { title: string; steps: string[] }> = {
-  poc: {
-    title: "POC Demo Guide",
+  intelligence: {
+    title: "Intelligence Guide",
     steps: [
-      "Select a demo scenario from the sidebar to load pre-built conversations.",
+      "Select a topic from the sidebar to load pre-built conversations.",
       "Review the data tables and insights in each response.",
       "Click 'Show SQL' to see the verified query behind each answer.",
       "Type your own question or click a suggestion chip at the bottom.",
-      "Use arrow keys to quickly cycle through scenarios.",
+      "Use arrow keys to quickly cycle through topics.",
     ],
   },
 };

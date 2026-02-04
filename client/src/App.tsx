@@ -4,27 +4,12 @@ import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import Home from "./pages/Home";
-import Dashboard from "./pages/Dashboard";
-import AgencyDrillDown from "./pages/AgencyDrillDown";
-import Anomalies from "./pages/Anomalies";
-import Forecasting from "./pages/Forecasting";
-import ExecutiveReports from "./pages/ExecutiveReports";
-import CIPDashboard from "./pages/CIPDashboard";
-import POCDemo from "./pages/POCDemo";
+import Intelligence from "./pages/Intelligence";
 
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/dashboard" component={Dashboard} />
-      <Route path="/agency/:code" component={AgencyDrillDown} />
-      <Route path="/anomalies" component={Anomalies} />
-      <Route path="/forecasting" component={Forecasting} />
-      <Route path="/reports" component={ExecutiveReports} />
-      <Route path="/cip" component={CIPDashboard} />
-      <Route path="/poc" component={POCDemo} />
-      <Route path="/404" component={NotFound} />
+      <Route path="/" component={Intelligence} />
       <Route component={NotFound} />
     </Switch>
   );

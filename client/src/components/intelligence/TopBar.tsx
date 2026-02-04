@@ -1,6 +1,6 @@
 import { SnowflakeIcon } from "./SnowflakeIcon";
 
-export default function POCTopBar() {
+export default function TopBar() {
   return (
     <div className="flex justify-between items-center px-5 h-14 bg-[#151b23]/90 backdrop-blur-md border-b border-[#2a3040] shrink-0">
       <div className="flex items-center gap-4">
@@ -28,7 +28,7 @@ export default function POCTopBar() {
             border: "1px solid rgba(41,181,232,0.25)",
           }}
         >
-          POC &mdash; EOTSS
+          EOTSS
         </span>
       </div>
       <div className="flex items-center gap-3">

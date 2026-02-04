@@ -1,4 +1,4 @@
-// POC Design System — shared constants across all POC components
+// Intelligence Design System — shared constants across all Intelligence components
 
 export const COLORS = {
   blue: "#58a6ff",

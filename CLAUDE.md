@@ -13,7 +13,6 @@
 - ETL: Python scripts (`etl/`), GitHub Actions (`.github/workflows/`)
 
 ## Gotchas
-- `three` (Three.js) is actively used by `client/src/components/DataTunnelHero.tsx` — do not remove
 - 18 pre-existing test failures in useAuth-dependent tests (jsdom/localStorage issue) — not a regression
 - All Snowflake config is env-var-only — no hardcoded account identifiers anywhere
 - SQL scripts must run in Snowsight (Cortex ML, agents, tasks, DMFs blocked by MCP)

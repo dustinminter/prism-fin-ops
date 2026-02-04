@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { usePOCScenario } from "@/contexts/POCScenarioContext";
-import { scenarios, type ScenarioId } from "@/data/pocDemoData";
+import { useIntelligence } from "@/contexts/IntelligenceContext";
+import { scenarios, type ScenarioId } from "@/data/intelligenceData";
 import { MessageSquarePlus, Circle } from "lucide-react";
 
 const dataSources = [
@@ -37,8 +37,8 @@ function StatusList({ items }: { items: string[] }) {
   );
 }
 
-export default function POCSidebar() {
-  const { activeScenario, setScenario } = usePOCScenario();
+export default function Sidebar() {
+  const { activeScenario, setScenario } = useIntelligence();
 
   return (
     <div id="si-sidebar" className="w-[240px] bg-[#151b23]/80 backdrop-blur-sm border-r border-[#2a3040] py-4 shrink-0 overflow-y-auto flex flex-col">
@@ -63,7 +63,7 @@ export default function POCSidebar() {
 
       <div className="h-px bg-[#2a3040] mx-4 mb-3" />
 
-      <SectionLabel>Demo Scenarios</SectionLabel>
+      <SectionLabel>Topics</SectionLabel>
       {scenarios.map((s, i) => {
         const Icon = s.icon;
         const isActive = activeScenario === s.id;

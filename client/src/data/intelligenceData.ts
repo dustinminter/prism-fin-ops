@@ -240,7 +240,7 @@ FROM EOTSS_STAGING.V_CIW_SPENDING
 WHERE BURN_RATE_PCT > 90
 ORDER BY BURN_RATE_PCT DESC
 LIMIT 20`,
-      insight: "ITD (Dec 2025) and CYBER (Jan 2026) are the injected anomalies — burn rates above 100% confirm the spike. MASSIT and DPH occasional months above 90% are within normal seasonal variance.",
+      insight: "ITD (Dec 2025) and CYBER (Jan 2026) are the flagged anomalies — burn rates above 100% confirm the spike. MASSIT and DPH occasional months above 90% are within normal seasonal variance.",
       source: "V_CIW_SPENDING",
       verified: true,
     },
