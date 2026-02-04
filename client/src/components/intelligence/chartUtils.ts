@@ -36,17 +36,30 @@ export function tickFormatter(format?: ValueFormat): (value: unknown) => string 
 }
 
 /**
- * Detect whether a column looks like a date/time field
+ * Detect whether a column looks like a date/time field.
+ * Checks column name AND sample values — category names like "Office Of..." are not dates.
  */
-function isDateColumn(key: string): boolean {
+function isDateColumn(key: string, rows?: Record<string, unknown>[]): boolean {
   const lower = key.toLowerCase();
-  return (
+  const nameHint =
     lower.includes("date") ||
     lower.includes("month") ||
     lower.includes("period") ||
     lower.includes("year") ||
-    lower.includes("quarter")
-  );
+    lower.includes("quarter");
+
+  if (!nameHint) return false;
+
+  // If we have rows, verify values actually look temporal (short strings, numeric-ish)
+  if (rows && rows.length > 0) {
+    const sample = rows.slice(0, 3).map((r) => String(r[key] ?? ""));
+    const looksLikeDate = sample.every(
+      (v) => v.length <= 20 && (/\d/.test(v) || /^(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|q[1-4])/i.test(v))
+    );
+    return looksLikeDate;
+  }
+
+  return nameHint;
 }
 
 /**
@@ -70,22 +83,24 @@ function detectChartType(
 ): ChartType {
   if (rows.length === 0) return "bar";
 
+  const hasDateCol = stringCols.some((col) => isDateColumn(col, rows));
+
   // Time-series → line chart
-  if (stringCols.some(isDateColumn) && numericCols.length >= 1) {
+  if (hasDateCol && numericCols.length >= 1) {
     return "line";
   }
 
-  // Few categories with one numeric → pie
-  if (stringCols.length === 1 && numericCols.length === 1 && rows.length <= 8) {
-    return "pie";
+  // Non-date categories → bar is the best default for comparisons/rankings
+  if (!hasDateCol && rows.length <= 12) {
+    return "bar";
   }
 
   // Cross-tab (two string cols + one numeric) → heatmap
-  if (stringCols.length >= 2 && numericCols.length === 1 && rows.length > 8) {
+  if (stringCols.length >= 2 && numericCols.length === 1 && rows.length > 12) {
     return "heatmap";
   }
 
-  // Multiple numeric series → composed
+  // Multiple numeric series with many rows → composed
   if (numericCols.length >= 3) {
     return "composed";
   }
@@ -107,8 +122,6 @@ function availableChartTypes(
   if (numericCols.length >= 1 && stringCols.length >= 1) {
     types.add("bar");
     if (rows.length <= 10) types.add("pie");
-  }
-  if (stringCols.some(isDateColumn)) {
     types.add("line");
     types.add("area");
   }
@@ -154,7 +167,7 @@ export function buildChartDataFromResults(
   if (!rows.length || !columns.length) return null;
 
   const stringCols = columns
-    .filter((c) => c.type === "string" || (!isNumericColumn(rows, c.name) && !isDateColumn(c.name)))
+    .filter((c) => c.type === "string" || (!isNumericColumn(rows, c.name) && !isDateColumn(c.name, rows)))
     .map((c) => c.name);
 
   const numericCols = columns
