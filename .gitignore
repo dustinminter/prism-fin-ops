@@ -93,3 +93,6 @@ data/commbuys/*/attachments/
 
 # Serena
 .serena/
+
+# MAIOS Agent OS install artifacts
+.maios-agent-os/
