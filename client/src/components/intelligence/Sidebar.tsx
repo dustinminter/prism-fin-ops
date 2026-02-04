@@ -3,15 +3,19 @@ import { scenarios, type ScenarioId } from "@/data/intelligenceData";
 import { MessageSquarePlus, Circle, Clock } from "lucide-react";
 
 export default function Sidebar() {
-  const { activeScenario, setScenario } = useIntelligence();
+  const { activeScenario, isNewChat, setScenario, startNewChat } = useIntelligence();
 
   return (
     <div className="w-[240px] bg-[#0d1117] border-r border-[#21262d] py-4 shrink-0 overflow-y-auto flex flex-col">
       {/* New Chat */}
       <div className="px-3 mb-4">
         <button
-          onClick={() => setScenario("spending" as ScenarioId)}
-          className="flex items-center gap-2 w-full px-3 py-2.5 rounded-lg bg-[#161b22] border border-[#21262d] text-[13px] text-[#c9d1d9] font-medium hover:bg-[#1c2333] hover:border-[#30363d] transition-all duration-200"
+          onClick={startNewChat}
+          className={`flex items-center gap-2 w-full px-3 py-2.5 rounded-lg border text-[13px] font-medium transition-all duration-200
+            ${isNewChat
+              ? "bg-[#1f6feb]/15 border-[#1f6feb]/30 text-[#58a6ff]"
+              : "bg-[#161b22] border-[#21262d] text-[#c9d1d9] hover:bg-[#1c2333] hover:border-[#30363d]"
+            }`}
         >
           <MessageSquarePlus className="w-4 h-4 text-[#29B5E8]" />
           New Chat
@@ -40,7 +44,7 @@ export default function Sidebar() {
       </div>
       {scenarios.map((s) => {
         const Icon = s.icon;
-        const isActive = activeScenario === s.id;
+        const isActive = !isNewChat && activeScenario === s.id;
         return (
           <button
             key={s.id}

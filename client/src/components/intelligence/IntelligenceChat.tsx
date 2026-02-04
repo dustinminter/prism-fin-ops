@@ -1,11 +1,13 @@
 import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, Loader2, Paperclip, Mic, MessageSquare, Brain } from "lucide-react";
+import { Send, Loader2, Paperclip, Mic, MessageSquare, Brain, HelpCircle } from "lucide-react";
 import { useIntelligence } from "@/contexts/IntelligenceContext";
-import { scenarioMap, type ChatMessage } from "@/data/intelligenceData";
+import { scenarioMap, scenarios, type ChatMessage, type ScenarioId } from "@/data/intelligenceData";
 import { trpc } from "@/lib/trpc";
 import { buildChartDataFromResults } from "./chartUtils";
 import IntelMessages from "./IntelMessages";
+import ExecutiveNarrative from "./ExecutiveNarrative";
+import GuidedTour, { useTourTrigger } from "./GuidedTour";
 import { SnowflakeIcon } from "./SnowflakeIcon";
 
 function getGreeting(): string {
@@ -22,7 +24,16 @@ const LOADING_STEPS = [
   "Preparing answer...",
 ];
 
-/* ─── Chat Input Bar ─── */
+const WELCOME_PROMPTS = [
+  "What is total spending by secretariat for FY2026?",
+  "Which agencies have spending anomalies?",
+  "Show projected year-end spend by agency",
+  "What is the total cost per agency including salaries?",
+  "Show agencies with burn rate above 90%",
+  "Show cybersecurity spending across all sources",
+];
+
+/* --- Chat Input Bar --- */
 function ChatInput({
   query,
   setQuery,
@@ -102,7 +113,7 @@ function ChatInput({
 }
 
 export default function IntelligenceChat() {
-  const { activeScenario } = useIntelligence();
+  const { activeScenario, isNewChat, setScenario } = useIntelligence();
   const data = scenarioMap[activeScenario];
   const [query, setQuery] = useState("");
   const [liveMessages, setLiveMessages] = useState<ChatMessage[]>([]);
@@ -113,10 +124,12 @@ export default function IntelligenceChat() {
   const liveMessagesRef = useRef(liveMessages);
   liveMessagesRef.current = liveMessages;
 
+  const { showTour, triggerTour, onTourComplete } = useTourTrigger();
+
   const greeting = useMemo(() => getGreeting(), []);
   const allMessages = useMemo(
-    () => [...data.conversations, ...liveMessages],
-    [data.conversations, liveMessages]
+    () => (isNewChat ? liveMessages : [...data.conversations, ...liveMessages]),
+    [isNewChat, data.conversations, liveMessages]
   );
   const hasMessages = allMessages.length > 0;
 
@@ -125,11 +138,11 @@ export default function IntelligenceChat() {
   // Reset live messages when scenario changes
   useEffect(() => {
     setLiveMessages([]);
-  }, [activeScenario]);
+  }, [activeScenario, isNewChat]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [activeScenario, liveMessages]);
+  }, [activeScenario, liveMessages, isNewChat]);
 
   // Cycle loading steps while waiting
   useEffect(() => {
@@ -147,6 +160,18 @@ export default function IntelligenceChat() {
     const message = (text || query).trim();
     if (!message || isLoading) return;
 
+    // If in new chat mode and a prompt matches a scenario, switch to that scenario
+    if (isNewChat) {
+      const matchedScenario = scenarios.find((s) =>
+        s.conversations.some((c) => c.role === "user" && c.content === message)
+      );
+      if (matchedScenario) {
+        setScenario(matchedScenario.id as ScenarioId);
+        setQuery("");
+        return;
+      }
+    }
+
     setQuery("");
     setLiveMessages((prev) => [...prev, { role: "user", content: message }]);
     setIsLoading(true);
@@ -158,10 +183,10 @@ export default function IntelligenceChat() {
         chatContext: {
           page: `intelligence-${activeScenario}`,
           conversationHistory: [
-            ...data.conversations.slice(-4).map((m) => ({
+            ...(isNewChat ? [] : data.conversations.slice(-4).map((m) => ({
               role: m.role,
               content: m.content,
-            })),
+            }))),
             ...liveMessagesRef.current.slice(-4).map((m) => ({
               role: m.role,
               content: m.content,
@@ -198,14 +223,17 @@ export default function IntelligenceChat() {
       setIsLoading(false);
       inputRef.current?.focus();
     }
-  }, [query, isLoading, activeScenario, data.conversations, chatMutation]);
+  }, [query, isLoading, isNewChat, activeScenario, data.conversations, chatMutation, setScenario]);
 
   return (
     <div className="flex-1 flex flex-col bg-[#0d1117]">
+      {/* Guided Tour */}
+      <GuidedTour forceShow={showTour} onComplete={onTourComplete} />
+
       {/* Scrollable content area */}
       <div className="flex-1 overflow-y-auto">
         {!hasMessages ? (
-          /* ─── Welcome Screen ─── */
+          /* --- Welcome Screen --- */
           <div className="flex flex-col items-center justify-center min-h-full px-6">
             <div className="flex flex-col items-center w-full max-w-[740px] -mt-12">
               {/* Greeting */}
@@ -236,29 +264,46 @@ export default function IntelligenceChat() {
                 centered
               />
 
-              {/* Sample questions */}
+              {/* Recommended prompts */}
               <div className="flex flex-col gap-0 mt-6 w-full max-w-[740px]">
-                {data.chips.map((chip, i) => (
+                <div className="flex items-center gap-1.5 text-[10px] font-semibold tracking-[1px] uppercase text-[#484f58] mb-1 px-4">
+                  Recommended
+                </div>
+                {WELCOME_PROMPTS.map((prompt, i) => (
                   <button
                     key={i}
-                    onClick={() => handleSend(chip)}
+                    onClick={() => handleSend(prompt)}
                     disabled={isLoading}
                     className="flex items-center gap-3 w-full px-4 py-3 text-left text-[14px] text-[#8b949e] hover:text-[#e6edf3] hover:bg-[#161b22] rounded-lg transition-colors disabled:opacity-50 cursor-pointer border-b border-[#21262d] last:border-b-0"
                   >
                     <MessageSquare className="w-4 h-4 shrink-0 text-[#484f58]" />
-                    {chip}
+                    {prompt}
                   </button>
                 ))}
               </div>
+
+              {/* Tour trigger */}
+              <button
+                onClick={triggerTour}
+                className="mt-6 flex items-center gap-2 text-[13px] text-[#484f58] hover:text-[#29B5E8] transition-colors"
+              >
+                <HelpCircle className="w-4 h-4" />
+                Take a guided tour
+              </button>
             </div>
           </div>
         ) : (
-          /* ─── Conversation View ─── */
+          /* --- Conversation View --- */
           <div className="max-w-[900px] mx-auto w-full px-6 py-4">
+            {/* Executive Narrative (at top of scenario conversations) */}
+            {!isNewChat && data.executiveNarrative && (
+              <ExecutiveNarrative narrative={data.executiveNarrative} />
+            )}
+
             {/* Messages */}
             <AnimatePresence mode="wait">
               <motion.div
-                key={`msgs-${activeScenario}`}
+                key={`msgs-${isNewChat ? "live" : activeScenario}`}
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -6 }}
@@ -288,13 +333,24 @@ export default function IntelligenceChat() {
       {/* Chat input — fixed at bottom (only in conversation view) */}
       {hasMessages && (
         <div className="border-t border-[#21262d] bg-[#0d1117] px-6 py-3 shrink-0">
-          <ChatInput
-            query={query}
-            setQuery={setQuery}
-            isLoading={isLoading}
-            onSend={() => handleSend()}
-            inputRef={inputRef}
-          />
+          <div className="flex items-center gap-2 max-w-[900px] mx-auto w-full">
+            <div className="flex-1">
+              <ChatInput
+                query={query}
+                setQuery={setQuery}
+                isLoading={isLoading}
+                onSend={() => handleSend()}
+                inputRef={inputRef}
+              />
+            </div>
+            <button
+              onClick={triggerTour}
+              className="w-8 h-8 rounded-lg flex items-center justify-center text-[#484f58] hover:text-[#29B5E8] hover:bg-[#21262d] transition-colors shrink-0"
+              title="Guided tour"
+            >
+              <HelpCircle className="w-4 h-4" />
+            </button>
+          </div>
         </div>
       )}
     </div>

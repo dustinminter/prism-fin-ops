@@ -88,6 +88,14 @@ export interface ChatTableRow {
   cells: { value: string; className?: string }[];
 }
 
+export interface ExecutiveNarrative {
+  title: string;
+  period: string;
+  summary: string;
+  highlights: { label: string; value: string; status: "good" | "warn" | "critical" }[];
+  risks: string[];
+}
+
 export interface ScenarioData {
   id: ScenarioId;
   label: string;
@@ -97,6 +105,7 @@ export interface ScenarioData {
   suggestions: string[];
   conversations: ChatMessage[];
   chips: string[];
+  executiveNarrative?: ExecutiveNarrative;
 }
 
 // ── Scenario Data ──────────────────────────────────────────────────────
@@ -203,9 +212,29 @@ ORDER BY total_expenditures DESC`,
       insight: "MASSIT spending is stable around the $12M/mo base budget. October and December show seasonal peaks from cloud consumption. All months within expected ±8% seasonal variance.",
       source: "V_CIW_SPENDING",
       verified: true,
+      suggestions: [
+        "Show top 10 vendors by contract value",
+        "What is ULO exposure by agency?",
+        "Compare FY2025 vs FY2026 by secretariat",
+      ],
     },
   ],
   chips: ["Top 10 vendors by contract value", "ULO exposure by agency", "Compare FY2025 vs FY2026 by secretariat"],
+  executiveNarrative: {
+    title: "Agency Spending Overview",
+    period: "FY2026 Q2 (Jul 2025 – Jan 2026)",
+    summary: "Total YTD spending across 10 agencies is $1.28B against $2.19B total budget authority, representing a 56.8% burn rate — on target at mid-year. HHS and DOT account for 54% of all expenditures. ULO exposure stands at $18.4M (+6.2% QoQ), driven by delayed cloud procurement settlements.",
+    highlights: [
+      { label: "YTD Spend", value: "$1.28B", status: "good" },
+      { label: "Burn Rate", value: "56.8%", status: "good" },
+      { label: "ULO Exposure", value: "$18.4M", status: "warn" },
+      { label: "Agencies Tracked", value: "10", status: "good" },
+    ],
+    risks: [
+      "ULO exposure trending up 6.2% — monitor AWS settlement timelines",
+      "EOTSS cloud spend approaching quarterly threshold",
+    ],
+  },
 };
 
 const anomaliesScenario: ScenarioData = {
@@ -292,9 +321,30 @@ ORDER BY DISTANCE DESC`,
       insight: "ITD is projected to exceed budget by $2.5M (2.5%) if the December spending pattern continues. CYBER and DESE are within 3% of their ceiling — recommend monthly monitoring.",
       source: "V_BUDGET_RISK (Cortex FORECAST)",
       verified: true,
+      suggestions: [
+        "Root cause analysis for ITD December spike",
+        "What is the budget impact if this trend continues?",
+        "Compare anomalies to prior fiscal year",
+      ],
     },
   ],
   chips: ["Root cause for ITD spike", "Budget impact if trend continues", "Compare anomalies to prior FY"],
+  executiveNarrative: {
+    title: "Anomaly & Risk Assessment",
+    period: "Detection Window: Jul 2025 – Jan 2026",
+    summary: "Cortex ML flagged 2 active anomalies — ITD December spending at +3.4σ (Critical) and CYBER January at +2.1σ (Warning). Budget risk analysis shows ITD projected $2.5M over budget if the pattern continues. CYBER and DESE are within 3% of ceiling.",
+    highlights: [
+      { label: "Active Anomalies", value: "2", status: "critical" },
+      { label: "Largest Deviation", value: "+3.4σ", status: "critical" },
+      { label: "Agencies At Risk", value: "3", status: "warn" },
+      { label: "Detection Model", value: "Cortex ML", status: "good" },
+    ],
+    risks: [
+      "ITD projected $2.5M over budget — unplanned AWS capacity for shared services",
+      "CYBER incident response procurement at 130% of budget authority",
+      "DESE within 3% of ceiling — staffing costs accelerating",
+    ],
+  },
 };
 
 const forecastScenario: ScenarioData = {
@@ -389,9 +439,30 @@ LIMIT 20`,
       insight: "ITD (Dec 2025) and CYBER (Jan 2026) are the flagged anomalies — burn rates above 100% confirm the spike. MASSIT and DPH occasional months above 90% are within normal seasonal variance.",
       source: "V_CIW_SPENDING",
       verified: true,
+      suggestions: [
+        "Model filling 50 CTHR vacancies",
+        "What-if: 10% cloud cost reduction",
+        "Project ULO exposure by year-end",
+      ],
     },
   ],
   chips: ["Model filling 50 CTHR vacancies", "What-if: 10% cloud cost reduction", "ULO projection by year-end"],
+  executiveNarrative: {
+    title: "Budget Forecast Intelligence",
+    period: "Forecast Horizon: Jan – Jun 2026",
+    summary: "Cortex FORECAST projects $1.10B in remaining spend across all agencies through end of FY2026. Average monthly burn of $182.7M is on pace with historical patterns. 3 agencies flagged with burn rates approaching or exceeding budget authority — ITD is the only confirmed over-budget projection.",
+    highlights: [
+      { label: "Forecast Horizon", value: "6 months", status: "good" },
+      { label: "Avg Monthly Forecast", value: "$182.7M", status: "good" },
+      { label: "Agencies At Risk", value: "3", status: "warn" },
+      { label: "Model Confidence", value: "95%", status: "good" },
+    ],
+    risks: [
+      "ITD only agency projected to exceed budget authority (102.5%)",
+      "CYBER and DESE within 3% of ceiling — monitor monthly",
+      "Cloud cost inflation could push EOTSS-wide burn 2-3% higher",
+    ],
+  },
 };
 
 const crossScenario: ScenarioData = {
@@ -518,9 +589,30 @@ ORDER BY total_cost DESC`,
       insight: "Total cybersecurity footprint: $92.7M across all sources. The 22.1% vacancy rate is the highest across all agencies — security talent gap is the top risk. 2 CIP projects ($30.2M) include the Zero Trust Architecture initiative.",
       source: "CIW + Commbuys + CTHR + CIP",
       verified: true,
+      suggestions: [
+        "Show vendor concentration risk analysis",
+        "Which CIP projects are at risk from staffing?",
+        "List expiring contracts over $500K",
+      ],
     },
   ],
   chips: ["Vendor concentration risk", "CIP projects at risk from staffing", "Expiring contracts > $500K"],
+  executiveNarrative: {
+    title: "Cross-Source Intelligence Summary",
+    period: "FY2026 — All 4 Data Sources",
+    summary: "PRISM integrates 4 Commonwealth data sources — CIW (operational spending), CTHR (workforce/salaries), Commbuys (procurement awards), and CIP (capital investments). Cross-source analysis reveals that MSP has the largest total cost footprint ($374.5M) when combining operations and salaries, while CYBER has the highest workforce risk at 22.1% vacancy rate.",
+    highlights: [
+      { label: "Data Sources", value: "4", status: "good" },
+      { label: "Semantic Tables", value: "7", status: "good" },
+      { label: "Cross-Source Joins", value: "Enabled", status: "good" },
+      { label: "Governance", value: "DULA", status: "good" },
+    ],
+    risks: [
+      "CYBER 22.1% vacancy rate — highest across all agencies, security talent gap",
+      "MSP salary obligations ($258.6M) may increase with union contract renewal",
+      "CIP capital projects ($30.2M cyber) dependent on filling 31 open positions",
+    ],
+  },
 };
 
 // ── Export ──────────────────────────────────────────────────────────────
