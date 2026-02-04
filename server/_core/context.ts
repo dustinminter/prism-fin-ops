@@ -5,6 +5,16 @@ import { sdk } from "./sdk";
 import { isSpcsEnvironment } from "../snowflake-spcs";
 import { resolveTenantForUser } from "./tenant-resolver";
 
+// Dev-mode fallback tenant when GOVERNANCE schema doesn't exist yet
+const DEV_TENANT: TenantConfig = {
+  tenantId: "dev",
+  displayName: "Dev Tenant",
+  dataSchema: "EOTSS_STAGING",
+  govSchema: "GOVERNANCE",
+  semSchema: "EOTSS_STAGING",
+  snowflakeRole: "ACCOUNTADMIN",
+};
+
 export type TrpcContext = {
   req: CreateExpressContextOptions["req"] | null;
   res: CreateExpressContextOptions["res"] | null;
@@ -47,6 +57,11 @@ export async function createContext(
     tenant = await resolveTenantForUser(baseUser.openId);
   } catch (error) {
     console.error("[Context] Tenant resolution failed:", (error as Error).message);
+    // In local dev, fall back to dev tenant so routes work without GOVERNANCE schema
+    if (!isSpcsEnvironment()) {
+      tenant = DEV_TENANT;
+      console.log("[Context] Using dev fallback tenant");
+    }
   }
 
   // Build user with tenantId (empty string if no tenant — route middleware will enforce)

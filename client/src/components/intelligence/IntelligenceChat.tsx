@@ -29,27 +29,6 @@ function getGreeting(): string {
   return "Good evening";
 }
 
-const DATA_QUESTION_PATTERNS = [
-  /\b(show|list|display|get|find|what|how much|how many|compare|breakdown|total|top|bottom)\b/i,
-  /\b(spending|spend|budget|expenditure|obligation|award|contract|vendor|agency|secretariat)\b/i,
-  /\b(trend|forecast|anomal|risk|burn rate|ulo|vacancy)\b/i,
-  /\b(by|per|across|for each|grouped by)\b/i,
-];
-
-/**
- * Heuristic to determine if a user message is a data/SQL question
- * that should be routed to executeNaturalLanguageQuery
- */
-function isDataQuestion(message: string): boolean {
-  const lower = message.toLowerCase();
-  // Match at least 2 of the patterns to avoid false positives
-  let matches = 0;
-  for (const pattern of DATA_QUESTION_PATTERNS) {
-    if (pattern.test(lower)) matches++;
-  }
-  return matches >= 2;
-}
-
 function KPISparkline({ data, color }: { data: number[]; color: string }) {
   const chartData = data.map((v, i) => ({ i, v }));
   return (
@@ -77,7 +56,6 @@ export default function IntelligenceChat() {
   const greeting = useMemo(() => getGreeting(), []);
 
   const chatMutation = trpc.prism.chatWithIntelligence.useMutation();
-  const nlQueryMutation = trpc.prism.executeNaturalLanguageQuery.useMutation();
 
   // Reset live messages when scenario changes
   useEffect(() => {
@@ -97,33 +75,6 @@ export default function IntelligenceChat() {
     setIsLoading(true);
 
     try {
-      // Route data questions to NL query endpoint for chart rendering
-      if (isDataQuestion(message)) {
-        try {
-          const nlResult = await nlQueryMutation.mutateAsync({ query: message });
-
-          if (nlResult.results.length > 0) {
-            const chartData = buildChartDataFromResults(nlResult.results, nlResult.columns);
-
-            setLiveMessages((prev) => [
-              ...prev,
-              {
-                role: "assistant",
-                content: nlResult.explanation,
-                chart: chartData ?? undefined,
-                sql: nlResult.generatedSQL,
-                source: "Natural Language Query",
-                verified: true,
-              },
-            ]);
-            return;
-          }
-          // Fall through to chat if no results
-        } catch {
-          // Fall through to chat on NL query error
-        }
-      }
-
       const result = await chatMutation.mutateAsync({
         message,
         chatContext: {
@@ -141,12 +92,20 @@ export default function IntelligenceChat() {
         },
       });
 
+      // Build chart from Cortex Analyst SQL results when available
+      const chartData = result.results && result.columns
+        ? buildChartDataFromResults(result.results, result.columns)
+        : undefined;
+
       setLiveMessages((prev) => [
         ...prev,
         {
           role: "assistant",
           content: result.response,
-          source: result.sources?.join(", "),
+          chart: chartData ?? undefined,
+          sql: result.sql,
+          source: result.sources?.join(", ") ?? "Cortex Analyst",
+          verified: result.isVerifiedQuery,
         },
       ]);
     } catch {
@@ -161,7 +120,7 @@ export default function IntelligenceChat() {
       setIsLoading(false);
       inputRef.current?.focus();
     }
-  }, [query, isLoading, activeScenario, data.conversations, chatMutation, nlQueryMutation]);
+  }, [query, isLoading, activeScenario, data.conversations, chatMutation]);
 
   return (
     <div className="flex-1 min-w-[420px] bg-[#f7f8fa] border-l border-[#e1e4e8] flex flex-col">

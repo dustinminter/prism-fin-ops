@@ -31,6 +31,7 @@ const SNOWFLAKE_CONFIG = {
   role: process.env.SNOWFLAKE_ROLE || "PRISM_APP_ROLE",
   username: process.env.SNOWFLAKE_USER || "",
   password: process.env.SNOWFLAKE_PASSWORD || "",
+  privateKeyPath: process.env.SNOWFLAKE_PRIVATE_KEY_PATH || "",
 };
 
 // Connection pool management
@@ -87,12 +88,23 @@ export function getConnectionOptions(): snowflake.ConnectionOptions {
       authenticator: "OAUTH",
       token: token,
     };
+  } else if (SNOWFLAKE_CONFIG.privateKeyPath) {
+    // Local development: Use keypair authentication
+    console.log("[Snowflake] Using keypair authentication (local dev)");
+    const privateKey = fs.readFileSync(SNOWFLAKE_CONFIG.privateKeyPath, "utf-8");
+    return {
+      ...baseOptions,
+      username: SNOWFLAKE_CONFIG.username,
+      authenticator: "SNOWFLAKE_JWT",
+      privateKey,
+    };
   } else {
     // Local development: Use username/password
     console.log("[Snowflake] Using password authentication (local dev)");
     if (!SNOWFLAKE_CONFIG.username || !SNOWFLAKE_CONFIG.password) {
       throw new Error(
-        "[Snowflake] SNOWFLAKE_USER and SNOWFLAKE_PASSWORD required for local development"
+        "[Snowflake] SNOWFLAKE_USER and SNOWFLAKE_PASSWORD required for local development. " +
+        "Alternatively, set SNOWFLAKE_PRIVATE_KEY_PATH for keypair auth."
       );
     }
     return {

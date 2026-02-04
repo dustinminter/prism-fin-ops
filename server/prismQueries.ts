@@ -1,5 +1,6 @@
 import { executeQuery, executeGovernedQuery, executeTenantQuery, GovernanceContext, GovernanceMetadata } from "./snowflake";
 import type { TenantConfig } from "../shared/types/tenant";
+import { sendAnalystMessage, parseAnalystResponse, buildAnalystMessages } from "./cortex-analyst";
 
 /**
  * Helper function to extract text from various Cortex response formats
@@ -1717,180 +1718,92 @@ Rules:
 `;
 
 /**
- * Execute a natural language query against Snowflake
- * Uses Cortex COMPLETE to translate NL to SQL, then executes
+ * Execute a natural language query against Snowflake via Cortex Analyst REST API.
+ * Sends the question to the PRISM_EOTSS_FINOPS semantic view, gets SQL back,
+ * executes it, and returns structured results.
  */
 export async function executeNaturalLanguageQuery(
   naturalLanguageQuery: string,
   context: GovernanceContext = {}
 ): Promise<NLQueryResult> {
   const startTime = Date.now();
-  console.log("[NLQuery] Starting query:", naturalLanguageQuery.substring(0, 100));
-
-  let generatedSQL = "";
+  console.log("[NLQuery] Starting Analyst query:", naturalLanguageQuery.substring(0, 100));
 
   try {
-    // Step 1: Try to use Cortex COMPLETE to generate SQL from natural language
-    // Use ARRAY_CONSTRUCT format (like chat) with parameterized queries for proper escaping
-    const systemPrompt = SCHEMA_CONTEXT;
-    const userPrompt = `User question: "${naturalLanguageQuery}"
+    // Step 1: Send to Cortex Analyst
+    const analystMessages = buildAnalystMessages(naturalLanguageQuery);
+    const analystResponse = await sendAnalystMessage(analystMessages);
+    const parsed = parseAnalystResponse(analystResponse);
 
-Generate a valid Snowflake SQL query to answer this question.
-Return ONLY the SQL query, no explanations or markdown.
-If the question cannot be answered with the available data, return: SELECT 'Query not supported' as error`;
+    console.log("[NLQuery] Analyst responded — SQL:", !!parsed.sql, "Suggestions:", parsed.suggestions.length);
 
-    const sqlGenerationQuery = `
-      SELECT SNOWFLAKE.CORTEX.COMPLETE(
-        'mistral-large',
-        ARRAY_CONSTRUCT(
-          OBJECT_CONSTRUCT('role', 'system', 'content', ?),
-          OBJECT_CONSTRUCT('role', 'user', 'content', ?)
-        ),
-        OBJECT_CONSTRUCT('temperature', 0.1, 'max_tokens', 500)
-      ) as generated_sql
-    `;
-
-    try {
-      console.log("[NLQuery] Step 1: Calling Cortex for SQL generation...");
-      const sqlResult = await executeQuery<Record<string, unknown>>(
-        sqlGenerationQuery,
-        [systemPrompt, userPrompt],
-        { ...context, requestSource: "nlQuery_sqlGeneration" }
-      );
-      console.log("[NLQuery] Step 1: Cortex call completed, result count:", sqlResult?.length);
-
-      // Snowflake returns column names in UPPERCASE, so check both cases
-      const row = sqlResult[0] || {};
-      const rawResponse = row.GENERATED_SQL || row.generated_sql;
-      console.log("[NLQuery] Step 1: Raw response type:", typeof rawResponse);
-      console.log("[NLQuery] Step 1: Available columns:", Object.keys(row).join(", "));
-
-      // Parse Cortex response using the shared helper
-      if (typeof rawResponse === "string") {
-        try {
-          const parsed = JSON.parse(rawResponse);
-          generatedSQL = extractCortexText(parsed);
-        } catch {
-          generatedSQL = rawResponse;
-        }
-      } else if (rawResponse && typeof rawResponse === "object") {
-        generatedSQL = extractCortexText(rawResponse);
-      }
-
-      // Clean up the SQL (remove markdown code blocks if present)
-      generatedSQL = (generatedSQL || "")
-        .replace(/```sql\n?/gi, "")
-        .replace(/```\n?/g, "")
-        .trim();
-
-      console.log("[NLQuery] Step 1: Generated SQL (truncated):", generatedSQL.substring(0, 200));
-    } catch (cortexError) {
-      // Fallback: generate SQL locally based on common patterns
-      console.log("[NLQuery] Step 1: Cortex failed, using fallback:", cortexError instanceof Error ? cortexError.message : "Unknown");
-      generatedSQL = generateFallbackSQL(naturalLanguageQuery);
-      console.log("[NLQuery] Step 1: Fallback SQL (truncated):", generatedSQL.substring(0, 200));
-    }
-
-    // Step 2: Execute the generated SQL
+    // Step 2: Execute the returned SQL
     let results: Record<string, unknown>[] = [];
     let columns: { name: string; type: string }[] = [];
 
-    try {
-      console.log("[NLQuery] Step 2: Executing generated SQL...");
-      results = await executeQuery<Record<string, unknown>>(
-        generatedSQL,
-        [],
-        { ...context, requestSource: "nlQuery_execution" }
-      );
-      console.log("[NLQuery] Step 2: Execution completed, row count:", results?.length);
-
-      // Extract column info from first result
-      if (results.length > 0) {
-        columns = Object.keys(results[0]).map(key => ({
-          name: key,
-          type: typeof results[0][key] === "number" ? "number" : "string"
-        }));
-        console.log("[NLQuery] Step 2: Columns extracted:", columns.map(c => c.name).join(", "));
-      }
-    } catch (execError) {
-      // If execution fails, return error info
-      console.error("[NLQuery] Step 2: SQL execution failed:", execError instanceof Error ? execError.message : "Unknown");
-      return {
-        query: naturalLanguageQuery,
-        generatedSQL,
-        results: [],
-        columns: [],
-        rowCount: 0,
-        executionTimeMs: Date.now() - startTime,
-        explanation: `Query execution failed: ${execError instanceof Error ? execError.message : "Unknown error"}`,
-        suggestedFollowUps: [
-          "Try rephrasing your question",
-          "Ask about total spending by agency",
-          "Request a list of top awards"
-        ],
-        governanceMetadata: {
-          queryId: `nlq-${Date.now()}`,
-          trustState: context.trustState || "draft",
-          agreementId: context.agreementId || "DUA-001",
-          enforcedAt: new Date().toISOString(),
-          userRole: context.userRole || "analyst"
+    if (parsed.sql) {
+      try {
+        results = await executeQuery<Record<string, unknown>>(
+          parsed.sql,
+          [],
+          { ...context, requestSource: "cortexAnalyst_execution" }
+        );
+        if (results.length > 0) {
+          columns = Object.keys(results[0]).map((key) => ({
+            name: key,
+            type: typeof results[0][key] === "number" ? "number" : "string",
+          }));
         }
-      };
+        console.log("[NLQuery] SQL executed:", results.length, "rows");
+      } catch (sqlError) {
+        console.warn("[NLQuery] SQL execution failed:", (sqlError as Error).message);
+      }
     }
 
-    // Step 3: Generate explanation and follow-ups
-    console.log("[NLQuery] Step 3: Generating explanation and follow-ups...");
-    const explanation = generateQueryExplanation(naturalLanguageQuery, generatedSQL, results);
-    const suggestedFollowUps = generateFollowUpQuestions(naturalLanguageQuery, results);
     const visualization = determineVisualization(naturalLanguageQuery, results, columns);
-
-    const executionTimeMs = Date.now() - startTime;
-    console.log("[NLQuery] Completed successfully in", executionTimeMs, "ms");
 
     return {
       query: naturalLanguageQuery,
-      generatedSQL,
+      generatedSQL: parsed.sql || "",
       results,
       columns,
       rowCount: results.length,
-      executionTimeMs,
-      explanation,
-      suggestedFollowUps,
+      executionTimeMs: Date.now() - startTime,
+      explanation: parsed.explanation,
+      suggestedFollowUps: parsed.suggestions.length > 0
+        ? parsed.suggestions
+        : generateFollowUpQuestions(naturalLanguageQuery, results),
       visualization,
       governanceMetadata: {
-        queryId: `nlq-${Date.now()}`,
+        queryId: parsed.requestId || `nlq-${Date.now()}`,
         trustState: context.trustState || "draft",
         agreementId: context.agreementId || "DUA-001",
         enforcedAt: new Date().toISOString(),
-        userRole: context.userRole || "analyst"
-      }
+        userRole: context.userRole || "analyst",
+      },
     };
   } catch (error) {
-    // Top-level catch for any unexpected errors
-    console.error("[NLQuery] Unexpected error:", error instanceof Error ? error.message : "Unknown");
-    console.error("[NLQuery] Error stack:", error instanceof Error ? error.stack : "No stack");
-
-    // Return a valid response with error info rather than throwing
+    console.error("[NLQuery] Analyst error:", (error as Error).message);
     return {
       query: naturalLanguageQuery,
-      generatedSQL: generatedSQL || "-- Error generating SQL",
+      generatedSQL: "",
       results: [],
       columns: [],
       rowCount: 0,
       executionTimeMs: Date.now() - startTime,
-      explanation: `An error occurred: ${error instanceof Error ? error.message : "Unknown error"}`,
+      explanation: `Unable to process query: ${(error as Error).message}`,
       suggestedFollowUps: [
-        "Try rephrasing your question",
-        "Ask about total spending by agency",
-        "Request a list of top awards"
+        "What is total spending by secretariat?",
+        "Which agencies are over budget?",
+        "Show me CIP projects by policy area",
       ],
       governanceMetadata: {
         queryId: `nlq-${Date.now()}`,
         trustState: context.trustState || "draft",
         agreementId: context.agreementId || "DUA-001",
         enforcedAt: new Date().toISOString(),
-        userRole: context.userRole || "analyst"
-      }
+        userRole: context.userRole || "analyst",
+      },
     };
   }
 }
@@ -2153,10 +2066,19 @@ export interface ChatResponse {
   };
   trustState: "draft" | "internal" | "client" | "executive";
   sources?: string[];
+  // Cortex Analyst structured fields
+  sql?: string;
+  results?: Record<string, unknown>[];
+  columns?: { name: string; type: string }[];
+  suggestions?: string[];
+  isVerifiedQuery?: boolean;
+  requestId?: string;
 }
 
 /**
- * Chat with PRISM Intelligence using Snowflake Cortex COMPLETE
+ * Chat with PRISM Intelligence using Snowflake Cortex Analyst REST API.
+ * Routes all questions through the PRISM_EOTSS_FINOPS semantic view for
+ * semantic model-aware text-to-SQL.
  */
 export async function chatWithIntelligence(
   message: string,
@@ -2167,108 +2089,66 @@ export async function chatWithIntelligence(
   },
   context: GovernanceContext = {}
 ): Promise<ChatResponse> {
-  const govContext = {
-    ...context,
-    requestSource: "chatWithIntelligence",
-  };
-
-  // Build system prompt with context about the current page and data
-  const systemPrompt = `You are PRISM Intelligence, an AI assistant for Commonwealth of Massachusetts financial operations analysts. You help analyze state IT spending data from CIW, CIP, Commbuys, and CTHR via the PRISM semantic model.
-
-Current context:
-- Page: ${chatContext.page}
-${chatContext.agencyCode ? `- Agency: ${chatContext.agencyCode}` : "- Scope: EOTSS (all agencies)"}
-- Trust State: ${context.trustState || "draft"}
-
-Your responses should be:
-- Concise and actionable (2-3 paragraphs max)
-- Focused on Massachusetts state IT spending analysis
-- Reference specific data when available
-- Suggest next steps or related questions
-
-Key concepts you know:
-- ULO (Unliquidated Obligations): Funds obligated but not yet paid out
-- CIP (Capital Investment Plan): Multi-year investment planning
-- Secretariats: Organizational groupings of Massachusetts agencies (e.g., EOTSS, HHS, Education)
-- Anomaly detection: Cortex ML models flag spending deviations from historical patterns
-- Budget risk: Projected year-end spend vs budget authority (Over Budget / At Risk / On Track / Under-Utilized)
-- Data sources: CIW (spending), CIP (investments), Commbuys (procurement), CTHR (workforce)
-- Fiscal year: July 1 - June 30 (Massachusetts fiscal year)`;
-
-  // Build conversation history
-  const conversationMessages = chatContext.conversationHistory?.slice(-6) || [];
-  const messagesForPrompt = conversationMessages.map(m =>
-    `${m.role === "user" ? "User" : "Assistant"}: ${m.content}`
-  ).join("\n\n");
-
-  const userPrompt = `${messagesForPrompt ? `Previous conversation:\n${messagesForPrompt}\n\n` : ""}User: ${message}
-
-Respond helpfully and concisely. If the question is about specific data, suggest the user ask a data query like "Show me top 10 agencies by spending" which can execute SQL.`;
-
   try {
-    // Try Cortex COMPLETE
-    const chatSql = `
-      SELECT SNOWFLAKE.CORTEX.COMPLETE(
-        'mistral-large',
-        ARRAY_CONSTRUCT(
-          OBJECT_CONSTRUCT('role', 'system', 'content', ?),
-          OBJECT_CONSTRUCT('role', 'user', 'content', ?)
-        ),
-        OBJECT_CONSTRUCT('temperature', 0.4, 'max_tokens', 800)
-      ) as RESPONSE
-    `;
+    // Build Analyst message history
+    const analystMessages = buildAnalystMessages(message, chatContext.conversationHistory);
 
-    const result = await executeQuery<{ RESPONSE: string | object }>(
-      chatSql,
-      [systemPrompt, userPrompt],
-      govContext
-    );
+    console.log("[Analyst Chat] Sending to Cortex Analyst:", message.substring(0, 100));
 
-    const rawResponse = result[0]?.RESPONSE;
-    let responseText = "";
+    // Call Cortex Analyst REST API
+    const analystResponse = await sendAnalystMessage(analystMessages);
+    const parsed = parseAnalystResponse(analystResponse);
 
-    console.log("[Cortex Chat] Raw response type:", typeof rawResponse);
+    console.log("[Analyst Chat] Got response — SQL:", !!parsed.sql, "Suggestions:", parsed.suggestions.length);
 
-    // Parse Cortex response using the shared helper
-    if (typeof rawResponse === "string") {
+    // If Analyst returned SQL, execute it to get data results
+    let results: Record<string, unknown>[] = [];
+    let columns: { name: string; type: string }[] = [];
+
+    if (parsed.sql) {
       try {
-        const parsed = JSON.parse(rawResponse);
-        responseText = extractCortexText(parsed);
-      } catch {
-        // If not JSON, use as-is
-        responseText = rawResponse;
+        console.log("[Analyst Chat] Executing Analyst SQL...");
+        results = await executeQuery<Record<string, unknown>>(
+          parsed.sql,
+          [],
+          { ...context, requestSource: "cortexAnalyst_execution" }
+        );
+
+        if (results.length > 0) {
+          columns = Object.keys(results[0]).map((key) => ({
+            name: key,
+            type: typeof results[0][key] === "number" ? "number" : "string",
+          }));
+        }
+
+        console.log("[Analyst Chat] SQL executed:", results.length, "rows,", columns.length, "columns");
+      } catch (sqlError) {
+        console.warn("[Analyst Chat] SQL execution failed:", (sqlError as Error).message);
+        // Still return the explanation — SQL just won't have results
       }
-    } else if (rawResponse && typeof rawResponse === "object") {
-      responseText = extractCortexText(rawResponse);
     }
 
-    console.log("[Cortex Chat] Extracted response (truncated):", responseText.substring(0, 200));
-
-    console.log("[Cortex] Chat response generated using COMPLETE");
-
     return {
-      response: responseText,
+      response: parsed.explanation,
       context: {
         page: chatContext.page,
         agencyCode: chatContext.agencyCode,
       },
       trustState: (context.trustState as ChatResponse["trustState"]) || "draft",
-      sources: ["Snowflake Cortex AI", "PRISM Semantic Model"],
+      sources: ["Snowflake Cortex Analyst", "PRISM Semantic Model"],
+      sql: parsed.sql || undefined,
+      results: results.length > 0 ? results : undefined,
+      columns: columns.length > 0 ? columns : undefined,
+      suggestions: parsed.suggestions.length > 0 ? parsed.suggestions : undefined,
+      isVerifiedQuery: parsed.isVerifiedQuery || undefined,
+      requestId: parsed.requestId,
     };
   } catch (error) {
-    console.warn("[Cortex] COMPLETE not available for chat:", (error as Error).message);
+    console.warn("[Analyst Chat] Cortex Analyst failed:", (error as Error).message);
 
-    // Fallback response when Cortex is unavailable
+    // Fallback response when Cortex Analyst is unavailable
     return {
-      response: `I understand you're asking about "${message}". While I'm currently operating in limited mode, I can help you with:
-
-**Data queries:** Ask questions like "Show me spending by agency" or "What are the top contracts this year?"
-
-**Reports:** Request an "executive summary" or "spending report" for AI-generated narratives.
-
-**Navigation:** I can help you explore the Dashboard, CIP, Anomalies, Forecasting, or Reports pages.
-
-Would you like to try one of these approaches?`,
+      response: `I'm unable to connect to Snowflake Intelligence right now. The pre-loaded analysis for this scenario is shown above.`,
       context: {
         page: chatContext.page,
         agencyCode: chatContext.agencyCode,
