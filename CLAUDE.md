@@ -1,9 +1,8 @@
 # CLAUDE.md — PRISM FinOps Intelligence
 
 ## Repository
-- **Upstream**: `ArchetypeCo/prism-fin-ops` (pull-only access for dustinminter)
-- **Fork**: `dustinminter/prism-fin-ops` — push here, cross-fork PR to upstream
-- **Remote setup**: `origin` = ArchetypeCo, `fork` = dustinminter
+- **Repo**: `dustinminter/prism-fin-ops` (primary — ArchetypeCo upstream was deleted/inaccessible as of 2026-02-19)
+- **Remote setup**: `origin` = dustinminter
 
 ## Stack
 - React 19 + Vite 7 + Tailwind v4 (frontend), Express + tRPC (backend), Snowflake SDK
@@ -12,15 +11,9 @@
 - Transforms: dbt (`dbt_project/`)
 - ETL: Python scripts (`etl/`), GitHub Actions (`.github/workflows/`)
 
-## Branches & PRs
-- `main` — base branch (ArchetypeCo upstream)
-- `feature/production-migration` — Track A multi-tenancy (PR #2, pending Nick review)
-- `feature/cthru-port` — CTHRU real data integration (PR #5, based on production-migration)
-  - Adds `V_CTHRU_SPENDING` as parallel view (does NOT touch `V_CIW_SPENDING`)
-  - `getCTHRUSpending` tenantProcedure endpoint bound to `V_CTHRU_SPENDING`
-  - ETL loader: `etl/load_cthru.py` (Socrata → Snowflake PUT+COPY)
-  - SQL: `snowflake/sql/20-cthru-real-data.sql` (6-step idempotent)
-  - POC view cutover explicitly deferred to a future migration PR
+## Branches
+- `main` — primary branch (includes production migration, multi-tenancy, CTHRU port, Intelligence UI redesign)
+- Feature branches merged and deleted 2026-02-19: `feature/production-migration`, `feature/cthru-port`
 
 ## CTHRU Data Integration
 - **Source**: Massachusetts Comptroller's CTHRU platform (Socrata API)
