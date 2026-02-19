@@ -32,7 +32,8 @@ RUN npx esbuild server/_core/index.prod.ts --platform=node --bundle --format=esm
     --external:snowflake-sdk \
     --external:zod \
     --external:nanoid \
-    --external:superjson
+    --external:superjson \
+    --external:jose
 
 # ============================================================================
 # Production stage

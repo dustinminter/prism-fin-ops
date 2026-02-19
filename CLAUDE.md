@@ -39,6 +39,16 @@
 - **Image tag**: `v2` (deployed 2026-02-19)
 - **Services**: backend, frontend, router — all RUNNING on `PRISM_COMPUTE_POOL`
 
+## Authentication
+- **Local dev**: No OIDC_ISSUER → auto-returns DEV_USER (admin, openId=dev-user-001)
+- **SPCS**: Pre-authenticated by Snowflake edge; extracts `Sf-Context-Current-User` header for identity
+- **Production (IdP)**: Set env vars to enable JWT/OIDC validation:
+  - `OIDC_ISSUER` — OIDC provider URL (e.g., `https://login.microsoftonline.com/{tenant}/v2.0`)
+  - `OIDC_AUDIENCE` — Expected audience claim (e.g., `api://prism-finops`)
+  - `OIDC_ADMIN_ROLES` — Comma-separated role names that grant admin (default: `admin,Admin,GlobalAdmin`)
+- **Tenant mapping**: User's `openId` (JWT `sub` claim) must exist in `GOVERNANCE.TENANT_USERS`
+- **Files**: `server/_core/sdk.ts` (JWT validation), `server/_core/context.ts` (SPCS + IdP routing)
+
 ## Gotchas
 - 10 pre-existing test failures in useAuth-dependent tests (jsdom/localStorage issue) — not a regression
 - All Snowflake config is env-var-only — no hardcoded account identifiers anywhere
