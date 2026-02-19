@@ -67,22 +67,27 @@ RETURNS TABLE (
 )
 LANGUAGE SQL
 AS
-$$
+DECLARE
+    res RESULTSET;
+BEGIN
     -- This procedure would join MA data with other states' contributions
     -- For now, returns MA data with placeholder percentile rankings
-    SELECT
-        FUNCTION_AREA,
-        FISCAL_YEAR_LABEL AS FISCAL_YEAR,
-        BURN_RATE_PCT AS MA_BURN_RATE,
-        50.0 AS PERCENTILE_RANK,  -- Placeholder: would be computed from cross-state data
-        0 AS COMPARISON_STATE_COUNT,
-        BURN_RATE_PCT AS MEDIAN_BURN_RATE,
-        BURN_RATE_PCT * 0.85 AS P25_BURN_RATE,
-        BURN_RATE_PCT * 1.15 AS P75_BURN_RATE
-    FROM EOTSS_STAGING.V_MA_SPENDING_BENCHMARKS
-    WHERE FUNCTION_AREA = target_function_area
-      AND FISCAL_YEAR_LABEL = target_fiscal_year
-$$;
+    res := (
+        SELECT
+            FUNCTION_AREA,
+            FISCAL_YEAR_LABEL AS FISCAL_YEAR,
+            BURN_RATE_PCT AS MA_BURN_RATE,
+            50.0 AS PERCENTILE_RANK,
+            0 AS COMPARISON_STATE_COUNT,
+            BURN_RATE_PCT AS MEDIAN_BURN_RATE,
+            BURN_RATE_PCT * 0.85 AS P25_BURN_RATE,
+            BURN_RATE_PCT * 1.15 AS P75_BURN_RATE
+        FROM EOTSS_STAGING.V_MA_SPENDING_BENCHMARKS
+        WHERE FUNCTION_AREA = :target_function_area
+          AND FISCAL_YEAR_LABEL = :target_fiscal_year
+    );
+    RETURN TABLE(res);
+END;
 
 -- =============================================================================
 -- Clean room join policy definition

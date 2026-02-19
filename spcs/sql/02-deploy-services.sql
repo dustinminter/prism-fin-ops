@@ -18,7 +18,7 @@ CREATE SERVICE IF NOT EXISTS PRISM_BACKEND
 spec:
   containers:
     - name: backend
-      image: /prism_spcs/app/images/backend:v1
+      image: /prism_spcs/app/images/backend:v2
       env:
         NODE_ENV: production
         PORT: "3000"
@@ -58,7 +58,7 @@ CREATE SERVICE IF NOT EXISTS PRISM_FRONTEND
 spec:
   containers:
     - name: frontend
-      image: /prism_spcs/app/images/frontend:v1
+      image: /prism_spcs/app/images/frontend:v2
       resources:
         requests:
           cpu: 0.25
@@ -89,13 +89,11 @@ CREATE SERVICE IF NOT EXISTS PRISM_ROUTER
 spec:
   containers:
     - name: router
-      image: /prism_spcs/app/images/router:v1
+      image: /prism_spcs/app/images/router:v2
       env:
-        -- IMPORTANT: Replace <SCHEMA_HASH> with output of:
-        --   SELECT SYSTEM$GET_SERVICE_DNS_DOMAIN('APP');
-        -- The hash is account-specific (e.g., pfka, abcd, etc.)
-        BACKEND_HOST: prism-backend.<SCHEMA_HASH>.svc.spcs.internal
-        FRONTEND_HOST: prism-frontend.<SCHEMA_HASH>.svc.spcs.internal
+        # DNS domain from SELECT SYSTEM$GET_SERVICE_DNS_DOMAIN('PRISM_SPCS.APP')
+        BACKEND_HOST: prism-backend.pfka.svc.spcs.internal
+        FRONTEND_HOST: prism-frontend.pfka.svc.spcs.internal
       resources:
         requests:
           cpu: 0.25

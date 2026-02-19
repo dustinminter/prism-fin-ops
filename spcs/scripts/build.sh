@@ -17,7 +17,8 @@ if [ -z "${SNOWFLAKE_ACCOUNT}" ]; then
     echo "Usage: SNOWFLAKE_ACCOUNT=<org-account> $0 <command>"
     exit 1
 fi
-IMAGE_REGISTRY="${SNOWFLAKE_ACCOUNT}.registry.snowflakecomputing.com"
+# Registry URL must be lowercase (Snowflake requirement)
+IMAGE_REGISTRY="$(echo "${SNOWFLAKE_ACCOUNT}" | tr '[:upper:]' '[:lower:]').registry.snowflakecomputing.com"
 IMAGE_REPO="prism_spcs/app/images"
 TAG="${TAG:-latest}"
 

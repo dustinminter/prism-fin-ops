@@ -19,7 +19,6 @@ RUN pnpm install --frozen-lockfile
 # Copy source code
 COPY server ./server
 COPY shared ./shared
-COPY drizzle ./drizzle
 COPY tsconfig.json ./
 
 # Build the production server with explicit externals (not --packages=external)
@@ -31,14 +30,9 @@ RUN npx esbuild server/_core/index.prod.ts --platform=node --bundle --format=esm
     --external:dotenv \
     --external:@trpc/server \
     --external:snowflake-sdk \
-    --external:drizzle-orm \
-    --external:mysql2 \
-    --external:cookie \
     --external:zod \
-    --external:jose \
     --external:nanoid \
-    --external:superjson \
-    --external:axios
+    --external:superjson
 
 # ============================================================================
 # Production stage

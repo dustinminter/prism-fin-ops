@@ -12,8 +12,8 @@ CREATE SCHEMA IF NOT EXISTS EOTSS_STAGING;
 
 -- =============================================================================
 -- VIEW 1: V_CIW_SPENDING
--- Source (current): EOTSS_POC.CIW_SPENDING
--- Swap target:      [CIW_SCHEMA].[CIW_TABLE] — adjust column mappings below
+-- Source: EOTSS_STAGING.CTHRU_SPENDING (real Massachusetts CTHRU data)
+-- Cutover from EOTSS_POC.CIW_SPENDING completed 2026-02-19
 -- Adds: UNLIQUIDATED_OBLIGATIONS, BURN_RATE_PCT
 -- =============================================================================
 CREATE OR REPLACE VIEW EOTSS_STAGING.V_CIW_SPENDING AS
@@ -28,21 +28,26 @@ SELECT
     FISCAL_YEAR_LABEL,
     TOTAL_OBLIGATIONS,
     TOTAL_EXPENDITURES,
-    BUDGET_AUTHORITY,
-    -- Computed: Unliquidated obligations = obligations - expenditures
-    ROUND(TOTAL_OBLIGATIONS - TOTAL_EXPENDITURES, 2) AS UNLIQUIDATED_OBLIGATIONS,
-    -- Computed: Burn rate = expenditures / budget authority (capped at 999%)
+    -- Budget authority: real from CTHRU Budgets, prorated to period
+    -- Falls back to estimate only if no budget data exists for this dept/fund
+    COALESCE(BUDGET_AUTHORITY, ROUND(TOTAL_EXPENDITURES * 1.15, 2)) AS BUDGET_AUTHORITY,
+    -- Computed: Unliquidated obligations
+    ROUND(TOTAL_OBLIGATIONS - TOTAL_EXPENDITURES, 2)            AS UNLIQUIDATED_OBLIGATIONS,
+    -- Computed: Burn rate (uses YTD expenditures against annual budget for accuracy)
     CASE
-        WHEN BUDGET_AUTHORITY > 0
-        THEN ROUND(LEAST(TOTAL_EXPENDITURES / BUDGET_AUTHORITY * 100, 999.99), 2)
+        WHEN COALESCE(ANNUAL_BUDGET_AUTHORITY, 0) > 0
+        THEN ROUND(LEAST(
+            YTD_EXPENDITURES / ANNUAL_BUDGET_AUTHORITY * 100,
+            999.99
+        ), 2)
+        WHEN COALESCE(BUDGET_AUTHORITY, 0) > 0
+        THEN ROUND(LEAST(
+            TOTAL_EXPENDITURES / BUDGET_AUTHORITY * 100,
+            999.99
+        ), 2)
         ELSE 0
-    END AS BURN_RATE_PCT
-FROM EOTSS_POC.CIW_SPENDING;
--- SWAP: Change FROM to [CIW_SCHEMA].[CIW_TABLE] and adjust column names:
---   AGENCY_CODE       → [CIW column for agency code]
---   TOTAL_OBLIGATIONS → [CIW column for obligations]
---   TOTAL_EXPENDITURES→ [CIW column for expenditures]
---   BUDGET_AUTHORITY  → [CIW column for budget authority]
+    END                                                          AS BURN_RATE_PCT
+FROM EOTSS_STAGING.CTHRU_SPENDING;
 
 -- =============================================================================
 -- VIEW 2: V_CIP_INVESTMENTS

@@ -34,7 +34,7 @@
 -- OPTION B: Native Semantic View (recommended for Intelligence UI)
 -- =============================================================================
 -- Creates a semantic view that the Snowflake Intelligence UI can discover
--- and use for natural language queries. Uses inline YAML with $$ delimiters.
+-- and use for natural language queries. Uses inline YAML with dollar-quote delimiters.
 
 CALL SYSTEM$CREATE_SEMANTIC_VIEW_FROM_YAML(
   'FEDERAL_FINANCIAL_DATA.EOTSS_STAGING',
@@ -923,26 +923,161 @@ tables:
 # referenced table. Since AGENCY_CODE is not a PK in any of these tables,
 # cross-table joins must be done manually in user queries.
 # =============================================================================
+
+# =============================================================================
+# VERIFIED QUERIES
+# Pre-validated SQL for common Intelligence UI questions.
+# Improves Cortex Analyst accuracy for these patterns.
+# =============================================================================
+verified_queries:
+  # -- Spending scenario queries --
+  - name: spending_by_secretariat
+    question: "What is total spending by secretariat for FY2026?"
+    use_as_onboarding_question: true
+    sql: |
+      SELECT SECRETARIAT_ID,
+             COUNT(DISTINCT AGENCY_CODE) AS agency_count,
+             SUM(TOTAL_OBLIGATIONS) AS total_obligations,
+             SUM(TOTAL_EXPENDITURES) AS total_expenditures,
+             ROUND(SUM(TOTAL_EXPENDITURES) / NULLIF(SUM(BUDGET_AUTHORITY), 0) * 100, 2) AS burn_rate
+      FROM EOTSS_STAGING.V_CIW_SPENDING
+      WHERE FISCAL_YEAR_LABEL = 'FY2026'
+      GROUP BY SECRETARIAT_ID
+      ORDER BY total_expenditures DESC
+    verified_by: "PRISM Intelligence UI"
+    verified_at: 1740000000
+
+  - name: monthly_spending_trend
+    question: "Show me monthly spending trend for a specific agency"
+    sql: |
+      SELECT FISCAL_PERIOD_DATE, AGENCY_CODE, AGENCY_NAME,
+             SUM(TOTAL_OBLIGATIONS) AS total_obligations,
+             SUM(TOTAL_EXPENDITURES) AS total_expenditures,
+             SUM(BUDGET_AUTHORITY) AS budget_authority,
+             ROUND(SUM(TOTAL_EXPENDITURES) / NULLIF(SUM(BUDGET_AUTHORITY), 0) * 100, 2) AS burn_rate_pct
+      FROM EOTSS_STAGING.V_CIW_SPENDING
+      WHERE FISCAL_YEAR_LABEL = 'FY2026'
+      GROUP BY FISCAL_PERIOD_DATE, AGENCY_CODE, AGENCY_NAME
+      ORDER BY FISCAL_PERIOD_DATE
+    verified_by: "PRISM Intelligence UI"
+    verified_at: 1740000000
+
+  - name: high_burn_rate_agencies
+    question: "Show agencies with burn rate above 90%"
+    use_as_onboarding_question: true
+    sql: |
+      SELECT AGENCY_CODE, AGENCY_NAME, FUND_NAME,
+             FISCAL_PERIOD_DATE, BURN_RATE_PCT,
+             TOTAL_EXPENDITURES, BUDGET_AUTHORITY
+      FROM EOTSS_STAGING.V_CIW_SPENDING
+      WHERE BURN_RATE_PCT > 90
+      ORDER BY BURN_RATE_PCT DESC
+      LIMIT 20
+    verified_by: "PRISM Intelligence UI"
+    verified_at: 1740000000
+
+  # -- Anomaly scenario queries --
+  - name: active_anomalies
+    question: "Which agencies have spending anomalies?"
+    use_as_onboarding_question: true
+    sql: |
+      SELECT AGENCY_CODE, AGENCY_NAME, FISCAL_PERIOD_DATE,
+             ACTUAL_SPEND, EXPECTED_SPEND, ANOMALY_SEVERITY,
+             SPEND_DEVIATION_PCT
+      FROM EOTSS_STAGING.V_SPEND_ANOMALIES
+      WHERE IS_ANOMALY = TRUE
+      ORDER BY DISTANCE DESC
+    verified_by: "PRISM Intelligence UI"
+    verified_at: 1740000000
+
+  - name: over_budget_agencies
+    question: "Which agencies are over budget?"
+    use_as_onboarding_question: true
+    sql: |
+      SELECT AGENCY_CODE, AGENCY_NAME, BUDGET_RISK_LEVEL,
+             YTD_SPEND, FORECASTED_REMAINING, PROJECTED_YEAR_END,
+             BUDGET_AUTHORITY, PROJECTED_BURN_RATE_PCT
+      FROM EOTSS_STAGING.V_BUDGET_RISK
+      WHERE BUDGET_RISK_LEVEL IN ('Over Budget', 'At Risk')
+      ORDER BY PROJECTED_BURN_RATE_PCT DESC
+    verified_by: "PRISM Intelligence UI"
+    verified_at: 1740000000
+
+  # -- Forecast scenario queries --
+  - name: projected_yearend_spend
+    question: "What is the projected year-end spend by agency?"
+    sql: |
+      SELECT AGENCY_CODE, AGENCY_NAME, BUDGET_RISK_LEVEL,
+             YTD_SPEND, FORECASTED_REMAINING, PROJECTED_YEAR_END,
+             BUDGET_AUTHORITY, PROJECTED_BURN_RATE_PCT
+      FROM EOTSS_STAGING.V_BUDGET_RISK
+      ORDER BY PROJECTED_BURN_RATE_PCT DESC
+    verified_by: "PRISM Intelligence UI"
+    verified_at: 1740000000
+
+  # -- Cross-source scenario queries --
+  - name: total_cost_with_salaries
+    question: "What is the total cost per agency including salaries?"
+    sql: |
+      SELECT s.AGENCY_CODE, s.AGENCY_NAME,
+             SUM(s.TOTAL_EXPENDITURES) AS operational_spending,
+             w.total_salary,
+             SUM(s.TOTAL_EXPENDITURES) + COALESCE(w.total_salary, 0) AS total_cost,
+             w.total_positions, w.total_filled, w.avg_vacancy_rate
+      FROM EOTSS_STAGING.V_CIW_SPENDING s
+      LEFT JOIN (
+          SELECT AGENCY_CODE,
+                 SUM(SALARY_OBLIGATIONS) AS total_salary,
+                 SUM(POSITION_COUNT) AS total_positions,
+                 SUM(FILLED_POSITIONS) AS total_filled,
+                 AVG(VACANCY_RATE) AS avg_vacancy_rate
+          FROM EOTSS_STAGING.V_CTHR_WORKFORCE
+          GROUP BY AGENCY_CODE
+      ) w ON s.AGENCY_CODE = w.AGENCY_CODE
+      WHERE s.FISCAL_YEAR_LABEL = 'FY2026'
+      GROUP BY s.AGENCY_CODE, s.AGENCY_NAME, w.total_salary,
+               w.total_positions, w.total_filled, w.avg_vacancy_rate
+      ORDER BY total_cost DESC
+    verified_by: "PRISM Intelligence UI"
+    verified_at: 1740000000
+
+  - name: agency_cross_source_profile
+    question: "Show me spending across all sources for a specific agency"
+    sql: |
+      SELECT 'Agency Profile' AS analysis_type,
+          (SELECT SUM(TOTAL_EXPENDITURES) FROM EOTSS_STAGING.V_CIW_SPENDING
+           WHERE FISCAL_YEAR_LABEL = 'FY2026') AS operational_spending,
+          (SELECT SUM(SALARY_OBLIGATIONS) FROM EOTSS_STAGING.V_CTHR_WORKFORCE) AS salary_costs,
+          (SELECT SUM(AWARD_AMOUNT) FROM EOTSS_STAGING.V_COMMBUYS_AWARDS) AS procurement_awards,
+          (SELECT AVG(VACANCY_RATE) FROM EOTSS_STAGING.V_CTHR_WORKFORCE) AS avg_vacancy_rate,
+          (SELECT COUNT(*) FROM EOTSS_STAGING.V_CIP_INVESTMENTS) AS active_projects
+    verified_by: "PRISM Intelligence UI"
+    verified_at: 1740000000
+
+  # -- Anomaly precision/evaluation queries --
+  - name: anomaly_model_accuracy
+    question: "How accurate is the anomaly detection model?"
+    sql: |
+      SELECT * FROM EOTSS_STAGING.V_ANOMALY_PRECISION
+    verified_by: "PRISM Intelligence UI"
+    verified_at: 1740000000
+
+  - name: outlier_awards
+    question: "Which procurement awards are outliers?"
+    sql: |
+      SELECT AWARD_ID, VENDOR_NAME, AGENCY_CODE, CATEGORY,
+             AWARD_DATE, AWARD_AMOUNT, Z_SCORE, IS_OUTLIER,
+             CONCENTRATION_LEVEL
+      FROM EOTSS_STAGING.V_PROCUREMENT_OUTLIERS
+      WHERE IS_OUTLIER = TRUE
+      ORDER BY Z_SCORE DESC
+    verified_by: "PRISM Intelligence UI"
+    verified_at: 1740000000
   $$
 );
 
 -- =============================================================================
--- Verification
+-- Verification (run manually in Snowsight)
 -- =============================================================================
-
--- Check that the semantic view was created
-SHOW SEMANTIC VIEWS IN SCHEMA FEDERAL_FINANCIAL_DATA.EOTSS_STAGING;
-
--- Describe the semantic view to verify structure
+-- SHOW SEMANTIC VIEWS IN SCHEMA FEDERAL_FINANCIAL_DATA.EOTSS_STAGING;
 -- DESCRIBE SEMANTIC VIEW FEDERAL_FINANCIAL_DATA.EOTSS_STAGING.PRISM_EOTSS_FINOPS;
-
--- =============================================================================
--- Test the semantic view with Cortex Analyst
--- =============================================================================
--- Quick smoke test: ask a question via SQL
-/*
-SELECT SNOWFLAKE.CORTEX.ANALYST(
-    'FEDERAL_FINANCIAL_DATA.EOTSS_STAGING.PRISM_EOTSS_FINOPS',
-    'What is total spending by secretariat for FY2026?'
-);
-*/

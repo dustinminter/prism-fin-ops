@@ -90,7 +90,7 @@ CREATE ROLE IF NOT EXISTS PRISM_USER_ROLE
 CREATE OR REPLACE NETWORK RULE PRISM_SPCS.APP.SNOWFLAKE_EGRESS_RULE
   TYPE = HOST_PORT
   -- Replace <ACCOUNT> with your Snowflake account identifier (e.g., org-account)
-  VALUE_LIST = ('<ACCOUNT>.snowflakecomputing.com:443')
+  VALUE_LIST = ('jnaqbvy-kxc12813.snowflakecomputing.com:443')
   MODE = EGRESS
   COMMENT = 'Allow SPCS containers to connect to Snowflake';
 

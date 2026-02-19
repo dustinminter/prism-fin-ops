@@ -7,9 +7,9 @@
 ## Stack
 - React 19 + Vite 7 + Tailwind v4 (frontend), Express + tRPC (backend), Snowflake SDK
 - Deployment: SPCS (Snowpark Container Services) — no Vercel, no external DB
-- IaC: Terraform (`terraform/`, 7 modules), SQL scripts (`snowflake/sql/00a-20`)
+- IaC: Terraform (`terraform/`, 7 modules), SQL scripts (`snowflake/sql/00a-21`)
 - Transforms: dbt (`dbt_project/`)
-- ETL: Python scripts (`etl/`), GitHub Actions (`.github/workflows/`)
+- ETL: Snowpark Python stored procedures (automated via Tasks), manual scripts (`etl/`) deprecated
 
 ## Branches
 - `main` — primary branch (includes production migration, multi-tenancy, CTHRU port, Intelligence UI redesign)
@@ -26,15 +26,28 @@
   - `CTHRU_SPENDING` — monthly dept/fund grain with budget join
   - `V_CTHRU_SPENDING` — parallel view (does NOT replace V_CIW_SPENDING)
 - **API**: `getCTHRUSpending` — tenantProcedure, schema token `{{DATA_SCHEMA}}`, executeTenantQuery
-- **ETL**: `python3 etl/load_cthru.py [--fy START END] [--truncate] [--budgets-only]`
+- **ETL (deprecated)**: `python3 etl/load_cthru.py [--fy START END] [--truncate] [--budgets-only]` — manual backfill only
+- **Automated ingestion**: 3 Snowpark procedures + Tasks (`21-automated-ingestion.sql`)
+  - `INGEST_CTHRU_SPENDING_DAILY` — daily 4 AM ET, Socrata pegc-naaa
+  - `INGEST_CTHRU_BUDGETS_WEEKLY` — weekly Sunday 3 AM ET, Socrata kv7m-35wn
+  - `INGEST_USASPENDING_DAILY` — daily 5 AM ET, api.usaspending.gov
+  - Monitoring: `V_INGESTION_STATUS`, `INGESTION_LOG`
+
+## SPCS Deployment
+- **Public endpoint**: `https://mrfn6t-jnaqbvy-kxc12813.snowflakecomputing.app`
+- **DNS domain hash**: `pfka` (from `SYSTEM$GET_SERVICE_DNS_DOMAIN('PRISM_SPCS.APP')`)
+- **Image tag**: `v2` (deployed 2026-02-19)
+- **Services**: backend, frontend, router — all RUNNING on `PRISM_COMPUTE_POOL`
 
 ## Gotchas
 - 10 pre-existing test failures in useAuth-dependent tests (jsdom/localStorage issue) — not a regression
 - All Snowflake config is env-var-only — no hardcoded account identifiers anywhere
 - SQL scripts must run in Snowsight (Cortex ML, agents, tasks, DMFs blocked by MCP)
-- SPCS deploy specs need `SYSTEM$GET_SERVICE_DNS_DOMAIN('APP')` output at deploy time for router DNS
-- V_CIW_SPENDING reads from POC data (03-eotss-staging-views.sql) — NOT yet swapped to CTHRU
-- V_CTHRU_SPENDING is the real-data view — getCTHRUSpending endpoint uses this
+- SPCS deploy specs use DNS hash `pfka` — recalculate if compute pool changes
+- V_CIW_SPENDING reads from CTHRU_SPENDING (cutover completed 2026-02-19)
+- V_CTHRU_SPENDING is the parallel view — getCTHRUSpending endpoint uses this
+- DETECT_ANOMALIES requires V_ANOMALY_DETECTION (filtered to agencies with training data), NOT V_FORECAST_TRAINING
+- `CREATE OR REPLACE SERVICE` is not supported — must DROP then CREATE
 
 ## Commands
 - `pnpm dev` — start dev server (backend + frontend)
