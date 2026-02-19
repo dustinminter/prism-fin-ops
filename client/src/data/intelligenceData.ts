@@ -3,6 +3,7 @@ import {
   AlertTriangle,
   Activity,
   Globe,
+  Cloud,
   type LucideIcon,
 } from "lucide-react";
 
@@ -12,7 +13,8 @@ export type ScenarioId =
   | "spending"
   | "anomalies"
   | "forecast"
-  | "cross";
+  | "cross"
+  | "cloud";
 
 export type ChartType = "bar" | "line" | "area" | "pie" | "composed" | "heatmap";
 
@@ -615,6 +617,118 @@ ORDER BY total_cost DESC`,
   },
 };
 
+// ── Cloud Cost Intelligence ────────────────────────────────────────────
+
+const cloudScenario: ScenarioData = {
+  id: "cloud",
+  label: "Cloud Cost Intelligence",
+  icon: Cloud,
+  kpis: [
+    {
+      label: "Total Cloud Spend (YTD)",
+      value: "$0",
+      color: "blue",
+      change: "FY2026 \u2022 AWS/Azure/GCP",
+      changeDirection: "neutral",
+      sparklineData: [0],
+    },
+    {
+      label: "Top Provider",
+      value: "AWS",
+      color: "green",
+      change: "Awaiting data",
+      changeDirection: "neutral",
+    },
+    {
+      label: "Savings Coverage",
+      value: "0%",
+      color: "gold",
+      change: "Reserved + Spot / Total",
+      changeDirection: "neutral",
+    },
+  ],
+  suggestions: [
+    "What is total cloud spending by provider?",
+    "Which agencies have the highest AWS costs?",
+    "Show me reserved instance coverage by agency",
+    "What is the month-over-month cost trend?",
+  ],
+  conversations: [
+    {
+      role: "user",
+      content: "What is total cloud spending by provider?",
+    },
+    {
+      role: "assistant",
+      content:
+        "Here is the cloud spending breakdown by provider. Note: cloud billing data requires AWS CUR, Azure Cost Management, or GCP billing export to be loaded into PRISM.",
+      chart: {
+        type: "bar",
+        title: "Cloud Spend by Provider (FY2026)",
+        data: [
+          { provider: "AWS", cost: 0 },
+          { provider: "Azure", cost: 0 },
+          { provider: "GCP", cost: 0 },
+        ],
+        series: [
+          {
+            dataKey: "cost",
+            label: "Total Cost ($)",
+            color: "#29B5E8",
+            formatter: "currency",
+          },
+        ],
+        xAxis: { dataKey: "provider", label: "Cloud Provider" },
+        yAxis: { dataKey: "cost", formatter: "currency" },
+      },
+      verified: true,
+    },
+    {
+      role: "user",
+      content: "Which agencies have the highest AWS costs?",
+    },
+    {
+      role: "assistant",
+      content:
+        "Cloud billing data will populate once AWS Cost and Usage Reports are loaded via the ingestion pipeline. Use `CALL EOTSS_STAGING.REBUILD_CLOUD_SPENDING()` after loading raw data.",
+      table: {
+        headers: [
+          "Agency",
+          "Cost Category",
+          "Total Cost",
+          "On-Demand",
+          "Reserved",
+          "Savings %",
+        ],
+        rows: [],
+      },
+      verified: true,
+    },
+  ],
+  chips: [
+    "AWS spend by service",
+    "Reserved instance utilization",
+    "Cost anomalies",
+    "Multi-cloud comparison",
+  ],
+  executiveNarrative: {
+    title: "Cloud Cost Intelligence",
+    period: "FY2026 YTD",
+    summary:
+      "Cloud billing integration is configured and ready for data. Load AWS CUR, Azure Cost Management exports, or GCP billing data into the raw staging tables to activate cloud cost analytics.",
+    highlights: [
+      { label: "Total Cloud Spend", value: "$0", status: "good" as const },
+      { label: "Providers Configured", value: "3", status: "good" as const },
+      { label: "Data Status", value: "Awaiting load", status: "warn" as const },
+    ],
+    risks: [
+      "No cloud billing data loaded yet \u2014 load AWS CUR or Cost Explorer export to activate",
+      "Cloud account-to-agency mapping table (CLOUD_ACCOUNT_MAP) needs to be populated",
+      "Service category mapping (CLOUD_SERVICE_MAP) should be configured for accurate categorization",
+    ],
+  },
+};
+
 // ── Export ──────────────────────────────────────────────────────────────
 
 export const scenarios: ScenarioData[] = [
@@ -622,6 +736,7 @@ export const scenarios: ScenarioData[] = [
   anomaliesScenario,
   forecastScenario,
   crossScenario,
+  cloudScenario,
 ];
 
 export const scenarioMap: Record<ScenarioId, ScenarioData> = {
@@ -629,4 +744,5 @@ export const scenarioMap: Record<ScenarioId, ScenarioData> = {
   anomalies: anomaliesScenario,
   forecast: forecastScenario,
   cross: crossScenario,
+  cloud: cloudScenario,
 };

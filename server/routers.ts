@@ -222,6 +222,25 @@ export const appRouter = router({
         );
       }),
 
+    // Cloud billing data (tenant-scoped, multi-provider)
+    getCloudSpending: tenantProcedure
+      .input(
+        z.object({
+          provider: z.enum(["aws", "azure", "gcp"]).optional(),
+          fiscalYear: z.string().optional(),
+          limit: z.number().optional().default(50),
+        })
+      )
+      .query(async ({ input, ctx }) => {
+        return prismQueries.getCloudSpending(
+          ctx.tenant!,
+          input.provider,
+          input.fiscalYear,
+          input.limit,
+          buildGovernanceContext(ctx)
+        );
+      }),
+
     // Natural Language Query endpoint
     executeNaturalLanguageQuery: protectedProcedure
       .input(

@@ -7,7 +7,7 @@
 ## Stack
 - React 19 + Vite 7 + Tailwind v4 (frontend), Express + tRPC (backend), Snowflake SDK
 - Deployment: SPCS (Snowpark Container Services) — no Vercel, no external DB
-- IaC: Terraform (`terraform/`, 7 modules), SQL scripts (`snowflake/sql/00a-21`)
+- IaC: Terraform (`terraform/`, 7 modules), SQL scripts (`snowflake/sql/00a-22`)
 - Transforms: dbt (`dbt_project/`)
 - ETL: Snowpark Python stored procedures (automated via Tasks), manual scripts (`etl/`) deprecated
 
@@ -48,6 +48,16 @@
   - `OIDC_ADMIN_ROLES` — Comma-separated role names that grant admin (default: `admin,Admin,GlobalAdmin`)
 - **Tenant mapping**: User's `openId` (JWT `sub` claim) must exist in `GOVERNANCE.TENANT_USERS`
 - **Files**: `server/_core/sdk.ts` (JWT validation), `server/_core/context.ts` (SPCS + IdP routing)
+
+## Cloud Billing Integration
+- **SQL**: `snowflake/sql/22-cloud-billing.sql` — raw staging (AWS/Azure/GCP), mapping tables, aggregated CLOUD_SPENDING, V_CLOUD_SPENDING view
+- **Raw tables**: `AWS_BILLING_RAW`, `AZURE_BILLING_RAW`, `GCP_BILLING_RAW` — one per provider
+- **Mapping**: `CLOUD_ACCOUNT_MAP` (cloud account → agency), `CLOUD_SERVICE_MAP` (service → PRISM category)
+- **Rebuild**: `CALL EOTSS_STAGING.REBUILD_CLOUD_SPENDING()` after raw data loads
+- **API**: `getCloudSpending` — tenantProcedure, filters by provider/fiscalYear/limit
+- **Semantic model**: V_CLOUD_SPENDING added as TABLE 8 in `05-deploy-semantic-model.sql`
+- **Intelligence UI**: Cloud Cost Analysis scenario in `client/src/data/intelligenceData.ts`
+- **Network rule**: `AWS_CE_EGRESS_RULE` for AWS Cost Explorer API access
 
 ## Gotchas
 - 10 pre-existing test failures in useAuth-dependent tests (jsdom/localStorage issue) — not a regression

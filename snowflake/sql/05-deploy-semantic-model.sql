@@ -916,6 +916,193 @@ tables:
         description: Total dollar value of outlier awards
         expr: SUM(IFF(procurement_outliers.is_outlier = TRUE, procurement_outliers.award_amount, 0))
 
+  # ===========================================================================
+  # TABLE 8: Cloud Spending (Multi-Provider)
+  # ===========================================================================
+  - name: CLOUD_SPENDING
+    description: >
+      Multi-cloud billing data aggregated monthly by provider, agency, and cost
+      category. Covers AWS, Azure, and GCP. Includes on-demand vs reserved/spot
+      cost breakdown, budget utilization, savings coverage, and month-over-month
+      trends. Use to analyze cloud cost efficiency and identify optimization
+      opportunities across Commonwealth agencies.
+    synonyms:
+      - cloud spending
+      - cloud costs
+      - cloud billing
+      - AWS costs
+      - Azure costs
+      - GCP costs
+      - cloud budget
+      - infrastructure costs
+    base_table:
+      database: FEDERAL_FINANCIAL_DATA
+      schema: EOTSS_STAGING
+      table: V_CLOUD_SPENDING
+    primary_key:
+      columns:
+        - RECORD_ID
+    dimensions:
+      - name: RECORD_ID
+        description: Unique identifier for the cloud spending record
+        expr: RECORD_ID
+        data_type: NUMBER
+      - name: CLOUD_PROVIDER
+        description: Cloud provider (aws, azure, gcp)
+        synonyms:
+          - provider
+          - cloud vendor
+          - CSP
+        expr: CLOUD_PROVIDER
+        data_type: VARCHAR
+      - name: AGENCY_CODE
+        description: Agency responsible for the cloud account
+        synonyms:
+          - agency
+          - department
+        expr: AGENCY_CODE
+        data_type: VARCHAR
+      - name: AGENCY_NAME
+        description: Full name of the agency
+        synonyms:
+          - agency name
+          - department name
+        expr: AGENCY_NAME
+        data_type: VARCHAR
+      - name: SECRETARIAT_ID
+        description: Executive office overseeing the agency
+        synonyms:
+          - secretariat
+          - executive office
+        expr: SECRETARIAT_ID
+        data_type: VARCHAR
+      - name: COST_CATEGORY
+        description: >
+          Standardized cost category: Compute, Storage, Database, Network,
+          AI/ML, Security, Other.
+        synonyms:
+          - service category
+          - cost type
+          - service type
+        expr: COST_CATEGORY
+        data_type: VARCHAR
+      - name: FISCAL_PERIOD_DATE
+        description: First day of the billing month
+        synonyms:
+          - month
+          - billing period
+          - date
+        expr: FISCAL_PERIOD_DATE
+        data_type: DATE
+      - name: FISCAL_YEAR_LABEL
+        description: Massachusetts fiscal year label (FY2025, FY2026)
+        synonyms:
+          - fiscal year
+          - FY
+        expr: FISCAL_YEAR_LABEL
+        data_type: VARCHAR
+      - name: ENVIRONMENT
+        description: Deployment environment (production, staging, dev, sandbox)
+        synonyms:
+          - env
+          - deployment environment
+        expr: ENVIRONMENT
+        data_type: VARCHAR
+    facts:
+      - name: TOTAL_COST
+        description: Total cloud cost for the period (unblended for AWS, direct for Azure/GCP)
+        synonyms:
+          - cloud cost
+          - total spend
+          - cloud spend
+        expr: TOTAL_COST
+        data_type: "NUMBER(18,2)"
+      - name: ONDEMAND_COST
+        description: Cost from on-demand (pay-as-you-go) usage
+        synonyms:
+          - on demand
+          - pay as you go
+        expr: ONDEMAND_COST
+        data_type: "NUMBER(18,2)"
+      - name: RESERVED_COST
+        description: Cost from reserved instances or savings plans
+        synonyms:
+          - reserved
+          - savings plan cost
+          - RI cost
+        expr: RESERVED_COST
+        data_type: "NUMBER(18,2)"
+      - name: SPOT_COST
+        description: Cost from spot/preemptible instances
+        synonyms:
+          - spot
+          - preemptible
+        expr: SPOT_COST
+        data_type: "NUMBER(18,2)"
+      - name: USAGE_HOURS
+        description: Total compute usage hours
+        synonyms:
+          - compute hours
+          - runtime hours
+        expr: USAGE_HOURS
+        data_type: "NUMBER(18,2)"
+      - name: SERVICE_COUNT
+        description: Number of distinct cloud services used
+        expr: SERVICE_COUNT
+        data_type: NUMBER
+      - name: RESOURCE_COUNT
+        description: Number of distinct resources provisioned
+        expr: RESOURCE_COUNT
+        data_type: NUMBER
+      - name: BUDGET_UTILIZATION_PCT
+        description: Percentage of monthly budget consumed
+        synonyms:
+          - budget utilization
+          - budget usage
+        expr: BUDGET_UTILIZATION_PCT
+        data_type: "NUMBER(10,2)"
+      - name: SAVINGS_PLAN_COVERAGE_PCT
+        description: >
+          Percentage of total cost covered by reserved/spot pricing.
+          Higher is better — indicates cost optimization.
+        synonyms:
+          - savings coverage
+          - RI coverage
+          - discount coverage
+        expr: SAVINGS_PLAN_COVERAGE_PCT
+        data_type: "NUMBER(10,2)"
+      - name: COST_PER_HOUR
+        description: Average cost per compute hour
+        synonyms:
+          - unit cost
+          - hourly cost
+        expr: COST_PER_HOUR
+        data_type: "NUMBER(18,4)"
+      - name: MOM_CHANGE_PCT
+        description: Month-over-month cost change percentage
+        synonyms:
+          - monthly change
+          - cost trend
+          - month over month
+        expr: MOM_CHANGE_PCT
+        data_type: "NUMBER(10,2)"
+    metrics:
+      - name: TOTAL_CLOUD_SPEND
+        description: Sum of all cloud spending across providers
+        expr: SUM(cloud_spending.total_cost)
+      - name: TOTAL_ONDEMAND
+        description: Sum of all on-demand cloud spending
+        expr: SUM(cloud_spending.ondemand_cost)
+      - name: TOTAL_RESERVED
+        description: Sum of all reserved/savings plan spending
+        expr: SUM(cloud_spending.reserved_cost)
+      - name: AVG_SAVINGS_COVERAGE
+        description: Average savings plan coverage across agencies
+        expr: AVG(cloud_spending.savings_plan_coverage_pct)
+      - name: PROVIDER_COUNT
+        description: Count of distinct cloud providers with spending
+        expr: COUNT(DISTINCT cloud_spending.cloud_provider)
+
 # =============================================================================
 # RELATIONSHIPS
 # NOTE: Relationships removed — Snowflake semantic views only support
@@ -1059,6 +1246,49 @@ verified_queries:
     question: "How accurate is the anomaly detection model?"
     sql: |
       SELECT * FROM EOTSS_STAGING.V_ANOMALY_PRECISION
+    verified_by: "PRISM Intelligence UI"
+    verified_at: 1740000000
+
+  # -- Cloud cost scenario queries --
+  - name: cloud_spend_by_provider
+    question: "What is cloud spending by provider?"
+    use_as_onboarding_question: true
+    sql: |
+      SELECT CLOUD_PROVIDER,
+             SUM(TOTAL_COST) AS total_cost,
+             SUM(ONDEMAND_COST) AS ondemand_cost,
+             SUM(RESERVED_COST) AS reserved_cost,
+             SUM(SPOT_COST) AS spot_cost,
+             ROUND(AVG(SAVINGS_PLAN_COVERAGE_PCT), 2) AS avg_savings_coverage
+      FROM EOTSS_STAGING.V_CLOUD_SPENDING
+      GROUP BY CLOUD_PROVIDER
+      ORDER BY total_cost DESC
+    verified_by: "PRISM Intelligence UI"
+    verified_at: 1740000000
+
+  - name: cloud_cost_by_category
+    question: "What are cloud costs by service category?"
+    sql: |
+      SELECT COST_CATEGORY,
+             SUM(TOTAL_COST) AS total_cost,
+             COUNT(DISTINCT AGENCY_CODE) AS agency_count,
+             ROUND(AVG(MOM_CHANGE_PCT), 2) AS avg_mom_change
+      FROM EOTSS_STAGING.V_CLOUD_SPENDING
+      GROUP BY COST_CATEGORY
+      ORDER BY total_cost DESC
+    verified_by: "PRISM Intelligence UI"
+    verified_at: 1740000000
+
+  - name: cloud_cost_trend
+    question: "Show me the monthly cloud cost trend"
+    sql: |
+      SELECT FISCAL_PERIOD_DATE, CLOUD_PROVIDER,
+             SUM(TOTAL_COST) AS total_cost,
+             SUM(ONDEMAND_COST) AS ondemand_cost,
+             SUM(RESERVED_COST) AS reserved_cost
+      FROM EOTSS_STAGING.V_CLOUD_SPENDING
+      GROUP BY FISCAL_PERIOD_DATE, CLOUD_PROVIDER
+      ORDER BY FISCAL_PERIOD_DATE, CLOUD_PROVIDER
     verified_by: "PRISM Intelligence UI"
     verified_at: 1740000000
 

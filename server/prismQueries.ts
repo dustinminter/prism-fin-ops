@@ -1157,6 +1157,82 @@ function formatCurrency(value: number): string {
 
 
 // ============================================================================
+// CLOUD BILLING QUERIES
+// ============================================================================
+
+export interface CloudSpendingSummary {
+  cloudProvider: string;
+  agencyCode: string;
+  agencyName: string;
+  costCategory: string;
+  fiscalYearLabel: string;
+  totalCost: number;
+  ondemandCost: number;
+  reservedCost: number;
+  savingsCoveragePct: number;
+  serviceCount: number;
+  momChangePct: number | null;
+}
+
+/**
+ * Get cloud spending summary by provider and agency.
+ * Uses schema token {{DATA_SCHEMA}} resolved via executeTenantQuery for tenant isolation.
+ */
+export async function getCloudSpending(
+  tenant: TenantConfig,
+  provider?: string,
+  fiscalYear?: string,
+  limit: number = 50,
+  context: GovernanceContext = {}
+): Promise<CloudSpendingSummary[]> {
+  const govContext = {
+    ...context,
+    requestSource: "getCloudSpending",
+  };
+
+  const conditions: string[] = [];
+  const params: (string | number)[] = [];
+
+  if (provider) {
+    conditions.push("CLOUD_PROVIDER = ?");
+    params.push(provider);
+  }
+  if (fiscalYear) {
+    conditions.push("FISCAL_YEAR_LABEL = ?");
+    params.push(fiscalYear);
+  }
+
+  const whereClause = conditions.length > 0 ? "WHERE " + conditions.join(" AND ") : "";
+  params.push(limit);
+
+  const sql = `
+    SELECT
+      CLOUD_PROVIDER           AS "cloudProvider",
+      AGENCY_CODE              AS "agencyCode",
+      AGENCY_NAME              AS "agencyName",
+      COST_CATEGORY            AS "costCategory",
+      FISCAL_YEAR_LABEL        AS "fiscalYearLabel",
+      SUM(TOTAL_COST)          AS "totalCost",
+      SUM(ONDEMAND_COST)       AS "ondemandCost",
+      SUM(RESERVED_COST)       AS "reservedCost",
+      CASE
+        WHEN SUM(TOTAL_COST) > 0
+        THEN ROUND((SUM(RESERVED_COST) + SUM(SPOT_COST)) / SUM(TOTAL_COST) * 100, 2)
+        ELSE 0
+      END                      AS "savingsCoveragePct",
+      SUM(SERVICE_COUNT)       AS "serviceCount",
+      AVG(MOM_CHANGE_PCT)      AS "momChangePct"
+    FROM FEDERAL_FINANCIAL_DATA.{{DATA_SCHEMA}}.V_CLOUD_SPENDING
+    ${whereClause}
+    GROUP BY CLOUD_PROVIDER, AGENCY_CODE, AGENCY_NAME, COST_CATEGORY, FISCAL_YEAR_LABEL
+    ORDER BY "totalCost" DESC
+    LIMIT ?
+  `;
+
+  return executeTenantQuery<CloudSpendingSummary>(sql, params, tenant, govContext);
+}
+
+// ============================================================================
 // CIP (Capital Investment Plan) QUERIES
 // ============================================================================
 
