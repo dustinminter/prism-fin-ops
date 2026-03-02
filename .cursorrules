@@ -1,0 +1,43 @@
+# PRISM FinOps Intelligence — Cursor Rules
+
+## Project Context
+Snowflake-native FinOps intelligence platform for Massachusetts EOTSS. Anomaly detection, budget forecasting, and spend analytics across CIW, CIP, Commbuys, CTHR, and CTHRU data sources.
+
+## Architecture
+- **Snowflake** (`FEDERAL_FINANCIAL_DATA.EOTSS_STAGING`): Semantic views, Cortex ML, Intelligence agent
+- **App Stack**: React 19 + Express/tRPC + Snowflake SDK
+- **Deployment**: SPCS container (`spcs/`), no Vercel, no MySQL, no Drizzle ORM
+- **Frontend**: Single-page Intelligence chat interface at `/` — no standalone dashboard pages
+- **Auth**: 3-mode — dev stub, SPCS edge auth (`Sf-Context-Current-User` header), JWT/OIDC
+
+## Key Patterns
+
+### Snowflake SQL
+- SQL files: `snowflake/sql/00a-22` (22 files, sequential deployment)
+- Deploy MCP-blocked SQL: `python3 ~/Desktop/maios/scripts/snow_deploy.py prism [files]`
+- `DETECT_ANOMALIES` requires evaluation timestamps AFTER training data — split training/detection views
+- `CREATE CORTEX INTELLIGENCE` is NOT valid SQL — Intelligence UI auto-discovers semantic views
+- Semantic view WHERE clauses via MCP don't resolve table-prefixed identifiers — use `run_snowflake_query`
+- Keypair auth from CLI: `~/.snowflake/keys/rsa_key.p8` (SSO can't complete from CLI)
+
+### Data Sources
+- **V_CIW_SPENDING**: POC data (synthetic)
+- **V_CTHRU_SPENDING**: Real CTHRU Socrata data (parallel view, does NOT replace V_CIW)
+- **V_CLOUD_SPENDING**: AWS/Azure/GCP cloud billing
+- **Anomaly tables**: V_SPEND_ANOMALIES, V_BUDGET_RISK, V_PROCUREMENT_OUTLIERS
+
+### Frontend
+- Pages: `pages/Intelligence.tsx` + `pages/NotFound.tsx` only
+- Components: `components/intelligence/` (IntelligenceChat, Sidebar, TopBar, IntelMessages)
+- Context: `contexts/IntelligenceContext.tsx` (provider + `useIntelligence` hook)
+- Data: `data/intelligenceData.ts` (5 scenario topics)
+- User type: `shared/types/user.ts` (plain interface, not Drizzle schema)
+
+### ETL
+- `etl/load_cthru.py` — Socrata → Snowflake PUT+COPY pipeline
+- Automated ingestion: `21-automated-ingestion.sql` (3 Snowpark procedures + Tasks)
+
+## Conventions
+- Tenant isolation via `{{DATA_SCHEMA}}` in tRPC procedures
+- Fiscal year: Massachusetts state FY (Jul-Jun), not federal (Oct-Sep)
+- All views prefixed with `V_`, dynamic tables with `DT_`
