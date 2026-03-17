@@ -10,7 +10,7 @@ export const spotlightTourSteps: DriveStep[] = [
     popover: {
       title: "Welcome to PRISM FinOps Intelligence",
       description:
-        "Your AI-powered financial operations platform for the Commonwealth of Massachusetts, powered by Snowflake Intelligence.",
+        "PRISM FinOps powered by Snowflake Intelligence.",
       side: "bottom",
       align: "center",
     },

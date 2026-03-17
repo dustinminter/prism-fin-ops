@@ -2,7 +2,6 @@ import {
   createContext,
   useContext,
   useState,
-  useEffect,
   useCallback,
   type ReactNode,
 } from "react";
@@ -55,16 +54,8 @@ export function PathfinderProvider({ children }: { children: ReactNode }) {
     driverInstance.drive();
   }, []);
 
-  // Auto-start tour on first visit
-  useEffect(() => {
-    if (tourCompleted) return;
-
-    const timer = setTimeout(() => {
-      startTour();
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, [tourCompleted, startTour]);
+  // Auto-start disabled — consolidated tour now handled by GuidedTour.tsx
+  // Manual trigger via startTour() still available via usePathfinder hook
 
   return (
     <PathfinderContext.Provider value={{ tourCompleted, startTour }}>

@@ -1,9 +1,11 @@
 import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, Loader2, Paperclip, Mic, MessageSquare, Brain, HelpCircle } from "lucide-react";
+import { Send, Loader2, Paperclip, Mic, MessageSquare, Brain, HelpCircle, TrendingUp, AlertTriangle } from "lucide-react";
 import { useIntelligence } from "@/contexts/IntelligenceContext";
-import { scenarioMap, scenarios, type ChatMessage, type ScenarioId } from "@/data/intelligenceData";
+import { scenarioMap, scenarios, type ChatMessage, type ScenarioId, type KPICard } from "@/data/intelligenceData";
 import { trpc } from "@/lib/trpc";
+import { useLiveScenarioData, useAnomalyBadgeCount } from "@/hooks/useLiveScenarioData";
+import { useAuth } from "@/_core/hooks/useAuth";
 import { buildChartDataFromResults } from "./chartUtils";
 import IntelMessages from "./IntelMessages";
 import ExecutiveNarrative from "./ExecutiveNarrative";
@@ -89,21 +91,27 @@ function ChatInput({
 
         {/* Pills row */}
         <div className="flex items-center gap-2 mt-2 pb-0.5">
-          <button className="text-[#484f58] hover:text-[#8b949e] transition-colors">
+          <button className="text-[#484f58] hover:text-[#8b949e] transition-colors" title="Attach file">
             <Paperclip className="w-4 h-4" />
           </button>
           <span className="inline-flex items-center gap-1.5 text-[12px] px-2.5 py-1 rounded-full bg-[#21262d] text-[#8b949e] border border-[#30363d]">
             PRISM_FINOPS_AGENT
           </span>
-          <span className="inline-flex items-center text-[12px] px-2.5 py-1 rounded-full bg-[#21262d] text-[#8b949e] border border-[#30363d]">
-            Sources: Auto
+          <span 
+            className="inline-flex items-center text-[12px] px-2.5 py-1 rounded-full bg-[#21262d] text-[#8b949e] border border-[#30363d]"
+            title="Queries all connected data sources: CIW, CIP, Commbuys, CTHR, Cloud Billing"
+          >
+            All Data Sources
           </span>
           <div className="flex-1" />
-          <button className="inline-flex items-center gap-1.5 text-[12px] px-2.5 py-1 rounded-full bg-[#21262d] text-[#8b949e] border border-[#30363d] hover:border-[#29B5E8]/40 transition-colors">
+          <button 
+            className="inline-flex items-center gap-1.5 text-[12px] px-2.5 py-1 rounded-full bg-[#21262d] text-[#8b949e] border border-[#30363d] hover:border-[#29B5E8]/40 transition-colors"
+            title="Extended thinking uses multi-step reasoning for complex questions. Takes longer but provides deeper analysis."
+          >
             <Brain className="w-3.5 h-3.5" />
             Extended thinking
           </button>
-          <button className="text-[#484f58] hover:text-[#8b949e] transition-colors">
+          <button className="text-[#484f58] hover:text-[#8b949e] transition-colors" title="Voice input">
             <Mic className="w-4 h-4" />
           </button>
         </div>
@@ -112,37 +120,90 @@ function ChatInput({
   );
 }
 
+const SCENARIO_BRIEFINGS: Record<ScenarioId, { title: string; description: string }> = {
+  spending: {
+    title: "Agency Spending Analysis",
+    description: "Here's your real-time spending overview across all tracked agencies:",
+  },
+  anomalies: {
+    title: "Spending Anomaly Detection",
+    description: "Current anomalies detected using statistical analysis against historical baselines:",
+  },
+  forecast: {
+    title: "Budget Forecasting",
+    description: "Projected spending based on Cortex ML time-series analysis:",
+  },
+  cloud: {
+    title: "Cloud Cost Intelligence",
+    description: "Live cloud spending summary across all providers and agencies:",
+  },
+  cross: {
+    title: "Cross-Agency Analysis",
+    description: "Comparative analysis across multiple data sources:",
+  },
+};
+
 export default function IntelligenceChat() {
-  const { activeScenario, isNewChat, setScenario } = useIntelligence();
+  const { activeScenario, isNewChat, setScenario, currentMessages, addMessage, activeConversation } = useIntelligence();
   const data = scenarioMap[activeScenario];
   const [query, setQuery] = useState("");
-  const [liveMessages, setLiveMessages] = useState<ChatMessage[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const liveMessagesRef = useRef(liveMessages);
-  liveMessagesRef.current = liveMessages;
+  const currentMessagesRef = useRef(currentMessages);
+  currentMessagesRef.current = currentMessages;
 
   const { showTour, triggerTour, onTourComplete } = useTourTrigger();
+  const { kpis: liveKpis, isLoading: isLoadingKpis } = useLiveScenarioData(activeScenario);
+  const { user } = useAuth();
+  const anomalyCount = useAnomalyBadgeCount();
+  
+  const spendingQuery = trpc.prism.getAgencySpending.useQuery(
+    { limit: 50 },
+    { staleTime: 60_000 }
+  );
+  const totalSpending = useMemo(() => {
+    if (!spendingQuery.data) return null;
+    const total = spendingQuery.data.reduce((sum, a) => sum + (a.totalSpending || 0), 0);
+    if (total >= 1_000_000_000) return `$${(total / 1_000_000_000).toFixed(2)}B`;
+    if (total >= 1_000_000) return `$${(total / 1_000_000).toFixed(1)}M`;
+    return `$${total.toFixed(0)}`;
+  }, [spendingQuery.data]);
+  
+  const userName = user?.name?.split(" ")[0] || user?.email?.split("@")[0] || "there";
 
   const greeting = useMemo(() => getGreeting(), []);
+  
+  const liveBriefingMessage = useMemo((): ChatMessage | null => {
+    if (isNewChat || activeConversation || liveKpis.length === 0) return null;
+    const briefing = SCENARIO_BRIEFINGS[activeScenario];
+    return {
+      role: "assistant",
+      content: `**${briefing.title}**\n\n${briefing.description}`,
+      kpis: liveKpis as KPICard[],
+      source: "Snowflake Live Data",
+      verified: true,
+      suggestions: data.suggestions,
+    };
+  }, [activeScenario, liveKpis, isNewChat, activeConversation, data.suggestions]);
+
   const allMessages = useMemo(
-    () => (isNewChat ? liveMessages : [...data.conversations, ...liveMessages]),
-    [isNewChat, data.conversations, liveMessages]
+    () => {
+      if (activeConversation) return currentMessages;
+      if (isNewChat) return currentMessages;
+      if (liveBriefingMessage) return [liveBriefingMessage, ...currentMessages];
+      return [...data.conversations, ...currentMessages];
+    },
+    [isNewChat, data.conversations, currentMessages, activeConversation, liveBriefingMessage]
   );
-  const hasMessages = allMessages.length > 0;
+  const hasMessages = allMessages.length > 0 || isLoadingKpis;
 
   const chatMutation = trpc.prism.chatWithIntelligence.useMutation();
 
-  // Reset live messages when scenario changes
-  useEffect(() => {
-    setLiveMessages([]);
-  }, [activeScenario, isNewChat]);
-
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [activeScenario, liveMessages, isNewChat]);
+  }, [activeScenario, currentMessages, isNewChat]);
 
   // Cycle loading steps while waiting
   useEffect(() => {
@@ -161,7 +222,7 @@ export default function IntelligenceChat() {
     if (!message || isLoading) return;
 
     // If in new chat mode and a prompt matches a scenario, switch to that scenario
-    if (isNewChat) {
+    if (isNewChat && !activeConversation) {
       const matchedScenario = scenarios.find((s) =>
         s.conversations.some((c) => c.role === "user" && c.content === message)
       );
@@ -173,7 +234,7 @@ export default function IntelligenceChat() {
     }
 
     setQuery("");
-    setLiveMessages((prev) => [...prev, { role: "user", content: message }]);
+    addMessage({ role: "user", content: message });
     setIsLoading(true);
     setLoadingStep(0);
 
@@ -187,7 +248,7 @@ export default function IntelligenceChat() {
               role: m.role,
               content: m.content,
             }))),
-            ...liveMessagesRef.current.slice(-4).map((m) => ({
+            ...currentMessagesRef.current.slice(-4).map((m) => ({
               role: m.role,
               content: m.content,
             })),
@@ -200,35 +261,37 @@ export default function IntelligenceChat() {
         ? buildChartDataFromResults(result.results, result.columns)
         : undefined;
 
-      setLiveMessages((prev) => [
-        ...prev,
-        {
-          role: "assistant",
-          content: result.response,
-          chart: chartData ?? undefined,
-          sql: result.sql,
-          source: result.sources?.join(", ") ?? "Cortex Analyst",
-          verified: result.isVerifiedQuery,
-        },
-      ]);
+      addMessage({
+        role: "assistant",
+        content: result.response,
+        chart: chartData ?? undefined,
+        sql: result.sql,
+        source: result.sources?.join(", ") ?? "Cortex Analyst",
+        verified: result.isVerifiedQuery,
+        insight: result.insight,
+        suggestions: result.suggestions,
+      });
     } catch {
-      setLiveMessages((prev) => [
-        ...prev,
-        {
-          role: "assistant",
-          content: "I'm unable to connect to Snowflake Intelligence right now. Please try again.",
-        },
-      ]);
+      addMessage({
+        role: "assistant",
+        content: "I'm unable to connect to Snowflake Intelligence right now. Please try again.",
+      });
     } finally {
       setIsLoading(false);
       inputRef.current?.focus();
     }
-  }, [query, isLoading, isNewChat, activeScenario, data.conversations, chatMutation, setScenario]);
+  }, [query, isLoading, isNewChat, activeScenario, data.conversations, chatMutation, setScenario, addMessage, activeConversation]);
 
   return (
     <div className="flex-1 flex flex-col bg-[#0d1117]">
       {/* Guided Tour */}
-      <GuidedTour forceShow={showTour} onComplete={onTourComplete} />
+      <GuidedTour
+        forceShow={showTour}
+        onComplete={onTourComplete}
+        onAITour={() => {
+          handleSend("Give me a guided tour of PRISM FinOps Intelligence. Walk me through the key capabilities step by step.");
+        }}
+      />
 
       {/* Scrollable content area */}
       <div className="flex-1 overflow-y-auto">
@@ -237,9 +300,9 @@ export default function IntelligenceChat() {
           <div className="flex flex-col items-center justify-center min-h-full px-6">
             <div className="flex flex-col items-center w-full max-w-[740px] -mt-12">
               {/* Greeting */}
-              <div className="text-center mb-8">
+              <div className="text-center mb-6">
                 <div className="text-[32px] font-semibold text-[#e6edf3] tracking-tight">
-                  {greeting}, Dustin
+                  {greeting}, {userName}
                 </div>
                 <div
                   className="text-[32px] font-semibold tracking-tight"
@@ -253,6 +316,36 @@ export default function IntelligenceChat() {
                   What insights can I help with?
                 </div>
               </div>
+
+              {/* Session Briefing */}
+              {(totalSpending || anomalyCount !== undefined) && (
+                <div className="flex items-center gap-4 mb-6 px-4 py-3 bg-[#161b22] border border-[#21262d] rounded-xl">
+                  {totalSpending && (
+                    <div className="flex items-center gap-2">
+                      <TrendingUp className="w-4 h-4 text-[#29B5E8]" />
+                      <span className="text-[13px] text-[#8b949e]">YTD Spending:</span>
+                      <span className="text-[13px] font-semibold text-[#e6edf3]">{totalSpending}</span>
+                    </div>
+                  )}
+                  {totalSpending && anomalyCount !== undefined && (
+                    <div className="w-px h-4 bg-[#30363d]" />
+                  )}
+                  {anomalyCount !== undefined && anomalyCount > 0 && (
+                    <div className="flex items-center gap-2">
+                      <AlertTriangle className="w-4 h-4 text-[#f85149]" />
+                      <span className="text-[13px] text-[#8b949e]">Active Anomalies:</span>
+                      <span className="text-[13px] font-semibold text-[#f85149]">{anomalyCount}</span>
+                    </div>
+                  )}
+                  {anomalyCount === 0 && (
+                    <div className="flex items-center gap-2">
+                      <AlertTriangle className="w-4 h-4 text-[#3fb950]" />
+                      <span className="text-[13px] text-[#8b949e]">Anomalies:</span>
+                      <span className="text-[13px] font-semibold text-[#3fb950]">All clear</span>
+                    </div>
+                  )}
+                </div>
+              )}
 
               {/* Centered input */}
               <ChatInput
@@ -296,8 +389,20 @@ export default function IntelligenceChat() {
           /* --- Conversation View --- */
           <div className="max-w-[900px] mx-auto w-full px-6 py-4">
             {/* Executive Narrative (at top of scenario conversations) */}
-            {!isNewChat && data.executiveNarrative && (
+            {!isNewChat && !liveBriefingMessage && data.executiveNarrative && (
               <ExecutiveNarrative narrative={data.executiveNarrative} />
+            )}
+
+            {/* Loading live data */}
+            {isLoadingKpis && !isNewChat && !activeConversation && (
+              <motion.div
+                initial={{ opacity: 0, y: 4 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex items-center gap-2.5 mb-4 px-4 py-3 bg-[#161b22] border border-[#21262d] rounded-xl"
+              >
+                <Loader2 className="w-4 h-4 text-[#29B5E8] animate-spin" />
+                <span className="text-[13px] text-[#8b949e]">Fetching live data from Snowflake...</span>
+              </motion.div>
             )}
 
             {/* Messages */}

@@ -1415,30 +1415,8 @@ export async function getCIPLineItems(
       requestSource: "getCIPLineItems",
     });
   } catch (error) {
-    console.warn("[CIP] Line items query failed:", (error as Error).message);
-    // Return mock data for development
-    return [
-      {
-        lineItemId: "LI-001",
-        programId: "CIP-001",
-        programName: "IT Modernization Initiative",
-        initiativeId: "INIT-001",
-        policyArea: "Technology",
-        capitalAgency: "EOTSS",
-        beneficiaryAgency: "Multiple Agencies",
-        projectName: "Cloud Migration Phase 1",
-        projectDescription: "Migrate legacy systems to cloud infrastructure",
-        fiscalYear: 2026,
-        fiscalYearLabel: "FY2026",
-        plannedAmount: 8500000,
-        actualAmount: 6200000,
-        varianceAmount: -2300000,
-        variancePct: -27.06,
-        status: "in_progress",
-        statusColor: "#58a6ff",
-        priorityRank: 1,
-      },
-    ];
+    console.error("[CIP] Line items query failed:", (error as Error).message);
+    throw error;
   }
 }
 
@@ -2142,13 +2120,79 @@ export interface ChatResponse {
   };
   trustState: "draft" | "internal" | "client" | "executive";
   sources?: string[];
-  // Cortex Analyst structured fields
   sql?: string;
   results?: Record<string, unknown>[];
   columns?: { name: string; type: string }[];
   suggestions?: string[];
   isVerifiedQuery?: boolean;
   requestId?: string;
+  insight?: string;
+}
+
+interface NarrativeInsight {
+  insight: string;
+  followUps: string[];
+}
+
+async function generateNarrativeInsight(
+  userQuestion: string,
+  results: Record<string, unknown>[],
+  columns: { name: string; type: string }[],
+  context: GovernanceContext = {}
+): Promise<NarrativeInsight | null> {
+  if (results.length === 0) return null;
+
+  try {
+    const sampleData = results.slice(0, 10);
+    const columnNames = columns.map(c => c.name).join(", ");
+    
+    const systemPrompt = `You are a financial data analyst for Massachusetts government. Analyze query results and provide:
+1. A concise insight (1-2 sentences) explaining what the data means for a Budget Director
+2. Flag any anomalies, risks, or notable patterns
+3. Suggest 2-3 specific follow-up questions based on the data
+
+Respond ONLY with valid JSON in this exact format:
+{"insight": "Your insight here", "followUps": ["Question 1?", "Question 2?", "Question 3?"]}`;
+
+    const userPrompt = `Question asked: "${userQuestion}"
+
+Columns: ${columnNames}
+Row count: ${results.length}
+Sample data (first ${sampleData.length} rows):
+${JSON.stringify(sampleData, null, 2)}
+
+Analyze and respond with JSON only.`;
+
+    const narrativeSql = `
+      SELECT SNOWFLAKE.CORTEX.COMPLETE(
+        'mistral-large',
+        ARRAY_CONSTRUCT(
+          OBJECT_CONSTRUCT('role', 'system', 'content', ?),
+          OBJECT_CONSTRUCT('role', 'user', 'content', ?)
+        ),
+        OBJECT_CONSTRUCT('temperature', 0.3, 'max_tokens', 500)
+      ) as NARRATIVE
+    `;
+
+    const narrativeResult = await executeQuery<{ NARRATIVE: string }>(
+      narrativeSql,
+      [systemPrompt, userPrompt],
+      { ...context, requestSource: "narrativeInsight" }
+    );
+
+    if (narrativeResult.length > 0 && narrativeResult[0].NARRATIVE) {
+      const rawResponse = extractCortexText(narrativeResult[0].NARRATIVE);
+      const jsonMatch = rawResponse.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        const parsed = JSON.parse(jsonMatch[0]) as NarrativeInsight;
+        console.log("[Narrative] Generated insight:", parsed.insight.substring(0, 80) + "...");
+        return parsed;
+      }
+    }
+  } catch (error) {
+    console.warn("[Narrative] Failed to generate insight:", (error as Error).message);
+  }
+  return null;
 }
 
 /**
@@ -2204,6 +2248,19 @@ export async function chatWithIntelligence(
       }
     }
 
+    let insight: string | undefined;
+    let contextualSuggestions = parsed.suggestions;
+
+    if (results.length > 0 && columns.length > 0) {
+      const narrative = await generateNarrativeInsight(message, results, columns, context);
+      if (narrative) {
+        insight = narrative.insight;
+        if (narrative.followUps.length > 0) {
+          contextualSuggestions = narrative.followUps;
+        }
+      }
+    }
+
     return {
       response: parsed.explanation,
       context: {
@@ -2215,9 +2272,10 @@ export async function chatWithIntelligence(
       sql: parsed.sql || undefined,
       results: results.length > 0 ? results : undefined,
       columns: columns.length > 0 ? columns : undefined,
-      suggestions: parsed.suggestions.length > 0 ? parsed.suggestions : undefined,
+      suggestions: contextualSuggestions.length > 0 ? contextualSuggestions : undefined,
       isVerifiedQuery: parsed.isVerifiedQuery || undefined,
       requestId: parsed.requestId,
+      insight,
     };
   } catch (error) {
     console.warn("[Analyst Chat] Cortex Analyst failed:", (error as Error).message);
