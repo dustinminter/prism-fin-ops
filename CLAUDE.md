@@ -1,77 +1,81 @@
-# CLAUDE.md — PRISM FinOps Intelligence
+# PRISM FinOps Intelligence — Project Context
 
-## Repository
-- **Repo**: `dustinminter/prism-fin-ops` (primary — ArchetypeCo upstream was deleted/inaccessible as of 2026-02-19)
-- **Remote setup**: `origin` = dustinminter
+> This file is authoritative when cwd matches this project's directory. Global CLAUDE.md is supplementary only.
 
-## Stack
-- React 19 + Vite 7 + Tailwind v4 (frontend), Express + tRPC (backend), Snowflake SDK
-- Deployment: SPCS (Snowpark Container Services) — no Vercel, no external DB
-- IaC: Terraform (`terraform/`, 7 modules), SQL scripts (`snowflake/sql/00a-22`)
-- Transforms: dbt (`dbt_project/`)
-- ETL: Snowpark Python stored procedures (automated via Tasks), manual scripts (`etl/`) deprecated
+## Overview
 
-## Branches
-- `main` — primary branch (includes production migration, multi-tenancy, CTHRU port, Intelligence UI redesign)
-- Feature branches merged and deleted 2026-02-19: `feature/production-migration`, `feature/cthru-port`
+Government FinOps analytics platform. Deployed for Massachusetts EOTSS as a proof of concept. Detects spend anomalies, forecasts budgets, surfaces procurement outliers.
+- **Repo**: `dustinminter/prism-fin-ops` | **Local**: `~/Projects/prism-fin-ops/`
+- **Status**: Active, all phases (1-17) complete, 22 SQL scripts deployed
 
-## CTHRU Data Integration
-- **Source**: Massachusetts Comptroller's CTHRU platform (Socrata API)
-  - Spending: `pegc-naaa` (~47.5M rows, transaction-level)
-  - Budget authority: `kv7m-35wn` (~44K rows, appropriation-level)
-- **Snowflake objects** (all in tenant data schema):
-  - `CTHRU_RAW`, `CTHRU_BUDGETS_RAW` — raw staging
-  - `CTHRU_SECRETARIAT_MAP` (39 mappings), `CTHRU_FUND_MAP` (21 mappings)
-  - `CTHRU_BUDGET_AUTHORITY` — dept/fund/FY aggregated budget
-  - `CTHRU_SPENDING` — monthly dept/fund grain with budget join
-  - `V_CTHRU_SPENDING` — parallel view (does NOT replace V_CIW_SPENDING)
-- **API**: `getCTHRUSpending` — tenantProcedure, schema token `{{DATA_SCHEMA}}`, executeTenantQuery
-- **ETL (deprecated)**: `python3 etl/load_cthru.py [--fy START END] [--truncate] [--budgets-only]` — manual backfill only
-- **Automated ingestion**: 3 Snowpark procedures + Tasks (`21-automated-ingestion.sql`)
-  - `INGEST_CTHRU_SPENDING_DAILY` — daily 4 AM ET, Socrata pegc-naaa
-  - `INGEST_CTHRU_BUDGETS_WEEKLY` — weekly Sunday 3 AM ET, Socrata kv7m-35wn
-  - `INGEST_USASPENDING_DAILY` — daily 5 AM ET, api.usaspending.gov
-  - Monitoring: `V_INGESTION_STATUS`, `INGESTION_LOG`
+## Architecture
 
-## SPCS Deployment
-- **Public endpoint**: `https://mrfn6t-jnaqbvy-kxc12813.snowflakecomputing.app`
-- **DNS domain hash**: `pfka` (from `SYSTEM$GET_SERVICE_DNS_DOMAIN('PRISM_SPCS.APP')`)
-- **Image tag**: `v2` (deployed 2026-02-19)
-- **Services**: backend, frontend, router — all RUNNING on `PRISM_COMPUTE_POOL`
+**Snowflake** (`FEDERAL_FINANCIAL_DATA.EOTSS_STAGING`):
+- Semantic view: `PRISM_EOTSS_FINOPS` (8 tables: CIW, CIP, Commbuys, CTHR, 3 anomaly, cloud), queried by `PRISM_FINOPS_AGENT`
+- Core views: `V_CIW_SPENDING`, `V_CIP_INVESTMENTS`, `V_COMMBUYS_AWARDS`, `V_CTHR_WORKFORCE`, `V_CTHRU_SPENDING` (real data, parallel)
+- Anomaly: `V_SPEND_ANOMALIES`, `V_BUDGET_RISK`, `V_PROCUREMENT_OUTLIERS`
+- Cortex ML: `EOTSS_SPENDING_ANOMALY` (anomaly detection), `EOTSS_SPENDING_FORECAST` (6-month forward)
+- Results: `SPEND_ANOMALY_RESULTS` (70 rows), `BUDGET_FORECAST_RESULTS` (60 rows)
 
-## Authentication
-- **Local dev**: No OIDC_ISSUER → auto-returns DEV_USER (admin, openId=dev-user-001)
-- **SPCS**: Pre-authenticated by Snowflake edge; extracts `Sf-Context-Current-User` header for identity
-- **Production (IdP)**: Set env vars to enable JWT/OIDC validation:
-  - `OIDC_ISSUER` — OIDC provider URL (e.g., `https://login.microsoftonline.com/{tenant}/v2.0`)
-  - `OIDC_AUDIENCE` — Expected audience claim (e.g., `api://prism-finops`)
-  - `OIDC_ADMIN_ROLES` — Comma-separated role names that grant admin (default: `admin,Admin,GlobalAdmin`)
-- **Tenant mapping**: User's `openId` (JWT `sub` claim) must exist in `GOVERNANCE.TENANT_USERS`
-- **Files**: `server/_core/sdk.ts` (JWT validation), `server/_core/context.ts` (SPCS + IdP routing)
+**App Stack**: React 19 + Express/tRPC + Snowflake SDK
+- Single-page Intelligence interface at `/` (Snowflake Intelligence chat is the entire frontend)
+- Frontend: `pages/Intelligence.tsx` + `pages/NotFound.tsx`; components in `components/intelligence/`
+- Context: `contexts/IntelligenceContext.tsx`; data: `data/intelligenceData.ts` (5 scenario topics)
+- Auth: 3-mode (dev stub, SPCS edge auth, JWT/OIDC via jose)
+- Run: `npm run dev` (port 3000)
 
-## Cloud Billing Integration
-- **SQL**: `snowflake/sql/22-cloud-billing.sql` — raw staging (AWS/Azure/GCP), mapping tables, aggregated CLOUD_SPENDING, V_CLOUD_SPENDING view
-- **Raw tables**: `AWS_BILLING_RAW`, `AZURE_BILLING_RAW`, `GCP_BILLING_RAW` — one per provider
-- **Mapping**: `CLOUD_ACCOUNT_MAP` (cloud account → agency), `CLOUD_SERVICE_MAP` (service → PRISM category)
-- **Rebuild**: `CALL EOTSS_STAGING.REBUILD_CLOUD_SPENDING()` after raw data loads
-- **API**: `getCloudSpending` — tenantProcedure, filters by provider/fiscalYear/limit
-- **Semantic model**: V_CLOUD_SPENDING added as TABLE 8 in `05-deploy-semantic-model.sql`
-- **Intelligence UI**: Cloud Cost Analysis scenario in `client/src/data/intelligenceData.ts`
-- **Network rule**: `AWS_CE_EGRESS_RULE` for AWS Cost Explorer API access
+**Snowflake Features** (deployed):
+- dbt project (`dbt_project/`): 7 staging models, 3 anomaly marts, `fiscal_year_params` macro, SCD2 snapshot
+- Tasks (`sql/09-create-tasks.sql`): 5-task monthly retrain DAG (1st of month 3AM)
+- Dynamic Tables (`sql/10-dynamic-tables.sql`): 5 DTs (CIW/CIP 1hr, anomaly DOWNSTREAM)
+- Cortex Agent (`sql/11-cortex-agents.sql`): `PRISM_ANOMALY_INVESTIGATOR`
+- CTHRU real data: `CTHRU_RAW` (5.66M rows), `V_CTHRU_SPENDING` (parallel, not replacing V_CIW_SPENDING)
+- Cloud billing (`sql/22-cloud-billing.sql`): AWS/Azure/GCP, `V_CLOUD_SPENDING`
+- Automated ingestion (`sql/21-automated-ingestion.sql`): CTHRU daily 4AM, budgets weekly Sun 3AM, USASpending daily 5AM
 
-## Gotchas
-- 10 pre-existing test failures in useAuth-dependent tests (jsdom/localStorage issue) — not a regression
-- All Snowflake config is env-var-only — no hardcoded account identifiers anywhere
-- SQL scripts must run in Snowsight (Cortex ML, agents, tasks, DMFs blocked by MCP)
-- SPCS deploy specs use DNS hash `pfka` — recalculate if compute pool changes
-- V_CIW_SPENDING reads from CTHRU_SPENDING (cutover completed 2026-02-19)
-- V_CTHRU_SPENDING is the parallel view — getCTHRUSpending endpoint uses this
-- DETECT_ANOMALIES requires V_ANOMALY_DETECTION (filtered to agencies with training data), NOT V_FORECAST_TRAINING
-- `CREATE OR REPLACE SERVICE` is not supported — must DROP then CREATE
+## Data Model
 
-## Commands
-- `pnpm dev` — start dev server (backend + frontend)
-- `pnpm check` — TypeScript type checking
-- `pnpm test` — run tests (expect 10 known failures)
-- `pnpm build` — production build
-- Credential scan: `grep -r "jnaqbvy\|kxc12813\|AHC45175\|MAIOS" .` — should return 0 results
+Schema: `FEDERAL_FINANCIAL_DATA.EOTSS_STAGING`
+
+| Object | Notes |
+|--------|-------|
+| V_CIW_SPENDING | POC spending data (active, not yet replaced) |
+| V_CTHRU_SPENDING | Real CTHRU data, parallel view |
+| V_COMMBUYS_AWARDS | Procurement awards |
+| V_CIP_INVESTMENTS | Capital investments |
+| SPEND_ANOMALY_RESULTS | 70 rows: Cortex anomaly output |
+| BUDGET_FORECAST_RESULTS | 60 rows: 6-month Cortex forecast |
+| CTHRU_RAW | 5.66M rows: raw Socrata data |
+| CLOUD_SPENDING | AWS/Azure/GCP billing consolidated |
+
+Maps: `CTHRU_SECRETARIAT_MAP` (39 entries), `CTHRU_FUND_MAP` (21 entries)
+
+## Workflows
+
+- **Dev**: `npm run dev` (port 3000)
+- **Deploy SQL**: `python3 ~/Desktop/maios/scripts/snow_deploy.py prism [file|range]`
+- **Anomaly retrain**: `scratchpad/deploy_anomaly.py` (domain-specific, NOT snow_deploy)
+- **CTHRU ETL**: `etl/load_cthru.py` (Socrata API → PUT+COPY pipeline)
+- **Cloud billing rebuild**: `CALL EOTSS_STAGING.REBUILD_CLOUD_SPENDING()`
+- **SPCS deploy**: keypair JWT auth (`~/.snowflake/keys/rsa_key.p8`)
+
+## Key Decisions
+
+- SPCS-only deployment (no Vercel, no external OAuth, no MySQL/Drizzle)
+- Keypair JWT auth for CLI deploy (SSO can't complete from CLI)
+- DETECT_ANOMALIES split: V_ANOMALY_TRAINING (17 months) + V_ANOMALY_DETECTION (7 months): evaluation timestamps must be AFTER training data
+- V_CIW_SPENDING swap deferred: failed scope-risk rubric criterion 2 (no deterministic cutover control)
+- Repo is independent: ArchetypeCo upstream deleted/inaccessible as of 2026-02-19
+
+## Active Work
+
+- CTHRU cutover from V_CIW_SPENDING deferred: needs future migration PR with deterministic cutover control
+- SPCS container deployment pending production validation
+
+## Constraints / Gotchas
+
+- `CREATE CORTEX INTELLIGENCE` is not valid SQL: Intelligence UI auto-discovers semantic views
+- SQL files numbered 00a-22 (22 files): deploy sequentially
+- `snow_deploy.py prism` for MCP-blocked DDL only; does NOT replace `scratchpad/deploy_anomaly.py`
+- Semantic view WHERE clauses via MCP don't resolve table-prefixed identifiers: use `run_snowflake_query` for filtered queries
+- Procurement Outliers: pure SQL z-score (outlier >2.0s) + HHI vendor concentration index
